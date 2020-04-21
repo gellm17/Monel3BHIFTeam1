@@ -1,11 +1,18 @@
 /Monel3BHIFTEAM1/.idea/
 ### Java template
 *.class
+/Monel3BHIFTEAM1/*.class
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
 # Package Files #
+Monel3BHIFTEAM1/out/production/Monel3BHIFTEAM1/app/*.class
+
+/Monel3BHIFTEAM1/*.jar
+/Monel3BHIFTEAM1/*.war
+/Monel3BHIFTEAM1/*.ear
+
 *.jar
 *.war
 *.ear
@@ -15,6 +22,7 @@ hs_err_pid*
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
 
+/Monel3BHIFTEAM1/*.iml
 *.iml
 
 ## Directory-based project format:
