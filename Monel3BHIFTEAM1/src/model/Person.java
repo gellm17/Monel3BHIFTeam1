@@ -8,11 +8,14 @@ import java.time.LocalDate;
 
 public class Person {
     private IntegerProperty id;
+    private ObjectProperty<Salutation> salutation;
+    private StringProperty title;
     private StringProperty name;
-    private ObjectProperty<LocalDate> birthDate;
+    private StringProperty street;
+    private IntegerProperty houseNumber;
+    private IntegerProperty zipCode;
+    private StringProperty place;
     private StringProperty telNr;
-    private StringProperty adress;
     private StringProperty email;
-
-
+    private ObjectProperty<LocalDate> birthDate;
 }
