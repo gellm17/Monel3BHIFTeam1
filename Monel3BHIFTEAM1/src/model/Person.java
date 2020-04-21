@@ -1,8 +1,6 @@
 package model;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 import java.time.LocalDate;
 
@@ -11,16 +9,31 @@ public class Person {
     private ObjectProperty<Salutation> salutation;
     private StringProperty title;
     private StringProperty name;
-    private StringProperty street;
-    private IntegerProperty houseNumber;
+    private StringProperty streetAndNr;
     private IntegerProperty zipCode;
     private StringProperty place;
     private StringProperty telNr;
     private StringProperty email;
     private ObjectProperty<LocalDate> birthDate;
 
+    private static int counterForID = 0;
 
+    public Person(Salutation salutation, String title, String name, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate) {
+        this.id = new SimpleIntegerProperty(this, "id", counterForID++);
+        this.salutation = new SimpleObjectProperty<Salutation>(this, "salutation", salutation);
+        this.title = new SimpleStringProperty(this, "title", title);
+        this.name = new SimpleStringProperty(this, "name", name);
+        this.streetAndNr = new SimpleStringProperty(this, "streetAndNr", street + " " + houseNumber);
+        this.zipCode = new SimpleIntegerProperty(this, "zipCode", zipCode);
+        this.place = new SimpleStringProperty(this, "place", place);
+        this.telNr = new SimpleStringProperty(this, "telNr", telNr);
+        this.email = new SimpleStringProperty(this, "email", email);
+        this.birthDate = new SimpleObjectProperty<LocalDate>(this, "birthDate", birthDate);
+    }
 
+    /*
+        GETTERS FOR PROPERTIES AND VALUES
+         */
     public int getId() {
         return id.get();
     }
@@ -53,20 +66,12 @@ public class Person {
         return name;
     }
 
-    public String getStreet() {
-        return street.get();
+    public String getStreetAndNr() {
+        return streetAndNr.get();
     }
 
-    public StringProperty streetProperty() {
-        return street;
-    }
-
-    public int getHouseNumber() {
-        return houseNumber.get();
-    }
-
-    public IntegerProperty houseNumberProperty() {
-        return houseNumber;
+    public StringProperty streetAndNrProperty() {
+        return streetAndNr;
     }
 
     public int getZipCode() {

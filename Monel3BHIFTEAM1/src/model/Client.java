@@ -3,6 +3,8 @@ package model;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 
+import java.time.LocalDate;
+
 public class Client extends Person{
     private IntegerProperty ssnr;
     private StringProperty diagnose;
@@ -11,8 +13,15 @@ public class Client extends Person{
     private StringProperty bic;
     private StringProperty allergies;
 
+    public Client(Salutation salutation, String title, String name, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate) {
+        super(salutation, title, name, street, houseNumber, zipCode, place, telNr, email, birthDate);
+        //TODO
+    }
 
 
+    /*
+        GETTERS FOR VALUES AND PROPERTIES
+         */
     public int getSsnr() {
         return ssnr.get();
     }
