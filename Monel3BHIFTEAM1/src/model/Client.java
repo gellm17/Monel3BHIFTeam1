@@ -1,4 +1,7 @@
 package model;
 
-public class Client {
+import javafx.beans.property.IntegerProperty;
+
+public class Client extends Person{
+    private IntegerProperty ssnr;
 }
