@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane prefHeight="788.0" prefWidth="1170.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.MainWindow">
    <top>
       <BorderPane prefHeight="90.0" prefWidth="1170.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER">
@@ -63,7 +62,7 @@
               <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="tabvClients" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tableClients" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                           <columns>
                             <TableColumn prefWidth="150.0" text="Bild" />
                             <TableColumn prefWidth="250.0" text="Vorname" />
