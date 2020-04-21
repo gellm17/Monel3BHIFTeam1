@@ -21,21 +21,24 @@ USE `monel`;
 DROP TABLE IF EXISTS `client`;
 CREATE TABLE IF NOT EXISTS `client` (
   `id` int(11) NOT NULL,
-  `salutation` varchar(50) DEFAULT NULL,
-  `title` varchar(50) DEFAULT NULL,
-  `firstname` varchar(50) DEFAULT NULL,
-  `lastname` varchar(50) DEFAULT NULL,
-  `street_housenr` varchar(50) DEFAULT NULL,
-  `postcode` int(11) DEFAULT NULL,
-  `place` varchar(50) DEFAULT NULL,
-  `phonenumber` varchar(50) DEFAULT NULL,
+  `esv` int(11) DEFAULT NULL,
+  `anrede` varchar(50) DEFAULT NULL,
+  `titel` varchar(50) DEFAULT NULL,
+  `vorname` varchar(50) DEFAULT NULL,
+  `nachname` varchar(50) DEFAULT NULL,
+  `strasse_hausnr` varchar(50) DEFAULT NULL,
+  `plz` int(11) DEFAULT NULL,
+  `ort` varchar(50) DEFAULT NULL,
+  `telefonnummer` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `ssnr` int(11) DEFAULT NULL,
-  `diagnosis` varchar(50) DEFAULT NULL,
-  `employment` varchar(50) DEFAULT NULL,
-  `allergies` varchar(50) DEFAULT NULL,
-  `other` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `svnr` int(11) DEFAULT NULL,
+  `diagnose` varchar(500) DEFAULT NULL,
+  `beschäftigung` varchar(50) DEFAULT NULL,
+  `allergien` varchar(500) DEFAULT NULL,
+  `sonstiges` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKperson` (`esv`),
+  CONSTRAINT `FKperson` FOREIGN KEY (`esv`) REFERENCES `person` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
@@ -44,30 +47,19 @@ CREATE TABLE IF NOT EXISTS `client` (
 DROP TABLE IF EXISTS `person`;
 CREATE TABLE IF NOT EXISTS `person` (
   `id` int(11) NOT NULL,
-  `salutation` varchar(50) DEFAULT NULL,
-  `title` varchar(50) DEFAULT NULL,
-  `firstname` varchar(50) DEFAULT NULL,
-  `lastname` varchar(50) DEFAULT NULL,
-  `street_housenr` varchar(50) DEFAULT NULL,
-  `postcode` int(11) DEFAULT NULL,
-  `place` varchar(50) DEFAULT NULL,
-  `phonenumber` varchar(50) DEFAULT NULL,
+  `idc` int(11) DEFAULT NULL,
+  `anrede` varchar(50) DEFAULT NULL,
+  `titel` varchar(50) DEFAULT NULL,
+  `vorname` varchar(50) DEFAULT NULL,
+  `nachname` varchar(50) DEFAULT NULL,
+  `strasse_hausnr` varchar(50) DEFAULT NULL,
+  `plz` int(11) DEFAULT NULL,
+  `ort` varchar(50) DEFAULT NULL,
+  `telefonnummer` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Daten Export vom Benutzer nicht ausgewählt
-
--- Exportiere Struktur von Tabelle monel.responsible_for
-DROP TABLE IF EXISTS `responsible_for`;
-CREATE TABLE IF NOT EXISTS `responsible_for` (
-  `idc` int(11) NOT NULL,
-  `idp` int(11) NOT NULL,
-  `flag` varchar(50) NOT NULL DEFAULT '' COMMENT 'ESV/Notfallkontakt',
+  PRIMARY KEY (`id`),
   KEY `FKclient` (`idc`),
-  KEY `FKperson` (`idp`),
-  CONSTRAINT `FKclient` FOREIGN KEY (`idc`) REFERENCES `client` (`id`),
-  CONSTRAINT `FKperson` FOREIGN KEY (`idp`) REFERENCES `person` (`id`)
+  CONSTRAINT `FKclient` FOREIGN KEY (`idc`) REFERENCES `client` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
