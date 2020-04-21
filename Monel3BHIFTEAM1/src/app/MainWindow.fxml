@@ -47,7 +47,7 @@
       </BorderPane>
    </top>
    <center>
-      <TabPane prefHeight="200.0" prefWidth="200.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+      <TabPane prefHeight="200.0" prefWidth="200.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMinHeight="70.0" tabMinWidth="70.0" BorderPane.alignment="CENTER">
         <tabs>
           <Tab fx:id="tabActivities" text="Aktivitäten">
             <content>
@@ -63,11 +63,17 @@
               <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tabvClients" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="C1" />
-                            <TableColumn prefWidth="75.0" text="C2" />
+                            <TableColumn prefWidth="150.0" text="Bild" />
+                            <TableColumn prefWidth="250.0" text="Vorname" />
+                              <TableColumn prefWidth="250.0" text="Nachname" />
+                              <TableColumn prefWidth="100.0" text="SvNr" />
+                              <TableColumn prefWidth="200.0" text="Telefon" />
                           </columns>
+                           <BorderPane.margin>
+                              <Insets top="20.0" />
+                           </BorderPane.margin>
                         </TableView>
                      </center>
                      <top>
@@ -81,13 +87,18 @@
                                     <Button fx:id="btnSearchClients" maxWidth="80.0" mnemonicParsing="false" text="Search" />
                                     <Button fx:id="btnFilterClients" maxWidth="80.0" mnemonicParsing="false" text="Filter" />
                                   <Button fx:id="btnAddClient" maxWidth="80.0" mnemonicParsing="false" text="+" />
+                                    <Button fx:id="btnDeleteClients" mnemonicParsing="false" text="Löschen" />
+                                    <Button fx:id="btnEditClients" mnemonicParsing="false" text="Bearbeiten" />
                                 </buttons>
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
                               </ButtonBar>
                            </right>
                         </BorderPane>
                      </top>
                      <padding>
-                        <Insets bottom="30.0" left="30.0" right="30.0" top="10.0" />
+                        <Insets bottom="30.0" left="50.0" right="30.0" top="20.0" />
                      </padding>
                   </BorderPane>
               </content>
@@ -109,10 +120,20 @@
             </Tab>
             <Tab fx:id="tabBirthdays" text="Geburtstage">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </AnchorPane>
               </content>
             </Tab>
         </tabs>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
       </TabPane>
    </center>
 </BorderPane>
