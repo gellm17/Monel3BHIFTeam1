@@ -1,8 +1,5 @@
 package data;
-
-
 import model.*;
-
 import java.util.ArrayList;
 
 public class PersonDAO {
@@ -10,6 +7,7 @@ public class PersonDAO {
     private ArrayList<Employee> employees = new ArrayList<Employee>();      // ArrayList mit allen Company
     private ArrayList<Sponsor> sponsor = new ArrayList<Sponsor>();      // ArrayList mit allen Company
     private static PersonDAO instance = null;
+
 
     private PersonDAO() {
 
@@ -35,5 +33,21 @@ public class PersonDAO {
         }
 
         return success;
+    }
+
+
+
+
+// GETTER
+    public ArrayList<Sponsor> getSponsor() {
+        return sponsor;
+    }
+
+    public ArrayList<Client> getClients() {
+        return clients;
+    }
+
+    public ArrayList<Employee> getEmployees() {
+        return employees;
     }
 }
