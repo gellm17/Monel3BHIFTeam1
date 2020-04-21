@@ -1,4 +1,4 @@
 package model;
 
-public class Sponsor {
+public class Sponsor extends Person {
 }
