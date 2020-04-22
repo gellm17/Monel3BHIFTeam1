@@ -6,12 +6,14 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -29,12 +31,12 @@
          <left>
             <ImageView fx:id="imageLogo" fitHeight="80.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@../../ressources/logo_Monel.png" />
+                  <Image url="@../../resources/logo_Monel.png" />
                </image>
             </ImageView>
          </left>
          <padding>
-            <Insets left="20.0" right="20.0" />
+            <Insets bottom="5.0" left="5.0" right="20.0" top="5.0" />
          </padding>
          <center>
             <Label fx:id="lbTitle" text="Klienten" textFill="WHITE" BorderPane.alignment="CENTER">
@@ -46,143 +48,289 @@
       </BorderPane>
    </top>
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Vorname">
-               <font>
-                  <Font name="Gill Sans MT" size="16.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </Label>
-            <TextField>
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="Nachname">
-               <font>
-                  <Font name="Gill Sans MT" size="16.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </Label>
-            <TextField>
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="40.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="SvNr">
-               <font>
-                  <Font name="Gill Sans MT" size="16.0" />
-               </font>
-               <padding>
-                  <Insets bottom="5.0" />
-               </padding>
-            </Label>
-            <TextField maxWidth="-Infinity" prefWidth="100.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </TextField>
-            <Label text="Geburtsdatum">
-               <font>
-                  <Font name="Gill Sans MT" size="16.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </Label>
-            <DatePicker>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </DatePicker>
-            <Label text="Datenschutz">
-               <font>
-                  <Font size="24.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="15.0" top="40.0" />
-               </VBox.margin>
-            </Label>
-            <CheckBox mnemonicParsing="false" text="Es dürfen Fotos gemacht werden">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </CheckBox>
-            <CheckBox mnemonicParsing="false" text="Fotos dürfen bearbeitet werden">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </CheckBox>
-            <CheckBox mnemonicParsing="false" text="Fotos dürfen gezeigt werden">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </CheckBox>
-            <CheckBox mnemonicParsing="false" text="Fotos dürfen veröffentlicht werden">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </CheckBox>
-            <Label text="Notfallkontakte">
-               <font>
-                  <Font size="24.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" top="40.0" />
-               </VBox.margin>
-            </Label>
-            <HBox>
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER">
+         <content>
+            <VBox>
                <children>
-                  <ToggleButton mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" selected="true" text="1">
+                  <Label text="Titel">
                      <font>
-                        <Font size="16.0" />
+                        <Font name="Gill Sans MT" size="16.0" />
                      </font>
-                  </ToggleButton>
-                  <ToggleButton mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="2">
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="tfTitleClient" maxWidth="-Infinity" prefWidth="400.0">
                      <font>
-                        <Font size="16.0" />
+                        <Font size="14.0" />
                      </font>
-                  </ToggleButton>
-                  <ToggleButton mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="3">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Vorname">
                      <font>
-                        <Font size="16.0" />
+                        <Font name="Gill Sans MT" size="16.0" />
                      </font>
-                  </ToggleButton>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="tfFirstnameClient">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Nachname">
+                     <font>
+                        <Font name="Gill Sans MT" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="tfLastnameClient">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="40.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="SvNr">
+                     <font>
+                        <Font name="Gill Sans MT" size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="tfSsnrClient" maxWidth="-Infinity" prefWidth="100.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Geburtsdatum">
+                     <font>
+                        <Font name="Gill Sans MT" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <DatePicker fx:id="dpBirthdateClient">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </DatePicker>
+                  <Label text="Adresse">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" top="40.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Straße">
+                     <font>
+                        <Font name="Gill Sans MT" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="tfStreet">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Hausnummer">
+                     <font>
+                        <Font name="Gill Sans MT" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="tfHousenumber" maxWidth="-Infinity" prefWidth="100.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="PLZ">
+                     <font>
+                        <Font name="Gill Sans MT" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="tfPLZ" maxWidth="-Infinity" prefWidth="100.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Ort">
+                     <font>
+                        <Font name="Gill Sans MT" size="16.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="tfCity">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </TextField>
+                  <Label text="Datenschutz">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" top="40.0" />
+                     </VBox.margin>
+                  </Label>
+                  <CheckBox fx:id="cbPrivacy1Clients" mnemonicParsing="false" text="Es dürfen Fotos gemacht werden">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="cbPrivacy2Clients" mnemonicParsing="false" text="Fotos dürfen bearbeitet werden">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="cbPrivacy3Clients" mnemonicParsing="false" text="Fotos dürfen gezeigt werden">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="5.0" />
+                     </VBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="cbPrivacy4Clients" mnemonicParsing="false" text="Fotos dürfen veröffentlicht werden">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </CheckBox>
+                  <Label text="Notfallkontakte">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" top="40.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TabPane fx:id="tbEmergencyContactsClients" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="35.0" tabMinWidth="35.0">
+                    <tabs>
+                      <Tab fx:id="tabEmergencyContact1" text="1">
+                        <content>
+                              <BorderPane>
+                                 <center>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label text="Vorname">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" top="15.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <TextField fx:id="tfFirstnameClient1">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" />
+                                             </VBox.margin>
+                                          </TextField>
+                                          <Label text="Nachname">
+                                             <font>
+                                                <Font name="Gill Sans MT" size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField fx:id="tfLastnameClient1">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </TextField>
+                                       </children>
+                                    </VBox>
+                                 </center>
+                              </BorderPane>
+                        </content>
+                      </Tab>
+                      <Tab fx:id="tabEmergencyContact2" text="2">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
                </children>
-            </HBox>
-         </children>
+               <padding>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </center>
+   <left>
+      <BorderPane BorderPane.alignment="CENTER">
+         <top>
+            <VBox BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../resources/icon_Fot.png" />
+                     </image>
+                  </ImageView>
+                  <BorderPane>
+                     <right>
+                        <Button fx:id="btnDeleteImageClients" mnemonicParsing="false" onAction="#btnDeleteImageClients_Clicked" text="Delete" BorderPane.alignment="CENTER" />
+                     </right>
+                     <left>
+                        <Button fx:id="btnSelectImageClients" mnemonicParsing="false" onAction="#btnSelectImageClients_Clicked" text="Select" BorderPane.alignment="CENTER" />
+                     </left>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </BorderPane>
+               </children>
+            </VBox>
+         </top>
          <padding>
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
          </padding>
-      </VBox>
-   </center>
-   <left>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+      </BorderPane>
    </left>
 </BorderPane>

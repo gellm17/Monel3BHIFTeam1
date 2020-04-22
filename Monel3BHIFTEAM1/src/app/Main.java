@@ -10,12 +10,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-        primaryStage.setFullScreen(true);
+        Parent root = FXMLLoader.load(getClass().getResource("MainWindow_Controller.fxml"));
         primaryStage.setTitle("MonelPro");
         primaryStage.setScene(new Scene(root));
 
-        tab.setGraphic(buildImage("../resources/iconAkt.png");
+        //tab.setGraphic(buildImage("../resources/iconAkt.png");
 
         primaryStage.show();
     }
@@ -25,7 +24,7 @@ public class Main extends Application {
         launch(args);
     }
 
-    private static ImageView buildImage(String imgPatch) {
+    /*private static ImageView buildImage(String imgPatch) {
         Image i = new Image(imgPatch);
         ImageView imageView = new ImageView();
         //You can set width and height
@@ -33,5 +32,5 @@ public class Main extends Application {
         imageView.setFitWidth(16);
         imageView.setImage(i);
         return imageView;
-    }
+    }*/
 }
