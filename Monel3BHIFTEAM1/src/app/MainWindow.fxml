@@ -21,20 +21,34 @@
          <right>
             <ButtonBar prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <buttons>
-                <Button fx:id="btnInfo" mnemonicParsing="false" text="Info" />
-                  <Button fx:id="btnSettings" mnemonicParsing="false" text="Einstellungen" />
+                <Button fx:id="btnInfo" mnemonicParsing="false" onAction="#btnInfo_Clicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/icon_Info.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="btnSettings" mnemonicParsing="false" onAction="#btnSettings_Clicked" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/icon_Einst.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
               </buttons>
             </ButtonBar>
          </right>
          <left>
             <ImageView fx:id="imageLogo" fitHeight="80.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@../../ressources/logo_Monel.png" />
+                  <Image url="@../../resources/logo_Monel.png" />
                </image>
             </ImageView>
          </left>
          <padding>
-            <Insets left="20.0" right="20.0" />
+            <Insets bottom="5.0" left="5.0" right="20.0" top="5.0" />
          </padding>
          <center>
             <Label fx:id="lbTitle" text="Klienten" textFill="WHITE" BorderPane.alignment="CENTER">
@@ -46,13 +60,13 @@
       </BorderPane>
    </top>
    <center>
-      <TabPane prefHeight="200.0" prefWidth="200.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMinHeight="70.0" tabMinWidth="70.0" BorderPane.alignment="CENTER">
+      <TabPane fx:id="tabPaneClients" prefHeight="200.0" prefWidth="200.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMinHeight="70.0" tabMinWidth="70.0" BorderPane.alignment="CENTER">
         <tabs>
-          <Tab fx:id="tabActivities" text="Aktivitäten">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
+            <Tab fx:id="tabActivities" text="Aktivitäten">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
           <Tab fx:id="tabBills" text="Rechnungen">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
@@ -83,11 +97,11 @@
                            <right>
                               <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                 <buttons>
-                                    <Button fx:id="btnSearchClients" maxWidth="80.0" mnemonicParsing="false" text="Search" />
-                                    <Button fx:id="btnFilterClients" maxWidth="80.0" mnemonicParsing="false" text="Filter" />
-                                  <Button fx:id="btnAddClient" maxWidth="80.0" mnemonicParsing="false" text="+" />
-                                    <Button fx:id="btnDeleteClients" mnemonicParsing="false" text="Löschen" />
-                                    <Button fx:id="btnEditClients" mnemonicParsing="false" text="Bearbeiten" />
+                                    <Button fx:id="btnSearchClients" maxWidth="80.0" mnemonicParsing="false" onAction="#btnSearchClients_Clicked" text="Search" />
+                                    <Button fx:id="btnFilterClients" maxWidth="80.0" mnemonicParsing="false" onAction="#btnFilterClients_Clicked" text="Filter" />
+                                  <Button fx:id="btnAddClient" maxWidth="80.0" mnemonicParsing="false" onAction="#btnAddClient_Clicked" text="+" />
+                                    <Button fx:id="btnDeleteClient" mnemonicParsing="false" onAction="#btnDeleteClient_Clicked" text="Löschen" />
+                                    <Button fx:id="btnEditClient" mnemonicParsing="false" onAction="#btnEditClient_Clicked" text="Bearbeiten" />
                                 </buttons>
                                  <BorderPane.margin>
                                     <Insets />

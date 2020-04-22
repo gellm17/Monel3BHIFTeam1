@@ -14,11 +14,24 @@ public class Main extends Application {
         primaryStage.setFullScreen(true);
         primaryStage.setTitle("MonelPro");
         primaryStage.setScene(new Scene(root));
+
+        tab.setGraphic(buildImage("../resources/iconAkt.png");
+
         primaryStage.show();
     }
 
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    private static ImageView buildImage(String imgPatch) {
+        Image i = new Image(imgPatch);
+        ImageView imageView = new ImageView();
+        //You can set width and height
+        imageView.setFitHeight(16);
+        imageView.setFitWidth(16);
+        imageView.setImage(i);
+        return imageView;
     }
 }
