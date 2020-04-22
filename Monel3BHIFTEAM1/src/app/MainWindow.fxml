@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -77,13 +76,6 @@
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
                         <TableView fx:id="tableClients" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                          <columns>
-                            <TableColumn prefWidth="150.0" text="Bild" />
-                            <TableColumn prefWidth="250.0" text="Vorname" />
-                              <TableColumn prefWidth="250.0" text="Nachname" />
-                              <TableColumn prefWidth="100.0" text="SvNr" />
-                              <TableColumn prefWidth="200.0" text="Telefon" />
-                          </columns>
                            <BorderPane.margin>
                               <Insets top="20.0" />
                            </BorderPane.margin>

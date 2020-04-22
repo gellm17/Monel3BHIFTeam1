@@ -1,7 +1,7 @@
-/*
+
 package data;
 import java.sql.*;
-
+/*
 public class DBConnector {
 // JDBC driver name and database URL
 
