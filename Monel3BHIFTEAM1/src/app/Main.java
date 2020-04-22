@@ -10,9 +10,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("MainWindow_Controller.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
         primaryStage.setTitle("MonelPro");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(new Scene(root, 1300, 800));
 
         //tab.setGraphic(buildImage("../resources/iconAkt.png");
 
