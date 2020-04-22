@@ -8,7 +8,8 @@ public class Person {
     private IntegerProperty id;
     private ObjectProperty<Salutation> salutation;
     private StringProperty title;
-    private StringProperty name;
+    private StringProperty firstName;
+    private StringProperty lastName;
     private StringProperty streetAndNr;
     private IntegerProperty zipCode;
     private StringProperty place;
@@ -18,11 +19,12 @@ public class Person {
 
     private static int counterForID = 0;
 
-    public Person(Salutation salutation, String title, String name, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate) {
+    public Person(Salutation salutation, String title, String firstName, String lastName,String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate) {
         this.id = new SimpleIntegerProperty(this, "id", counterForID++);
         this.salutation = new SimpleObjectProperty<Salutation>(this, "salutation", salutation);
         this.title = new SimpleStringProperty(this, "title", title);
-        this.name = new SimpleStringProperty(this, "name", name);
+        this.firstName = new SimpleStringProperty(this, "firstName", firstName);
+        this.lastName = new SimpleStringProperty(this, "lastName", lastName);
         this.streetAndNr = new SimpleStringProperty(this, "streetAndNr", street + " " + houseNumber);
         this.zipCode = new SimpleIntegerProperty(this, "zipCode", zipCode);
         this.place = new SimpleStringProperty(this, "place", place);
@@ -58,21 +60,15 @@ public class Person {
         return title;
     }
 
-    public String getName() {
-        return name.get();
-    }
+    public String getFirstName() { return firstName.get(); }
 
-    public StringProperty nameProperty() {
-        return name;
-    }
+    public String getLastName() { return lastName.get(); }
 
-    public String getStreetAndNr() {
-        return streetAndNr.get();
-    }
+    public StringProperty lastNameProperty() { return lastName; }
 
-    public StringProperty streetAndNrProperty() {
-        return streetAndNr;
-    }
+    public String getStreetAndNr() { return streetAndNr.get(); }
+
+    public StringProperty streetAndNrProperty() { return streetAndNr; }
 
     public int getZipCode() {
         return zipCode.get();
