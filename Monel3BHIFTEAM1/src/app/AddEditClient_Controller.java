@@ -10,8 +10,9 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import model.Client;
 
-public class AddEditClient_Controller {
+public class AddEditClient_Controller extends SceneLoader{
 
     @FXML
     private Button btnInfo;
@@ -84,6 +85,17 @@ public class AddEditClient_Controller {
 
     @FXML
     private Tab tabEmergencyContact2;
+
+    private Client editableClient;
+
+    public Client getEditableClient() {
+        return editableClient;
+    }
+
+    public void setEditableClient(Client editableClient) {
+        this.editableClient = editableClient;
+        tfTitleClient.setText(this.editableClient.toString());
+    }
 
     @FXML
     void btnDeleteImageClients_Clicked(ActionEvent event) {

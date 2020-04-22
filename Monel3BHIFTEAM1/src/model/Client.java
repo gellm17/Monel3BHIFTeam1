@@ -28,6 +28,12 @@ public class Client extends Person{
         this.emergencyContact2 = new SimpleObjectProperty<Person>(this, "emergencyContact2", emergencyContact2);
     }
 
+    public Client(Salutation salutation, String title, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate, int ssnr) {
+        super(salutation, title, firstName, lastName, street, houseNumber, zipCode, place, telNr, email, birthDate);
+        this.ssnr = new SimpleIntegerProperty(this, "ssnr", ssnr);
+    }
+
+
     /*
             GETTERS FOR VALUES AND PROPERTIES
              */
