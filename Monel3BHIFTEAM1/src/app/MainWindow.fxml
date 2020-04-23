@@ -14,13 +14,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="788.0" prefWidth="1170.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.MainWindow_Controller">
+<BorderPane prefHeight="847.0" prefWidth="1233.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.MainWindow_Controller">
    <top>
-      <BorderPane prefHeight="90.0" prefWidth="1170.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER">
+      <BorderPane maxHeight="-Infinity" prefHeight="90.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER">
          <right>
-            <ButtonBar prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <ButtonBar maxHeight="55.0" BorderPane.alignment="CENTER">
               <buttons>
-                <Button fx:id="btnInfo" mnemonicParsing="false" onAction="#btnInfo_Clicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent;">
+                <Button fx:id="btnInfo" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnInfo_Clicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -28,7 +28,7 @@
                            </image>
                         </ImageView>
                      </graphic></Button>
-                  <Button fx:id="btnSettings" mnemonicParsing="false" onAction="#btnSettings_Clicked" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnSettings" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnSettings_Clicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent;">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -59,7 +59,7 @@
       </BorderPane>
    </top>
    <center>
-      <TabPane fx:id="tabPaneClients" prefHeight="200.0" prefWidth="200.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMinHeight="70.0" tabMinWidth="70.0" BorderPane.alignment="CENTER">
+      <TabPane fx:id="tabPaneClients" prefHeight="200.0" prefWidth="200.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMinHeight="90.0" tabMinWidth="90.0" BorderPane.alignment="CENTER">
         <tabs>
             <Tab fx:id="tabActivities" text="Aktivitäten">
               <content>
