@@ -30,7 +30,7 @@
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/icon_Info.png" />
+                              <Image url="@../resources/icon_Info.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -39,7 +39,7 @@
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../resources/icon_Einst.png" />
+                              <Image url="@../resources/icon_Einst.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -50,7 +50,7 @@
          <left>
             <ImageView fx:id="imageLogo" fitHeight="80.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@../../resources/logo_Monel.png" />
+                  <Image url="@../resources/logo_Monel.png" />
                </image>
             </ImageView>
          </left>
@@ -1309,7 +1309,7 @@
                <children>
                   <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../resources/icon_Fot.png" />
+                        <Image url="@../resources/icon_Photo_HQ_white.png" />
                      </image>
                   </ImageView>
                   <BorderPane>

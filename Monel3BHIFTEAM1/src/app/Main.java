@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader fxml = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
         primaryStage.setMaximized(true);
-        primaryStage.setTitle("MonelPro");
+        primaryStage.setTitle("Monel Pro");
         BorderPane root = fxml.load();
         Scene scene = new Scene(root);
 
