@@ -27,12 +27,6 @@ public class AddEditClient_Controller extends SceneLoader{
     private Label lbTitle;
 
     @FXML
-    private Button btnDeleteImageClients;
-
-    @FXML
-    private Button btnSelectImageClients;
-
-    @FXML
     private TextField tfTitleClient;
 
     @FXML
@@ -48,43 +42,175 @@ public class AddEditClient_Controller extends SceneLoader{
     private DatePicker dpBirthdateClient;
 
     @FXML
-    private TextField tfStreet;
+    private TextField tfStreetClient;
 
     @FXML
-    private TextField tfHousenumber;
+    private TextField tfHousenumberClient;
 
     @FXML
-    private TextField tfPLZ;
+    private TextField tfZipClient;
 
     @FXML
-    private TextField tfCity;
+    private TextField tfPlaceClient;
 
     @FXML
-    private CheckBox cbPrivacy1Clients;
+    private CheckBox cbPrivacy1Client;
 
     @FXML
-    private CheckBox cbPrivacy2Clients;
+    private CheckBox cbPrivacy2Client;
 
     @FXML
-    private CheckBox cbPrivacy3Clients;
+    private CheckBox cbPrivacy3Client;
 
     @FXML
-    private CheckBox cbPrivacy4Clients;
+    private CheckBox cbPrivacy4Client;
 
     @FXML
     private TabPane tbEmergencyContactsClients;
 
     @FXML
+    private Tab tabEsv;
+
+    @FXML
+    private TextField tfTitleEsv;
+
+    @FXML
+    private TextField tfFirstnameEsv;
+
+    @FXML
+    private TextField tfLastnameEsv;
+
+    @FXML
+    private TextField tfSsnrEsv;
+
+    @FXML
+    private DatePicker dpBirthdateEsv;
+
+    @FXML
+    private TextField tfStreetEsv;
+
+    @FXML
+    private TextField tfHousenumberEsv;
+
+    @FXML
+    private TextField tfZipEsv;
+
+    @FXML
+    private TextField tfPlaceEsv;
+
+    @FXML
+    private TextField tfTelNrEsv;
+
+    @FXML
+    private TextField tfEmailEsv;
+
+    @FXML
     private Tab tabEmergencyContact1;
 
     @FXML
-    private TextField tfFirstnameClient1;
+    private TextField tfTitleContact1;
 
     @FXML
-    private TextField tfLastnameClient1;
+    private TextField tfFirstnameContact1;
+
+    @FXML
+    private TextField tfLastnameContact1;
+
+    @FXML
+    private TextField tfSsnrContact1;
+
+    @FXML
+    private DatePicker dpBirthdateContact1;
+
+    @FXML
+    private TextField tfStreetContact1;
+
+    @FXML
+    private TextField tfHousenumberContact1;
+
+    @FXML
+    private TextField tfZipContact1;
+
+    @FXML
+    private TextField tfPlaceContact1;
+
+    @FXML
+    private TextField tfTelNrContact1;
+
+    @FXML
+    private TextField tfEmailContact1;
 
     @FXML
     private Tab tabEmergencyContact2;
+
+    @FXML
+    private TextField tfTitleContact2;
+
+    @FXML
+    private TextField tfFirstnameContact2;
+
+    @FXML
+    private TextField tfLastnameContact2;
+
+    @FXML
+    private TextField tfSsnrContact2;
+
+    @FXML
+    private DatePicker dpBirthdateContact2;
+
+    @FXML
+    private TextField tfStreetContact2;
+
+    @FXML
+    private TextField tfHousenumberContact2;
+
+    @FXML
+    private TextField tfZipContact2;
+
+    @FXML
+    private TextField tfPlaceContact2;
+
+    @FXML
+    private TextField tfTelNrContact2;
+
+    @FXML
+    private TextField tfEmailContact2;
+
+    @FXML
+    private TextField tfTelNrClient;
+
+    @FXML
+    private TextField tfEmailClient;
+
+    @FXML
+    private TextField tfDiagnoseClient;
+
+    @FXML
+    private TextField tfJobClient;
+
+    @FXML
+    private TextField tfAllergiesClient;
+
+    @FXML
+    private TextField tfOtherClient;
+
+    @FXML
+    private TextField tfIbanClient;
+
+    @FXML
+    private TextField tfBicClient;
+
+    @FXML
+    private Button btnDeleteImageClients;
+
+    @FXML
+    private Button btnSelectImageClients;
+
+    @FXML
+    private Button btnOkClient;
+
+    @FXML
+    private Button btnCancelClient;
 
     private Client editableClient;
 
@@ -103,7 +229,17 @@ public class AddEditClient_Controller extends SceneLoader{
     }
 
     @FXML
+    void btnInfo_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
     void btnSelectImageClients_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnSettings_Clicked(ActionEvent event) {
 
     }
 
