@@ -1335,12 +1335,12 @@
          <bottom>
             <ButtonBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <buttons>
-                  <Button fx:id="btnOkClient" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Fertig">
+                  <Button fx:id="btnOkClient" mnemonicParsing="false" onAction="#btnOkClient_Clicked" prefHeight="50.0" prefWidth="100.0" text="Fertig">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                <Button fx:id="btnCancelClient" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="Abbrechen">
+                <Button fx:id="btnCancelClient" mnemonicParsing="false" onAction="#btnCancelClient_Clicked" prefHeight="50.0" prefWidth="100.0" text="Abbrechen">
                      <font>
                         <Font size="16.0" />
                      </font>

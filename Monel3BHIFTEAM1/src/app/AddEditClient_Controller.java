@@ -1,18 +1,18 @@
 package app;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import model.Client;
+import model.Salutation;
 
-public class AddEditClient_Controller extends SceneLoader{
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AddEditClient_Controller extends SceneLoader implements Initializable {
 
     @FXML
     private Button btnInfo;
@@ -25,6 +25,9 @@ public class AddEditClient_Controller extends SceneLoader{
 
     @FXML
     private Label lbTitle;
+
+    @FXML
+    private ComboBox<Salutation> comboSalutationClient;
 
     @FXML
     private TextField tfTitleClient;
@@ -72,6 +75,9 @@ public class AddEditClient_Controller extends SceneLoader{
     private Tab tabEsv;
 
     @FXML
+    private ComboBox<Salutation> comboSalutationEsv;
+
+    @FXML
     private TextField tfTitleEsv;
 
     @FXML
@@ -108,6 +114,9 @@ public class AddEditClient_Controller extends SceneLoader{
     private Tab tabEmergencyContact1;
 
     @FXML
+    private ComboBox<Salutation> comboSalutationContact1;
+
+    @FXML
     private TextField tfTitleContact1;
 
     @FXML
@@ -142,6 +151,9 @@ public class AddEditClient_Controller extends SceneLoader{
 
     @FXML
     private Tab tabEmergencyContact2;
+
+    @FXML
+    private ComboBox<Salutation> comboSalutationContact2;
 
     @FXML
     private TextField tfTitleContact2;
@@ -212,6 +224,7 @@ public class AddEditClient_Controller extends SceneLoader{
     @FXML
     private Button btnCancelClient;
 
+
     private Client editableClient;
 
     public Client getEditableClient() {
@@ -220,7 +233,11 @@ public class AddEditClient_Controller extends SceneLoader{
 
     public void setEditableClient(Client editableClient) {
         this.editableClient = editableClient;
-        tfTitleClient.setText(this.editableClient.toString());
+    }
+
+    @FXML
+    void btnCancelClient_Clicked(ActionEvent event) {
+
     }
 
     @FXML
@@ -234,6 +251,11 @@ public class AddEditClient_Controller extends SceneLoader{
     }
 
     @FXML
+    void btnOkClient_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
     void btnSelectImageClients_Clicked(ActionEvent event) {
 
     }
@@ -243,4 +265,26 @@ public class AddEditClient_Controller extends SceneLoader{
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        comboSalutationClient.getItems().setAll(Salutation.values());
+        comboSalutationContact1.getItems().setAll(Salutation.values());
+        comboSalutationContact2.getItems().setAll(Salutation.values());
+        comboSalutationEsv.getItems().setAll(Salutation.values());
+        if (editableClient != null) {
+            comboSalutationClient.getSelectionModel().select(editableClient.getSalutation());
+            tfTitleClient.setText(editableClient.getTitle());
+            tfFirstnameClient.setText(editableClient.getFirstName());
+            tfLastnameClient.setText(editableClient.getLastName());
+
+            tfAllergiesClient.setText(editableClient.getAllergies());
+            tfDiagnoseClient.setText(editableClient.getDiagnose());
+            //CONTACT
+            tfTelNrClient.setText(editableClient.getTelNr());
+            tfEmailClient.setText(editableClient.getEmail());
+            //BANK
+            tfBicClient.setText(editableClient.getBic());
+            tfIbanClient.setText(editableClient.getIban());
+        }
+    }
 }
