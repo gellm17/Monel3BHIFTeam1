@@ -25,8 +25,24 @@
          <right>
             <ButtonBar prefHeight="30.0" prefWidth="200.0" BorderPane.alignment="CENTER">
               <buttons>
-                <Button fx:id="btnInfo" mnemonicParsing="false" text="Info" />
-                  <Button fx:id="btnSettings" mnemonicParsing="false" text="Einstellungen" />
+                  <Button fx:id="btnInfo" mnemonicParsing="false" onAction="#btnInfo_Clicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/icon_Info.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnSettings" mnemonicParsing="false" onAction="#btnSettings_Clicked" style="-fx-background-color: transparent;">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../resources/icon_Einst.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
               </buttons>
             </ButtonBar>
          </right>
@@ -82,7 +98,7 @@
                                     <Insets bottom="5.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField fx:id="tfFirstnameClient">
+                              <TextField fx:id="tfFirstnameClient" maxWidth="700.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -98,7 +114,7 @@
                                     <Insets bottom="5.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField fx:id="tfLastnameClient">
+                              <TextField fx:id="tfLastnameClient" maxWidth="700.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -342,7 +358,7 @@
                                                                   <Insets bottom="5.0" />
                                                                </VBox.margin>
                                                             </Label>
-                                                            <TextField fx:id="tfFirstnameEsv">
+                                                            <TextField fx:id="tfFirstnameEsv" maxWidth="700.0">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -358,7 +374,7 @@
                                                                   <Insets bottom="5.0" />
                                                                </VBox.margin>
                                                             </Label>
-                                                            <TextField fx:id="tfLastnameEsv">
+                                                            <TextField fx:id="tfLastnameEsv" maxWidth="700.0">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -594,7 +610,7 @@
                                                                   <Insets bottom="5.0" />
                                                                </VBox.margin>
                                                             </Label>
-                                                            <TextField fx:id="tfFirstnameContact1">
+                                                            <TextField fx:id="tfFirstnameContact1" maxWidth="700.0">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -610,7 +626,7 @@
                                                                   <Insets bottom="5.0" />
                                                                </VBox.margin>
                                                             </Label>
-                                                            <TextField fx:id="tfLastnameContact1">
+                                                            <TextField fx:id="tfLastnameContact1" maxWidth="700.0">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -846,7 +862,7 @@
                                                                   <Insets bottom="5.0" />
                                                                </VBox.margin>
                                                             </Label>
-                                                            <TextField fx:id="tfFirstnameContact2">
+                                                            <TextField fx:id="tfFirstnameContact2" maxWidth="700.0">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -862,7 +878,7 @@
                                                                   <Insets bottom="5.0" />
                                                                </VBox.margin>
                                                             </Label>
-                                                            <TextField fx:id="tfLastnameContact2">
+                                                            <TextField fx:id="tfLastnameContact2" maxWidth="700.0">
                                                                <font>
                                                                   <Font size="14.0" />
                                                                </font>
@@ -1076,7 +1092,7 @@
                                     <Insets bottom="5.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField fx:id="tfTelNrClient">
+                              <TextField fx:id="tfTelNrClient" maxWidth="300.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -1092,7 +1108,7 @@
                                     <Insets bottom="5.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField fx:id="tfEmailClient">
+                              <TextField fx:id="tfEmailClient" maxWidth="600.0">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
