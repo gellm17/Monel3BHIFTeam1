@@ -254,11 +254,14 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             tfZipClient.setText(""+editableClient.getZipCode());
             tfPlaceClient.setText(editableClient.getPlace());
             //PRIVACY
-            Privacy privacyOfEditableClient = editableClient.getPrivacy();
-            /*cbPrivacy1Client.setSelected(cbPrivacy1Client.isSelected() == privacyOfEditableClient.getPrivacies().get(0));
-            cbPrivacy2Client.setSelected(cbPrivacy2Client.isSelected() == privacyOfEditableClient.getPrivacies().get(1));
-            cbPrivacy3Client.setSelected(cbPrivacy3Client.isSelected() == privacyOfEditableClient.getPrivacies().get(2));
-            cbPrivacy4Client.setSelected(cbPrivacy4Client.isSelected() == privacyOfEditableClient.getPrivacies().get(3));*/
+            Privacy privacyOfEditableClient = new Privacy();
+            if (editableClient.getPrivacy() != null) {
+                privacyOfEditableClient = editableClient.getPrivacy();
+            }
+            cbPrivacy1Client.setSelected(privacyOfEditableClient.getPrivacies().get(0));
+            cbPrivacy2Client.setSelected(privacyOfEditableClient.getPrivacies().get(1));
+            cbPrivacy3Client.setSelected(privacyOfEditableClient.getPrivacies().get(2));
+            cbPrivacy4Client.setSelected(privacyOfEditableClient.getPrivacies().get(3));
             //CONTACT
             tfTelNrClient.setText(editableClient.getTelNr());
             tfEmailClient.setText(editableClient.getEmail());
@@ -344,9 +347,10 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             clientToAdd.setEmail(tfEmailClient.getText());
         }
 
+        clientToAdd.setPrivacy(new Privacy(new ArrayList<Boolean>(){{add(cbPrivacy1Client.isSelected()); add(cbPrivacy2Client.isSelected()); add(cbPrivacy3Client.isSelected()); add(cbPrivacy4Client.isSelected());}}));
+
         if(PersonDAO.getInstance().addPerson(clientToAdd)){
-            if (editableClient != null) {
-                PersonDAO.getInstance().deletePerson(editableClient);
+            if (editableClient != null) { PersonDAO.getInstance().deletePerson(editableClient);
             }
             super.showScene("MainWindow");
         }

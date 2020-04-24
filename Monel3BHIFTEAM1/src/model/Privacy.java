@@ -4,6 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Privacy {
@@ -14,6 +15,15 @@ public class Privacy {
 
     public Privacy(List<Boolean> privacies) {
         this.privacies = FXCollections.observableList(privacies);
+    }
+    public Privacy() {
+        this(new ArrayList<Boolean>(){ {
+            add(false);
+            add(false);
+            add(false);
+            add(false);
+        }
+        });
     }
 
     public int getId() {
