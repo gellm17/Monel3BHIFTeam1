@@ -1139,6 +1139,9 @@
                                  </tabs>
                               </TabPane>
                            </children>
+                           <padding>
+                              <Insets bottom="-0.1" left="-0.1" right="-0.1" top="-0.1" />
+                           </padding>
                         </VBox>
                     </content>
                      <font>
