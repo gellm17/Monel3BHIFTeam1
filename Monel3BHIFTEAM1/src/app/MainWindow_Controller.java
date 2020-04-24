@@ -130,10 +130,12 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
         this.CreateColumns();
         this.ConfigureTableView(PersonDAO.getInstance().getClients());
         this.btnDeleteClient.setDisable(true);
+        this.btnEditClient.setDisable(true);
 
         tableClients.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 btnDeleteClient.setDisable(false);
+                btnEditClient.setDisable(false);
                 selectedItem = newSelection;
                 System.out.println(selectedItem);
 
