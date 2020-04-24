@@ -90,7 +90,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </ComboBox>
-                                    <Label text="Titel">
+                                    <Label text="Titel (optional)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -373,7 +373,7 @@
                                                                   <Insets bottom="10.0" />
                                                                </VBox.margin>
                                                             </ComboBox>
-                                                            <Label text="Titel">
+                                                            <Label text="Titel (optional)">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="16.0" />
                                                                </font>
@@ -450,7 +450,7 @@
                                                                   <Insets bottom="40.0" />
                                                                </VBox.margin>
                                                             </DatePicker>
-                                                            <Label text="Adresse">
+                                                            <Label text="Adresse (optional)">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="24.0" />
                                                                </font>
@@ -555,7 +555,7 @@
                                                                   <Insets bottom="40.0" />
                                                                </VBox.margin>
                                                             </HBox>
-                                                            <Label text="Kontakt">
+                                                            <Label text="Kontakt (optional)">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="24.0" />
                                                                </font>
@@ -638,7 +638,7 @@
                                                                   <Insets bottom="10.0" />
                                                                </VBox.margin>
                                                             </ComboBox>
-                                                            <Label text="Titel">
+                                                            <Label text="Titel (optional)">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="16.0" />
                                                                </font>
@@ -715,7 +715,7 @@
                                                                   <Insets bottom="40.0" />
                                                                </VBox.margin>
                                                             </DatePicker>
-                                                            <Label text="Adresse">
+                                                            <Label text="Adresse (optional)">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="24.0" />
                                                                </font>
@@ -820,7 +820,7 @@
                                                                   <Insets bottom="40.0" />
                                                                </VBox.margin>
                                                             </HBox>
-                                                            <Label text="Kontakt">
+                                                            <Label text="Kontakt (optional)">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="24.0" />
                                                                </font>
@@ -903,7 +903,7 @@
                                                                   <Insets bottom="10.0" />
                                                                </VBox.margin>
                                                             </ComboBox>
-                                                            <Label text="Titel">
+                                                            <Label text="Titel (optional)">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="16.0" />
                                                                </font>
@@ -980,7 +980,7 @@
                                                                   <Insets bottom="40.0" />
                                                                </VBox.margin>
                                                             </DatePicker>
-                                                            <Label text="Adresse">
+                                                            <Label text="Adresse (optional)">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="24.0" />
                                                                </font>
@@ -1085,7 +1085,7 @@
                                                                   <Insets bottom="40.0" />
                                                                </VBox.margin>
                                                             </HBox>
-                                                            <Label text="Kontakt">
+                                                            <Label text="Kontakt (optional)">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="24.0" />
                                                                </font>
@@ -1145,7 +1145,7 @@
                         <Font size="14.0" />
                      </font>
                   </TitledPane>
-                  <TitledPane text="Kontaktdaten">
+                  <TitledPane text="Kontaktdaten (optional)">
                     <content>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
                            <content>
@@ -1192,7 +1192,7 @@
                         <Font size="14.0" />
                      </font>
                   </TitledPane>
-                  <TitledPane text="Informationen">
+                  <TitledPane text="Informationen (optional)">
                     <content>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
                            <content>

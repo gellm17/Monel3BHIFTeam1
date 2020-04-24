@@ -132,6 +132,8 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
         this.btnDeleteClient.setDisable(true);
         this.btnEditClient.setDisable(true);
 
+        //this.tabActivities.setGraphic(buildImage("../resources/iconAkt.png");
+
         tableClients.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 btnDeleteClient.setDisable(false);
