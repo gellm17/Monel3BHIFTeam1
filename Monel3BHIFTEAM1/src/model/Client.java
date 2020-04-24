@@ -14,8 +14,9 @@ public class Client extends Person{
     private ObjectProperty<Person> esv;                 //Elternschutzvertreter
     private ObjectProperty<Person> emergencyContact1;
     private ObjectProperty<Person> emergencyContact2;
+    private ObjectProperty<Privacy> privacy;
 
-    public Client(Salutation salutation, String title, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate, int ssnr, String diagnose, String job, String iban, String bic, String allergies, Person esv, Person emergencyContact1, Person emergencyContact2) {
+    public Client(Salutation salutation, String title, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate, int ssnr, String diagnose, String job, String iban, String bic, String allergies, Person esv, Person emergencyContact1, Person emergencyContact2, Privacy privacy) {
         super(salutation, title, firstName, lastName, street, houseNumber, zipCode, place, telNr, email, birthDate);
         this.ssnr = new SimpleIntegerProperty(this, "ssnr", ssnr);
         this.diagnose = new SimpleStringProperty(this, "diagnose", diagnose);
@@ -26,6 +27,7 @@ public class Client extends Person{
         this.esv = new SimpleObjectProperty<Person>(this, "esv", esv);
         this.emergencyContact1 = new SimpleObjectProperty<Person>(this, "emergencyContact1", emergencyContact1);
         this.emergencyContact2 = new SimpleObjectProperty<Person>(this, "emergencyContact2", emergencyContact2);
+        this.privacy = new SimpleObjectProperty<Privacy>(this, "privacy", privacy);
     }
 
     public Client(Salutation salutation, String title, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate, int ssnr) {
@@ -96,4 +98,12 @@ public class Client extends Person{
     public Person getEmergencyContact2() { return emergencyContact2.get(); }
 
     public ObjectProperty<Person> emergencyContact2Property() { return emergencyContact2; }
+
+    public Privacy getPrivacy() {
+        return privacy.get();
+    }
+
+    public ObjectProperty<Privacy> privacyProperty() {
+        return privacy;
+    }
 }

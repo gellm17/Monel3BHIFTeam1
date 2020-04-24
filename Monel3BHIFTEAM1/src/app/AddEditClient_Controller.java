@@ -7,12 +7,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import model.Client;
+import model.Privacy;
 import model.Salutation;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class AddEditClient_Controller extends SceneLoader implements Initializable {
+public class AddEditClient_Controller extends SceneLoader {
 
     @FXML
     private Button btnInfo;
@@ -233,6 +235,39 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
     public void setEditableClient(Client editableClient) {
         this.editableClient = editableClient;
+        comboSalutationClient.getItems().setAll(Salutation.values());
+        comboSalutationContact1.getItems().setAll(Salutation.values());
+        comboSalutationContact2.getItems().setAll(Salutation.values());
+        comboSalutationEsv.getItems().setAll(Salutation.values());
+        if (editableClient != null) {
+            comboSalutationClient.getSelectionModel().select(editableClient.getSalutation());
+            tfTitleClient.setText(editableClient.getTitle());
+            tfFirstnameClient.setText(editableClient.getFirstName());
+            tfLastnameClient.setText(editableClient.getLastName());
+            tfSsnrClient.setText(""+editableClient.getSsnr());
+            //dpBirthdateClient.setValue(editableClient.getBirthDate());
+            /*//ADDRESS
+            tfStreetClient.setText(editableClient.getStreetAndNr().split(" ")[0]);
+            tfHousenumberClient.setText(editableClient.getStreetAndNr().split(" ")[1]);
+            tfZipClient.setText(""+editableClient.getZipCode());
+            tfPlaceClient.setText(editableClient.getPlace());
+            //PRIVACY
+            /*Privacy privacyOfEditableClient = editableClient.getPrivacy();
+            cbPrivacy1Client.setSelected(cbPrivacy1Client.isSelected() == privacyOfEditableClient.getPrivacies().get(0));
+            cbPrivacy2Client.setSelected(cbPrivacy2Client.isSelected() == privacyOfEditableClient.getPrivacies().get(1));
+            cbPrivacy3Client.setSelected(cbPrivacy3Client.isSelected() == privacyOfEditableClient.getPrivacies().get(2));
+            cbPrivacy4Client.setSelected(cbPrivacy4Client.isSelected() == privacyOfEditableClient.getPrivacies().get(3));
+            //CONTACT
+            tfTelNrClient.setText(editableClient.getTelNr());
+            tfEmailClient.setText(editableClient.getEmail());
+            //INFO
+            tfDiagnoseClient.setText(editableClient.getDiagnose());
+            tfJobClient.setText(editableClient.getJob());
+            tfAllergiesClient.setText(editableClient.getAllergies());
+            //BANK
+            tfBicClient.setText(editableClient.getBic());
+            tfIbanClient.setText(editableClient.getIban());*/
+        }
     }
 
     @FXML
@@ -265,26 +300,5 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        comboSalutationClient.getItems().setAll(Salutation.values());
-        comboSalutationContact1.getItems().setAll(Salutation.values());
-        comboSalutationContact2.getItems().setAll(Salutation.values());
-        comboSalutationEsv.getItems().setAll(Salutation.values());
-        if (editableClient != null) {
-            comboSalutationClient.getSelectionModel().select(editableClient.getSalutation());
-            tfTitleClient.setText(editableClient.getTitle());
-            tfFirstnameClient.setText(editableClient.getFirstName());
-            tfLastnameClient.setText(editableClient.getLastName());
 
-            tfAllergiesClient.setText(editableClient.getAllergies());
-            tfDiagnoseClient.setText(editableClient.getDiagnose());
-            //CONTACT
-            tfTelNrClient.setText(editableClient.getTelNr());
-            tfEmailClient.setText(editableClient.getEmail());
-            //BANK
-            tfBicClient.setText(editableClient.getBic());
-            tfIbanClient.setText(editableClient.getIban());
-        }
-    }
 }
