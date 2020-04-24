@@ -37,6 +37,10 @@ public abstract class SceneLoader {
 
     }
 
+    public Stage getPrimStage() {
+        return primStage;
+    }
+
     public void setPrimaryStage(Stage primaryStage) {
         this.primStage = primaryStage;
     }

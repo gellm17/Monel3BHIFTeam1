@@ -150,7 +150,7 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
     public void CreateColumns() {
         //Picture
         tcFirstname = new TableColumn<Client, String>("Vorname");
-        tcLastname = new TableColumn<Client, String>("Lastname");
+        tcLastname = new TableColumn<Client, String>("Nachname");
         tcSsnr = new TableColumn<Client, Integer>("Ssnr");
         tcTelnr = new TableColumn<Client, String>("Telefon");
 
@@ -294,13 +294,17 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
             BorderPane root = loader.load();
 
             Scene scene = new Scene(root);
-            Stage primaryStage = new Stage();
+            Stage primaryStage = this.getPrimStage();
+            primaryStage.setMaximized(true);
+            primaryStage.setTitle("Monel Pro");
             primaryStage.setScene(scene);
             Screen screen = Screen.getPrimary();
             //Get controller of scene2
             AddEditClient_Controller editController = loader.getController();
             //Pass whatever data you want. You can have multiple method calls here
             editController.setEditableClient((Client) selectedItem);
+
+
 
 
             //Maximized
