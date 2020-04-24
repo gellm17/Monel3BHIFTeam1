@@ -27,4 +27,8 @@ public class Privacy {
     public ObservableList<Boolean> getPrivacies() {
         return privacies;
     }
+
+    public void setPrivacies(ObservableList<Boolean> privacies) {
+        this.privacies = privacies;
+    }
 }
