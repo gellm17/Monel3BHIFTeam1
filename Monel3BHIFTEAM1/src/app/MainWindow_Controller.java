@@ -292,30 +292,30 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
        // showScene("AddEditClient");
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddEditClient.fxml"));
-            BorderPane root = loader.load();
 
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("AddEditClient.fxml"));
+            BorderPane root = fxml.load();
             Scene scene = new Scene(root);
-            Stage primaryStage = this.getPrimStage();
-            primaryStage.setMaximized(true);
-            primaryStage.setTitle("Monel Pro");
-            primaryStage.setScene(scene);
+            this.getPrimStage().setScene(scene);
             Screen screen = Screen.getPrimary();
-            //Get controller of scene2
-            AddEditClient_Controller editController = loader.getController();
+
+            //Maximized
+            Rectangle2D bounds = screen.getVisualBounds();
+            this.getPrimStage().setX(bounds.getMinX());
+            this.getPrimStage().setY(bounds.getMinY());
+            this.getPrimStage().setWidth(bounds.getWidth());
+            this.getPrimStage().setHeight(bounds.getHeight());
+            this.getPrimStage().show();
+
+
+            AddEditClient_Controller editController = fxml.getController();
             //Pass whatever data you want. You can have multiple method calls here
             editController.setEditableClient((Client) selectedItem);
 
 
+            SceneLoader loader = editController;
+            loader.setPrimaryStage(this.getPrimStage());
 
-
-            //Maximized
-            Rectangle2D bounds = screen.getVisualBounds();
-            primaryStage.setX(bounds.getMinX());
-            primaryStage.setY(bounds.getMinY());
-            primaryStage.setWidth(bounds.getWidth());
-            primaryStage.setHeight(bounds.getHeight());
-            primaryStage.show();
 
             /*
             Stage primStage = null;
