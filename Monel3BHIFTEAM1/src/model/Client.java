@@ -16,7 +16,7 @@ public class Client extends Person{
     private ObjectProperty<Person> emergencyContact2;
     private ObjectProperty<Privacy> privacy;
 
-    public Client(Salutation salutation, String title, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate, int ssnr, String diagnose, String job, String iban, String bic, String allergies, Person esv, Person emergencyContact1, Person emergencyContact2, Privacy privacy) {
+    /*public Client(Salutation salutation, String title, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate, int ssnr, String diagnose, String job, String iban, String bic, String allergies, Person esv, Person emergencyContact1, Person emergencyContact2, Privacy privacy) {
         super(salutation, title, firstName, lastName, street, houseNumber, zipCode, place, telNr, email, birthDate);
         this.ssnr = new SimpleIntegerProperty(this, "ssnr", ssnr);
         this.diagnose = new SimpleStringProperty(this, "diagnose", diagnose);
@@ -28,19 +28,29 @@ public class Client extends Person{
         this.emergencyContact1 = new SimpleObjectProperty<Person>(this, "emergencyContact1", emergencyContact1);
         this.emergencyContact2 = new SimpleObjectProperty<Person>(this, "emergencyContact2", emergencyContact2);
         this.privacy = new SimpleObjectProperty<Privacy>(this, "privacy", privacy);
-    }
+    }*/
 
-    public Client(Salutation salutation, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, LocalDate birthDate, int ssnr) {
+    public Client(Salutation salutation, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, LocalDate birthDate, int ssnr, String bic, String iban) {
         super(salutation, firstName, lastName, street, houseNumber, zipCode, place, birthDate);
         this.ssnr = new SimpleIntegerProperty(this, "ssnr", ssnr);
+        this.iban = new SimpleStringProperty(this, "iban", iban);
+        this.bic = new SimpleStringProperty(this, "bic", bic);
+
+        this.diagnose = new SimpleStringProperty(this, "diagnose", "");
+        this.job = new SimpleStringProperty(this, "job", "");
+        this.allergies = new SimpleStringProperty(this, "allergies", "");
+        this.esv = new SimpleObjectProperty<Person>(this, "esv", null);
+        this.emergencyContact1 = new SimpleObjectProperty<Person>(this, "emergencyContact1", null);
+        this.emergencyContact2 = new SimpleObjectProperty<Person>(this, "emergencyContact2", null);
+        this.privacy = new SimpleObjectProperty<Privacy>(this, "privacy", null);
     }
 
-    public Client(Salutation salutation, String title, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate, IntegerProperty ssnr, StringProperty iban, StringProperty bic) {
+   /* public Client(Salutation salutation, String title, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate, IntegerProperty ssnr, StringProperty iban, StringProperty bic) {
         super(salutation, title, firstName, lastName, street, houseNumber, zipCode, place, telNr, email, birthDate);
         this.ssnr = ssnr;
         this.iban = iban;
         this.bic = bic;
-    }
+    }*/
 
     /*
                 GETTERS FOR VALUES AND PROPERTIES
@@ -111,5 +121,34 @@ public class Client extends Person{
 
     public ObjectProperty<Privacy> privacyProperty() {
         return privacy;
+    }
+
+    //SETTER
+    public void setDiagnose(String diagnose) {
+        this.diagnose.set(diagnose);
+    }
+
+    public void setJob(String job) {
+        this.job.set(job);
+    }
+
+    public void setAllergies(String allergies) {
+        this.allergies.set(allergies);
+    }
+
+    public void setEsv(Person esv) {
+        this.esv.set(esv);
+    }
+
+    public void setEmergencyContact1(Person emergencyContact1) {
+        this.emergencyContact1.set(emergencyContact1);
+    }
+
+    public void setEmergencyContact2(Person emergencyContact2) {
+        this.emergencyContact2.set(emergencyContact2);
+    }
+
+    public void setPrivacy(Privacy privacy) {
+        this.privacy.set(privacy);
     }
 }

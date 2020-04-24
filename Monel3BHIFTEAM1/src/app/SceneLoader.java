@@ -28,8 +28,8 @@ public abstract class SceneLoader {
             primStage.setHeight(bounds.getHeight());
             primStage.show();
 
-            //SceneLoader loader = fxml.getController();
-            //loader.setPrimaryStage(primStage);
+            SceneLoader loader = fxml.getController();
+            loader.setPrimaryStage(primStage);
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

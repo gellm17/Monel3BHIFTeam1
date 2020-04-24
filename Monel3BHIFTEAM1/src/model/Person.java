@@ -19,7 +19,7 @@ public class Person {
 
     private static int counterForID = 0;
 
-    public Person(Salutation salutation, String title, String firstName, String lastName,String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate) {
+    /*public Person(Salutation salutation, String title, String firstName, String lastName,String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate) {
         this.id = new SimpleIntegerProperty(this, "id", counterForID++);
         this.salutation = new SimpleObjectProperty<Salutation>(this, "salutation", salutation);
         this.title = new SimpleStringProperty(this, "title", title);
@@ -31,7 +31,7 @@ public class Person {
         this.telNr = new SimpleStringProperty(this, "telNr", telNr);
         this.email = new SimpleStringProperty(this, "email", email);
         this.birthDate = new SimpleObjectProperty<LocalDate>(this, "birthDate", birthDate);
-    }
+    }*/
 
     public Person(Salutation salutation, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, LocalDate birthDate) {
         this.id = new SimpleIntegerProperty(this, "id", counterForID++);
@@ -42,6 +42,10 @@ public class Person {
         this.zipCode = new SimpleIntegerProperty(this, "zipCode", zipCode);;
         this.place = new SimpleStringProperty(this, "place", place);
         this.birthDate = new SimpleObjectProperty<LocalDate>(this, "birthDate", birthDate);
+
+        this.title = new SimpleStringProperty(this, "title", "");
+        this.telNr = new SimpleStringProperty(this, "telNr", "");
+        this.email = new SimpleStringProperty(this, "email", "");
     }
 
     /*
@@ -119,5 +123,17 @@ public class Person {
 
     public ObjectProperty<LocalDate> birthDateProperty() {
         return birthDate;
+    }
+
+    public void setTitle(String title) {
+        this.title.set(title);
+    }
+
+    public void setTelNr(String telNr) {
+        this.telNr.set(telNr);
+    }
+
+    public void setEmail(String email) {
+        this.email.set(email);
     }
 }

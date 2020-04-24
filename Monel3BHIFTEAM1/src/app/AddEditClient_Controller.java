@@ -1,5 +1,6 @@
 package app;
 
+import data.PersonDAO;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -228,7 +229,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     private Button btnCancelClient;
 
 
-    private Client editableClient;
+    private Client editableClient = null;
 
     public Client getEditableClient() {
         return editableClient;
@@ -246,18 +247,18 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             tfFirstnameClient.setText(editableClient.getFirstName());
             tfLastnameClient.setText(editableClient.getLastName());
             tfSsnrClient.setText(""+editableClient.getSsnr());
-            //dpBirthdateClient.setValue(editableClient.getBirthDate());
-            /*//ADDRESS
+            dpBirthdateClient.setValue(editableClient.getBirthDate());
+            //ADDRESS
             tfStreetClient.setText(editableClient.getStreetAndNr().split(" ")[0]);
             tfHousenumberClient.setText(editableClient.getStreetAndNr().split(" ")[1]);
             tfZipClient.setText(""+editableClient.getZipCode());
             tfPlaceClient.setText(editableClient.getPlace());
             //PRIVACY
-            /*Privacy privacyOfEditableClient = editableClient.getPrivacy();
-            cbPrivacy1Client.setSelected(cbPrivacy1Client.isSelected() == privacyOfEditableClient.getPrivacies().get(0));
+            Privacy privacyOfEditableClient = editableClient.getPrivacy();
+            /*cbPrivacy1Client.setSelected(cbPrivacy1Client.isSelected() == privacyOfEditableClient.getPrivacies().get(0));
             cbPrivacy2Client.setSelected(cbPrivacy2Client.isSelected() == privacyOfEditableClient.getPrivacies().get(1));
             cbPrivacy3Client.setSelected(cbPrivacy3Client.isSelected() == privacyOfEditableClient.getPrivacies().get(2));
-            cbPrivacy4Client.setSelected(cbPrivacy4Client.isSelected() == privacyOfEditableClient.getPrivacies().get(3));
+            cbPrivacy4Client.setSelected(cbPrivacy4Client.isSelected() == privacyOfEditableClient.getPrivacies().get(3));*/
             //CONTACT
             tfTelNrClient.setText(editableClient.getTelNr());
             tfEmailClient.setText(editableClient.getEmail());
@@ -267,13 +268,13 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             tfAllergiesClient.setText(editableClient.getAllergies());
             //BANK
             tfBicClient.setText(editableClient.getBic());
-            tfIbanClient.setText(editableClient.getIban());*/
+            tfIbanClient.setText(editableClient.getIban());
         }
     }
 
     @FXML
     void btnCancelClient_Clicked(ActionEvent event) {
-
+        showScene("MainWindow");
     }
 
     @FXML
@@ -288,7 +289,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
     @FXML
     void btnOkClient_Clicked(ActionEvent event) {
-        Client clientToAdd;
+        Client clientToAdd = null;
         ArrayList<Boolean> errors = new ArrayList<Boolean>();
 
         if (comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Herr && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Frau && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Firma && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Sonstige) {
@@ -299,29 +300,9 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             errors.add(false);
         }
 
-        if (tfFirstnameClient.getText().equals("")) {
-            tfFirstnameClient.setStyle("-FX-Border-Color: red");
-            errors.add(true);
-        } else {
-            tfFirstnameClient.setStyle(null);
-            errors.add(false);
-        }
-
-        if (tfLastnameClient.getText().equals("")) {
-            tfLastnameClient.setStyle("-FX-Border-Color: red");
-            errors.add(true);
-        } else {
-            tfLastnameClient.setStyle(null);
-            errors.add(false);
-        }
-
-        if (tfSsnrClient.getText().equals("")){
-            tfSsnrClient.setStyle("-FX-Border-Color: red");
-            errors.add(true);
-        } else {
-            tfSsnrClient.setStyle(null);
-            errors.add(false);
-        }
+        errors.add(tfCheck(tfFirstnameClient));
+        errors.add(tfCheck(tfLastnameClient));
+        errors.add(tfCheck(tfSsnrClient));
 
         if (dpBirthdateClient.getValue() == null) {
             dpBirthdateClient.setStyle("-FX-Border-Color: red");
@@ -331,53 +312,13 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             errors.add(false);
         }
 
-        if (tfZipClient.getText().equals("")){
-            tfZipClient.setStyle("-FX-Border-Color: red");
-            errors.add(true);
-        } else {
-            tfZipClient.setStyle(null);
-            errors.add(false);
-        }
+        errors.add(tfCheck(tfZipClient));
+        errors.add(tfCheck(tfHousenumberClient));
+        errors.add(tfCheck(tfStreetClient));
+        errors.add(tfCheck(tfPlaceClient));
 
-        if (tfHousenumberClient.getText().equals("")){
-            tfHousenumberClient.setStyle("-FX-Border-Color: red");
-            errors.add(true);
-        } else {
-            tfHousenumberClient.setStyle(null);
-            errors.add(false);
-        }
-
-        if (tfStreetClient.getText().equals("")){
-            tfStreetClient.setStyle("-FX-Border-Color: red");
-            errors.add(true);
-        } else {
-            tfStreetClient.setStyle(null);
-            errors.add(false);
-        }
-
-        if (tfPlaceClient.getText().equals("")){
-            tfPlaceClient.setStyle("-FX-Border-Color: red");
-            errors.add(true);
-        } else {
-            tfPlaceClient.setStyle(null);
-            errors.add(false);
-        }
-
-        if (tfBicClient.getText().equals("")){
-            tfBicClient.setStyle("-FX-Border-Color: red");
-            errors.add(true);
-        } else {
-            tfBicClient.setStyle(null);
-            errors.add(false);
-        }
-
-        if (tfIbanClient.getText().equals("")){
-            tfIbanClient.setStyle("-FX-Border-Color: red");
-            errors.add(true);
-        } else {
-            tfIbanClient.setStyle(null);
-            errors.add(false);
-        }
+        errors.add(tfCheck(tfIbanClient));
+        errors.add(tfCheck(tfBicClient));
 
         if (!errors.contains(true)){
             clientToAdd = new Client(   comboSalutationClient.getSelectionModel().getSelectedItem(),
@@ -388,8 +329,28 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
                                         Integer.parseInt(tfZipClient.getText()),
                                         tfPlaceClient.getText(),
                                         dpBirthdateClient.getValue(),
-                                        Integer.parseInt(tfSsnrClient.getText()));
+                                        Integer.parseInt(tfSsnrClient.getText()),
+                                        tfBicClient.getText(),
+                                        tfIbanClient.getText());
         }
+
+        if (!tfTitleClient.getText().equals("") && clientToAdd != null){
+            clientToAdd.setTitle(tfTitleClient.getText());
+        }
+        if (!tfTelNrClient.getText().equals("") && clientToAdd != null) {
+            clientToAdd.setTelNr(tfTelNrClient.getText());
+        }
+        if (!tfEmailClient.getText().equals("") && clientToAdd != null) {
+            clientToAdd.setEmail(tfEmailClient.getText());
+        }
+
+        if(PersonDAO.getInstance().addPerson(clientToAdd)){
+            if (editableClient != null) {
+                PersonDAO.getInstance().deletePerson(editableClient);
+            }
+            super.showScene("MainWindow");
+        }
+
     }
 
     @FXML
@@ -402,6 +363,17 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
     }
 
+    private boolean tfCheck(TextField tf){
+        boolean error = true;
+        if (tf.getText().equals("")){
+            tf.setStyle("-FX-Border-Color: red");
+            error = true;
+        } else {
+            tf.setStyle(null);
+            error = false;
+        }
+        return error;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
