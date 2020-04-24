@@ -30,15 +30,21 @@ public class Client extends Person{
         this.privacy = new SimpleObjectProperty<Privacy>(this, "privacy", privacy);
     }
 
-    public Client(Salutation salutation, String title, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate, int ssnr) {
-        super(salutation, title, firstName, lastName, street, houseNumber, zipCode, place, telNr, email, birthDate);
+    public Client(Salutation salutation, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, LocalDate birthDate, int ssnr) {
+        super(salutation, firstName, lastName, street, houseNumber, zipCode, place, birthDate);
         this.ssnr = new SimpleIntegerProperty(this, "ssnr", ssnr);
     }
 
+    public Client(Salutation salutation, String title, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate, IntegerProperty ssnr, StringProperty iban, StringProperty bic) {
+        super(salutation, title, firstName, lastName, street, houseNumber, zipCode, place, telNr, email, birthDate);
+        this.ssnr = ssnr;
+        this.iban = iban;
+        this.bic = bic;
+    }
 
     /*
-            GETTERS FOR VALUES AND PROPERTIES
-             */
+                GETTERS FOR VALUES AND PROPERTIES
+                 */
     public int getSsnr() {
         return ssnr.get();
     }

@@ -33,9 +33,20 @@ public class Person {
         this.birthDate = new SimpleObjectProperty<LocalDate>(this, "birthDate", birthDate);
     }
 
+    public Person(Salutation salutation, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, LocalDate birthDate) {
+        this.id = new SimpleIntegerProperty(this, "id", counterForID++);
+        this.salutation = new SimpleObjectProperty<Salutation>(this, "salutation", salutation);
+        this.firstName = new SimpleStringProperty(this, "firstName", firstName);
+        this.lastName = new SimpleStringProperty(this, "lastName", lastName);
+        this.streetAndNr = new SimpleStringProperty(this, "streetAndNr", street + " " + houseNumber);
+        this.zipCode = new SimpleIntegerProperty(this, "zipCode", zipCode);;
+        this.place = new SimpleStringProperty(this, "place", place);
+        this.birthDate = new SimpleObjectProperty<LocalDate>(this, "birthDate", birthDate);
+    }
+
     /*
-        GETTERS FOR PROPERTIES AND VALUES
-         */
+            GETTERS FOR PROPERTIES AND VALUES
+             */
     public int getId() {
         return id.get();
     }

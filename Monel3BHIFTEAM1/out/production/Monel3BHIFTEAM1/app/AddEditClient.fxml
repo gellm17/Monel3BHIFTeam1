@@ -1145,7 +1145,7 @@
                         <Font size="14.0" />
                      </font>
                   </TitledPane>
-                  <TitledPane text="Kontaktdaten (optional)">
+                  <TitledPane text="Kontakt (optional)">
                     <content>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
                            <content>

@@ -11,10 +11,11 @@ import model.Privacy;
 import model.Salutation;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AddEditClient_Controller extends SceneLoader {
+public class AddEditClient_Controller extends SceneLoader implements Initializable{
 
     @FXML
     private Button btnInfo;
@@ -287,7 +288,108 @@ public class AddEditClient_Controller extends SceneLoader {
 
     @FXML
     void btnOkClient_Clicked(ActionEvent event) {
+        Client clientToAdd;
+        ArrayList<Boolean> errors = new ArrayList<Boolean>();
 
+        if (comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Herr && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Frau && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Firma && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Sonstige) {
+            comboSalutationClient.setStyle("-FX-Border-Color: red");
+            errors.add(true);
+        } else {
+            comboSalutationClient.setStyle(null);
+            errors.add(false);
+        }
+
+        if (tfFirstnameClient.getText().equals("")) {
+            tfFirstnameClient.setStyle("-FX-Border-Color: red");
+            errors.add(true);
+        } else {
+            tfFirstnameClient.setStyle(null);
+            errors.add(false);
+        }
+
+        if (tfLastnameClient.getText().equals("")) {
+            tfLastnameClient.setStyle("-FX-Border-Color: red");
+            errors.add(true);
+        } else {
+            tfLastnameClient.setStyle(null);
+            errors.add(false);
+        }
+
+        if (tfSsnrClient.getText().equals("")){
+            tfSsnrClient.setStyle("-FX-Border-Color: red");
+            errors.add(true);
+        } else {
+            tfSsnrClient.setStyle(null);
+            errors.add(false);
+        }
+
+        if (dpBirthdateClient.getValue() == null) {
+            dpBirthdateClient.setStyle("-FX-Border-Color: red");
+            errors.add(true);
+        } else {
+            dpBirthdateClient.setStyle(null);
+            errors.add(false);
+        }
+
+        if (tfZipClient.getText().equals("")){
+            tfZipClient.setStyle("-FX-Border-Color: red");
+            errors.add(true);
+        } else {
+            tfZipClient.setStyle(null);
+            errors.add(false);
+        }
+
+        if (tfHousenumberClient.getText().equals("")){
+            tfHousenumberClient.setStyle("-FX-Border-Color: red");
+            errors.add(true);
+        } else {
+            tfHousenumberClient.setStyle(null);
+            errors.add(false);
+        }
+
+        if (tfStreetClient.getText().equals("")){
+            tfStreetClient.setStyle("-FX-Border-Color: red");
+            errors.add(true);
+        } else {
+            tfStreetClient.setStyle(null);
+            errors.add(false);
+        }
+
+        if (tfPlaceClient.getText().equals("")){
+            tfPlaceClient.setStyle("-FX-Border-Color: red");
+            errors.add(true);
+        } else {
+            tfPlaceClient.setStyle(null);
+            errors.add(false);
+        }
+
+        if (tfBicClient.getText().equals("")){
+            tfBicClient.setStyle("-FX-Border-Color: red");
+            errors.add(true);
+        } else {
+            tfBicClient.setStyle(null);
+            errors.add(false);
+        }
+
+        if (tfIbanClient.getText().equals("")){
+            tfIbanClient.setStyle("-FX-Border-Color: red");
+            errors.add(true);
+        } else {
+            tfIbanClient.setStyle(null);
+            errors.add(false);
+        }
+
+        if (!errors.contains(true)){
+            clientToAdd = new Client(   comboSalutationClient.getSelectionModel().getSelectedItem(),
+                                        tfFirstnameClient.getText(),
+                                        tfLastnameClient.getText(),
+                                        tfStreetClient.getText(),
+                                        tfHousenumberClient.getText(),
+                                        Integer.parseInt(tfZipClient.getText()),
+                                        tfPlaceClient.getText(),
+                                        dpBirthdateClient.getValue(),
+                                        Integer.parseInt(tfSsnrClient.getText()));
+        }
     }
 
     @FXML
@@ -301,4 +403,11 @@ public class AddEditClient_Controller extends SceneLoader {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        comboSalutationClient.getItems().setAll(Salutation.values());
+        comboSalutationContact1.getItems().setAll(Salutation.values());
+        comboSalutationContact2.getItems().setAll(Salutation.values());
+        comboSalutationEsv.getItems().setAll(Salutation.values());
+    }
 }
