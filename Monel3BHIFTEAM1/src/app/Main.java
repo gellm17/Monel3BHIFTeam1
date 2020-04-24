@@ -19,7 +19,7 @@ public class Main extends Application {
         MainWindow_Controller main = fxml.getController();
         main.setPrimaryStage(primaryStage);
         primaryStage.setScene(scene);
-        //tab.setGraphic(buildImage("../resources/iconAkt.png");
+        //setGraphic(buildImage("../resources/iconAkt.png");
         primaryStage.show();
     }
 
