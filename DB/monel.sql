@@ -20,7 +20,7 @@ USE `monel`;
 -- Exportiere Struktur von Tabelle monel.client
 DROP TABLE IF EXISTS `client`;
 CREATE TABLE IF NOT EXISTS `client` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `esv` int(11) DEFAULT NULL,
   `anrede` varchar(50) DEFAULT NULL,
   `titel` varchar(50) DEFAULT NULL,
@@ -33,12 +33,12 @@ CREATE TABLE IF NOT EXISTS `client` (
   `email` varchar(50) DEFAULT NULL,
   `svnr` int(11) DEFAULT NULL,
   `diagnose` varchar(500) DEFAULT NULL,
-  `beschäftigung` varchar(50) DEFAULT NULL,
+  `beschaeftigung` varchar(50) DEFAULT NULL,
   `allergien` varchar(500) DEFAULT NULL,
   `sonstiges` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKperson` (`esv`),
-  CONSTRAINT `FKperson` FOREIGN KEY (`esv`) REFERENCES `person` (`id`)
+  KEY `FKesv` (`esv`),
+  CONSTRAINT `FKesv` FOREIGN KEY (`esv`) REFERENCES `person` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS `client` (
 -- Exportiere Struktur von Tabelle monel.person
 DROP TABLE IF EXISTS `person`;
 CREATE TABLE IF NOT EXISTS `person` (
-  `id` int(11) NOT NULL,
-  `idc` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `notfallkontakt` int(11) DEFAULT NULL,
   `anrede` varchar(50) DEFAULT NULL,
   `titel` varchar(50) DEFAULT NULL,
   `vorname` varchar(50) DEFAULT NULL,
@@ -58,8 +58,8 @@ CREATE TABLE IF NOT EXISTS `person` (
   `telefonnummer` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKclient` (`idc`),
-  CONSTRAINT `FKclient` FOREIGN KEY (`idc`) REFERENCES `client` (`id`)
+  KEY `FKclient` (`notfallkontakt`),
+  CONSTRAINT `FKclient` FOREIGN KEY (`notfallkontakt`) REFERENCES `client` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
