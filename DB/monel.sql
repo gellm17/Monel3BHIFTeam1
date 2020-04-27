@@ -22,6 +22,8 @@ DROP TABLE IF EXISTS `client`;
 CREATE TABLE IF NOT EXISTS `client` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `esv` int(11) DEFAULT NULL,
+  `notfallkontakt1` int(11) DEFAULT NULL,
+  `notfallkontakt2` int(11) DEFAULT NULL,
   `anrede` varchar(50) DEFAULT NULL,
   `titel` varchar(50) DEFAULT NULL,
   `vorname` varchar(50) DEFAULT NULL,
@@ -38,7 +40,37 @@ CREATE TABLE IF NOT EXISTS `client` (
   `sonstiges` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKesv` (`esv`),
-  CONSTRAINT `FKesv` FOREIGN KEY (`esv`) REFERENCES `person` (`id`)
+  KEY `FKnotfallkontakt1` (`notfallkontakt1`),
+  KEY `FKnotfallkontatk2` (`notfallkontakt2`),
+  CONSTRAINT `FKesv` FOREIGN KEY (`esv`) REFERENCES `person` (`id`),
+  CONSTRAINT `FKnotfallkontakt1` FOREIGN KEY (`notfallkontakt1`) REFERENCES `person` (`id`),
+  CONSTRAINT `FKnotfallkontatk2` FOREIGN KEY (`notfallkontakt2`) REFERENCES `person` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Daten Export vom Benutzer nicht ausgewählt
+
+-- Exportiere Struktur von Tabelle monel.mirarbeiter
+DROP TABLE IF EXISTS `mirarbeiter`;
+CREATE TABLE IF NOT EXISTS `mirarbeiter` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `anrede` varchar(50) DEFAULT NULL,
+  `titel` varchar(50) DEFAULT NULL,
+  `vorname` varchar(50) DEFAULT NULL,
+  `nachname` varchar(50) DEFAULT NULL,
+  `strasse_hausnummer` varchar(50) DEFAULT NULL,
+  `plz` int(4) DEFAULT NULL,
+  `ort` varchar(50) DEFAULT NULL,
+  `telefonnummer` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `svnr` varchar(50) DEFAULT NULL,
+  `ehrenamt` varchar(50) DEFAULT NULL COMMENT 'bei NULL Hauptamt',
+  `verwendungsgruppe` varchar(50) DEFAULT NULL,
+  `gehaltsstufe` int(11) DEFAULT NULL,
+  `wochenstunden` int(11) DEFAULT NULL,
+  `vorrückungsdatum` date DEFAULT NULL,
+  `bankverbindung` varchar(50) DEFAULT NULL,
+  `einstelldatum` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
@@ -57,9 +89,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   `ort` varchar(50) DEFAULT NULL,
   `telefonnummer` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKclient` (`notfallkontakt`),
-  CONSTRAINT `FKclient` FOREIGN KEY (`notfallkontakt`) REFERENCES `client` (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
