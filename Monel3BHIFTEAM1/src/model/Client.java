@@ -33,9 +33,9 @@ public class Client extends Person{
     public Client(Salutation salutation, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, LocalDate birthDate, int ssnr) {
         super(salutation, firstName, lastName, street, houseNumber, zipCode, place, birthDate);
         this.ssnr = new SimpleIntegerProperty(this, "ssnr", ssnr);
+
         this.iban = new SimpleStringProperty(this, "iban", "");
         this.bic = new SimpleStringProperty(this, "bic", "");
-
         this.diagnose = new SimpleStringProperty(this, "diagnose", "");
         this.job = new SimpleStringProperty(this, "job", "");
         this.allergies = new SimpleStringProperty(this, "allergies", "");
@@ -150,5 +150,17 @@ public class Client extends Person{
 
     public void setPrivacy(Privacy privacy) {
         this.privacy.set(privacy);
+    }
+
+    public void setSsnr(int ssnr) {
+        this.ssnr.set(ssnr);
+    }
+
+    public void setIban(String iban) {
+        this.iban.set(iban);
+    }
+
+    public void setBic(String bic) {
+        this.bic.set(bic);
     }
 }
