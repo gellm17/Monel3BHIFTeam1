@@ -9,10 +9,9 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -58,7 +57,7 @@
             <Insets bottom="5.0" left="5.0" right="20.0" top="5.0" />
          </padding>
          <center>
-            <Label fx:id="lbTitle" text="Klienten" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label fx:id="lbTitle" text="Mitarbeiter" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Gill Sans MT" size="36.0" />
                </font>
@@ -85,7 +84,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <ComboBox fx:id="comboSalutationClient" prefWidth="150.0">
+                                    <ComboBox fx:id="comboSalutationEmployee" prefWidth="150.0">
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
@@ -98,7 +97,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfTitleClient" maxWidth="-Infinity" prefWidth="400.0">
+                                    <TextField fx:id="tfTitleEmployee" maxWidth="-Infinity" prefWidth="400.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -114,7 +113,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfFirstnameClient" maxWidth="700.0">
+                                    <TextField fx:id="tfFirstnameEmployee" maxWidth="700.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -130,7 +129,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfLastnameClient" maxWidth="700.0">
+                                    <TextField fx:id="tfLastnameEmployee" maxWidth="700.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -146,7 +145,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfSsnrClient" maxWidth="-Infinity" prefWidth="100.0">
+                                    <TextField fx:id="tfSsnrEmployee" maxWidth="-Infinity" prefWidth="100.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -162,7 +161,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <DatePicker fx:id="dpBirthdateClient">
+                                    <DatePicker fx:id="dpBirthdateEmployee">
                                        <VBox.margin>
                                           <Insets />
                                        </VBox.margin>
@@ -197,7 +196,7 @@
                                                       <Insets bottom="5.0" />
                                                    </VBox.margin>
                                                 </Label>
-                                                <TextField fx:id="tfStreetClient" prefWidth="400.0">
+                                                <TextField fx:id="tfStreetEmployee" prefWidth="400.0">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -217,7 +216,7 @@
                                                       <Insets bottom="5.0" />
                                                    </VBox.margin>
                                                 </Label>
-                                                <TextField fx:id="tfHousenumberClient" maxWidth="-Infinity" prefWidth="50.0">
+                                                <TextField fx:id="tfHousenumberEmployee" maxWidth="-Infinity" prefWidth="50.0">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -241,7 +240,7 @@
                                                       <Insets bottom="5.0" />
                                                    </VBox.margin>
                                                 </Label>
-                                                <TextField fx:id="tfZipClient" maxWidth="-Infinity" prefWidth="100.0">
+                                                <TextField fx:id="tfZipEmployee" maxWidth="-Infinity" prefWidth="100.0">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -261,7 +260,7 @@
                                                       <Insets bottom="5.0" />
                                                    </VBox.margin>
                                                 </Label>
-                                                <TextField fx:id="tfPlaceClient" prefWidth="400.0">
+                                                <TextField fx:id="tfPlaceEmployee" prefWidth="400.0">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -291,7 +290,7 @@
                            <content>
                               <VBox>
                                  <children>
-                                    <CheckBox fx:id="cbPrivacy1Client" mnemonicParsing="false" text="Es dürfen Fotos gemacht werden">
+                                    <CheckBox fx:id="cbPrivacy1Employee" mnemonicParsing="false" text="Es dürfen Fotos gemacht werden">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -299,7 +298,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </CheckBox>
-                                    <CheckBox fx:id="cbPrivacy2Client" mnemonicParsing="false" text="Fotos dürfen bearbeitet werden">
+                                    <CheckBox fx:id="cbPrivacy2Employee" mnemonicParsing="false" text="Fotos dürfen bearbeitet werden">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -307,7 +306,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </CheckBox>
-                                    <CheckBox fx:id="cbPrivacy3Client" mnemonicParsing="false" text="Fotos dürfen gezeigt werden">
+                                    <CheckBox fx:id="cbPrivacy3Employee" mnemonicParsing="false" text="Fotos dürfen gezeigt werden">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -315,7 +314,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </CheckBox>
-                                    <CheckBox fx:id="cbPrivacy4Client" mnemonicParsing="false" text="Fotos dürfen veröffentlicht werden">
+                                    <CheckBox fx:id="cbPrivacy4Employee" mnemonicParsing="false" text="Fotos dürfen veröffentlicht werden">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -335,826 +334,13 @@
                         <Font size="14.0" />
                      </font>
                 </TitledPane>
-                  <TitledPane text="ESV / Notfallkontakte">
-                    <content>
-                        <VBox>
-                           <children>
-                              <TabPane fx:id="tbEmergencyContactsClients" maxHeight="1.7976931348623157E308" tabClosingPolicy="UNAVAILABLE" tabMinHeight="60.0" tabMinWidth="80.0">
-                                 <tabs>
-                                    <Tab fx:id="tabEsv" text="ESV">
-                                       <content>
-                                          <BorderPane maxHeight="1.7976931348623157E308">
-                                             <center>
-                                                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" BorderPane.alignment="CENTER">
-                                                   <BorderPane.margin>
-                                                      <Insets />
-                                                   </BorderPane.margin>
-                                                   <content>
-                                                      <VBox>
-                                                         <children>
-                                                            <Label layoutX="30.0" layoutY="614.0" text="Erwachsenenschutzvertreter">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="30.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="20.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label text="Anrede">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <ComboBox fx:id="comboSalutationEsv" prefWidth="150.0">
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </ComboBox>
-                                                            <Label text="Titel (optional)">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfTitleEsv" maxWidth="-Infinity" prefWidth="400.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                            <Label text="Vorname">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfFirstnameEsv" maxWidth="700.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                            <Label text="Nachname">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfLastnameEsv" maxWidth="700.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="40.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                            <Label text="SvNr">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfSsnrEsv" maxWidth="-Infinity" prefWidth="100.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                            <Label text="Geburtsdatum">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <DatePicker fx:id="dpBirthdateEsv">
-                                                               <VBox.margin>
-                                                                  <Insets bottom="40.0" />
-                                                               </VBox.margin>
-                                                            </DatePicker>
-                                                            <Label text="Adresse (optional)">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="24.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <HBox prefHeight="0.0">
-                                                               <children>
-                                                                  <VBox prefHeight="0.0">
-                                                                     <children>
-                                                                        <Label text="Straße">
-                                                                           <font>
-                                                                              <Font name="Gill Sans MT" size="16.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="5.0" />
-                                                                           </VBox.margin>
-                                                                        </Label>
-                                                                        <TextField fx:id="tfStreetEsv" prefWidth="400.0">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="10.0" right="10.0" />
-                                                                           </VBox.margin>
-                                                                        </TextField>
-                                                                     </children>
-                                                                     <HBox.margin>
-                                                                        <Insets />
-                                                                     </HBox.margin>
-                                                                  </VBox>
-                                                                  <VBox prefHeight="0.0">
-                                                                     <children>
-                                                                        <Label text="Nr.">
-                                                                           <font>
-                                                                              <Font name="Gill Sans MT" size="16.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="5.0" />
-                                                                           </VBox.margin>
-                                                                        </Label>
-                                                                        <TextField fx:id="tfHousenumberEsv" maxWidth="-Infinity" prefWidth="50.0">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="10.0" />
-                                                                           </VBox.margin>
-                                                                        </TextField>
-                                                                     </children>
-                                                                  </VBox>
-                                                               </children>
-                                                               <VBox.margin>
-                                                                  <Insets />
-                                                               </VBox.margin>
-                                                            </HBox>
-                                                            <HBox prefHeight="0.0">
-                                                               <children>
-                                                                  <VBox prefHeight="200.0">
-                                                                     <children>
-                                                                        <Label text="PLZ">
-                                                                           <font>
-                                                                              <Font name="Gill Sans MT" size="16.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="5.0" />
-                                                                           </VBox.margin>
-                                                                        </Label>
-                                                                        <TextField fx:id="tfZipEsv" maxWidth="-Infinity" prefWidth="100.0">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="10.0" right="10.0" />
-                                                                           </VBox.margin>
-                                                                        </TextField>
-                                                                     </children>
-                                                                  </VBox>
-                                                                  <VBox prefHeight="200.0">
-                                                                     <children>
-                                                                        <Label text="Ort">
-                                                                           <font>
-                                                                              <Font name="Gill Sans MT" size="16.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="5.0" />
-                                                                           </VBox.margin>
-                                                                        </Label>
-                                                                        <TextField fx:id="tfPlaceEsv" prefWidth="400.0">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="10.0" />
-                                                                           </VBox.margin>
-                                                                        </TextField>
-                                                                     </children>
-                                                                  </VBox>
-                                                               </children>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="40.0" />
-                                                               </VBox.margin>
-                                                            </HBox>
-                                                            <Label text="Kontakt (optional)">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="24.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="15.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label text="Telefonnummer">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfTelNrEsv" maxWidth="300.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                            <Label text="Email">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfEmailEsv" maxWidth="600.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                         </children>
-                                                         <padding>
-                                                            <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
-                                                         </padding>
-                                                      </VBox>
-                                                   </content>
-                                                </ScrollPane>
-                                             </center>
-                                          </BorderPane>
-                                       </content>
-                                    </Tab>
-                                    <Tab fx:id="tabEmergencyContact1" text="Kontakt 1">
-                                       <content>
-                                          <BorderPane maxHeight="1.7976931348623157E308">
-                                             <center>
-                                                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" BorderPane.alignment="CENTER">
-                                                   <BorderPane.margin>
-                                                      <Insets />
-                                                   </BorderPane.margin>
-                                                   <content>
-                                                      <VBox>
-                                                         <children>
-                                                            <Label text="Notfallkontakt 1">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="30.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="20.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label text="Anrede">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <ComboBox fx:id="comboSalutationContact1" prefWidth="150.0">
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </ComboBox>
-                                                            <Label text="Titel (optional)">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfTitleContact1" maxWidth="-Infinity" prefWidth="400.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                            <Label text="Vorname">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfFirstnameContact1" maxWidth="700.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                            <Label text="Nachname">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfLastnameContact1" maxWidth="700.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="40.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                            <Label text="SvNr">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfSsnrContact1" maxWidth="-Infinity" prefWidth="100.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                            <Label text="Geburtsdatum">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <DatePicker fx:id="dpBirthdateContact1">
-                                                               <VBox.margin>
-                                                                  <Insets bottom="40.0" />
-                                                               </VBox.margin>
-                                                            </DatePicker>
-                                                            <Label text="Adresse (optional)">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="24.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <HBox prefHeight="0.0">
-                                                               <children>
-                                                                  <VBox prefHeight="0.0">
-                                                                     <children>
-                                                                        <Label text="Straße">
-                                                                           <font>
-                                                                              <Font name="Gill Sans MT" size="16.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="5.0" />
-                                                                           </VBox.margin>
-                                                                        </Label>
-                                                                        <TextField fx:id="tfStreetContact1" prefWidth="400.0">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="10.0" right="10.0" />
-                                                                           </VBox.margin>
-                                                                        </TextField>
-                                                                     </children>
-                                                                     <HBox.margin>
-                                                                        <Insets />
-                                                                     </HBox.margin>
-                                                                  </VBox>
-                                                                  <VBox prefHeight="0.0">
-                                                                     <children>
-                                                                        <Label text="Nr.">
-                                                                           <font>
-                                                                              <Font name="Gill Sans MT" size="16.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="5.0" />
-                                                                           </VBox.margin>
-                                                                        </Label>
-                                                                        <TextField fx:id="tfHousenumberContact1" maxWidth="-Infinity" prefWidth="50.0">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="10.0" />
-                                                                           </VBox.margin>
-                                                                        </TextField>
-                                                                     </children>
-                                                                  </VBox>
-                                                               </children>
-                                                               <VBox.margin>
-                                                                  <Insets />
-                                                               </VBox.margin>
-                                                            </HBox>
-                                                            <HBox prefHeight="0.0">
-                                                               <children>
-                                                                  <VBox prefHeight="200.0">
-                                                                     <children>
-                                                                        <Label text="PLZ">
-                                                                           <font>
-                                                                              <Font name="Gill Sans MT" size="16.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="5.0" />
-                                                                           </VBox.margin>
-                                                                        </Label>
-                                                                        <TextField fx:id="tfZipContact1" maxWidth="-Infinity" prefWidth="100.0">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="10.0" right="10.0" />
-                                                                           </VBox.margin>
-                                                                        </TextField>
-                                                                     </children>
-                                                                  </VBox>
-                                                                  <VBox prefHeight="200.0">
-                                                                     <children>
-                                                                        <Label text="Ort">
-                                                                           <font>
-                                                                              <Font name="Gill Sans MT" size="16.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="5.0" />
-                                                                           </VBox.margin>
-                                                                        </Label>
-                                                                        <TextField fx:id="tfPlaceContact1" prefWidth="400.0">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="10.0" />
-                                                                           </VBox.margin>
-                                                                        </TextField>
-                                                                     </children>
-                                                                  </VBox>
-                                                               </children>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="40.0" />
-                                                               </VBox.margin>
-                                                            </HBox>
-                                                            <Label text="Kontakt (optional)">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="24.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="15.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label text="Telefonnummer">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfTelNrContact1" maxWidth="300.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                            <Label text="Email">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfEmailContact1" maxWidth="600.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                         </children>
-                                                         <padding>
-                                                            <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
-                                                         </padding>
-                                                      </VBox>
-                                                   </content>
-                                                </ScrollPane>
-                                             </center>
-                                          </BorderPane>
-                                       </content>
-                                    </Tab>
-                                    <Tab fx:id="tabEmergencyContact2" text="Kontakt 2">
-                                       <content>
-                                          <BorderPane maxHeight="1.7976931348623157E308">
-                                             <center>
-                                                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" BorderPane.alignment="CENTER">
-                                                   <BorderPane.margin>
-                                                      <Insets />
-                                                   </BorderPane.margin>
-                                                   <content>
-                                                      <VBox>
-                                                         <children>
-                                                            <Label text="Notfallkontakt 2">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="30.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="20.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label text="Anrede">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <ComboBox fx:id="comboSalutationContact2" prefWidth="150.0">
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </ComboBox>
-                                                            <Label text="Titel (optional)">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfTitleContact2" maxWidth="-Infinity" prefWidth="400.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                            <Label text="Vorname">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfFirstnameContact2" maxWidth="700.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                            <Label text="Nachname">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfLastnameContact2" maxWidth="700.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="40.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                            <Label text="SvNr">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfSsnrContact2" maxWidth="-Infinity" prefWidth="100.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                            <Label text="Geburtsdatum">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <DatePicker fx:id="dpBirthdateContact2">
-                                                               <VBox.margin>
-                                                                  <Insets bottom="40.0" />
-                                                               </VBox.margin>
-                                                            </DatePicker>
-                                                            <Label text="Adresse (optional)">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="24.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <HBox prefHeight="0.0">
-                                                               <children>
-                                                                  <VBox prefHeight="0.0">
-                                                                     <children>
-                                                                        <Label text="Straße">
-                                                                           <font>
-                                                                              <Font name="Gill Sans MT" size="16.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="5.0" />
-                                                                           </VBox.margin>
-                                                                        </Label>
-                                                                        <TextField fx:id="tfStreetContact2" prefWidth="400.0">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="10.0" right="10.0" />
-                                                                           </VBox.margin>
-                                                                        </TextField>
-                                                                     </children>
-                                                                     <HBox.margin>
-                                                                        <Insets />
-                                                                     </HBox.margin>
-                                                                  </VBox>
-                                                                  <VBox prefHeight="0.0">
-                                                                     <children>
-                                                                        <Label text="Nr.">
-                                                                           <font>
-                                                                              <Font name="Gill Sans MT" size="16.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="5.0" />
-                                                                           </VBox.margin>
-                                                                        </Label>
-                                                                        <TextField fx:id="tfHousenumberContact2" maxWidth="-Infinity" prefWidth="50.0">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="10.0" />
-                                                                           </VBox.margin>
-                                                                        </TextField>
-                                                                     </children>
-                                                                  </VBox>
-                                                               </children>
-                                                               <VBox.margin>
-                                                                  <Insets />
-                                                               </VBox.margin>
-                                                            </HBox>
-                                                            <HBox prefHeight="0.0">
-                                                               <children>
-                                                                  <VBox prefHeight="200.0">
-                                                                     <children>
-                                                                        <Label text="PLZ">
-                                                                           <font>
-                                                                              <Font name="Gill Sans MT" size="16.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="5.0" />
-                                                                           </VBox.margin>
-                                                                        </Label>
-                                                                        <TextField fx:id="tfZipContact2" maxWidth="-Infinity" prefWidth="100.0">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="10.0" right="10.0" />
-                                                                           </VBox.margin>
-                                                                        </TextField>
-                                                                     </children>
-                                                                  </VBox>
-                                                                  <VBox prefHeight="200.0">
-                                                                     <children>
-                                                                        <Label text="Ort">
-                                                                           <font>
-                                                                              <Font name="Gill Sans MT" size="16.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="5.0" />
-                                                                           </VBox.margin>
-                                                                        </Label>
-                                                                        <TextField fx:id="tfPlaceContact2" prefWidth="400.0">
-                                                                           <font>
-                                                                              <Font size="14.0" />
-                                                                           </font>
-                                                                           <VBox.margin>
-                                                                              <Insets bottom="10.0" />
-                                                                           </VBox.margin>
-                                                                        </TextField>
-                                                                     </children>
-                                                                  </VBox>
-                                                               </children>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="40.0" />
-                                                               </VBox.margin>
-                                                            </HBox>
-                                                            <Label text="Kontakt (optional)">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="24.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="15.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <Label text="Telefonnummer">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfTelNrContact2" maxWidth="300.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                            <Label text="Email">
-                                                               <font>
-                                                                  <Font name="Gill Sans MT" size="16.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="5.0" />
-                                                               </VBox.margin>
-                                                            </Label>
-                                                            <TextField fx:id="tfEmailContact2" maxWidth="600.0">
-                                                               <font>
-                                                                  <Font size="14.0" />
-                                                               </font>
-                                                               <VBox.margin>
-                                                                  <Insets bottom="10.0" />
-                                                               </VBox.margin>
-                                                            </TextField>
-                                                         </children>
-                                                         <padding>
-                                                            <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
-                                                         </padding>
-                                                      </VBox>
-                                                   </content>
-                                                </ScrollPane>
-                                             </center>
-                                          </BorderPane>
-                                       </content>
-                                    </Tab>
-                                 </tabs>
-                              </TabPane>
-                           </children>
-                           <padding>
-                              <Insets bottom="-0.1" left="-0.1" right="-0.1" top="-0.1" />
-                           </padding>
-                        </VBox>
-                    </content>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TitledPane>
-                  <TitledPane text="Kontakt (optional)">
+                  <TitledPane text="Kontakt">
                     <content>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
                            <content>
                               <VBox>
                                  <children>
-                                    <Label text="Telefonnummer">
+                                    <Label text="Telefonnummer (optional)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -1170,7 +356,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <Label text="Email">
+                                    <Label text="Email (optional)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -1195,84 +381,115 @@
                         <Font size="14.0" />
                      </font>
                   </TitledPane>
-                  <TitledPane text="Informationen (optional)">
-                    <content>
+                  <TitledPane layoutX="10.0" layoutY="130.0" text="Informationen">
+                     <content>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
                            <content>
                               <VBox>
-                                 <children>
-                                    <Label text="Diagnose">
-                                       <font>
-                                          <Font name="Gill Sans MT" size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <TextField fx:id="tfDiagnoseClient">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <Label text="Beschäftigung">
-                                       <font>
-                                          <Font name="Gill Sans MT" size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <TextField fx:id="tfJobClient">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <Label text="Allergien">
-                                       <font>
-                                          <Font name="Gill Sans MT" size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <TextField fx:id="tfAllergiesClient">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="10.0" />
-                                       </VBox.margin>
-                                    </TextField>
-                                    <Label text="Sonstiges">
-                                       <font>
-                                          <Font name="Gill Sans MT" size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets bottom="5.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <TextField fx:id="tfOtherClient">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </TextField>
-                                 </children>
                                  <padding>
                                     <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
                                  </padding>
+                                 <children>
+                                    <Label text="Arbeitsverhältnis">
+                                       <font>
+                                          <Font name="Gill Sans MT" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                       <children>
+                                          <ToggleButton fx:id="tglBtnFulltimeEmployee" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" selected="true" text="Hauptamt">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </ToggleButton>
+                                          <ToggleButton fx:id="tglBtnVolunteeringEmployee" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Ehrenamt">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </ToggleButton>
+                                       </children>
+                                    </HBox>
+                                    <Label layoutX="45.0" layoutY="109.0" text="Verwendungsgruppe">
+                                       <font>
+                                          <Font name="Gill Sans MT" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="tfOccupationGroupEmployee" layoutX="45.0" layoutY="133.0" maxWidth="-Infinity" prefWidth="100.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <Label layoutX="45.0" layoutY="173.0" text="Gehaltsstufe">
+                                       <font>
+                                          <Font name="Gill Sans MT" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="tfSalaryLevelEmployee" layoutX="45.0" layoutY="133.0" maxWidth="-Infinity" prefWidth="100.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <Label layoutX="45.0" layoutY="173.0" text="Wochenstunden">
+                                       <font>
+                                          <Font name="Gill Sans MT" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="tfHoursPerWeekEmployee" layoutX="45.0" layoutY="197.0" maxWidth="-Infinity" prefWidth="100.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <Label layoutX="45.0" layoutY="237.0" text="Vorrückdatum">
+                                       <font>
+                                          <Font name="Gill Sans MT" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <DatePicker fx:id="dpDateSalaryLevelEmployee">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </DatePicker>
+                                    <Label layoutX="45.0" layoutY="301.0" text="Einstelldatum">
+                                       <font>
+                                          <Font name="Gill Sans MT" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <DatePicker fx:id="dpDateOfEmploymentEmployee" layoutX="45.0" layoutY="325.0" />
+                                 </children>
                               </VBox>
                            </content>
                         </ScrollPane>
-                    </content>
+                     </content>
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -1334,14 +551,14 @@
          <top>
             <VBox BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgEmployee" fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/icon_Photo_HQ_white.png" />
                      </image>
                   </ImageView>
                   <BorderPane>
                      <right>
-                        <Button fx:id="btnDeleteImageClients" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#btnDeleteImageClients_Clicked" prefHeight="50.0" prefWidth="50.0" BorderPane.alignment="CENTER">
+                        <Button fx:id="btnDeleteImageEmployee" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#btnDeleteImageEmployee_Clicked" prefHeight="50.0" prefWidth="50.0" BorderPane.alignment="CENTER">
                            <graphic>
                               <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -1351,7 +568,7 @@
                            </graphic></Button>
                      </right>
                      <left>
-                        <Button fx:id="btnSelectImageClients" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#btnSelectImageClients_Clicked" prefHeight="50.0" prefWidth="50.0" BorderPane.alignment="CENTER">
+                        <Button fx:id="btnSelectImageEmployee" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#btnSelectImageEmployee_Clicked" prefHeight="50.0" prefWidth="50.0" BorderPane.alignment="CENTER">
                            <graphic>
                               <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -1386,7 +603,7 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </Label>
-          <Button fx:id="btnCancelClient" mnemonicParsing="false" onAction="#btnCancelClient_Clicked" prefHeight="50.0" prefWidth="130.0" text="Abbrechen">
+          <Button fx:id="btnCancelEmployee" mnemonicParsing="false" onAction="#btnCancelEmployee_Clicked" prefHeight="50.0" prefWidth="130.0" text="Abbrechen">
                <font>
                   <Font size="20.0" />
                </font>
@@ -1394,7 +611,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="btnOkClient" mnemonicParsing="false" onAction="#btnOkClient_Clicked" prefHeight="50.0" prefWidth="130.0" text="Fertig">
+            <Button fx:id="btnOkEmployee" mnemonicParsing="false" onAction="#btnOkEmployee_Clicked" prefHeight="50.0" prefWidth="130.0" text="Fertig">
                <font>
                   <Font size="20.0" />
                </font>

@@ -451,7 +451,7 @@
                                                                   <Insets bottom="40.0" />
                                                                </VBox.margin>
                                                             </DatePicker>
-                                                            <Label text="Adresse (optional)">
+                                                            <Label text="Adresse">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="24.0" />
                                                                </font>
@@ -556,7 +556,7 @@
                                                                   <Insets bottom="40.0" />
                                                                </VBox.margin>
                                                             </HBox>
-                                                            <Label text="Kontakt (optional)">
+                                                            <Label text="Kontakt">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="24.0" />
                                                                </font>
@@ -564,7 +564,7 @@
                                                                   <Insets bottom="15.0" />
                                                                </VBox.margin>
                                                             </Label>
-                                                            <Label text="Telefonnummer">
+                                                            <Label text="Telefonnummer (optional)">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="16.0" />
                                                                </font>
@@ -580,7 +580,7 @@
                                                                   <Insets bottom="10.0" />
                                                                </VBox.margin>
                                                             </TextField>
-                                                            <Label text="Email">
+                                                            <Label text="Email (optional)">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="16.0" />
                                                                </font>
@@ -716,7 +716,7 @@
                                                                   <Insets bottom="40.0" />
                                                                </VBox.margin>
                                                             </DatePicker>
-                                                            <Label text="Adresse (optional)">
+                                                            <Label text="Adresse">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="24.0" />
                                                                </font>
@@ -821,7 +821,7 @@
                                                                   <Insets bottom="40.0" />
                                                                </VBox.margin>
                                                             </HBox>
-                                                            <Label text="Kontakt (optional)">
+                                                            <Label text="Kontakt">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="24.0" />
                                                                </font>
@@ -829,7 +829,7 @@
                                                                   <Insets bottom="15.0" />
                                                                </VBox.margin>
                                                             </Label>
-                                                            <Label text="Telefonnummer">
+                                                            <Label text="Telefonnummer (optional)">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="16.0" />
                                                                </font>
@@ -845,7 +845,7 @@
                                                                   <Insets bottom="10.0" />
                                                                </VBox.margin>
                                                             </TextField>
-                                                            <Label text="Email">
+                                                            <Label text="Email  (optional)">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="16.0" />
                                                                </font>
@@ -981,7 +981,7 @@
                                                                   <Insets bottom="40.0" />
                                                                </VBox.margin>
                                                             </DatePicker>
-                                                            <Label text="Adresse (optional)">
+                                                            <Label text="Adresse">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="24.0" />
                                                                </font>
@@ -1086,7 +1086,7 @@
                                                                   <Insets bottom="40.0" />
                                                                </VBox.margin>
                                                             </HBox>
-                                                            <Label text="Kontakt (optional)">
+                                                            <Label text="Kontakt">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="24.0" />
                                                                </font>
@@ -1094,7 +1094,7 @@
                                                                   <Insets bottom="15.0" />
                                                                </VBox.margin>
                                                             </Label>
-                                                            <Label text="Telefonnummer">
+                                                            <Label text="Telefonnummer (optional)">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="16.0" />
                                                                </font>
@@ -1110,7 +1110,7 @@
                                                                   <Insets bottom="10.0" />
                                                                </VBox.margin>
                                                             </TextField>
-                                                            <Label text="Email">
+                                                            <Label text="Email (optional)">
                                                                <font>
                                                                   <Font name="Gill Sans MT" size="16.0" />
                                                                </font>
@@ -1149,13 +1149,13 @@
                         <Font size="14.0" />
                      </font>
                   </TitledPane>
-                  <TitledPane text="Kontakt (optional)">
+                  <TitledPane text="Kontakt">
                     <content>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
                            <content>
                               <VBox>
                                  <children>
-                                    <Label text="Telefonnummer">
+                                    <Label text="Telefonnummer (optional)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -1171,7 +1171,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <Label text="Email">
+                                    <Label text="Email (optional)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -1196,13 +1196,13 @@
                         <Font size="14.0" />
                      </font>
                   </TitledPane>
-                  <TitledPane text="Informationen (optional)">
+                  <TitledPane text="Informationen">
                     <content>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
                            <content>
                               <VBox>
                                  <children>
-                                    <Label text="Diagnose">
+                                    <Label text="Diagnose (optional)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -1215,7 +1215,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </TextArea>
-                                    <Label text="Beschäftigung">
+                                    <Label text="Beschäftigung (optional)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -1231,7 +1231,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <Label text="Allergien">
+                                    <Label text="Allergien (optional)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -1244,7 +1244,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </TextArea>
-                                    <Label text="Sonstiges">
+                                    <Label text="Sonstiges (optional)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -1322,14 +1322,14 @@
          <top>
             <VBox BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgClient" fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/icon_Photo_HQ_white.png" />
                      </image>
                   </ImageView>
                   <BorderPane>
                      <right>
-                        <Button fx:id="btnDeleteImageClients" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#btnDeleteImageClients_Clicked" prefHeight="50.0" prefWidth="50.0" BorderPane.alignment="CENTER">
+                        <Button fx:id="btnDeleteImageClient" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#btnDeleteImageClient_Clicked" prefHeight="50.0" prefWidth="50.0" BorderPane.alignment="CENTER">
                            <graphic>
                               <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -1339,7 +1339,7 @@
                            </graphic></Button>
                      </right>
                      <left>
-                        <Button fx:id="btnSelectImageClients" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#btnSelectImageClients_Clicked" prefHeight="50.0" prefWidth="50.0" BorderPane.alignment="CENTER">
+                        <Button fx:id="btnSelectImageClient" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#btnSelectImageClient_Clicked" prefHeight="50.0" prefWidth="50.0" BorderPane.alignment="CENTER">
                            <graphic>
                               <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
