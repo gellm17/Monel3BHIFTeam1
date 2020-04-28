@@ -30,11 +30,11 @@ public class Client extends Person{
         this.privacy = new SimpleObjectProperty<Privacy>(this, "privacy", privacy);
     }*/
 
-    public Client(Salutation salutation, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, LocalDate birthDate, int ssnr, String bic, String iban) {
+    public Client(Salutation salutation, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, LocalDate birthDate, int ssnr) {
         super(salutation, firstName, lastName, street, houseNumber, zipCode, place, birthDate);
         this.ssnr = new SimpleIntegerProperty(this, "ssnr", ssnr);
-        this.iban = new SimpleStringProperty(this, "iban", iban);
-        this.bic = new SimpleStringProperty(this, "bic", bic);
+        this.iban = new SimpleStringProperty(this, "iban", "");
+        this.bic = new SimpleStringProperty(this, "bic", "");
 
         this.diagnose = new SimpleStringProperty(this, "diagnose", "");
         this.job = new SimpleStringProperty(this, "job", "");
