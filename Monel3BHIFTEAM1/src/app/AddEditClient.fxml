@@ -11,6 +11,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.Image?>
@@ -1209,14 +1210,11 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfDiagnoseClient">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
+                                    <TextArea fx:id="taDiagnoseClient" prefHeight="200.0" prefWidth="200.0">
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
-                                    </TextField>
+                                    </TextArea>
                                     <Label text="Beschäftigung">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
@@ -1241,14 +1239,11 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfAllergiesClient">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
+                                    <TextArea fx:id="taAllergiesClient" prefHeight="200.0" prefWidth="200.0">
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
-                                    </TextField>
+                                    </TextArea>
                                     <Label text="Sonstiges">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
@@ -1257,14 +1252,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfOtherClient">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets />
-                                       </VBox.margin>
-                                    </TextField>
+                                    <TextArea fx:id="taOtherClient" prefHeight="200.0" prefWidth="200.0" />
                                  </children>
                                  <padding>
                                     <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
