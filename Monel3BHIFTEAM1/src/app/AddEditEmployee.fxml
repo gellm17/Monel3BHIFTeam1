@@ -89,7 +89,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </ComboBox>
-                                    <Label text="Titel (optional)">
+                                    <Label text="Titel">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -105,7 +105,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <Label text="Vorname">
+                                    <Label text="Vorname (Pflichtfeld)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -121,7 +121,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <Label text="Nachname">
+                                    <Label text="Nachname (Pflichtfeld)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -340,7 +340,7 @@
                            <content>
                               <VBox>
                                  <children>
-                                    <Label text="Telefonnummer (optional)">
+                                    <Label text="Telefonnummer">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -356,7 +356,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <Label text="Email (optional)">
+                                    <Label text="Email">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -403,12 +403,12 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                        <children>
-                                          <ToggleButton fx:id="tglBtnFulltimeEmployee" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" selected="true" text="Hauptamt">
+                                          <ToggleButton fx:id="tglBtnFulltimeEmployee" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" selected="true" text="Hauptamt">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </ToggleButton>
-                                          <ToggleButton fx:id="tglBtnVolunteeringEmployee" mnemonicParsing="false" prefHeight="40.0" prefWidth="90.0" text="Ehrenamt">
+                                          <ToggleButton fx:id="tglBtnVolunteeringEmployee" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" text="Ehrenamt">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
