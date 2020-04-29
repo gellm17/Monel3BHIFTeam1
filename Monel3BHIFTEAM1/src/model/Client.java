@@ -30,19 +30,19 @@ public class Client extends Person{
         this.privacy = new SimpleObjectProperty<Privacy>(this, "privacy", privacy);
     }*/
 
-    public Client(Salutation salutation, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, LocalDate birthDate, int ssnr) {
-        super(salutation, firstName, lastName, street, houseNumber, zipCode, place, birthDate);
-        this.ssnr = new SimpleIntegerProperty(this, "ssnr", ssnr);
+    public Client(Salutation salutation, String firstName, String lastName) {
+        super(salutation, firstName, lastName);
 
-        this.iban = new SimpleStringProperty(this, "iban", "");
-        this.bic = new SimpleStringProperty(this, "bic", "");
-        this.diagnose = new SimpleStringProperty(this, "diagnose", "");
-        this.job = new SimpleStringProperty(this, "job", "");
-        this.allergies = new SimpleStringProperty(this, "allergies", "");
-        this.esv = new SimpleObjectProperty<Person>(this, "esv", null);
-        this.emergencyContact1 = new SimpleObjectProperty<Person>(this, "emergencyContact1", null);
-        this.emergencyContact2 = new SimpleObjectProperty<Person>(this, "emergencyContact2", null);
-        this.privacy = new SimpleObjectProperty<Privacy>(this, "privacy", null);
+        this.ssnr = new SimpleIntegerProperty(this, "ssnr");
+        this.iban = new SimpleStringProperty(this, "iban");
+        this.bic = new SimpleStringProperty(this, "bic");
+        this.diagnose = new SimpleStringProperty(this, "diagnose");
+        this.job = new SimpleStringProperty(this, "job");
+        this.allergies = new SimpleStringProperty(this, "allergies");
+        this.esv = new SimpleObjectProperty<Person>(this, "esv");
+        this.emergencyContact1 = new SimpleObjectProperty<Person>(this, "emergencyContact1");
+        this.emergencyContact2 = new SimpleObjectProperty<Person>(this, "emergencyContact2");
+        this.privacy = new SimpleObjectProperty<Privacy>(this, "privacy");
     }
 
    /* public Client(Salutation salutation, String title, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate, IntegerProperty ssnr, StringProperty iban, StringProperty bic) {

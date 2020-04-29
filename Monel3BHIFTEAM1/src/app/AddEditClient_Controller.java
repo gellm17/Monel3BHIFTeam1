@@ -295,27 +295,31 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     void btnOkClient_Clicked(ActionEvent event) {
         Client clientToAdd = null;
 
-        errors.add(tfCheck(tfSsnrClient, "^[1-9][0-9]{3}$"));
-
-        if (comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Herr && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Frau && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Firma && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Sonstige) {
+        /*if (comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Herr && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Frau && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Firma && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Sonstige) {
             comboSalutationClient.setStyle("-FX-Border-Color: red");
             errors.add(true);
         } else {
             comboSalutationClient.setStyle(null);
             errors.add(false);
-        }
+        }*/
+        errors.add(tfCheck(tfFirstnameClient, "^\\D+$"));
+        errors.add(tfCheck(tfLastnameClient, "^\\D+$"));
 
-       /* errors.add(tfCheck(tfFirstnameClient));
-        errors.add(tfCheck(tfLastnameClient));
-        errors.add(tfCheck(tfSsnrClient));*/
+        //errors.add(tfCheck(tfSsnrClient));
 
-        if (dpBirthdateClient.getValue() == null) {
+        errors.add(tfCheck(tfSsnrClient, "^[1-9][0-9]{3}$"));
+
+
+
+
+
+        /*if (dpBirthdateClient.getValue() == null) {
             dpBirthdateClient.setStyle("-FX-Border-Color: red");
             errors.add(true);
         } else {
             dpBirthdateClient.setStyle(null);
             errors.add(false);
-        }
+        }*/
 
         errors.add(tfCheck(tfZipClient, "^[1-9][0-9]{3}$"));
         /*errors.add(tfCheck(tfHousenumberClient));
@@ -328,13 +332,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         if (!errors.contains(true)){
             clientToAdd = new Client(   comboSalutationClient.getSelectionModel().getSelectedItem(),
                                         tfFirstnameClient.getText(),
-                                        tfLastnameClient.getText(),
-                                        tfStreetClient.getText(),
-                                        tfHousenumberClient.getText(),
-                                        Integer.parseInt(tfZipClient.getText()),
-                                        tfPlaceClient.getText(),
-                                        dpBirthdateClient.getValue(),
-                                        Integer.parseInt(tfSsnrClient.getText())
+                                        tfLastnameClient.getText()
             );}
 
         if (!tfIbanClient.getText().equals("") && clientToAdd != null) {
@@ -385,6 +383,16 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         return error;
     }
 
+    private void addFocusedProperty(TextField tf, String regex, boolean must){
+        tf.focusedProperty().addListener((arg0, oldValue, newValue) -> {
+            if (!newValue) { //when focus lost
+                if (tf.getText().equals("") && must) {
+                    errors.add(tfCheck(tf, regex));
+                }
+            }
+        });
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -393,13 +401,23 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         comboSalutationContact2.getItems().setAll(Salutation.values());
         comboSalutationEsv.getItems().setAll(Salutation.values());
 
-        tfSsnrClient.focusedProperty().addListener((arg0, oldValue, newValue) -> {
+        comboSalutationClient.getSelectionModel().select(0);
+        comboSalutationContact1.getSelectionModel().select(0);
+        comboSalutationContact2.getSelectionModel().select(0);
+        comboSalutationEsv.getSelectionModel().select(0);
+
+        /*tfSsnrClient.focusedProperty().addListener((arg0, oldValue, newValue) -> {
             if (!newValue) { //when focus lost
                 errors.add(tfCheck(tfSsnrClient, "^[1-9][0-9]{3}$"));
             }
-        });
+        });*/
 
-        tfZipClient.focusedProperty().addListener((arg0, oldValue, newValue) -> {
+        addFocusedProperty(tfSsnrClient, "^[1-9][0-9]{3}$", false);
+        addFocusedProperty(tfZipClient, "^[1-9][0-9]{3}$", false);
+        addFocusedProperty(tfEmailClient, "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", false);
+        addFocusedProperty(tfIbanClient, "^[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?$", false);
+
+        /*tfZipClient.focusedProperty().addListener((arg0, oldValue, newValue) -> {
             if (!newValue) { //when focus lost
                 errors.add(tfCheck(tfZipClient, "^[1-9][0-9]{3}$"));
             }
@@ -419,6 +437,6 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
                 errors.add(tfCheck(tfIbanClient, "^[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?$"));
                 }
             }
-        });
+        });*/
     }
 }

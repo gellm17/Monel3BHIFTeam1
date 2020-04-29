@@ -48,6 +48,21 @@ public class Person {
         this.email = new SimpleStringProperty(this, "email", "");
     }
 
+    public Person(Salutation salutation, String firstName, String lastName){
+        this.id = new SimpleIntegerProperty(this, "id", counterForID++);
+        this.salutation = new SimpleObjectProperty<Salutation>(this, "salutation", salutation);
+        this.firstName = new SimpleStringProperty(this, "firstName", firstName);
+        this.lastName = new SimpleStringProperty(this, "lastName", lastName);
+
+        this.streetAndNr = new SimpleStringProperty(this, "streetAndNr");
+        this.zipCode = new SimpleIntegerProperty(this, "zipCode");;
+        this.place = new SimpleStringProperty(this, "place");
+        this.birthDate = new SimpleObjectProperty<LocalDate>(this, "birthDate");
+        this.title = new SimpleStringProperty(this, "title");
+        this.telNr = new SimpleStringProperty(this, "telNr");
+        this.email = new SimpleStringProperty(this, "email");
+    }
+
     /*
             GETTERS FOR PROPERTIES AND VALUES
              */
