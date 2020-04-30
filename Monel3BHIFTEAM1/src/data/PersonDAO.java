@@ -18,7 +18,7 @@ public class PersonDAO {
         //clients.add(new Client(Salutation.Herr, "Dr.", "Michael", "Gell", "Sägestraße", "543", 5582, "St.Michael", "066666666606", "michael.gell@gmx.at", LocalDate.now(), 11111));
        // clients.add(new Client(Salutation.Herr, "Dr.", "Michael", "Gell", "Sägestraße", "543", 5582, "St.Michael", "066666666606", "michael.gell@gmx.at", LocalDate.now(), 22222));
         //clients.add(new Client(Salutation.Herr, "Dr.", "Michael", "Gell", "Sägestraße", "543", 5582, "St.Michael", "066666666606", "michael.gell@gmx.at", LocalDate.now(), 23452));
-        clients.add(new Client(Salutation.Herr, "Clemens", "Burgmann", "Arnbach", "99", 9920, "Sillian", LocalDate.now(), 4919));
+        clients.add(new Client(Salutation.Herr, "Clemens", "Burgmann"));
     }
     public static PersonDAO getInstance() {
         if (instance == null) {

@@ -302,17 +302,18 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             comboSalutationClient.setStyle(null);
             errors.add(false);
         }*/
-        errors.add(tfCheck(tfFirstnameClient, "^\\D+$"));
-        errors.add(tfCheck(tfLastnameClient, "^\\D+$"));
 
-        //errors.add(tfCheck(tfSsnrClient));
+        errors.add(tfCheck(tfFirstnameClient, "^\\D+$", true));
+        errors.add(tfCheck(tfLastnameClient, "^\\D+$", true));
 
-        errors.add(tfCheck(tfSsnrClient, "^[1-9][0-9]{3}$"));
+        if (!errors.contains(true)){
+            clientToAdd = new Client(   comboSalutationClient.getSelectionModel().getSelectedItem(),
+                    tfFirstnameClient.getText(),
+                    tfLastnameClient.getText()
+            );}
 
-
-
-
-
+        errors.add(tfCheck(tfTitleClient, "^\\D+$", false));
+        errors.add(tfCheck(tfSsnrClient, "^[1-9][0-9]{3}$", false));
         /*if (dpBirthdateClient.getValue() == null) {
             dpBirthdateClient.setStyle("-FX-Border-Color: red");
             errors.add(true);
@@ -320,23 +321,23 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             dpBirthdateClient.setStyle(null);
             errors.add(false);
         }*/
+        //errors.add(tfCheck(tfSsnrClient));
 
-        errors.add(tfCheck(tfZipClient, "^[1-9][0-9]{3}$"));
-        /*errors.add(tfCheck(tfHousenumberClient));
-        errors.add(tfCheck(tfStreetClient));
-        errors.add(tfCheck(tfPlaceClient));
 
-        errors.add(tfCheck(tfIbanClient));
+
+        errors.add(tfCheck(tfZipClient, "^[1-9][0-9]{3}$", false));
+
+
+        errors.add(tfCheck(tfHousenumberClient, "^[1-9][0-9]{0-3}$", false));
+        errors.add(tfCheck(tfStreetClient, "^\\D+$", false));
+        errors.add(tfCheck(tfPlaceClient, "^\\D+$", false));
+
+        /*errors.add(tfCheck(tfIbanClient));
         errors.add(tfCheck(tfBicClient));*/
 
-        if (!errors.contains(true)){
-            clientToAdd = new Client(   comboSalutationClient.getSelectionModel().getSelectedItem(),
-                                        tfFirstnameClient.getText(),
-                                        tfLastnameClient.getText()
-            );}
 
         if (!tfIbanClient.getText().equals("") && clientToAdd != null) {
-            errors.add(tfCheck(tfIbanClient, "^[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?$"));
+            errors.add(tfCheck(tfIbanClient, "^[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?$", false));
             clientToAdd.setIban(tfIbanClient.getText());
         }
         if (!tfTitleClient.getText().equals("") && clientToAdd != null){
@@ -346,13 +347,13 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             clientToAdd.setTelNr(tfTelNrClient.getText());
         }
         if (!tfEmailClient.getText().equals("") && clientToAdd != null) {
-            errors.add(tfCheck(tfEmailClient, "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"));
+            errors.add(tfCheck(tfEmailClient, "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", false));
             clientToAdd.setEmail(tfEmailClient.getText());
         }
 
         clientToAdd.setPrivacy(new Privacy(new ArrayList<Boolean>(){{add(cbPrivacy1Client.isSelected()); add(cbPrivacy2Client.isSelected()); add(cbPrivacy3Client.isSelected()); add(cbPrivacy4Client.isSelected());}}));
 
-        if(PersonDAO.getInstance().addPerson(clientToAdd)){
+        if(PersonDAO.getInstance().addPerson(clientToAdd) && !errors.contains(true)){
             if (editableClient != null) { PersonDAO.getInstance().deletePerson(editableClient);
             }
             super.showScene("MainWindow");
@@ -370,25 +371,23 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
     }
 
-    private boolean tfCheck(TextField tf, String regex){
+    private boolean tfCheck(TextField tf, String regex, boolean must){
         boolean error = true;
-        if(!tf.getText().matches(regex)){
-            //when it not matches the pattern (1.0 - 6.0)
-            error = true;
-            tf.setStyle("-FX-Border-Color: red");
-        } else {
-            error = false;
-            tf.setStyle(null);
-        }
+            if ((tf.getText().equals("") && must) || !tf.getText().matches(regex)) {
+                //when it not matches the pattern (1.0 - 6.0)
+                error = true;
+                tf.setStyle("-FX-Border-Color: red");
+            } else {
+                error = false;
+                tf.setStyle(null);
+            }
         return error;
     }
 
     private void addFocusedProperty(TextField tf, String regex, boolean must){
         tf.focusedProperty().addListener((arg0, oldValue, newValue) -> {
             if (!newValue) { //when focus lost
-                if (tf.getText().equals("") && must) {
-                    errors.add(tfCheck(tf, regex));
-                }
+                errors.add(tfCheck(tf, regex, must));
             }
         });
     }
