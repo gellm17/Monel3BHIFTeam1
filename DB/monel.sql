@@ -17,9 +17,47 @@ DROP DATABASE IF EXISTS `monel`;
 CREATE DATABASE IF NOT EXISTS `monel` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `monel`;
 
--- Exportiere Struktur von Tabelle monel.client
-DROP TABLE IF EXISTS `client`;
-CREATE TABLE IF NOT EXISTS `client` (
+-- Exportiere Struktur von Tabelle monel.aktivitaet
+DROP TABLE IF EXISTS `aktivitaet`;
+CREATE TABLE IF NOT EXISTS `aktivitaet` (
+  `id` int(11) NOT NULL,
+  `datum` date DEFAULT NULL,
+  `aktivitätsbezeichnung` varchar(50) DEFAULT NULL,
+  `kategorie` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Daten Export vom Benutzer nicht ausgewählt
+
+-- Exportiere Struktur von Tabelle monel.aktivitaetsprotokoll
+DROP TABLE IF EXISTS `aktivitaetsprotokoll`;
+CREATE TABLE IF NOT EXISTS `aktivitaetsprotokoll` (
+  `id` int(11) NOT NULL,
+  `aktivitaet` int(11) NOT NULL,
+  `mitarbeiter` int(11) DEFAULT NULL,
+  `klient` int(11) DEFAULT NULL,
+  `rechnung` int(11) DEFAULT NULL,
+  `startzeit` time DEFAULT NULL,
+  `endzeit` time DEFAULT NULL,
+  `jahr_Monat` date DEFAULT NULL COMMENT 'ist wichtig für die Rechnung',
+  `stundensatz` int(11) DEFAULT NULL,
+  `fahrtkosten` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKaktivitaet` (`aktivitaet`),
+  KEY `FKmitarbeiter` (`mitarbeiter`),
+  KEY `FKklient_aktivitaetsprotokoll` (`klient`),
+  KEY `FKrechnung` (`rechnung`),
+  CONSTRAINT `FKaktivitaet` FOREIGN KEY (`aktivitaet`) REFERENCES `aktivitaet` (`id`),
+  CONSTRAINT `FKklient_aktivitaetsprotokoll` FOREIGN KEY (`klient`) REFERENCES `klient` (`id`),
+  CONSTRAINT `FKmitarbeiter` FOREIGN KEY (`mitarbeiter`) REFERENCES `mirarbeiter` (`id`),
+  CONSTRAINT `FKrechnung` FOREIGN KEY (`rechnung`) REFERENCES `rechnung` (`rechnungsnummmer`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Daten Export vom Benutzer nicht ausgewählt
+
+-- Exportiere Struktur von Tabelle monel.klient
+DROP TABLE IF EXISTS `klient`;
+CREATE TABLE IF NOT EXISTS `klient` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `esv` int(11) DEFAULT NULL,
   `notfallkontakt1` int(11) DEFAULT NULL,
@@ -28,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `client` (
   `titel` varchar(50) DEFAULT NULL,
   `vorname` varchar(50) DEFAULT NULL,
   `nachname` varchar(50) DEFAULT NULL,
-  `strasse_hausnr` varchar(50) DEFAULT NULL,
+  `strasse_hausnummer` varchar(50) DEFAULT NULL,
   `plz` int(11) DEFAULT NULL,
   `ort` varchar(50) DEFAULT NULL,
   `telefonnummer` varchar(50) DEFAULT NULL,
@@ -84,11 +122,46 @@ CREATE TABLE IF NOT EXISTS `person` (
   `titel` varchar(50) DEFAULT NULL,
   `vorname` varchar(50) DEFAULT NULL,
   `nachname` varchar(50) DEFAULT NULL,
-  `strasse_hausnr` varchar(50) DEFAULT NULL,
+  `strasse_hausnummer` varchar(50) DEFAULT NULL,
   `plz` int(11) DEFAULT NULL,
   `ort` varchar(50) DEFAULT NULL,
   `telefonnummer` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Daten Export vom Benutzer nicht ausgewählt
+
+-- Exportiere Struktur von Tabelle monel.rechnung
+DROP TABLE IF EXISTS `rechnung`;
+CREATE TABLE IF NOT EXISTS `rechnung` (
+  `rechnungsnummmer` int(11) NOT NULL,
+  `klient` int(11) NOT NULL,
+  `ausstellungsdatum` date DEFAULT NULL,
+  `verwendungszweck` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`rechnungsnummmer`),
+  KEY `FKklient_rechnung` (`klient`),
+  CONSTRAINT `FKklient_rechnung` FOREIGN KEY (`klient`) REFERENCES `klient` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Daten Export vom Benutzer nicht ausgewählt
+
+-- Exportiere Struktur von Tabelle monel.sponsor
+DROP TABLE IF EXISTS `sponsor`;
+CREATE TABLE IF NOT EXISTS `sponsor` (
+  `id` int(11) NOT NULL,
+  `anrede` varchar(50) DEFAULT NULL,
+  `titel` varchar(50) DEFAULT NULL,
+  `vorname` varchar(50) DEFAULT NULL,
+  `nachname` varchar(50) DEFAULT NULL,
+  `strasse_hausnummer` varchar(50) DEFAULT NULL,
+  `plz` int(4) DEFAULT NULL,
+  `ort` varchar(50) DEFAULT NULL,
+  `telefonnummer` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `firmenname` varchar(50) DEFAULT NULL,
+  `firmentelefonnummer` varchar(50) DEFAULT NULL,
+  `firmenemail` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
