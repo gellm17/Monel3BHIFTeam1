@@ -4,18 +4,18 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="847.0" prefWidth="1233.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.MainWindow_Controller">
+<BorderPane prefHeight="847.0" prefWidth="1233.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ClientList_Controller">
    <top>
       <BorderPane maxHeight="-Infinity" prefHeight="90.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER">
          <right>
@@ -60,371 +60,193 @@
       </BorderPane>
    </top>
    <center>
-      <TabPane fx:id="tabPaneClients" prefHeight="200.0" prefWidth="200.0" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMinHeight="90.0" tabMinWidth="90.0" BorderPane.alignment="CENTER">
-        <tabs>
-            <Tab fx:id="tabActivities" text="Aktivitäten">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </Tab>
-          <Tab fx:id="tabBills" text="Rechnungen">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-            <Tab fx:id="tabClients" text="Klienten">
-              <content>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
-                     <center>
-                        <TableView fx:id="tableClients" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets top="35.0" />
-                           </BorderPane.margin>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                     </center>
-                     <top>
-                        <BorderPane BorderPane.alignment="CENTER">
-                           <center>
-                              <TextField fx:id="tfSearchClients" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" BorderPane.alignment="CENTER">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font></TextField>
-                           </center>
-                           <right>
-                              <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
-                                 <BorderPane.margin>
-                                    <Insets />
-                                 </BorderPane.margin>
-                                 <children>
-                                    <Button fx:id="btnSearchClients" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnSearchClients_Clicked" prefHeight="44.0" prefWidth="44.0">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="40.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_Such.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btnFilterClients" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnFilterClients_Clicked" prefHeight="44.0" prefWidth="44.0">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_Filt.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                  <Button fx:id="btnAddClient" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnAddClient_Clicked" prefHeight="44.0" prefWidth="44.0">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_AddK.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btnDeleteClient" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnDeleteClient_Clicked" prefHeight="44.0" prefWidth="44.0">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_Del.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btnEditClient" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnEditClient_Clicked" prefHeight="44.0" prefWidth="44.0">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fitHeight="100.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_Edit.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </right>
-                        </BorderPane>
-                     </top>
-                     <padding>
-                        <Insets bottom="30.0" left="80.0" right="30.0" top="35.0" />
-                     </padding>
-                  </BorderPane>
-              </content>
-            </Tab>
-            <Tab fx:id="tabEmployees" text="Mitarbeiter">
-              <content>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
-                     <center>
-                        <TableView fx:id="tableEmployees" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets top="35.0" />
-                           </BorderPane.margin>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                     </center>
-                     <top>
-                        <BorderPane BorderPane.alignment="CENTER">
-                           <center>
-                              <TextField fx:id="tfSearchEmployees" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" BorderPane.alignment="CENTER">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </TextField>
-                           </center>
-                           <right>
-                              <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
-                                 <BorderPane.margin>
-                                    <Insets />
-                                 </BorderPane.margin>
-                                 <children>
-                                    <Button fx:id="btnSearchEmployees" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnSearchEmployees_Clicked" prefHeight="44.0" prefWidth="44.0">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="40.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_Such.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btnFilterEmployees" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnFilterEmployees_Clicked" prefHeight="44.0" prefWidth="44.0">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_Filt.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btnAddEmployee" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnAddEmployee_Clicked" prefHeight="44.0" prefWidth="44.0">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_AddK.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btnDeleteEmployee" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnDeleteEmployee_Clicked" prefHeight="44.0" prefWidth="44.0">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_Del.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btnEditEmployee" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnEditEmployee_Clicked" prefHeight="44.0" prefWidth="44.0">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fitHeight="100.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_Edit.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </right>
-                        </BorderPane>
-                     </top>
-                     <padding>
-                        <Insets bottom="30.0" left="80.0" right="30.0" top="35.0" />
-                     </padding>
-                  </BorderPane>
-              </content>
-            </Tab>
-            <Tab fx:id="tabSponsors" text="Sponsoren">
-              <content>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
-                     <center>
-                        <TableView fx:id="tableClients1" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets top="35.0" />
-                           </BorderPane.margin>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                     </center>
-                     <top>
-                        <BorderPane BorderPane.alignment="CENTER">
-                           <center>
-                              <TextField fx:id="tfSearchSponsors" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" BorderPane.alignment="CENTER">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </TextField>
-                           </center>
-                           <right>
-                              <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
-                                 <BorderPane.margin>
-                                    <Insets />
-                                 </BorderPane.margin>
-                                 <children>
-                                    <Button fx:id="btnSearchSponsors" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnSearchSponsors_Clicked" prefHeight="44.0" prefWidth="44.0">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="40.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_Such.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btnFilterSponsors" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnFilterSponsors_Clicked" prefHeight="44.0" prefWidth="44.0">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_Filt.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btnAddSponsor" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnAddSponsor_Clicked" prefHeight="44.0" prefWidth="44.0">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_AddK.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btnDeleteSponsor" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnDeleteSponsor_Clicked" prefHeight="44.0" prefWidth="44.0">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_Del.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                    <Button fx:id="btnEditSponsor" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnEditSponsor_Clicked" prefHeight="44.0" prefWidth="44.0">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fitHeight="100.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_Edit.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </right>
-                        </BorderPane>
-                     </top>
-                     <padding>
-                        <Insets bottom="30.0" left="80.0" right="30.0" top="35.0" />
-                     </padding>
-                  </BorderPane>
-              </content>
-            </Tab>
-            <Tab fx:id="tabPhotos" text="Fotos">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </Tab>
-            <Tab fx:id="tabBirthdays" text="Geburtstage">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <opaqueInsets>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+            <TableView fx:id="tableClients" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets top="35.0" />
+               </BorderPane.margin>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </center>
+         <top>
+            <BorderPane BorderPane.alignment="CENTER">
+               <center>
+                  <TextField fx:id="tfSearchClients" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </TextField>
+               </center>
+               <right>
+                  <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
                         <Insets />
-                     </opaqueInsets>
-                  </AnchorPane>
-              </content>
-            </Tab>
-        </tabs>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </TabPane>
+                     </BorderPane.margin>
+                     <children>
+                        <Button fx:id="btnSearchClients" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnSearchClients_Clicked" prefHeight="44.0" prefWidth="44.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="40.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/icon_Such.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnFilterClients" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnFilterClients_Clicked" prefHeight="44.0" prefWidth="44.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/icon_Filt.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                      <Button fx:id="btnAddClient" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnAddClient_Clicked" prefHeight="44.0" prefWidth="44.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/icon_AddK.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnDeleteClient" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnDeleteClient_Clicked" prefHeight="44.0" prefWidth="44.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/icon_Del.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="btnEditClient" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnEditClient_Clicked" prefHeight="44.0" prefWidth="44.0">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="100.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/icon_Edit.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+               </right>
+            </BorderPane>
+         </top>
+         <padding>
+            <Insets bottom="30.0" left="80.0" right="30.0" top="35.0" />
+         </padding>
+      </BorderPane>
    </center>
+   <left>
+      <GridPane prefWidth="120.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnNavActivities" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavActivities_Clicked" text="Aktivitäten">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/icon_Akt.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnNavBills" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavBills_Clicked" text="Rechnungen" GridPane.rowIndex="1">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/icon_Rech.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnNavClients" contentDisplay="TOP" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavClients_Clicked" style="-fx-background-color: transparent;" text="Klienten" GridPane.rowIndex="2">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/icon_Kli.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnNavEmployees" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavEmployees_Clicked" text="Mitarbeiter" GridPane.rowIndex="3">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/icon_MA.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnNavSponsors" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavSponsors_Clicked" text="Sponsoren" GridPane.rowIndex="4">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/icon_Spen.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnNavPhotos" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavPhotos_Clicked" text="Fotos" GridPane.rowIndex="5">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/icon_Fot.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnNavBirthdays" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavBirthdays_Clicked" text="Geburtstage" GridPane.rowIndex="6">
+               <graphic>
+                  <ImageView fitHeight="50.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/icon_Cake.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </GridPane>
+   </left>
 </BorderPane>
