@@ -121,6 +121,9 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
     @FXML
     private Tab tabBirthdays;
 
+    @FXML
+    private Button btnSearchEmployees;
+
     private Object selectedItem;
 
     @Override
@@ -365,5 +368,30 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
 
     }
 
+
+    @FXML
+    void btnSearchEmployees_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnFilterEmployees_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnAddEmployee_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnDeleteEmployee_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnEditEmployee_Clicked(ActionEvent event) {
+
+    }
 }
 
