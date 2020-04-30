@@ -10,13 +10,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader fxml = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+        FXMLLoader fxml = new FXMLLoader(getClass().getResource("ClientList.fxml"));
         primaryStage.setMaximized(true);
         primaryStage.setTitle("Monel Pro");
         BorderPane root = fxml.load();
         Scene scene = new Scene(root);
 
-        MainWindow_Controller main = fxml.getController();
+        ClientList_Controller main = fxml.getController();
         main.setPrimaryStage(primaryStage);
         primaryStage.setScene(scene);
         //setGraphic(buildImage("../resources/iconAkt.png");

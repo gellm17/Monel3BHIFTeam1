@@ -20,10 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
-
-public class MainWindow_Controller extends SceneLoader implements Initializable {
-    @FXML private javafx.scene.control.Button closeButton;
+public class ClientList_Controller extends SceneLoader implements Initializable {
 
     @FXML
     private Button btnInfo;
@@ -36,18 +33,6 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
 
     @FXML
     private Label lbTitle;
-
-    @FXML
-    private TabPane tabPaneClients;
-
-    @FXML
-    private Tab tabActivities;
-
-    @FXML
-    private Tab tabBills;
-
-    @FXML
-    private Tab tabClients;
 
     @FXML
     private TableView<Client> tableClients;
@@ -63,6 +48,8 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
 
     @FXML
     private TableColumn<Client, String> tcTelnr;
+
+    private Object selectedItem;
 
 
     /*Weitere Informationen
@@ -107,21 +94,25 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
     private Button btnEditClient;
 
     @FXML
-    private Tab tabEmployees;
+    private Button btnNavActivities;
 
     @FXML
-    private Tab tabSponsors;
+    private Button btnNavBills;
 
     @FXML
-    private Tab tabPhotos;
+    private Button btnNavClients;
 
     @FXML
-    private Tab tabBirthdays;
+    private Button btnNavEmployees;
 
     @FXML
-    private Button btnSearchEmployees;
+    private Button btnNavSponsors;
 
-    private Object selectedItem;
+    @FXML
+    private Button btnNavPhotos;
+
+    @FXML
+    private Button btnNavBirthdays;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -178,100 +169,8 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
         tcFirstname.prefWidthProperty().bind(tableClients.widthProperty().divide(5)); // w * 1/2
         tcLastname.prefWidthProperty().bind(tableClients.widthProperty().divide(4));
         tcTelnr.prefWidthProperty().bind(tableClients.widthProperty().divide(3));
-        /*
-        this.tvVerPersonCompany.setEditable(true);
-        this.tvCompany.setEditable(true);
-
-        //Width
-        tcVerSsnr.prefWidthProperty().bind(tvVerPersonCompany.widthProperty().divide(5)); // w * 1/4
-        tcDiagnose.prefWidthProperty().bind(tvVerPersonCompany.widthProperty().divide(5)); // w * 1/2
-        tcWorkplace.prefWidthProperty().bind(tvVerPersonCompany.widthProperty().divide(4));
-        tcVerLic.prefWidthProperty().bind(tvVerPersonCompany.widthProperty().divide(3));
-
-        tcCompName.prefWidthProperty().bind(tvCompany.widthProperty().divide(3)); // w * 1/4
-        tcRegDate.prefWidthProperty().bind(tvCompany.widthProperty().divide(3)); // w * 1/2
-        tcVerResponsible.prefWidthProperty().bind(tvCompany.widthProperty().divide(3));
-
-
-        tcVerSsnr.setCellFactory(TextFieldTableCell.<Person, Integer>forTableColumn(new IntegerStringConverter()));
-        tcVerSsnr.setOnEditCommit(new EventHandler<CellEditEvent<Person, Integer>>() {
-            @Override
-            public void handle(CellEditEvent<Person, Integer> t) {
-                ((Person) t.getTableView().getItems().get(t.getTablePosition().getRow())).setSsnr(t.getNewValue());
-            }
-        });
-
-        tcDiagnose.setCellFactory(TextFieldTableCell.forTableColumn());
-        tcDiagnose.setOnEditCommit(new EventHandler<CellEditEvent<Person, String>>() {
-            @Override
-            public void handle(CellEditEvent<Person, String> t) {
-                ((Person)t.getTableView().getItems().get(t.getTablePosition().getRow())).setName(t.getNewValue());
-            }
-        });
-
-
-        tcWorkplace.setCellFactory(ComboBoxTableCell.forTableColumn(companies));
-        tcWorkplace.setOnEditCommit(new EventHandler<CellEditEvent<Person, Company>>() {
-            @Override
-            public void handle(CellEditEvent<Person, Company> t) {
-                ((Person) t.getTableView().getItems().get(t.getTablePosition().getRow())).setWorkplace(t.getNewValue());
-            }
-        });
-
-
-        tcCompName.setCellFactory(TextFieldTableCell.forTableColumn());
-        tcCompName.setOnEditCommit(new EventHandler<CellEditEvent<Company, String>>() {
-            @Override
-            public void handle(CellEditEvent<Company, String> t) {
-                ((Company) t.getTableView().getItems().get(t.getTablePosition().getRow())).setName(t.getNewValue());
-            }
-        });
-
-        tcVerResponsible.setCellFactory(ComboBoxTableCell.forTableColumn(persons));
-        tcVerResponsible.setOnEditCommit(new EventHandler<CellEditEvent<Company, Person>>() {
-            @Override
-            public void handle(CellEditEvent<Company, Person> t) {
-                ((Company) t.getTableView().getItems().get(t.getTablePosition().getRow())).setResponsible(t.getNewValue());
-            }
-        });
-
-         */
-		/*
-		tcRegDate.setCellFactory(DatePicker.forTableColumn());
-		tcRegDate.setOnEditCommit(new EventHandler<CellEditEvent<Company, LocalDate>>() {
-			@Override
-			public void handle(CellEditEvent<Company, LocalDate> t) {
-				((Company) t.getTableView().getItems().get(t.getTablePosition().getRow())).setRegDate(t.getNewValue());
-			}
-		});
-		*/
-        /*
-         * ObservableList<Person> company=FXCollections.observableArrayList(new
-         * Person("Mike", 324543), new Person("Clemens", 294533));
-         * //ObservableList<String> company = FXCollections.observableArrayList("Rapid",
-         * "Salzburg", "Bayern München","Augsburg");
-         * tcVerResponsible.setCellFactory(ComboBoxTableCell.forTableColumn(company));
-         * tcVerResponsible.setOnEditCommit(new
-         * EventHandler<CellEditEvent<JuristicPerson, Person>>() {
-         *
-         * @Override public void handle(CellEditEvent<JuristicPerson, Person> t) {
-         * ((Company)t.getTableView().getItems().get(t.getTablePosition().getRow())).
-         * setResponsible((t.getNewValue())); } });
-         */
-        /*
-         * //Geht nicht wie Checkboxen in Cell darstellen
-         * tcVerLic.setCellFactory(TextFieldTableCell.forTableColumn());
-         * tcVerLic.setOnEditCommit(new EventHandler<CellEditEvent<JuristicPerson,
-         * String>>() {
-         *
-         * @Override public void handle(CellEditEvent<JuristicPerson, String> t) {
-         * ((Person)
-         * t.getTableView().getItems().get(t.getTablePosition().getRow())).setLic((
-         * ObservableSet<License>) FXCollections.observableArrayList(License.A)); } });
-         */
 
     }
-
 
 
 
@@ -289,7 +188,7 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
     void btnEditClient_Clicked(ActionEvent event) {
         //AddEditClient_Controller editcontroller = new AddEditClient_Controller();
         //editcontroller.setEditableClient((Client) selectedItem);
-       // showScene("AddEditClient");
+        // showScene("AddEditClient");
 
         try {
 
@@ -356,6 +255,41 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
     }
 
     @FXML
+    void btnNavActivities_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnNavBills_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnNavBirthdays_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnNavClients_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnNavEmployees_Clicked(ActionEvent event) {
+        showScene("EmployeeList");
+    }
+
+    @FXML
+    void btnNavPhotos_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnNavSponsors_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
     void btnSearchClients_Clicked(ActionEvent event) {
 
     }
@@ -365,30 +299,4 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
 
     }
 
-
-    @FXML
-    void btnSearchEmployees_Clicked(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnFilterEmployees_Clicked(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnAddEmployee_Clicked(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnDeleteEmployee_Clicked(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnEditEmployee_Clicked(ActionEvent event) {
-
-    }
 }
-

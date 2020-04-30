@@ -1382,7 +1382,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="btnOkClient" mnemonicParsing="false" onAction="#btnOkClient_Clicked" prefHeight="50.0" prefWidth="130.0" text="Fertig">
+            <Button fx:id="btnOkClient" defaultButton="true" mnemonicParsing="false" onAction="#btnOkClient_Clicked" prefHeight="50.0" prefWidth="130.0" text="Fertig">
                <font>
                   <Font size="20.0" />
                </font>
