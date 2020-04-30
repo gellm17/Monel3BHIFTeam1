@@ -12,6 +12,11 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
+-- Löschen alter Tabellen
+DROP TABLE IF EXISTS `sponsor`;
+DROP TABLE IF EXISTS `mirarbeiter`;
+DROP TABLE IF EXISTS `klient`;
+
 -- Exportiere Datenbank Struktur für monel
 DROP DATABASE IF EXISTS `monel`;
 CREATE DATABASE IF NOT EXISTS `monel` /*!40100 DEFAULT CHARACTER SET utf8 */;
@@ -20,7 +25,7 @@ USE `monel`;
 -- Exportiere Struktur von Tabelle monel.aktivitaet
 DROP TABLE IF EXISTS `aktivitaet`;
 CREATE TABLE IF NOT EXISTS `aktivitaet` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `datum` date DEFAULT NULL,
   `aktivitätsbezeichnung` varchar(50) DEFAULT NULL,
   `kategorie` varchar(50) DEFAULT NULL,
@@ -32,8 +37,8 @@ CREATE TABLE IF NOT EXISTS `aktivitaet` (
 -- Exportiere Struktur von Tabelle monel.aktivitaetsprotokoll
 DROP TABLE IF EXISTS `aktivitaetsprotokoll`;
 CREATE TABLE IF NOT EXISTS `aktivitaetsprotokoll` (
-  `id` int(11) NOT NULL,
-  `aktivitaet` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `aktivitaet` int(11) DEFAULT NULL,
   `mitarbeiter` int(11) DEFAULT NULL,
   `klient` int(11) DEFAULT NULL,
   `rechnung` int(11) DEFAULT NULL,
@@ -43,9 +48,9 @@ CREATE TABLE IF NOT EXISTS `aktivitaetsprotokoll` (
   `stundensatz` int(11) DEFAULT NULL,
   `fahrtkosten` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKaktivitaet` (`aktivitaet`),
   KEY `FKmitarbeiter` (`mitarbeiter`),
   KEY `FKklient_aktivitaetsprotokoll` (`klient`),
+  KEY `FKaktivitaet` (`aktivitaet`),
   KEY `FKrechnung` (`rechnung`),
   CONSTRAINT `FKaktivitaet` FOREIGN KEY (`aktivitaet`) REFERENCES `aktivitaet` (`id`),
   CONSTRAINT `FKklient_aktivitaetsprotokoll` FOREIGN KEY (`klient`) REFERENCES `klient` (`id`),
@@ -55,60 +60,17 @@ CREATE TABLE IF NOT EXISTS `aktivitaetsprotokoll` (
 
 -- Daten Export vom Benutzer nicht ausgewählt
 
--- Exportiere Struktur von Tabelle monel.klient
-DROP TABLE IF EXISTS `klient`;
-CREATE TABLE IF NOT EXISTS `klient` (
+-- Exportiere Struktur von Tabelle monel.dokument
+DROP TABLE IF EXISTS `dokument`;
+CREATE TABLE IF NOT EXISTS `dokument` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `esv` int(11) DEFAULT NULL,
-  `notfallkontakt1` int(11) DEFAULT NULL,
-  `notfallkontakt2` int(11) DEFAULT NULL,
-  `anrede` varchar(50) DEFAULT NULL,
-  `titel` varchar(50) DEFAULT NULL,
-  `vorname` varchar(50) DEFAULT NULL,
-  `nachname` varchar(50) DEFAULT NULL,
-  `strasse_hausnummer` varchar(50) DEFAULT NULL,
-  `plz` int(11) DEFAULT NULL,
-  `ort` varchar(50) DEFAULT NULL,
-  `telefonnummer` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `svnr` int(11) DEFAULT NULL,
-  `diagnose` varchar(500) DEFAULT NULL,
-  `beschaeftigung` varchar(50) DEFAULT NULL,
-  `allergien` varchar(500) DEFAULT NULL,
-  `sonstiges` varchar(50) DEFAULT NULL,
+  `besitzerid` int(11) NOT NULL,
+  `pfad` varchar(50) NOT NULL,
+  `dokumentenart` varchar(4) DEFAULT NULL,
+  `besitzer` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKesv` (`esv`),
-  KEY `FKnotfallkontakt1` (`notfallkontakt1`),
-  KEY `FKnotfallkontatk2` (`notfallkontakt2`),
-  CONSTRAINT `FKesv` FOREIGN KEY (`esv`) REFERENCES `person` (`id`),
-  CONSTRAINT `FKnotfallkontakt1` FOREIGN KEY (`notfallkontakt1`) REFERENCES `person` (`id`),
-  CONSTRAINT `FKnotfallkontatk2` FOREIGN KEY (`notfallkontakt2`) REFERENCES `person` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Daten Export vom Benutzer nicht ausgewählt
-
--- Exportiere Struktur von Tabelle monel.mirarbeiter
-DROP TABLE IF EXISTS `mirarbeiter`;
-CREATE TABLE IF NOT EXISTS `mirarbeiter` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `anrede` varchar(50) DEFAULT NULL,
-  `titel` varchar(50) DEFAULT NULL,
-  `vorname` varchar(50) DEFAULT NULL,
-  `nachname` varchar(50) DEFAULT NULL,
-  `strasse_hausnummer` varchar(50) DEFAULT NULL,
-  `plz` int(4) DEFAULT NULL,
-  `ort` varchar(50) DEFAULT NULL,
-  `telefonnummer` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `svnr` varchar(50) DEFAULT NULL,
-  `ehrenamt` varchar(50) DEFAULT NULL COMMENT 'bei NULL Hauptamt',
-  `verwendungsgruppe` varchar(50) DEFAULT NULL,
-  `gehaltsstufe` int(11) DEFAULT NULL,
-  `wochenstunden` int(11) DEFAULT NULL,
-  `vorrückungsdatum` date DEFAULT NULL,
-  `bankverbindung` varchar(50) DEFAULT NULL,
-  `einstelldatum` date DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  KEY `FKbesitzer` (`besitzerid`),
+  CONSTRAINT `FKbesitzer` FOREIGN KEY (`besitzerid`) REFERENCES `person` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
@@ -117,6 +79,10 @@ CREATE TABLE IF NOT EXISTS `mirarbeiter` (
 DROP TABLE IF EXISTS `person`;
 CREATE TABLE IF NOT EXISTS `person` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `esv` int(11) DEFAULT NULL,
+  `notfallkontakt1` int(11) DEFAULT NULL,
+  `notfallkontakt2` int(11) DEFAULT NULL,
+  `personentyp` varchar(11) NOT NULL,
   `notfallkontakt` int(11) DEFAULT NULL,
   `anrede` varchar(50) DEFAULT NULL,
   `titel` varchar(50) DEFAULT NULL,
@@ -127,7 +93,28 @@ CREATE TABLE IF NOT EXISTS `person` (
   `ort` varchar(50) DEFAULT NULL,
   `telefonnummer` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `svnr` int(10) DEFAULT NULL,
+  `diagnose` varchar(500) DEFAULT NULL,
+  `allergien` varchar(500) DEFAULT NULL,
+  `sonstiges` varchar(50) DEFAULT NULL,
+  `beschaeftigung` varchar(50) DEFAULT NULL,
+  `ehrenamt` tinyint(1) DEFAULT NULL COMMENT 'bei Null Hauptamt',
+  `verwendungsgruppe` varchar(50) DEFAULT NULL,
+  `gehaltsstufe` varchar(50) DEFAULT NULL,
+  `wochenstunden` tinyint(2) DEFAULT NULL,
+  `bankverbindung` varchar(50) DEFAULT NULL,
+  `vorrückdatum` date DEFAULT NULL,
+  `einstelldatum` date DEFAULT NULL,
+  `firmenname` varchar(50) DEFAULT NULL,
+  `firmentelefonnummer` varchar(50) DEFAULT NULL,
+  `firmenemail` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKesv` (`esv`),
+  KEY `FKnotfallkontakt1` (`notfallkontakt1`),
+  KEY `FKnotfallkontakt2` (`notfallkontakt2`),
+  CONSTRAINT `FKesv` FOREIGN KEY (`esv`) REFERENCES `person` (`id`),
+  CONSTRAINT `FKnotfallkontakt1` FOREIGN KEY (`notfallkontakt1`) REFERENCES `person` (`id`),
+  CONSTRAINT `FKnotfallkontakt2` FOREIGN KEY (`notfallkontakt2`) REFERENCES `person` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
@@ -135,34 +122,13 @@ CREATE TABLE IF NOT EXISTS `person` (
 -- Exportiere Struktur von Tabelle monel.rechnung
 DROP TABLE IF EXISTS `rechnung`;
 CREATE TABLE IF NOT EXISTS `rechnung` (
-  `rechnungsnummmer` int(11) NOT NULL,
+  `rechnungsnummmer` int(11) NOT NULL AUTO_INCREMENT,
   `klient` int(11) NOT NULL,
   `ausstellungsdatum` date DEFAULT NULL,
   `verwendungszweck` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`rechnungsnummmer`),
   KEY `FKklient_rechnung` (`klient`),
   CONSTRAINT `FKklient_rechnung` FOREIGN KEY (`klient`) REFERENCES `klient` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Daten Export vom Benutzer nicht ausgewählt
-
--- Exportiere Struktur von Tabelle monel.sponsor
-DROP TABLE IF EXISTS `sponsor`;
-CREATE TABLE IF NOT EXISTS `sponsor` (
-  `id` int(11) NOT NULL,
-  `anrede` varchar(50) DEFAULT NULL,
-  `titel` varchar(50) DEFAULT NULL,
-  `vorname` varchar(50) DEFAULT NULL,
-  `nachname` varchar(50) DEFAULT NULL,
-  `strasse_hausnummer` varchar(50) DEFAULT NULL,
-  `plz` int(4) DEFAULT NULL,
-  `ort` varchar(50) DEFAULT NULL,
-  `telefonnummer` varchar(50) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL,
-  `firmenname` varchar(50) DEFAULT NULL,
-  `firmentelefonnummer` varchar(50) DEFAULT NULL,
-  `firmenemail` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
