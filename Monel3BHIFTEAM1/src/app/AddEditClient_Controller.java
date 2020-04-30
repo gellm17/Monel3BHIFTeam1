@@ -1,7 +1,6 @@
 package app;
 
 import data.PersonDAO;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,7 +12,6 @@ import model.Salutation;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddEditClient_Controller extends SceneLoader implements Initializable{
@@ -382,6 +380,10 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
                 tf.setStyle(null);
             }
         return error;
+    }
+    @FXML
+    void btnDeleteImageClient_Clicked(ActionEvent event) {
+
     }
 
     private void addFocusedProperty(TextField tf, String regex, boolean must){

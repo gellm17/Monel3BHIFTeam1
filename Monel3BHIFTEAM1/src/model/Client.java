@@ -39,9 +39,9 @@ public class Client extends Person{
         this.diagnose = new SimpleStringProperty(this, "diagnose");
         this.job = new SimpleStringProperty(this, "job");
         this.allergies = new SimpleStringProperty(this, "allergies");
-        this.esv = new SimpleObjectProperty<Person>(this, "esv");
-        this.emergencyContact1 = new SimpleObjectProperty<Person>(this, "emergencyContact1");
-        this.emergencyContact2 = new SimpleObjectProperty<Person>(this, "emergencyContact2");
+        this.esv = new SimpleObjectProperty<Person>(this, "esv", null);
+        this.emergencyContact1 = new SimpleObjectProperty<Person>(this, "emergencyContact1", null);
+        this.emergencyContact2 = new SimpleObjectProperty<Person>(this, "emergencyContact2", null);
         this.privacy = new SimpleObjectProperty<Privacy>(this, "privacy");
     }
 
