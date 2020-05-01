@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public abstract class SceneLoader {
 
-    private Stage primStage;
+    private Stage primStage = new Stage();
     public void showScene(String name) {
         try {
             FXMLLoader fxml = new FXMLLoader(getClass().getResource(name+".fxml"));

@@ -7,8 +7,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import model.Client;
+import model.Person;
 import model.Privacy;
 import model.Salutation;
+import org.w3c.dom.Text;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -291,8 +293,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
     @FXML
     void btnOkClient_Clicked(ActionEvent event) {
-        Client clientToAdd = null;
-
+        Client clientToAdd = new Client();
         /*if (comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Herr && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Frau && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Firma && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Sonstige) {
             comboSalutationClient.setStyle("-FX-Border-Color: red");
             errors.add(true);
@@ -301,8 +302,8 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             errors.add(false);
         }*/
 
-        errors.add(tfCheck(tfFirstnameClient, "^\\D+$", true));
-        errors.add(tfCheck(tfLastnameClient, "^\\D+$", true));
+        errors.add(tfCheck(tfFirstnameClient, "^\\D+$"));
+        errors.add(tfCheck(tfLastnameClient, "^\\D+$"));
 
         if (!errors.contains(true)){
             clientToAdd = new Client(   comboSalutationClient.getSelectionModel().getSelectedItem(),
@@ -310,13 +311,14 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
                     tfLastnameClient.getText()
             );}
 
-        if (!tfCheck(tfTitleClient, "^\\D+$", false)) {
+        setAllPersonFields(clientToAdd, tfTitleClient, tfFirstnameClient, tfLastnameClient, tfSsnrClient, tfStreetClient, tfHousenumberClient, tfZipClient, tfPlaceClient, tfTelNrClient, tfEmailClient);
+        /*if (!tfCheck(tfTitleClient, "^(\\D+)?$")) {
             clientToAdd.setTitle(tfTitleClient.getText());
         } else {
             errors.add(true);
         }
 
-        if (!tfCheck(tfSsnrClient, "^[1-9][0-9]{3}$", false)) {
+        if (!tfCheck(tfSsnrClient, "^([1-9][0-9]{3})?$")) {
             clientToAdd.setTitle(tfTitleClient.getText());
         } else {
             errors.add(true);
@@ -332,57 +334,174 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         }*/
         //errors.add(tfCheck(tfSsnrClient));
 
+        /*if (!tfCheck(tfStreetClient, "^(\\D+)?$") && tfCheck(tfHousenumberClient, "^([1-9][0-9]{0-3})?$")) {
+            clientToAdd.setStreetAndNr(tfStreetClient.getText() + " " + tfHousenumberClient.getText());
+        } else {
+            errors.add(true);
+        }
+
+        if (!tfCheck(tfZipClient, "^([1-9][0-9]{3})?$")) {
+            clientToAdd.setZipCode(Integer.parseInt(tfZipClient.getText()));
+        } else {
+            errors.add(true);
+        }
+
+        if (!tfCheck(tfPlaceClient, "^(\\D+)?$")){
+            clientToAdd.setPlace(tfPlaceClient.getText());
+        } else {
+            errors.add(true);
+        }*/
+        //TODO BIRTHDAY
+        clientToAdd.setPrivacy(new Privacy(new ArrayList<Boolean>(){{add(cbPrivacy1Client.isSelected()); add(cbPrivacy2Client.isSelected()); add(cbPrivacy3Client.isSelected()); add(cbPrivacy4Client.isSelected());}}));
+
+        Person esv = new Person();
+        setAllPersonFields(esv, tfTitleEsv, tfFirstnameEsv, tfLastnameEsv, tfSsnrEsv, tfStreetEsv, tfHousenumberEsv, tfZipEsv, tfPlaceEsv, tfTelNrEsv, tfEmailEsv);
+        clientToAdd.setEsv(esv);
+
+        Person ec1 = new Person();
+        setAllPersonFields(ec1, tfTitleContact1, tfFirstnameContact1, tfLastnameContact1, tfSsnrContact1, tfStreetContact1, tfHousenumberContact1, tfZipContact1, tfPlaceContact1, tfTelNrContact1, tfEmailContact1);
+        clientToAdd.setEmergencyContact1(ec1);
+
+        Person ec2 = new Person();
+        setAllPersonFields(ec2, tfTitleContact2, tfFirstnameContact2, tfLastnameContact2, tfSsnrContact2, tfStreetContact2, tfHousenumberContact2, tfZipContact2, tfPlaceContact2, tfTelNrContact2, tfEmailContact2);
+        clientToAdd.setEmergencyContact2(ec2);
+
+        /*if (!tfCheck(tfAllergiesClient,"^(\\D+)?$")) {
+            clientToAdd.setAllergies(tfAllergiesClient.getText());
+        } else {
+            errors.add(true);
+        }*/
+
+        if (!tfCheck(tfJobClient,"^(\\D+)?$")) {
+            clientToAdd.setJob(tfJobClient.getText());
+        } else {
+            errors.add(true);
+        }
+
+        /*if (!tfCheck(tfDiagnoseClient,"^(\\D+)?$")) {
+            clientToAdd.setDiagnose(tfDiagnoseClient.getText());
+        } else {
+            errors.add(true);
+        }*/
+
+        //errors.add(tfCheck(tfZipClient, "^[1-9][0-9]{3}$", false));
 
 
-        errors.add(tfCheck(tfZipClient, "^[1-9][0-9]{3}$", false));
-
-
-        errors.add(tfCheck(tfHousenumberClient, "^[1-9][0-9]{0-3}$", false));
-        errors.add(tfCheck(tfStreetClient, "^\\D+$", false));
-        errors.add(tfCheck(tfPlaceClient, "^\\D+$", false));
+        //errors.add(tfCheck(tfHousenumberClient, "^[1-9][0-9]{0-3}$", false));
+        //errors.add(tfCheck(tfStreetClient, "^\\D+$", false));
+        //errors.add(tfCheck(tfPlaceClient, "^\\D+$", false));
 
         /*errors.add(tfCheck(tfIbanClient));
         errors.add(tfCheck(tfBicClient));*/
 
-
-        if (!tfIbanClient.getText().equals("") && clientToAdd != null) {
-            errors.add(tfCheck(tfIbanClient, "^[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?$", false));
-            clientToAdd.setIban(tfIbanClient.getText());
-        }
-        if (!tfTitleClient.getText().equals("") && clientToAdd != null){
-            clientToAdd.setTitle(tfTitleClient.getText());
-        }
-        if (!tfTelNrClient.getText().equals("") && clientToAdd != null) {
+        /*if (!tfCheck(tfTelNrClient, "^([0-9]*)?$")) {
             clientToAdd.setTelNr(tfTelNrClient.getText());
+        } else {
+            errors.add(true);
         }
-        if (!tfEmailClient.getText().equals("") && clientToAdd != null) {
-            errors.add(tfCheck(tfEmailClient, "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", false));
+
+        if (!tfCheck(tfEmailClient, "^([a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+)?$")) {
             clientToAdd.setEmail(tfEmailClient.getText());
+        } else {
+            errors.add(true);
+        }*/
+
+        if (!tfCheck(tfIbanClient, "^([A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?)?$")) {
+            clientToAdd.setIban(tfIbanClient.getText());
+        } else {
+            errors.add(true);
         }
 
-        clientToAdd.setPrivacy(new Privacy(new ArrayList<Boolean>(){{add(cbPrivacy1Client.isSelected()); add(cbPrivacy2Client.isSelected()); add(cbPrivacy3Client.isSelected()); add(cbPrivacy4Client.isSelected());}}));
+        if (!tfCheck(tfBicClient, "^([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)?$")){
+            clientToAdd.setBic(tfBicClient.getText());
+        } else {
+            errors.add(true);
+        }
 
-        if(PersonDAO.getInstance().addPerson(clientToAdd) && !errors.contains(true)){
+
+        if(!errors.contains(true) && PersonDAO.getInstance().addPerson(clientToAdd)) {
             if (editableClient != null) { PersonDAO.getInstance().deletePerson(editableClient);
             }
-            super.showScene("MainWindow");
+            this.getPrimStage().close();
         }
 
+    }
+
+    private void setAllPersonFields(Person p, TextField tfTitle, TextField tfFirstname, TextField tfLastname, TextField tfSsnr, TextField tfStreet, TextField tfHousenumber, TextField tfZip, TextField tfPlace, TextField tfTelNr, TextField tfEmail) {
+        if (!tfCheck(tfTitle, "^(\\D+)?$")) {
+            p.setTitle(tfTitle.getText());
+        } else {
+            errors.add(true);
+        }
+        if (p instanceof Client) {
+            if (!tfCheck(tfFirstname, "^(\\D+)?$")) {
+                p.setFirstName(tfFirstname.getText());
+            } else {
+                errors.add(true);
+            }
+
+            if(!tfCheck(tfLastname, "^(\\D+)?$")){
+                p.setLastName(tfLastname.getText());
+            } else {
+                errors.add(true);
+            }
+        }
+
+
+        if (!tfCheck(tfSsnr, "^([1-9][0-9]{3})?$")) {
+            p.setTitle(tfSsnr.getText());
+        } else {
+            errors.add(true);
+        }
+
+        if (!tfCheck(tfStreet, "^(\\D+)?$") && tfCheck(tfHousenumber, "^([1-9][0-9]*)?$")) {
+            p.setStreetAndNr(tfStreet.getText() + " " + tfHousenumber.getText());
+        } else {
+            errors.add(true);
+        }
+
+        if (!tfCheck(tfZip, "^([1-9][0-9]{3})?$")) {
+            try {
+                p.setZipCode(Integer.parseInt(tfZip.getText()));
+            } catch (Exception e) { }
+
+        } else {
+            errors.add(true);
+        }
+
+        if (!tfCheck(tfPlace, "^(\\D+)?$")){
+            p.setPlace(tfPlace.getText());
+        } else {
+            errors.add(true);
+        }
+
+        if (!tfCheck(tfTelNr, "^([0-9]*)?$")) {
+            p.setTelNr(tfTelNr.getText());
+        } else {
+            errors.add(true);
+        }
+
+        if (!tfCheck(tfEmail, "^([a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+)?$")) {
+            p.setEmail(tfEmail.getText());
+        } else {
+            errors.add(true);
+        }
     }
 
     @FXML
-    void btnSelectImageClients_Clicked(ActionEvent event) {
+    void btnSelectImageClient_Clicked(ActionEvent event) {
 
     }
+
 
     @FXML
     void btnSettings_Clicked(ActionEvent event) {
 
     }
 
-    private boolean tfCheck(TextField tf, String regex, boolean must){
+    private boolean tfCheck(TextField tf, String regex){
         boolean error = true;
-            if ((tf.getText().equals("") && must) || !tf.getText().matches(regex)) {
+            if (!tf.getText().matches(regex)) {
                 //when it not matches the pattern (1.0 - 6.0)
                 error = true;
                 tf.setStyle("-FX-Border-Color: red");
@@ -397,10 +516,10 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
     }
 
-    private void addFocusedProperty(TextField tf, String regex, boolean must){
+    private void addFocusedProperty(TextField tf, String regex){
         tf.focusedProperty().addListener((arg0, oldValue, newValue) -> {
             if (!newValue) { //when focus lost
-                errors.add(tfCheck(tf, regex, must));
+                errors.add(tfCheck(tf, regex));
             }
         });
     }
@@ -424,10 +543,10 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             }
         });*/
 
-        addFocusedProperty(tfSsnrClient, "^[1-9][0-9]{3}$", false);
-        addFocusedProperty(tfZipClient, "^[1-9][0-9]{3}$", false);
-        addFocusedProperty(tfEmailClient, "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$", false);
-        addFocusedProperty(tfIbanClient, "^[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?$", false);
+        addFocusedProperty(tfSsnrClient, "^([1-9][0-9]{3})?$");
+        addFocusedProperty(tfZipClient, "^([1-9][0-9]{3})?$");
+        addFocusedProperty(tfEmailClient, "^([a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+)?$");
+        addFocusedProperty(tfIbanClient, "^([A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?)?$");
 
         /*tfZipClient.focusedProperty().addListener((arg0, oldValue, newValue) -> {
             if (!newValue) { //when focus lost

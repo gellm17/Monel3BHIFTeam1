@@ -32,6 +32,19 @@ public class Person {
         this.email = new SimpleStringProperty(this, "email", email);
         this.birthDate = new SimpleObjectProperty<LocalDate>(this, "birthDate", birthDate);
     }*/
+    public Person(){
+        this.id = new SimpleIntegerProperty(this, "id", counterForID++);
+        this.salutation = new SimpleObjectProperty<Salutation>(this, "salutation", Salutation.Herr);
+        this.firstName = new SimpleStringProperty(this, "firstName", "");
+        this.lastName = new SimpleStringProperty(this, "lastName", "");
+        this.streetAndNr = new SimpleStringProperty(this, "streetAndNr", "");
+        this.zipCode = new SimpleIntegerProperty(this, "zipCode", 0);
+        this.place = new SimpleStringProperty(this, "place", "");
+        this.birthDate = new SimpleObjectProperty<LocalDate>(this, "birthDate", LocalDate.now());
+        this.title = new SimpleStringProperty(this, "title", "");
+        this.telNr = new SimpleStringProperty(this, "telNr", "");
+        this.email = new SimpleStringProperty(this, "email", "");
+    }
 
     public Person(Salutation salutation, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, LocalDate birthDate) {
         this.id = new SimpleIntegerProperty(this, "id", counterForID++);
@@ -54,13 +67,13 @@ public class Person {
         this.firstName = new SimpleStringProperty(this, "firstName", firstName);
         this.lastName = new SimpleStringProperty(this, "lastName", lastName);
 
-        this.streetAndNr = new SimpleStringProperty(this, "streetAndNr");
-        this.zipCode = new SimpleIntegerProperty(this, "zipCode");;
-        this.place = new SimpleStringProperty(this, "place");
-        this.birthDate = new SimpleObjectProperty<LocalDate>(this, "birthDate");
-        this.title = new SimpleStringProperty(this, "title");
-        this.telNr = new SimpleStringProperty(this, "telNr");
-        this.email = new SimpleStringProperty(this, "email");
+        this.streetAndNr = new SimpleStringProperty(this, "streetAndNr", "");
+        this.zipCode = new SimpleIntegerProperty(this, "zipCode", 0);
+        this.place = new SimpleStringProperty(this, "place", "");
+        this.birthDate = new SimpleObjectProperty<LocalDate>(this, "birthDate", null);
+        this.title = new SimpleStringProperty(this, "title", "");
+        this.telNr = new SimpleStringProperty(this, "telNr", "");
+        this.email = new SimpleStringProperty(this, "email", "");
     }
 
     /*
@@ -141,7 +154,7 @@ public class Person {
     }
 
     public void setTitle(String title) {
-        this.title.set(title);
+        this.title.setValue(title);
     }
 
     public void setTelNr(String telNr) {
@@ -150,5 +163,33 @@ public class Person {
 
     public void setEmail(String email) {
         this.email.set(email);
+    }
+
+    public void setSalutation(Salutation salutation) {
+        this.salutation.set(salutation);
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName.set(firstName);
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName.set(lastName);
+    }
+
+    public void setStreetAndNr(String streetAndNr) {
+        this.streetAndNr.set(streetAndNr);
+    }
+
+    public void setZipCode(int zipCode) {
+        this.zipCode.set(zipCode);
+    }
+
+    public void setPlace(String place) {
+        this.place.set(place);
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate.set(birthDate);
     }
 }
