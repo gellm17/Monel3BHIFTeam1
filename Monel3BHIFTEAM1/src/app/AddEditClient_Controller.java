@@ -312,8 +312,19 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
                     tfLastnameClient.getText()
             );}
 
-        errors.add(tfCheck(tfTitleClient, "^\\D+$", false));
-        errors.add(tfCheck(tfSsnrClient, "^[1-9][0-9]{3}$", false));
+        if (!tfCheck(tfTitleClient, "^\\D+$", false)) {
+            clientToAdd.setTitle(tfTitleClient.getText());
+        } else {
+            errors.add(true);
+        }
+
+        if (!tfCheck(tfSsnrClient, "^[1-9][0-9]{3}$", false)) {
+            clientToAdd.setTitle(tfTitleClient.getText());
+        } else {
+            errors.add(true);
+        }
+
+
         /*if (dpBirthdateClient.getValue() == null) {
             dpBirthdateClient.setStyle("-FX-Border-Color: red");
             errors.add(true);
