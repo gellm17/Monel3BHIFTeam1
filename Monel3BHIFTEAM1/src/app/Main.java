@@ -17,7 +17,7 @@ public class Main extends Application {
         Scene scene = new Scene(root);
 
         ClientList_Controller main = fxml.getController();
-        main.setPrimaryStage(primaryStage);
+        //main.setPrimaryStage(primaryStage);
         primaryStage.setScene(scene);
         //setGraphic(buildImage("../resources/iconAkt.png");
         primaryStage.show();
