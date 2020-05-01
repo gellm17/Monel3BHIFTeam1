@@ -278,7 +278,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
     @FXML
     void btnCancelClient_Clicked(ActionEvent event) {
-        showScene("MainWindow");
+        showScene("ClientList");
     }
 
     @FXML
