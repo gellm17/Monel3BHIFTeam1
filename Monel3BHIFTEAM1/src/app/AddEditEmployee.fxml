@@ -348,7 +348,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfTelNrClient" maxWidth="300.0">
+                                    <TextField fx:id="tfTelNrEmployee" maxWidth="300.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -364,7 +364,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfEmailClient" maxWidth="600.0">
+                                    <TextField fx:id="tfEmailEmployee" maxWidth="600.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -511,7 +511,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfIbanClient" maxWidth="-Infinity" prefWidth="500.0">
+                                    <TextField fx:id="tfIbanEmployee" maxWidth="-Infinity" prefWidth="500.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -527,7 +527,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfBicClient" maxWidth="-Infinity" prefWidth="300.0">
+                                    <TextField fx:id="tfBicEmployee" maxWidth="-Infinity" prefWidth="300.0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>

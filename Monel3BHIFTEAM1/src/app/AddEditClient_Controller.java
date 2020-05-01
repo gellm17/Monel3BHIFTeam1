@@ -199,13 +199,13 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     private TextField tfEmailClient;
 
     @FXML
-    private TextField tfDiagnoseClient;
+    private TextArea taDiagnoseClient;
 
     @FXML
     private TextField tfJobClient;
 
     @FXML
-    private TextField tfAllergiesClient;
+    private TextArea taAllergiesClient;
 
     @FXML
     private TextField tfOtherClient;
@@ -250,8 +250,10 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             tfSsnrClient.setText(""+editableClient.getSsnr());
             dpBirthdateClient.setValue(editableClient.getBirthDate());
             //ADDRESS
-            tfStreetClient.setText(editableClient.getStreetAndNr().split(" ")[0]);
-            tfHousenumberClient.setText(editableClient.getStreetAndNr().split(" ")[1]);
+            try {
+                tfStreetClient.setText(editableClient.getStreetAndNr().split(" ")[0]);
+                tfHousenumberClient.setText(editableClient.getStreetAndNr().split(" ")[1]);
+            } catch (Exception ex) {}
             tfZipClient.setText(""+editableClient.getZipCode());
             tfPlaceClient.setText(editableClient.getPlace());
             //PRIVACY
@@ -267,9 +269,9 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             tfTelNrClient.setText(editableClient.getTelNr());
             tfEmailClient.setText(editableClient.getEmail());
             //INFO
-            tfDiagnoseClient.setText(editableClient.getDiagnose());
+            taDiagnoseClient.setText(editableClient.getDiagnose());
             tfJobClient.setText(editableClient.getJob());
-            tfAllergiesClient.setText(editableClient.getAllergies());
+            taAllergiesClient.setText(editableClient.getAllergies());
             //BANK
             tfBicClient.setText(editableClient.getBic());
             tfIbanClient.setText(editableClient.getIban());
@@ -366,11 +368,17 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         setAllPersonFields(ec2, tfTitleContact2, tfFirstnameContact2, tfLastnameContact2, tfSsnrContact2, tfStreetContact2, tfHousenumberContact2, tfZipContact2, tfPlaceContact2, tfTelNrContact2, tfEmailContact2);
         clientToAdd.setEmergencyContact2(ec2);
 
-        /*if (!tfCheck(tfAllergiesClient,"^(\\D+)?$")) {
-            clientToAdd.setAllergies(tfAllergiesClient.getText());
+        if (!tfCheck(tfSsnrClient, "^([1-9][0-9]{3})?$")) {
+                clientToAdd.setSsnr(Integer.parseInt(tfSsnrClient.getText()));
         } else {
             errors.add(true);
-        }*/
+        }
+
+        if (!taCheck(taAllergiesClient,"^(\\D+)?$")) {
+            clientToAdd.setAllergies(taAllergiesClient.getText());
+        } else {
+            errors.add(true);
+        }
 
         if (!tfCheck(tfJobClient,"^(\\D+)?$")) {
             clientToAdd.setJob(tfJobClient.getText());
@@ -378,33 +386,12 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             errors.add(true);
         }
 
-        /*if (!tfCheck(tfDiagnoseClient,"^(\\D+)?$")) {
-            clientToAdd.setDiagnose(tfDiagnoseClient.getText());
-        } else {
-            errors.add(true);
-        }*/
-
-        //errors.add(tfCheck(tfZipClient, "^[1-9][0-9]{3}$", false));
-
-
-        //errors.add(tfCheck(tfHousenumberClient, "^[1-9][0-9]{0-3}$", false));
-        //errors.add(tfCheck(tfStreetClient, "^\\D+$", false));
-        //errors.add(tfCheck(tfPlaceClient, "^\\D+$", false));
-
-        /*errors.add(tfCheck(tfIbanClient));
-        errors.add(tfCheck(tfBicClient));*/
-
-        /*if (!tfCheck(tfTelNrClient, "^([0-9]*)?$")) {
-            clientToAdd.setTelNr(tfTelNrClient.getText());
+        if (!taCheck(taDiagnoseClient,"^(\\D+)?$")) {
+            clientToAdd.setDiagnose(taDiagnoseClient.getText());
         } else {
             errors.add(true);
         }
 
-        if (!tfCheck(tfEmailClient, "^([a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+)?$")) {
-            clientToAdd.setEmail(tfEmailClient.getText());
-        } else {
-            errors.add(true);
-        }*/
 
         if (!tfCheck(tfIbanClient, "^([A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?)?$")) {
             clientToAdd.setIban(tfIbanClient.getText());
@@ -422,7 +409,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         if(!errors.contains(true) && PersonDAO.getInstance().addPerson(clientToAdd)) {
             if (editableClient != null) { PersonDAO.getInstance().deletePerson(editableClient);
             }
-            this.getPrimStage().close();
+            super.showScene("ClientList");
         }
 
     }
@@ -433,7 +420,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         } else {
             errors.add(true);
         }
-        if (p instanceof Client) {
+        if (!(p instanceof Client)) {
             if (!tfCheck(tfFirstname, "^(\\D+)?$")) {
                 p.setFirstName(tfFirstname.getText());
             } else {
@@ -448,13 +435,9 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         }
 
 
-        if (!tfCheck(tfSsnr, "^([1-9][0-9]{3})?$")) {
-            p.setTitle(tfSsnr.getText());
-        } else {
-            errors.add(true);
-        }
 
-        if (!tfCheck(tfStreet, "^(\\D+)?$") && tfCheck(tfHousenumber, "^([1-9][0-9]*)?$")) {
+
+        if (!tfCheck(tfStreet, "^(\\D+)?$") && !tfCheck(tfHousenumber, "^([1-9][0-9]*)?$")) {
             p.setStreetAndNr(tfStreet.getText() + " " + tfHousenumber.getText());
         } else {
             errors.add(true);
@@ -502,7 +485,6 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     private boolean tfCheck(TextField tf, String regex){
         boolean error = true;
             if (!tf.getText().matches(regex)) {
-                //when it not matches the pattern (1.0 - 6.0)
                 error = true;
                 tf.setStyle("-FX-Border-Color: red");
             } else {
@@ -511,6 +493,19 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             }
         return error;
     }
+
+    private boolean taCheck(TextArea ta, String regex) {
+        boolean error = true;
+        if (!ta.getText().matches(regex)) {
+            error = true;
+            ta.setStyle("-FX-Border-Color: red");
+        } else {
+            error = false;
+            ta.setStyle(null);
+        }
+        return error;
+    }
+
     @FXML
     void btnDeleteImageClient_Clicked(ActionEvent event) {
 
@@ -537,37 +532,10 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         comboSalutationContact2.getSelectionModel().select(0);
         comboSalutationEsv.getSelectionModel().select(0);
 
-        /*tfSsnrClient.focusedProperty().addListener((arg0, oldValue, newValue) -> {
-            if (!newValue) { //when focus lost
-                errors.add(tfCheck(tfSsnrClient, "^[1-9][0-9]{3}$"));
-            }
-        });*/
-
         addFocusedProperty(tfSsnrClient, "^([1-9][0-9]{3})?$");
         addFocusedProperty(tfZipClient, "^([1-9][0-9]{3})?$");
         addFocusedProperty(tfEmailClient, "^([a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+)?$");
         addFocusedProperty(tfIbanClient, "^([A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?)?$");
 
-        /*tfZipClient.focusedProperty().addListener((arg0, oldValue, newValue) -> {
-            if (!newValue) { //when focus lost
-                errors.add(tfCheck(tfZipClient, "^[1-9][0-9]{3}$"));
-            }
-        });
-
-        tfEmailClient.focusedProperty().addListener((arg0, oldValue, newValue) -> {
-            if (!newValue) { //when focus lost
-                if (!tfEmailClient.getText().equals("")){
-                    errors.add(tfCheck(tfEmailClient, "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$"));
-                }
-            }
-        });
-
-        tfIbanClient.focusedProperty().addListener((arg0, oldValue, newValue) -> {
-            if (!newValue) { //when focus lost
-                if (!tfIbanClient.getText().equals("")){
-                errors.add(tfCheck(tfIbanClient, "^[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?$"));
-                }
-            }
-        });*/
     }
 }

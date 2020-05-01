@@ -203,7 +203,7 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
 
 
             AddEditEmployee_Controller editController = fxml.getController();
-            editController.setEditableClient((Client) selectedItem);
+            editController.setEditableEmployee((Employee) selectedItem);
 
 
             SceneLoader loader = editController;
