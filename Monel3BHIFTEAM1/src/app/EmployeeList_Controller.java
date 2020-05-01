@@ -242,7 +242,7 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
 
     @FXML
     void btnNavClients_Clicked(ActionEvent event) {
-
+        showScene("ClientList");
     }
 
     @FXML

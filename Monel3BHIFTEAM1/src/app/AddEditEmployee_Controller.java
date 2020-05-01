@@ -133,7 +133,7 @@ public class AddEditEmployee_Controller extends SceneLoader {
 
     @FXML
     void btnCancelEmployee_Clicked(ActionEvent event) {
-
+        showScene("EmployeeList");
     }
 
     @FXML
