@@ -9,16 +9,17 @@ import java.util.ArrayList;
 
 public class PersonDAO {
     private ObservableList<Client> clients = FXCollections.observableList(new ArrayList<Client>());           // ArrayList mit allen Personen
-    private ArrayList<Employee> employees = new ArrayList<Employee>();      // ArrayList mit allen Employees
-    private ArrayList<Sponsor> sponsor = new ArrayList<Sponsor>();      // ArrayList mit allen Company
+    private ObservableList<Employee> employees = FXCollections.observableList(new ArrayList<Employee>());      // ArrayList mit allen Employees
+    private ObservableList<Sponsor> sponsor = FXCollections.observableList(new ArrayList<>());      // ArrayList mit allen Company
     private static PersonDAO instance = null;
 
 
     private PersonDAO() {
         //clients.add(new Client(Salutation.Herr, "Dr.", "Michael", "Gell", "Sägestraße", "543", 5582, "St.Michael", "066666666606", "michael.gell@gmx.at", LocalDate.now(), 11111));
-       // clients.add(new Client(Salutation.Herr, "Dr.", "Michael", "Gell", "Sägestraße", "543", 5582, "St.Michael", "066666666606", "michael.gell@gmx.at", LocalDate.now(), 22222));
+        // clients.add(new Client(Salutation.Herr, "Dr.", "Michael", "Gell", "Sägestraße", "543", 5582, "St.Michael", "066666666606", "michael.gell@gmx.at", LocalDate.now(), 22222));
         //clients.add(new Client(Salutation.Herr, "Dr.", "Michael", "Gell", "Sägestraße", "543", 5582, "St.Michael", "066666666606", "michael.gell@gmx.at", LocalDate.now(), 23452));
         clients.add(new Client(Salutation.Herr, "Clemens", "Burgmann"));
+        employees.add(new Employee(Salutation.Herr, "Mike", "Gell"));
     }
     public static PersonDAO getInstance() {
         if (instance == null) {
@@ -60,8 +61,8 @@ public class PersonDAO {
 
 
 
-// GETTER
-    public ArrayList<Sponsor> getSponsor() {
+    // GETTER
+    public ObservableList<Sponsor> getSponsor() {
         return sponsor;
     }
 
@@ -69,7 +70,7 @@ public class PersonDAO {
         return clients;
     }
 
-    public ArrayList<Employee> getEmployees() {
+    public ObservableList<Employee> getEmployees() {
         return employees;
     }
 }

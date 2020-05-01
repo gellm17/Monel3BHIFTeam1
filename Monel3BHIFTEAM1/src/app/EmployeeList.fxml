@@ -66,9 +66,6 @@
                <BorderPane.margin>
                   <Insets top="35.0" />
                </BorderPane.margin>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
             </TableView>
          </center>
          <top>
@@ -164,12 +161,12 @@
             </BorderPane>
          </top>
          <padding>
-            <Insets bottom="30.0" left="80.0" right="30.0" top="35.0" />
+            <Insets bottom="30.0" left="100.0" right="30.0" top="35.0" />
          </padding>
       </BorderPane>
    </center>
    <left>
-      <GridPane prefWidth="120.0" BorderPane.alignment="CENTER">
+      <GridPane prefWidth="140.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
@@ -185,63 +182,63 @@
          <children>
             <Button fx:id="btnNavActivities" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavActivities_Clicked" text="Aktivitäten">
                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/icon_Akt.png" />
+                        <Image url="@../resources/nav_icons/icon_Activities_bf.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <Button fx:id="btnNavBills" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavBills_Clicked" text="Rechnungen" GridPane.rowIndex="1">
                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/icon_Rech.png" />
+                        <Image url="@../resources/nav_icons/icon_Bills_bf.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <Button fx:id="btnNavClients" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavClients_Clicked" text="Klienten" GridPane.rowIndex="2">
                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/icon_Kli.png" />
+                        <Image url="@../resources/nav_icons/icon_Clients_bf.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <Button fx:id="btnNavEmployees" contentDisplay="TOP" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavEmployees_Clicked" style="-fx-background-color: transparent;" text="Mitarbeiter" GridPane.rowIndex="3">
                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/icon_MA.png" />
+                        <Image url="@../resources/nav_icons/icon_Employees_bf.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <Button fx:id="btnNavSponsors" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavSponsors_Clicked" text="Sponsoren" GridPane.rowIndex="4">
                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/icon_Spen.png" />
+                        <Image url="@../resources/nav_icons/icon_Sponsors_bf.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <Button fx:id="btnNavPhotos" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavPhotos_Clicked" text="Fotos" GridPane.rowIndex="5">
                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/icon_Fot.png" />
+                        <Image url="@../resources/nav_icons/icon_Photos_bf.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
             <Button fx:id="btnNavBirthdays" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavBirthdays_Clicked" text="Geburtstage" GridPane.rowIndex="6">
                <graphic>
-                  <ImageView fitHeight="50.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/icon_Cake.png" />
+                        <Image url="@../resources/nav_icons/icon_Birthdays_bf.png" />
                      </image>
                   </ImageView>
                </graphic>

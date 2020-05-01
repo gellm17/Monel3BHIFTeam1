@@ -10,8 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
+import model.Client;
 
-public class AddEditEmployee_Controller {
+import java.util.ArrayList;
+
+public class AddEditEmployee_Controller extends SceneLoader {
 
     @FXML
     private Button btnInfo;
@@ -117,6 +120,16 @@ public class AddEditEmployee_Controller {
 
     @FXML
     private Button btnOkEmployee;
+
+    private Client editableClient = null;
+
+    public Client getEditableClient() {
+        return editableClient;
+    }
+
+    public void setEditableClient(Client editableClient) {
+        this.editableClient = editableClient;
+    }
 
     @FXML
     void btnCancelEmployee_Clicked(ActionEvent event) {
