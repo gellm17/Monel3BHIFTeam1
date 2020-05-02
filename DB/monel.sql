@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   `notfallkontakt1` int(11) DEFAULT NULL,
   `notfallkontakt2` int(11) DEFAULT NULL,
   `personentyp` varchar(11) NOT NULL,
-  `anrede` varchar(50) DEFAULT NULL,
+  `anrede` varchar(11) DEFAULT NULL,
   `titel` varchar(50) DEFAULT NULL,
   `vorname` varchar(50) DEFAULT NULL,
   `nachname` varchar(50) DEFAULT NULL,
@@ -91,6 +91,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   `ort` varchar(50) DEFAULT NULL,
   `telefonnummer` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
+  `geburtstag` date DEFAULT NULL,
   `svnr` int(10) DEFAULT NULL,
   `diagnose` varchar(500) DEFAULT NULL,
   `allergien` varchar(500) DEFAULT NULL,
@@ -113,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   CONSTRAINT `FKesv` FOREIGN KEY (`esv`) REFERENCES `person` (`id`),
   CONSTRAINT `FKnotfallkontakt1` FOREIGN KEY (`notfallkontakt1`) REFERENCES `person` (`id`),
   CONSTRAINT `FKnotfallkontakt2` FOREIGN KEY (`notfallkontakt2`) REFERENCES `person` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 

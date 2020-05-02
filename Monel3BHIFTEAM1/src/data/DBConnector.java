@@ -20,17 +20,17 @@ public class DBConnector {
             System.out.println("Verbindung wurde erfolgreich aufgebaut");
             stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM person");
-            //PersonDAO.loadPersons(rs);
+            //PersonDAO.getInstance().loadPersons(rs);
             //rs = stmt.executeQuery("SELECT * FROM aktivitaet");
-            //AktivitaetDAO.loadAktivitaet(rs);
+            //AktivitaetDAO.getInstance().loadAktivitaet(rs);
             //rs = stmt.executeQuery("SELECT * FROM aktivitaetsprotokoll");
-            //AktivitaetsprotokollDAO.laodAktivitaetsprotokoll(rs);
+            //AktivitaetsprotokollDAO.getInstance().laodAktivitaetsprotokoll(rs);
             //rs = stmt.executeQuery("SELECT * FROM rechnung");
-            //rechnungDAO.loadRechnung(rs);
+            //rechnungDAO.getInstance().loadRechnung(rs);
             //rs = stmt.executeQuery("SELECT * FROM dokument");
-            //dokumentDAO.loadDokumente(rs);
+            //dokumentDAO.getInstance().loadDokumente(rs);
             //rs = stmt.executeQuery("SELECT * FROM datenschutz");
-            //DatenschutzDAO.loadDatenschutz(rs);
+            //DatenschutzDAO.getInstance().loadDatenschutz(rs);
             System.out.println("Daten wurden erfolgreich eingelesen");
         } catch (ClassNotFoundException e) {
             System.out.println("Driver " + JDBC_DRIVER + " NOT loaded");

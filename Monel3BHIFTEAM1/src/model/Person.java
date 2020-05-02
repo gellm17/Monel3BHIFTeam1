@@ -19,7 +19,7 @@ public class Person {
 
     private static int counterForID = 0;
 
-    /*public Person(Salutation salutation, String title, String firstName, String lastName,String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate) {
+    public Person(Salutation salutation, String title, String firstName, String lastName,String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate) {
         this.id = new SimpleIntegerProperty(this, "id", counterForID++);
         this.salutation = new SimpleObjectProperty<Salutation>(this, "salutation", salutation);
         this.title = new SimpleStringProperty(this, "title", title);
@@ -31,7 +31,7 @@ public class Person {
         this.telNr = new SimpleStringProperty(this, "telNr", telNr);
         this.email = new SimpleStringProperty(this, "email", email);
         this.birthDate = new SimpleObjectProperty<LocalDate>(this, "birthDate", birthDate);
-    }*/
+    }
     public Person(){
         this.id = new SimpleIntegerProperty(this, "id", counterForID++);
         this.salutation = new SimpleObjectProperty<Salutation>(this, "salutation", Salutation.Herr);
