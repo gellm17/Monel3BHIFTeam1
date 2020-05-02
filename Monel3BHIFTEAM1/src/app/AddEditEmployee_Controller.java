@@ -1,5 +1,6 @@
 package app;
 
+import data.PersonDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.image.ImageView;
+import javafx.util.converter.LocalDateStringConverter;
 import model.Client;
 import model.Employee;
 import model.Privacy;
@@ -136,6 +138,34 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
 
     public void setEditableEmployee(Employee editableEmployee) {
         this.editableEmployee = editableEmployee;
+        comboSalutationEmployee.getItems().setAll(Salutation.values());
+        if (editableEmployee != null){
+            comboSalutationEmployee.getSelectionModel().select(editableEmployee.getSalutation());
+            tfTitleEmployee.setText(editableEmployee.getTitle());
+            tfFirstnameEmployee.setText(editableEmployee.getFirstName());
+            tfLastnameEmployee.setText(editableEmployee.getLastName());
+            tfSsnrEmployee.setText(""+editableEmployee.getSsnr());
+            dpBirthdateEmployee.setValue(editableEmployee.getBirthDate());
+            //ADDRESS
+            try {
+                tfStreetEmployee.setText(editableEmployee.getStreetAndNr().split(" ")[0]);
+                tfHousenumberEmployee.setText(editableEmployee.getStreetAndNr().split(" ")[1]);
+            } catch (Exception ex) {}
+            tfZipEmployee.setText(""+editableEmployee.getZipCode());
+            tfPlaceEmployee.setText(editableEmployee.getPlace());
+            //PRIVACY
+            Privacy privacyOfEditableEmployee = new Privacy();
+            if (editableEmployee.getPrivacy() != null) {
+                privacyOfEditableEmployee = editableEmployee.getPrivacy();
+            }
+            cbPrivacy1Employee.setSelected(privacyOfEditableEmployee.getPrivacies().get(0));
+            cbPrivacy2Employee.setSelected(privacyOfEditableEmployee.getPrivacies().get(1));
+            cbPrivacy3Employee.setSelected(privacyOfEditableEmployee.getPrivacies().get(2));
+            cbPrivacy4Employee.setSelected(privacyOfEditableEmployee.getPrivacies().get(3));
+            //CONTACT
+            tfTelNrEmployee.setText(editableEmployee.getTelNr());
+            tfEmailEmployee.setText(editableEmployee.getEmail());
+        }
     }
 
     @FXML
@@ -176,7 +206,14 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
             errors.add(true);
         }
 
-        //TODO Birthday
+        try {
+            LocalDateStringConverter ldsc = new LocalDateStringConverter();
+            employeeToAdd.setBirthDate(ldsc.fromString(dpBirthdateEmployee.getEditor().getText()));
+            dpBirthdateEmployee.setStyle(null);
+        } catch (Exception e) {
+            dpBirthdateEmployee.setStyle("-FX-Border-Color: red");
+            errors.add(true);
+        }
 
         if (!tfCheck(tfStreetEmployee, "^(\\D+)?$") && !tfCheck(tfHousenumberEmployee, "^([1-9][0-9]*)?$")) {
             employeeToAdd.setStreetAndNr(tfStreetEmployee.getText() + " " + tfHousenumberEmployee.getText());
@@ -213,6 +250,44 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
             errors.add(true);
         }
 
+        if (!tfCheck(tfOccupationGroupEmployee, "^(\\D+)?$")){
+            employeeToAdd.setOccupationGroup(tfOccupationGroupEmployee.getText());
+        } else {
+            errors.add(true);
+        }
+
+        if (!tfCheck(tfSalaryLevelEmployee, "^(\\D+)?$")){
+            employeeToAdd.setSalaryLevel(tfSalaryLevelEmployee.getText());
+        } else {
+            errors.add(true);
+        }
+
+        if (!tfCheck(tfHoursPerWeekEmployee, "^([0-9]*)?$")){
+            try {
+                employeeToAdd.setHoursPerWeek(Integer.parseInt(tfHoursPerWeekEmployee.getText()));
+            } catch (Exception e) {}
+        } else {
+            errors.add(true);
+        }
+
+        try {
+            LocalDateStringConverter ldsc = new LocalDateStringConverter();
+            employeeToAdd.setDateSalaryLevel(ldsc.fromString(dpDateSalaryLevelEmployee.getEditor().getText()));
+            dpDateSalaryLevelEmployee.setStyle(null);
+        } catch (Exception e) {
+            dpDateSalaryLevelEmployee.setStyle("-FX-Border-Color: red");
+            errors.add(true);
+        }
+
+        try {
+            LocalDateStringConverter ldsc = new LocalDateStringConverter();
+            employeeToAdd.setDateOfEmployment(ldsc.fromString(dpDateOfEmploymentEmployee.getEditor().getText()));
+            dpDateOfEmploymentEmployee.setStyle(null);
+        } catch (Exception e) {
+            dpDateOfEmploymentEmployee.setStyle("-FX-Border-Color: red");
+            errors.add(true);
+        }
+
         if (!tfCheck(tfIbanEmployee, "^([A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?)?$")) {
             employeeToAdd.setIban(tfIbanEmployee.getText());
         } else {
@@ -223,6 +298,12 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
             employeeToAdd.setBic(tfBicEmployee.getText());
         } else {
             errors.add(true);
+        }
+
+        if(!errors.contains(true) && PersonDAO.getInstance().addPerson(employeeToAdd)) {
+            if (editableEmployee != null) { PersonDAO.getInstance().deletePerson(editableEmployee);
+            }
+            super.showScene("EmployeeList");
         }
     }
 

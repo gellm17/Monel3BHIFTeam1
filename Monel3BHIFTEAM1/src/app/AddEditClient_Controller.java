@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.util.converter.LocalDateStringConverter;
+import javafx.util.converter.LocalDateTimeStringConverter;
 import model.Client;
 import model.Person;
 import model.Privacy;
@@ -296,13 +298,6 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     @FXML
     void btnOkClient_Clicked(ActionEvent event) {
         Client clientToAdd = new Client();
-        /*if (comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Herr && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Frau && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Firma && comboSalutationClient.getSelectionModel().getSelectedItem() != Salutation.Sonstige) {
-            comboSalutationClient.setStyle("-FX-Border-Color: red");
-            errors.add(true);
-        } else {
-            comboSalutationClient.setStyle(null);
-            errors.add(false);
-        }*/
 
         errors.add(tfCheck(tfFirstnameClient, "^\\D+$"));
         errors.add(tfCheck(tfLastnameClient, "^\\D+$"));
@@ -313,7 +308,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
                     tfLastnameClient.getText()
             );}
 
-        setAllPersonFields(clientToAdd, tfTitleClient, tfFirstnameClient, tfLastnameClient, tfSsnrClient, tfStreetClient, tfHousenumberClient, tfZipClient, tfPlaceClient, tfTelNrClient, tfEmailClient);
+        setAllPersonFields(clientToAdd, tfTitleClient, tfFirstnameClient, tfLastnameClient, tfSsnrClient, tfStreetClient, tfHousenumberClient, tfZipClient, tfPlaceClient, tfTelNrClient, tfEmailClient, dpBirthdateClient);
         /*if (!tfCheck(tfTitleClient, "^(\\D+)?$")) {
             clientToAdd.setTitle(tfTitleClient.getText());
         } else {
@@ -357,19 +352,21 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         clientToAdd.setPrivacy(new Privacy(new ArrayList<Boolean>(){{add(cbPrivacy1Client.isSelected()); add(cbPrivacy2Client.isSelected()); add(cbPrivacy3Client.isSelected()); add(cbPrivacy4Client.isSelected());}}));
 
         Person esv = new Person();
-        setAllPersonFields(esv, tfTitleEsv, tfFirstnameEsv, tfLastnameEsv, tfSsnrEsv, tfStreetEsv, tfHousenumberEsv, tfZipEsv, tfPlaceEsv, tfTelNrEsv, tfEmailEsv);
+        setAllPersonFields(esv, tfTitleEsv, tfFirstnameEsv, tfLastnameEsv, tfSsnrEsv, tfStreetEsv, tfHousenumberEsv, tfZipEsv, tfPlaceEsv, tfTelNrEsv, tfEmailEsv, dpBirthdateEsv);
         clientToAdd.setEsv(esv);
 
         Person ec1 = new Person();
-        setAllPersonFields(ec1, tfTitleContact1, tfFirstnameContact1, tfLastnameContact1, tfSsnrContact1, tfStreetContact1, tfHousenumberContact1, tfZipContact1, tfPlaceContact1, tfTelNrContact1, tfEmailContact1);
+        setAllPersonFields(ec1, tfTitleContact1, tfFirstnameContact1, tfLastnameContact1, tfSsnrContact1, tfStreetContact1, tfHousenumberContact1, tfZipContact1, tfPlaceContact1, tfTelNrContact1, tfEmailContact1, dpBirthdateContact1);
         clientToAdd.setEmergencyContact1(ec1);
 
         Person ec2 = new Person();
-        setAllPersonFields(ec2, tfTitleContact2, tfFirstnameContact2, tfLastnameContact2, tfSsnrContact2, tfStreetContact2, tfHousenumberContact2, tfZipContact2, tfPlaceContact2, tfTelNrContact2, tfEmailContact2);
+        setAllPersonFields(ec2, tfTitleContact2, tfFirstnameContact2, tfLastnameContact2, tfSsnrContact2, tfStreetContact2, tfHousenumberContact2, tfZipContact2, tfPlaceContact2, tfTelNrContact2, tfEmailContact2, dpBirthdateContact2);
         clientToAdd.setEmergencyContact2(ec2);
 
         if (!tfCheck(tfSsnrClient, "^([1-9][0-9]{3})?$")) {
+            try {
                 clientToAdd.setSsnr(Integer.parseInt(tfSsnrClient.getText()));
+            } catch (Exception e) { }
         } else {
             errors.add(true);
         }
@@ -414,7 +411,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
     }
 
-    private void setAllPersonFields(Person p, TextField tfTitle, TextField tfFirstname, TextField tfLastname, TextField tfSsnr, TextField tfStreet, TextField tfHousenumber, TextField tfZip, TextField tfPlace, TextField tfTelNr, TextField tfEmail) {
+    private void setAllPersonFields(Person p, TextField tfTitle, TextField tfFirstname, TextField tfLastname, TextField tfSsnr, TextField tfStreet, TextField tfHousenumber, TextField tfZip, TextField tfPlace, TextField tfTelNr, TextField tfEmail, DatePicker dpBirthdate) {
         if (!tfCheck(tfTitle, "^(\\D+)?$")) {
             p.setTitle(tfTitle.getText());
         } else {
@@ -434,7 +431,14 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             }
         }
 
-
+        try {
+            LocalDateStringConverter ldsc = new LocalDateStringConverter();
+            p.setBirthDate(ldsc.fromString(dpBirthdate.getEditor().getText()));
+            dpBirthdate.setStyle(null);
+        } catch (Exception e) {
+            dpBirthdate.setStyle("-FX-Border-Color: red");
+            errors.add(true);
+        }
 
 
         if (!tfCheck(tfStreet, "^(\\D+)?$") && !tfCheck(tfHousenumber, "^([1-9][0-9]*)?$")) {

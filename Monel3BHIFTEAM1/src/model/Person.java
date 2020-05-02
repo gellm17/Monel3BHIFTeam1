@@ -38,7 +38,7 @@ public class Person {
         this.firstName = new SimpleStringProperty(this, "firstName", "");
         this.lastName = new SimpleStringProperty(this, "lastName", "");
         this.streetAndNr = new SimpleStringProperty(this, "streetAndNr", "");
-        this.zipCode = new SimpleIntegerProperty(this, "zipCode", 0);
+        this.zipCode = new SimpleIntegerProperty(this, "zipCode");
         this.place = new SimpleStringProperty(this, "place", "");
         this.birthDate = new SimpleObjectProperty<LocalDate>(this, "birthDate", LocalDate.now());
         this.title = new SimpleStringProperty(this, "title", "");
@@ -68,7 +68,7 @@ public class Person {
         this.lastName = new SimpleStringProperty(this, "lastName", lastName);
 
         this.streetAndNr = new SimpleStringProperty(this, "streetAndNr", "");
-        this.zipCode = new SimpleIntegerProperty(this, "zipCode", 0);
+        this.zipCode = new SimpleIntegerProperty(this, "zipCode");
         this.place = new SimpleStringProperty(this, "place", "");
         this.birthDate = new SimpleObjectProperty<LocalDate>(this, "birthDate", null);
         this.title = new SimpleStringProperty(this, "title", "");
