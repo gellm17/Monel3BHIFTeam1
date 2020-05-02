@@ -1,66 +1,57 @@
-
 package data;
 import java.sql.*;
-/*
-public class DBConnector {
-// JDBC driver name and database URL
 
+public class DBConnector {
+    // JDBC driver name and database URL
     static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
     static final String DB_URL = "jdbc:mariadb://192.168.100.174/db";
 
     //  Database credentials
-    static final String USER = "root";
-    static final String PASS = "root";
+    static final String USER = "madmin";
+    static final String PASS = "admin";
 
-    public static void main(String[] args) {
+    public static void loadDB() {
         Connection conn = null;
         Statement stmt = null;
         try {
-            //STEP 2: Register JDBC driver
-            Class.forName("org.mariadb.jdbc.Driver");
-
-            //STEP 3: Open a connection
-            System.out.println("Connecting to a selected database...");
-            conn = DriverManager.getConnection(
-                    "jdbc:mariadb://192.168.100.174/db", "root", "root");
-            System.out.println("Connected database successfully...");
-
-            //STEP 4: Execute a query
-            System.out.println("Creating table in given database...");
+            Class.forName(JDBC_DRIVER);
+            System.out.println("Verbindungsaufbau zur Datenbank");
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            System.out.println("Verbindung wurde erfolgreich aufgebaut");
             stmt = conn.createStatement();
-
-            String sql = "CREATE TABLE REGISTRATION "
-                    + "(id INTEGER not NULL, "
-                    + " first VARCHAR(255), "
-                    + " last VARCHAR(255), "
-                    + " age INTEGER, "
-                    + " PRIMARY KEY ( id ))";
-
-            stmt.executeUpdate(sql);
-            System.out.println("Created table in given database...");
-        } catch (SQLException se) {
-            //Handle errors for JDBC
-            se.printStackTrace();
-        } catch (Exception e) {
-            //Handle errors for Class.forName
+            ResultSet rs = stmt.executeQuery("SELECT * FROM person");
+            //PersonDAO.loadPersons(rs);
+            //rs = stmt.executeQuery("SELECT * FROM aktivitaet");
+            //AktivitaetDAO.loadAktivitaet(rs);
+            //rs = stmt.executeQuery("SELECT * FROM aktivitaetsprotokoll");
+            //AktivitaetsprotokollDAO.laodAktivitaetsprotokoll(rs);
+            //rs = stmt.executeQuery("SELECT * FROM rechnung");
+            //rechnungDAO.loadRechnung(rs);
+            //rs = stmt.executeQuery("SELECT * FROM dokument");
+            //dokumentDAO.loadDokumente(rs);
+            //rs = stmt.executeQuery("SELECT * FROM datenschutz");
+            //DatenschutzDAO.loadDatenschutz(rs);
+            System.out.println("Daten wurden erfolgreich eingelesen");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Driver " + JDBC_DRIVER + " NOT loaded");
             e.printStackTrace();
+        } catch (SQLException se) {
+            System.out.println("could not connect " + DB_URL + " due to:");
+            se.printStackTrace();
         } finally {
-            //finally block used to close resources
             try {
                 if (stmt != null) {
                     conn.close();
                 }
-            } catch (SQLException se) {
-            }// do nothing
+            } catch (SQLException se) {}
             try {
                 if (conn != null) {
                     conn.close();
                 }
             } catch (SQLException se) {
                 se.printStackTrace();
-            }//end finally try
-        }//end try
+            }
+        }
         System.out.println("Goodbye!");
-    }//end main
-}//end JDBCExample
-*/
+    }
+}

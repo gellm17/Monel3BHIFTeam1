@@ -11,7 +11,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-
 -- Löschen alter Tabellen
 DROP TABLE IF EXISTS `sponsor`;
 DROP TABLE IF EXISTS `mirarbeiter`;
@@ -83,7 +82,6 @@ CREATE TABLE IF NOT EXISTS `person` (
   `notfallkontakt1` int(11) DEFAULT NULL,
   `notfallkontakt2` int(11) DEFAULT NULL,
   `personentyp` varchar(11) NOT NULL,
-  `notfallkontakt` int(11) DEFAULT NULL,
   `anrede` varchar(50) DEFAULT NULL,
   `titel` varchar(50) DEFAULT NULL,
   `vorname` varchar(50) DEFAULT NULL,
@@ -115,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   CONSTRAINT `FKesv` FOREIGN KEY (`esv`) REFERENCES `person` (`id`),
   CONSTRAINT `FKnotfallkontakt1` FOREIGN KEY (`notfallkontakt1`) REFERENCES `person` (`id`),
   CONSTRAINT `FKnotfallkontakt2` FOREIGN KEY (`notfallkontakt2`) REFERENCES `person` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 
