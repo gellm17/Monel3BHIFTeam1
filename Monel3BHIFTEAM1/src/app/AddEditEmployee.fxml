@@ -12,6 +12,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -407,8 +408,11 @@
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="groupVolunteering" />
+                                             </toggleGroup>
                                           </ToggleButton>
-                                          <ToggleButton fx:id="tglBtnVolunteeringEmployee" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" text="Ehrenamt">
+                                          <ToggleButton fx:id="tglBtnVolunteeringEmployee" mnemonicParsing="false" prefHeight="35.0" prefWidth="90.0" text="Ehrenamt" toggleGroup="$groupVolunteering">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>

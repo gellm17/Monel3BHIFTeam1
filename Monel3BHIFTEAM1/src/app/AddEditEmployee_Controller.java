@@ -144,14 +144,18 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
             tfTitleEmployee.setText(editableEmployee.getTitle());
             tfFirstnameEmployee.setText(editableEmployee.getFirstName());
             tfLastnameEmployee.setText(editableEmployee.getLastName());
-            tfSsnrEmployee.setText(""+editableEmployee.getSsnr());
+            if (editableEmployee.getSsnr() != 0) {
+                tfSsnrEmployee.setText("" + editableEmployee.getSsnr());
+            }
             dpBirthdateEmployee.setValue(editableEmployee.getBirthDate());
             //ADDRESS
             try {
                 tfStreetEmployee.setText(editableEmployee.getStreetAndNr().split(" ")[0]);
                 tfHousenumberEmployee.setText(editableEmployee.getStreetAndNr().split(" ")[1]);
             } catch (Exception ex) {}
-            tfZipEmployee.setText(""+editableEmployee.getZipCode());
+            if (editableEmployee.getZipCode() != 0){
+                tfZipEmployee.setText(""+editableEmployee.getZipCode());
+            }
             tfPlaceEmployee.setText(editableEmployee.getPlace());
             //PRIVACY
             Privacy privacyOfEditableEmployee = new Privacy();
@@ -162,6 +166,15 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
             cbPrivacy2Employee.setSelected(privacyOfEditableEmployee.getPrivacies().get(1));
             cbPrivacy3Employee.setSelected(privacyOfEditableEmployee.getPrivacies().get(2));
             cbPrivacy4Employee.setSelected(privacyOfEditableEmployee.getPrivacies().get(3));
+            //INFO
+            tglBtnFulltimeEmployee.setSelected(!editableEmployee.isVolunteering());
+            tglBtnVolunteeringEmployee.setSelected(editableEmployee.isVolunteering());
+            tfOccupationGroupEmployee.setText(editableEmployee.getOccupationGroup());
+            if (editableEmployee.getHoursPerWeek() != 0){
+                tfHoursPerWeekEmployee.setText(""+editableEmployee.getHoursPerWeek());
+            }
+            dpDateSalaryLevelEmployee.setValue(editableEmployee.getDateSalaryLevel());
+            dpDateOfEmploymentEmployee.setValue(editableEmployee.getDateOfEmployment());
             //CONTACT
             tfTelNrEmployee.setText(editableEmployee.getTelNr());
             tfEmailEmployee.setText(editableEmployee.getEmail());
@@ -195,6 +208,13 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
 
         errors.add(tfCheck(tfFirstnameEmployee, "^\\D+$"));
         errors.add(tfCheck(tfLastnameEmployee, "^\\D+$"));
+
+        if (!errors.contains(true)){
+            employeeToAdd = new Employee(   comboSalutationEmployee.getSelectionModel().getSelectedItem(),
+                    tfFirstnameEmployee.getText(),
+                    tfLastnameEmployee.getText()
+            );}
+
 
         if (!tfCheck(tfSsnrEmployee, "^([1-9][0-9]{3})?$")) {
             try {

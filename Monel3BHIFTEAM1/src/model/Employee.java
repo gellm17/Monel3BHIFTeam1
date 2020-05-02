@@ -34,14 +34,14 @@ public class Employee extends Person {
     public Employee(Salutation salutation, String firstName, String lastName) {
         super(salutation, firstName, lastName);
 
-        ssnr = new SimpleIntegerProperty(this, "ssnr", 0);
+        ssnr = new SimpleIntegerProperty(this, "ssnr");
         volunteering = new SimpleBooleanProperty(this, "volunteering");
-        occupationGroup = new SimpleStringProperty(this, "occupationGroup");
+        occupationGroup = new SimpleStringProperty(this, "occupationGroup", "");
         salaryLevel = new SimpleStringProperty(this, "salaryLevel");
         hoursPerWeek = new SimpleIntegerProperty(this, "hoursPerWeek");
         dateSalaryLevel = new SimpleObjectProperty<LocalDate>(this, "dateSalaryLevel");
-        iban = new SimpleStringProperty(this, "iban");
-        bic = new SimpleStringProperty(this, "bic");
+        iban = new SimpleStringProperty(this, "iban", "");
+        bic = new SimpleStringProperty(this, "bic", "");
         dateOfEmployment = new SimpleObjectProperty<LocalDate>(this, "dateOfEmployment");
         privacy = new SimpleObjectProperty<Privacy>(this, "privacy");
     }
@@ -165,4 +165,5 @@ public class Employee extends Person {
     public void setPrivacy(Privacy privacy) {
         this.privacy.set(privacy);
     }
+
 }
