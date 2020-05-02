@@ -1,5 +1,10 @@
+.background {
+
+}
+
 .button {
     -fx-background-radius: 0;
+    -fx-cursor: hand;
 }
 
 .button:hover {
@@ -24,6 +29,10 @@
 
 .toolButton {
     -fx-background-color: rgb(190, 190, 190);
+}
+
+.toolButton:disabled {
+    -fx-background-color: rgb(210, 210, 210);
 }
 
 .toolButton:hover {
@@ -65,3 +74,21 @@
 .roundBottomRight {
     -fx-background-radius: 0 0 10pt 0;
 }
+
+.text-field {
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+}
+
+
+/* Accordion */
+
+/*.titled-pane > .title 
+{
+-fx-background-color: rgb(220, 220, 220);
+}
+
+.titled-pane:focused > .title 
+{
+-fx-background-color: rgb(200, 200, 200);
+}*/

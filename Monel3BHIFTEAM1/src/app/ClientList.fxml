@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="847.0" prefWidth="1233.0" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ClientList_Controller">
+<BorderPane prefHeight="847.0" prefWidth="1233.0" styleClass="background" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ClientList_Controller">
    <top>
       <BorderPane maxHeight="-Infinity" prefHeight="90.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER">
          <right>
@@ -78,7 +78,7 @@
             </TableView>
          </center>
          <top>
-            <BorderPane BorderPane.alignment="CENTER">
+            <BorderPane styleClass="background" BorderPane.alignment="CENTER">
                <center>
                   <TextField fx:id="tfSearchClients" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" BorderPane.alignment="CENTER">
                      <font>
@@ -215,7 +215,7 @@
                   <String fx:value="roundBottomRight" />
                </styleClass>
             </Button>
-            <Button fx:id="btnNavClients" contentDisplay="TOP" disable="true" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavClients_Clicked" style="-fx-background-color: transparent;" text="Klienten" GridPane.rowIndex="2">
+            <Button fx:id="btnNavClients" contentDisplay="TOP" disable="true" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavClients_Clicked" styleClass="transparentButton" text="Klienten" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fitHeight="260.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
