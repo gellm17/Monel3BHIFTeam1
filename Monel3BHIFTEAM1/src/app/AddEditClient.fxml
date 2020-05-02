@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
@@ -21,29 +22,37 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="847.0" prefWidth="1232.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.AddEditClient_Controller">
+<BorderPane prefHeight="847.0" prefWidth="1232.0" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.AddEditClient_Controller">
    <top>
       <BorderPane maxHeight="-Infinity" prefHeight="90.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER">
          <right>
-            <ButtonBar maxHeight="55.0" BorderPane.alignment="CENTER">
+            <ButtonBar buttonMinWidth="50.0" maxHeight="65.0" BorderPane.alignment="CENTER">
               <buttons>
-                  <Button fx:id="btnInfo" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnInfo_Clicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnInfo" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnInfo_Clicked" prefHeight="65.0" prefWidth="65.0">
                      <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/icon_Info.png" />
                            </image>
                         </ImageView>
                      </graphic>
+                     <styleClass>
+                        <String fx:value="transparentButton" />
+                        <String fx:value="circular" />
+                     </styleClass>
                   </Button>
-                  <Button fx:id="btnSettings" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnSettings_Clicked" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnSettings" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnSettings_Clicked" prefHeight="65.0" prefWidth="65.0">
                      <graphic>
-                        <ImageView fitHeight="150.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/icon_Einst.png" />
                            </image>
                         </ImageView>
                      </graphic>
+                     <styleClass>
+                        <String fx:value="transparentButton" />
+                        <String fx:value="circular" />
+                     </styleClass>
                   </Button>
               </buttons>
             </ButtonBar>
@@ -1329,7 +1338,7 @@
                   </ImageView>
                   <BorderPane>
                      <right>
-                        <Button fx:id="btnDeleteImageClient" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#btnDeleteImageClient_Clicked" prefHeight="50.0" prefWidth="50.0" BorderPane.alignment="CENTER">
+                        <Button fx:id="btnDeleteImageClient" disable="true" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#btnDeleteImageClient_Clicked" prefHeight="50.0" prefWidth="50.0" styleClass="toolButton" BorderPane.alignment="CENTER">
                            <graphic>
                               <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -1339,7 +1348,7 @@
                            </graphic></Button>
                      </right>
                      <left>
-                        <Button fx:id="btnSelectImageClient" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#btnSelectImageClient_Clicked" prefHeight="50.0" prefWidth="50.0" BorderPane.alignment="CENTER">
+                        <Button fx:id="btnSelectImageClient" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#btnSelectImageClient_Clicked" prefHeight="50.0" prefWidth="50.0" styleClass="toolButton" BorderPane.alignment="CENTER">
                            <graphic>
                               <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -1374,7 +1383,7 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </Label>
-          <Button fx:id="btnCancelClient" mnemonicParsing="false" onAction="#btnCancelClient_Clicked" prefHeight="50.0" prefWidth="130.0" text="Abbrechen">
+          <Button fx:id="btnCancelClient" mnemonicParsing="false" onAction="#btnCancelClient_Clicked" prefHeight="50.0" prefWidth="130.0" styleClass="cancelButton" text="Abbrechen">
                <font>
                   <Font size="20.0" />
                </font>
@@ -1382,7 +1391,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="btnOkClient" defaultButton="true" mnemonicParsing="false" onAction="#btnOkClient_Clicked" prefHeight="50.0" prefWidth="130.0" text="Fertig">
+            <Button fx:id="btnOkClient" mnemonicParsing="false" onAction="#btnOkClient_Clicked" prefHeight="50.0" prefWidth="130.0" styleClass="okButton" text="Fertig">
                <font>
                   <Font size="20.0" />
                </font>
