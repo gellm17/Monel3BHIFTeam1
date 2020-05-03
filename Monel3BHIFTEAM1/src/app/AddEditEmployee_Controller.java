@@ -4,13 +4,7 @@ import data.PersonDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.util.converter.LocalDateStringConverter;
 import model.Client;
@@ -35,6 +29,12 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
 
     @FXML
     private Label lbTitle;
+
+    @FXML
+    private Accordion accordionEmployees;
+
+    @FXML
+    private TitledPane tPaneBasicData;
 
     @FXML
     private ComboBox<Salutation> comboSalutationEmployee;
@@ -353,5 +353,7 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
     public void initialize(URL url, ResourceBundle resourceBundle) {
         comboSalutationEmployee.getItems().setAll(Salutation.values());
         comboSalutationEmployee.getSelectionModel().select(0);
+
+        this.accordionEmployees.setExpandedPane(tPaneBasicData);
     }
 }

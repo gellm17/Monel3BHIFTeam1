@@ -31,12 +31,12 @@
     -fx-background-color: rgb(190, 190, 190);
 }
 
-.toolButton:disabled {
-    -fx-background-color: rgb(210, 210, 210);
+.toolButton:hover {
+    -fx-background-color: rgb(150, 150, 150);
 }
 
-.toolButton:hover {
-    -fx-background-color: rgb(160, 160, 160);
+.toolButton:disabled {
+    -fx-background-color: rgb(210, 210, 210);
 }
 
 .searchButton {
@@ -68,14 +68,14 @@
 }
 
 .roundTopRight {
-    -fx-background-radius: 0 10pt 0 0;
+    -fx-background-radius: 0 5pt 0 0;
 }
 
 .roundBottomRight {
-    -fx-background-radius: 0 0 10pt 0;
+    -fx-background-radius: 0 0 5pt 0;
 }
 
-.text-field {
+.text-field, .text-area, .date-picker, .combo-box {
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }

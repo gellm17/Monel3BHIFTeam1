@@ -78,9 +78,9 @@
    <center>
       <VBox>
          <children>
-            <Accordion maxHeight="1.7976931348623157E308">
+            <Accordion fx:id="accordionEmployees" maxHeight="1.7976931348623157E308">
               <panes>
-                <TitledPane text="Stammdaten">
+                <TitledPane fx:id="tPaneBasicData" text="Stammdaten">
                   <content>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
                            <content>

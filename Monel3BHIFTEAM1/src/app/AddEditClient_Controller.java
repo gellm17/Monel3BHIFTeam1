@@ -34,6 +34,12 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     private Label lbTitle;
 
     @FXML
+    private Accordion accordionClients;
+
+    @FXML
+    private TitledPane tPaneBasicData;
+
+    @FXML
     private ComboBox<Salutation> comboSalutationClient;
 
     @FXML
@@ -519,5 +525,6 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         addFocusedProperty(tfEmailClient, "^([a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+)?$");
         addFocusedProperty(tfIbanClient, "^([A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?)?$");
 
+        this.accordionClients.setExpandedPane(this.tPaneBasicData);
     }
 }
