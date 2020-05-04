@@ -23,7 +23,7 @@
 
 <BorderPane prefHeight="847.0" prefWidth="1232.0" styleClass="background" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddEditEmployee_Controller">
    <top>
-      <BorderPane maxHeight="-Infinity" prefHeight="90.0" style="-fx-background-color: red;" BorderPane.alignment="CENTER">
+      <BorderPane maxHeight="-Infinity" prefHeight="90.0" styleClass="programHeader" BorderPane.alignment="CENTER">
          <right>
             <ButtonBar buttonMinWidth="50.0" maxHeight="65.0" BorderPane.alignment="CENTER">
               <buttons>
