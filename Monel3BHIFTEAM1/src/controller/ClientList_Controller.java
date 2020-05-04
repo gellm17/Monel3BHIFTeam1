@@ -1,8 +1,11 @@
-package app;
+package controller;
 
+import app.SceneLoader;
+import controller.AddEditClient_Controller;
 import data.PersonDAO;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -11,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import model.Client;
@@ -125,6 +129,19 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
 
         //this.tabActivities.setGraphic(buildImage("../resources/iconAkt.png");
 
+        tableClients.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                    try {
+                        startAddEdit();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
         tableClients.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 btnDeleteClient.setDisable(false);
@@ -186,57 +203,9 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
 
     @FXML
     void btnEditClient_Clicked(ActionEvent event) {
-        //AddEditClient_Controller editcontroller = new AddEditClient_Controller();
-        //editcontroller.setEditableClient((Client) selectedItem);
-        // showScene("AddEditClient");
 
         try {
-
-            FXMLLoader fxml = new FXMLLoader(getClass().getResource("AddEditClient.fxml"));
-            BorderPane root = fxml.load();
-            Scene scene = new Scene(root);
-            this.getPrimStage().setScene(scene);
-            Screen screen = Screen.getPrimary();
-
-            //Maximized
-            Rectangle2D bounds = screen.getVisualBounds();
-            this.getPrimStage().setX(bounds.getMinX());
-            this.getPrimStage().setY(bounds.getMinY());
-            this.getPrimStage().setWidth(bounds.getWidth());
-            this.getPrimStage().setHeight(bounds.getHeight());
-            this.getPrimStage().show();
-
-
-            AddEditClient_Controller editController = fxml.getController();
-            //Pass whatever data you want. You can have multiple method calls here
-            editController.setEditableClient((Client) selectedItem);
-
-
-            SceneLoader loader = editController;
-            loader.setPrimaryStage(this.getPrimStage());
-
-
-            /*
-            Stage primStage = null;
-            FXMLLoader fxml = new FXMLLoader(getClass().getResource("AddEditClient.fxml"));
-            BorderPane root = (BorderPane)fxml.load();
-            Scene scene = new Scene(root);
-            primStage.setScene(scene);
-            Screen screen = Screen.getPrimary();
-            Rectangle2D bounds = screen.getVisualBounds();
-            AddEditClient_Controller editcontroller = fxml.getController();
-            editcontroller.setEditableClient((Client) selectedItem);
-
-            primStage.setX(bounds.getMinX());
-            primStage.setY(bounds.getMinY());
-            primStage.setWidth(bounds.getWidth());
-            primStage.setHeight(bounds.getHeight());
-            primStage.show();
-
-            SceneLoader loader = editcontroller;
-            loader.setPrimaryStage(primStage);
-            */
-
+            startAddEdit();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -296,6 +265,32 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
 
     @FXML
     void btnSettings_Clicked(ActionEvent event) {
+
+    }
+
+    private void startAddEdit() throws IOException {
+        FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditClient.fxml"));
+        BorderPane root = fxml.load();
+        Scene scene = new Scene(root);
+        this.getPrimStage().setScene(scene);
+        Screen screen = Screen.getPrimary();
+
+        //Maximized
+        Rectangle2D bounds = screen.getVisualBounds();
+        this.getPrimStage().setX(bounds.getMinX());
+        this.getPrimStage().setY(bounds.getMinY());
+        this.getPrimStage().setWidth(bounds.getWidth());
+        this.getPrimStage().setHeight(bounds.getHeight());
+        this.getPrimStage().show();
+
+
+        AddEditClient_Controller editController = fxml.getController();
+        //Pass whatever data you want. You can have multiple method calls here
+        editController.setEditableClient((Client) selectedItem);
+
+
+        SceneLoader loader = editController;
+        loader.setPrimaryStage(this.getPrimStage());
 
     }
 

@@ -14,7 +14,7 @@ public abstract class SceneLoader {
     private Stage primStage = new Stage();
     public void showScene(String name) {
         try {
-            FXMLLoader fxml = new FXMLLoader(getClass().getResource(name+".fxml"));
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/"+name+".fxml"));
             BorderPane root = fxml.load();
             Scene scene = new Scene(root);
             primStage.setScene(scene);

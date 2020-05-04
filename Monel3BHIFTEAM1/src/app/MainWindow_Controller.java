@@ -1,5 +1,6 @@
 package app;
 
+import controller.AddEditClient_Controller;
 import data.PersonDAO;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -293,7 +294,7 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
 
         try {
 
-            FXMLLoader fxml = new FXMLLoader(getClass().getResource("AddEditClient.fxml"));
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditClient.fxml"));
             BorderPane root = fxml.load();
             Scene scene = new Scene(root);
             this.getPrimStage().setScene(scene);

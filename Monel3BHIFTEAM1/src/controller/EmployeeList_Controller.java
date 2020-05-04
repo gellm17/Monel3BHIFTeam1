@@ -1,5 +1,7 @@
-package app;
+package controller;
 
+import app.SceneLoader;
+import controller.AddEditEmployee_Controller;
 import data.PersonDAO;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,7 +15,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
-import model.Client;
 import model.Employee;
 import model.Person;
 
@@ -187,7 +188,7 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
     void btnEditEmployee_Clicked(ActionEvent event) {
         try {
 
-            FXMLLoader fxml = new FXMLLoader(getClass().getResource("AddEditEmployee.fxml"));
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditEmployee.fxml"));
             BorderPane root = fxml.load();
             Scene scene = new Scene(root);
             this.getPrimStage().setScene(scene);

@@ -1,5 +1,6 @@
-package app;
+package controller;
 
+import app.SceneLoader;
 import data.PersonDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
