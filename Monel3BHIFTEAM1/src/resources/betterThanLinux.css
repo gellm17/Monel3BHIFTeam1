@@ -80,6 +80,10 @@
     -fx-background-radius: 0;
 }
 
+.lightBorder {
+    -fx-border-color: lightgray;
+}
+
 
 /* Accordion */
 
