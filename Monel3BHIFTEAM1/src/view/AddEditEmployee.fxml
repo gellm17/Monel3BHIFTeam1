@@ -76,7 +76,7 @@
       </BorderPane>
    </top>
    <center>
-      <VBox>
+      <VBox styleClass="background">
          <children>
             <Accordion fx:id="accordionEmployees" maxHeight="1.7976931348623157E308">
               <panes>
@@ -436,14 +436,11 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfOccupationGroupEmployee" layoutX="45.0" layoutY="133.0" maxWidth="-Infinity" prefWidth="100.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
+                                    <ComboBox fx:id="comboOccupationGroupEmployee" prefWidth="100.0">
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
-                                    </TextField>
+                                    </ComboBox>
                                     <Label layoutX="45.0" layoutY="173.0" text="Gehaltsstufe">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
@@ -452,14 +449,11 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfSalaryLevelEmployee" layoutX="45.0" layoutY="133.0" maxWidth="-Infinity" prefWidth="100.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
+                                    <ComboBox fx:id="comboSalaryLevelEmployee" prefWidth="100.0">
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
-                                    </TextField>
+                                    </ComboBox>
                                     <Label layoutX="45.0" layoutY="173.0" text="Wochenstunden">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
@@ -560,7 +554,7 @@
       </VBox>
    </center>
    <left>
-      <BorderPane BorderPane.alignment="CENTER">
+      <BorderPane styleClass="background" BorderPane.alignment="CENTER">
          <top>
             <VBox BorderPane.alignment="CENTER">
                <children>
@@ -606,7 +600,7 @@
       </BorderPane>
    </left>
    <bottom>
-      <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_RIGHT" styleClass="background" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="lbMessage" textFill="RED">
                <font>

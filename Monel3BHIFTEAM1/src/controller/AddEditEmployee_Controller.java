@@ -38,7 +38,7 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
     private TitledPane tPaneBasicData;
 
     @FXML
-    private ComboBox<Salutation> comboSalutationEmployee;
+    private ComboBox<?> comboSalutationEmployee;
 
     @FXML
     private TextField tfTitleEmployee;
@@ -89,13 +89,16 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
     private ToggleButton tglBtnFulltimeEmployee;
 
     @FXML
+    private ToggleGroup groupVolunteering;
+
+    @FXML
     private ToggleButton tglBtnVolunteeringEmployee;
 
     @FXML
-    private TextField tfOccupationGroupEmployee;
+    private ComboBox<?> comboOccupationGroupEmployee;
 
     @FXML
-    private TextField tfSalaryLevelEmployee;
+    private ComboBox<?> comboSalaryLevelEmployee;
 
     @FXML
     private TextField tfHoursPerWeekEmployee;
