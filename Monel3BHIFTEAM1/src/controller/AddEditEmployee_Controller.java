@@ -203,6 +203,7 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
     @FXML
     void btnOkEmployee_Clicked(ActionEvent event) {
         Employee employeeToAdd = new Employee();
+        errors.clear();
 
         if (!tfCheck(tfTitleEmployee, "^(\\D+)?$")) {
             employeeToAdd.setTitle(tfTitleEmployee.getText());

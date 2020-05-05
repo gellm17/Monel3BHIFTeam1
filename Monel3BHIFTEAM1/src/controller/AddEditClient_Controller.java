@@ -320,6 +320,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     @FXML
     void btnOkClient_Clicked(ActionEvent event) {
         Client clientToAdd = new Client();
+        errors.clear();
 
         errors.add(tfCheck(tfFirstnameClient, "^\\D+$"));
         errors.add(tfCheck(tfLastnameClient, "^\\D+$"));
