@@ -16,13 +16,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="847.0" prefWidth="1233.0" styleClass="background" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmployeeList_Controller">
+<BorderPane prefHeight="847.0" prefWidth="1233.0" styleClass="background" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ActivityList_Controller">
    <top>
       <BorderPane maxHeight="-Infinity" prefHeight="90.0" styleClass="programHeader" BorderPane.alignment="CENTER">
          <right>
-            <ButtonBar buttonMinWidth="50.0" maxHeight="65.0" BorderPane.alignment="CENTER">
+            <ButtonBar buttonMinWidth="45.0" maxHeight="65.0" BorderPane.alignment="CENTER">
               <buttons>
-                <Button fx:id="btnInfo" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnInfo_Clicked" prefHeight="65.0" prefWidth="65.0">
+                <Button fx:id="btnInfo" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnInfo_Clicked" prefHeight="65.0" prefWidth="65.0">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -34,14 +34,18 @@
                         <String fx:value="transparentButton" />
                         <String fx:value="circular" />
                      </styleClass></Button>
-                  <Button fx:id="btnSettings" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnSettings_Clicked" prefHeight="65.0" prefWidth="65.0" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnSettings" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnSettings_Clicked" prefHeight="65.0" prefWidth="65.0">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/icon_Einst.png" />
                            </image>
                         </ImageView>
-                     </graphic></Button>
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="transparentButton" />
+                        <String fx:value="circular" />
+                     </styleClass></Button>
               </buttons>
             </ButtonBar>
          </right>
@@ -56,7 +60,7 @@
             <Insets bottom="5.0" left="5.0" right="20.0" top="5.0" />
          </padding>
          <center>
-            <Label fx:id="lbTitle" text="Mitarbeiter" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label fx:id="lbTitle" text="Aktivitäten" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Gill Sans MT" size="36.0" />
                </font>
@@ -65,18 +69,18 @@
       </BorderPane>
    </top>
    <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="background" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>
-            <TableView fx:id="tableEmployees" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableActivities" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets top="35.0" />
                </BorderPane.margin>
             </TableView>
          </center>
          <top>
-            <BorderPane BorderPane.alignment="CENTER">
+            <BorderPane styleClass="background" BorderPane.alignment="CENTER">
                <center>
-                  <TextField fx:id="tfSearchEmployees" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" BorderPane.alignment="CENTER">
+                  <TextField fx:id="tfSearchClients" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -88,7 +92,7 @@
                         <Insets />
                      </BorderPane.margin>
                      <children>
-                        <Button fx:id="btnSearchEmployees" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnSearchEmployees_Clicked" prefHeight="44.0" prefWidth="44.0">
+                        <Button fx:id="btnSearchActivities" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnSearchActivities_Clicked" prefHeight="44.0" prefWidth="44.0">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -107,7 +111,7 @@
                               <String fx:value="searchButton" />
                            </styleClass>
                         </Button>
-                        <Button fx:id="btnFilterEmployees" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnFilterEmployees_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                        <Button fx:id="btnFilterActivities" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnFilterActivities_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -122,7 +126,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="btnAddEmployee" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnAddEmployee_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                      <Button fx:id="btnAddActivity" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnAddActivity_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -137,7 +141,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="btnDeleteEmployee" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnDeleteEmployee_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                        <Button fx:id="btnDeleteActivity" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnDeleteActivity_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -152,7 +156,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="btnEditEmployee" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnEditEmployee_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                        <Button fx:id="btnEditActivity" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnEditActivity_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -189,51 +193,20 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnNavActivities" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavActivities_Clicked" styleClass="navButton" text="Aktivitäten">
+            <Button fx:id="btnNavActivities" contentDisplay="TOP" disable="true" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavActivities_Clicked" styleClass="transparentButton" text="Aktivitäten">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/nav_icons/icon_Activities_bf.png" />
+                        <Image url="@../resources/nav_icons/icon_Activities_bo.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnNavBills" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavBills_Clicked" styleClass="navButton" text="Rechnungen" GridPane.rowIndex="1">
+            <Button fx:id="btnNavBills" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavBills_Clicked" text="Rechnungen" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/nav_icons/icon_Bills_bf.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="btnNavClients" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavClients_Clicked" text="Klienten" GridPane.rowIndex="2">
-               <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/nav_icons/icon_Clients_bf.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <styleClass>
-                  <String fx:value="navButton" />
-                  <String fx:value="roundBottomRight" />
-               </styleClass>
-            </Button>
-            <Button fx:id="btnNavEmployees" contentDisplay="TOP" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavEmployees_Clicked" style="-fx-background-color: transparent;" text="Mitarbeiter" GridPane.rowIndex="3">
-               <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/nav_icons/icon_Employees_bf.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="btnNavSponsors" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavSponsors_Clicked" text="Sponsoren" GridPane.rowIndex="4">
-               <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../resources/nav_icons/icon_Sponsors_bf.png" />
+                        <Image url="@../resources/nav_icons/icon_Bills_bo.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -242,20 +215,47 @@
                   <String fx:value="roundTopRight" />
                </styleClass>
             </Button>
-            <Button fx:id="btnNavPhotos" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavPhotos_Clicked" styleClass="navButton" text="Fotos" GridPane.rowIndex="5">
+            <Button fx:id="btnNavClients" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavClients_Clicked" styleClass="navButton" text="Klienten" GridPane.rowIndex="2">
                <graphic>
-                  <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="260.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/nav_icons/icon_Photos_bf.png" />
+                        <Image url="@../resources/nav_icons/icon_Clients_bo.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnNavBirthdays" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavBirthdays_Clicked" styleClass="navButton" text="Geburtstage" GridPane.rowIndex="6">
+            <Button fx:id="btnNavEmployees" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavEmployees_Clicked" styleClass="navButton" text="Mitarbeiter" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../resources/nav_icons/icon_Birthdays_bf.png" />
+                        <Image url="@../resources/nav_icons/icon_Employees_bo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnNavSponsors" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavSponsors_Clicked" styleClass="navButton" text="Sponsoren" GridPane.rowIndex="4">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/nav_icons/icon_Sponsors_bo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnNavPhotos" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavPhotos_Clicked" styleClass="navButton" text="Fotos" GridPane.rowIndex="5">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/nav_icons/icon_Photos_bo.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnNavBirthdays" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavBirthdays_Clicked" styleClass="navButton" text="Geburtstage" GridPane.rowIndex="6">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/nav_icons/icon_Birthdays_bo.png" />
                      </image>
                   </ImageView>
                </graphic>

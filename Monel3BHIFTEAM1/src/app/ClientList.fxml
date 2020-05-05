@@ -60,7 +60,7 @@
             <Insets bottom="5.0" left="5.0" right="20.0" top="5.0" />
          </padding>
          <center>
-            <Label fx:id="lbTitle" text="Monel Pro" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label fx:id="lbTitle" text="Klienten" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Gill Sans MT" size="36.0" />
                </font>

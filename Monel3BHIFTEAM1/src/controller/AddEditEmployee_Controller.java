@@ -38,7 +38,7 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
     private TitledPane tPaneBasicData;
 
     @FXML
-    private ComboBox<?> comboSalutationEmployee;
+    private ComboBox<Salutation> comboSalutationEmployee;
 
     @FXML
     private TextField tfTitleEmployee;

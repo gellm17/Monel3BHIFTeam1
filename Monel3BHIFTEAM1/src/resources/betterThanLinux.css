@@ -56,11 +56,11 @@
 }
 
 .okButton {
-    -fx-background-color: rgb(120, 180, 200);
+    -fx-background-color: rgb(80, 180, 210);
 }
 
 .okButton:hover {
-    -fx-background-color: rgb(90, 150, 170);
+    -fx-background-color: rgb(60, 160, 190);
 }
 
 .circular {
@@ -92,14 +92,17 @@
     -fx-padding: 7 10;
     -fx-background-radius: 0;
     -fx-background-color: transparent;
+    -fx-border-style: solid;
+    -fx-border-width: 0 1 0 0;
+    -fx-border-color: rgb(200, 200, 200);
 }
 
 .tab-header-area .tab:selected {
-    -fx-background-color: rgb(190, 190, 190);
-    /*-fx-padding: 4 10;
+    -fx-background-color: rgb(180, 180, 180);
+    /*-fx-padding: 7 10 5 10;
     -fx-border-style: solid;
-    -fx-border-width: 0 0 3 0;
-    -fx-border-color: rgb(120, 180, 200);*/
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: red;*/
 }
 
 .tab-header-area .tab:hover {
