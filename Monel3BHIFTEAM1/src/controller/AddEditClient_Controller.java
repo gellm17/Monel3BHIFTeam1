@@ -347,7 +347,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         setAllPersonFields(ec2, tfTitleContact2, tfFirstnameContact2, tfLastnameContact2, tfSsnrContact2, tfStreetContact2, tfHousenumberContact2, tfZipContact2, tfPlaceContact2, tfTelNrContact2, tfEmailContact2, dpBirthdateContact2, comboSalutationContact2);
         clientToAdd.setEmergencyContact2(ec2);
 
-        if (!tfCheck(tfSsnrClient, "^([1-9][0-9]{3})?$")) {
+        if (!tfCheck(tfSsnrClient, "^([1-9][0-9]{9})?$")) {
             try {
                 clientToAdd.setSsnr(Integer.parseInt(tfSsnrClient.getText()));
             } catch (Exception e) { }
@@ -522,7 +522,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         comboSalutationContact2.getSelectionModel().select(0);
         comboSalutationEsv.getSelectionModel().select(0);
 
-        addFocusedProperty(tfSsnrClient, "^([1-9][0-9]{3})?$");
+        addFocusedProperty(tfSsnrClient, "^([1-9][0-9]{9})?$");
         addFocusedProperty(tfZipClient, "^([1-9][0-9]{3})?$");
         addFocusedProperty(tfEmailClient, "^([a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+)?$");
         addFocusedProperty(tfIbanClient, "^([A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?)?$");

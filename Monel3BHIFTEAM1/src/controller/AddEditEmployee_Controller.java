@@ -8,10 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.util.converter.LocalDateStringConverter;
-import model.Client;
-import model.Employee;
-import model.Privacy;
-import model.Salutation;
+import model.*;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -95,10 +92,10 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
     private ToggleButton tglBtnVolunteeringEmployee;
 
     @FXML
-    private ComboBox<?> comboOccupationGroupEmployee;
+    private ComboBox<OccupationGroup> comboOccupationGroupEmployee;
 
     @FXML
-    private ComboBox<?> comboSalaryLevelEmployee;
+    private ComboBox<SalaryLevel> comboSalaryLevelEmployee;
 
     @FXML
     private TextField tfHoursPerWeekEmployee;
@@ -143,6 +140,8 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
     public void setEditableEmployee(Employee editableEmployee) {
         this.editableEmployee = editableEmployee;
         comboSalutationEmployee.getItems().setAll(Salutation.values());
+        comboOccupationGroupEmployee.getItems().setAll(OccupationGroup.values());
+        comboSalaryLevelEmployee.getItems().setAll(SalaryLevel.values());
         if (editableEmployee != null){
             comboSalutationEmployee.getSelectionModel().select(editableEmployee.getSalutation());
             tfTitleEmployee.setText(editableEmployee.getTitle());
@@ -173,7 +172,9 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
             //INFO
             tglBtnFulltimeEmployee.setSelected(!editableEmployee.isVolunteering());
             tglBtnVolunteeringEmployee.setSelected(editableEmployee.isVolunteering());
-            tfOccupationGroupEmployee.setText(editableEmployee.getOccupationGroup());
+            //tfOccupationGroupEmployee.setText(editableEmployee.getOccupationGroup());
+            comboOccupationGroupEmployee.getSelectionModel().select(editableEmployee.getOccupationGroup());
+            comboSalaryLevelEmployee.getSelectionModel().select(editableEmployee.getSalaryLevel());
             if (editableEmployee.getHoursPerWeek() != 0){
                 tfHoursPerWeekEmployee.setText(""+editableEmployee.getHoursPerWeek());
             }
@@ -221,7 +222,7 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
             );}
 
 
-        if (!tfCheck(tfSsnrEmployee, "^([1-9][0-9]{3})?$")) {
+        if (!tfCheck(tfSsnrEmployee, "^([1-9][0-9]{9})?$")) {
             try {
                 employeeToAdd.setSsnr(Integer.parseInt(tfSsnrEmployee.getText()));
             } catch (Exception ex){
@@ -275,17 +276,8 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
             errors.add(true);
         }
 
-        if (!tfCheck(tfOccupationGroupEmployee, "^(\\D+)?$")){
-            employeeToAdd.setOccupationGroup(tfOccupationGroupEmployee.getText());
-        } else {
-            errors.add(true);
-        }
-
-        if (!tfCheck(tfSalaryLevelEmployee, "^(\\D+)?$")){
-            employeeToAdd.setSalaryLevel(tfSalaryLevelEmployee.getText());
-        } else {
-            errors.add(true);
-        }
+        employeeToAdd.setOccupationGroup(comboOccupationGroupEmployee.getSelectionModel().getSelectedItem());
+        employeeToAdd.setSalaryLevel(comboSalaryLevelEmployee.getSelectionModel().getSelectedItem());
 
         if (!tfCheck(tfHoursPerWeekEmployee, "^([0-9]*)?$")){
             try {
@@ -358,6 +350,12 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
     public void initialize(URL url, ResourceBundle resourceBundle) {
         comboSalutationEmployee.getItems().setAll(Salutation.values());
         comboSalutationEmployee.getSelectionModel().select(0);
+
+        comboOccupationGroupEmployee.getItems().setAll(OccupationGroup.values());
+        comboOccupationGroupEmployee.getSelectionModel().select(0);
+
+        comboSalaryLevelEmployee.getItems().setAll(SalaryLevel.values());
+        comboSalaryLevelEmployee.getSelectionModel().select(0);
 
         this.accordionEmployees.setExpandedPane(tPaneBasicData);
     }
