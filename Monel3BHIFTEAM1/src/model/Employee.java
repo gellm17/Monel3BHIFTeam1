@@ -7,8 +7,8 @@ import java.time.LocalDate;
 public class Employee extends Person {
     private IntegerProperty ssnr;
     private BooleanProperty volunteering;
-    private StringProperty occupationGroup;
-    private StringProperty salaryLevel;
+    private ObjectProperty<OccupationGroup> occupationGroup;
+    private ObjectProperty<SalaryLevel> salaryLevel;
     private IntegerProperty hoursPerWeek;
     private ObjectProperty<LocalDate> dateSalaryLevel;
     private StringProperty iban;
@@ -21,8 +21,8 @@ public class Employee extends Person {
 
         ssnr = new SimpleIntegerProperty(this, "ssnr");
         volunteering = new SimpleBooleanProperty(this, "volunteering");
-        occupationGroup = new SimpleStringProperty(this, "occupationGroup", "");
-        salaryLevel = new SimpleStringProperty(this, "salaryLevel", "");
+        occupationGroup = new SimpleObjectProperty<OccupationGroup>(this, "occupationGroup", OccupationGroup.VG1);
+        salaryLevel = new SimpleObjectProperty<SalaryLevel>(this, "salaryLevel", SalaryLevel.GS1);
         hoursPerWeek = new SimpleIntegerProperty(this, "hoursPerWeek");
         dateSalaryLevel = new SimpleObjectProperty<LocalDate>(this, "dateSalaryLevel");
         iban = new SimpleStringProperty(this, "iban", "");
@@ -36,8 +36,8 @@ public class Employee extends Person {
 
         ssnr = new SimpleIntegerProperty(this, "ssnr");
         volunteering = new SimpleBooleanProperty(this, "volunteering");
-        occupationGroup = new SimpleStringProperty(this, "occupationGroup", "");
-        salaryLevel = new SimpleStringProperty(this, "salaryLevel");
+        occupationGroup = new SimpleObjectProperty<OccupationGroup>(this, "occupationGroup", OccupationGroup.VG1);
+        salaryLevel = new SimpleObjectProperty<SalaryLevel>(this, "salaryLevel", SalaryLevel.GS1);
         hoursPerWeek = new SimpleIntegerProperty(this, "hoursPerWeek");
         dateSalaryLevel = new SimpleObjectProperty<LocalDate>(this, "dateSalaryLevel");
         iban = new SimpleStringProperty(this, "iban", "");
@@ -70,27 +70,27 @@ public class Employee extends Person {
         this.volunteering.set(volunteering);
     }
 
-    public String getOccupationGroup() {
+    public OccupationGroup getOccupationGroup() {
         return occupationGroup.get();
     }
 
-    public StringProperty occupationGroupProperty() {
+    public ObjectProperty<OccupationGroup> occupationGroupProperty() {
         return occupationGroup;
     }
 
-    public void setOccupationGroup(String occupationGroup) {
+    public void setOccupationGroup(OccupationGroup occupationGroup) {
         this.occupationGroup.set(occupationGroup);
     }
 
-    public String getSalaryLevel() {
+    public SalaryLevel getSalaryLevel() {
         return salaryLevel.get();
     }
 
-    public StringProperty salaryLevelProperty() {
+    public ObjectProperty<SalaryLevel> salaryLevelProperty() {
         return salaryLevel;
     }
 
-    public void setSalaryLevel(String salaryLevel) {
+    public void setSalaryLevel(SalaryLevel salaryLevel) {
         this.salaryLevel.set(salaryLevel);
     }
 

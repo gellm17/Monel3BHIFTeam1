@@ -1,5 +1,9 @@
 package model;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.time.LocalDate;
 
 public class Sponsor extends Person {
@@ -11,12 +15,12 @@ public class Sponsor extends Person {
     public Sponsor(Salutation salutation, String firstName, String lastName) {
         super(salutation, firstName, lastName );
 
-        firmenname = new SimpleIntegerProperty(this, "firmenname");
-        firmenTelNr = new SimpleIntegerProperty(this, "firmenTelNr");
-        firmenEmail = new SimpleIntegerProperty(this, "firmenEmail");
+        firmenname = new SimpleStringProperty(this, "firmenname");
+        firmenTelNr = new SimpleStringProperty(this, "firmenTelNr");
+        firmenEmail = new SimpleStringProperty(this, "firmenEmail");
     }
 
-    public int getFirmenname() {
+    public String getFirmenname() {
         return firmenname.get();
     }
     public StringProperty getFirmennameProperty() {
@@ -26,7 +30,7 @@ public class Sponsor extends Person {
         this.firmenname = firmenname;
     }
 
-    public int getFirmenTalNr() {
+    public String getFirmenTalNr() {
         return firmenTelNr.get();
     }
     public StringProperty getFirmenTalNrProperty() {
@@ -36,7 +40,7 @@ public class Sponsor extends Person {
         this.firmenTelNr = firmenTelNr;
     }
 
-    public int getFirmenEmail() {
+    public String getFirmenEmail() {
         return firmenEmail.get();
     }
     public StringProperty getFirmenEmailProperty() {
