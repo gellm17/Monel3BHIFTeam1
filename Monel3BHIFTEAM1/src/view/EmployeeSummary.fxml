@@ -23,7 +23,7 @@
             <Insets right="40.0" />
          </BorderPane.margin>
          <top>
-            <ImageView fx:id="imgEmployee" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+            <ImageView fx:id="imgEmployee" fitHeight="250.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
                   <Image url="@../resources/icon_Photo_HQ_white.png" />
                </image>
@@ -93,7 +93,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbNameEmployee" text="Herr Prof. Dr. Alex Nordmann" wrapText="true" GridPane.columnIndex="1">
+                                    <Label fx:id="lbNameEmployee" wrapText="true" GridPane.columnIndex="1">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -106,7 +106,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbSsnrEmployee" text="1234" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <Label fx:id="lbSsnrEmployee" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -116,7 +116,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbBirthdateEmployee" text="12.02.2011" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <Label fx:id="lbBirthdateEmployee" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -129,12 +129,12 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbStreetEmployee" text="Straße 12" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                    <Label fx:id="lbStreetEmployee" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbPlaceEmployee" text="1220 Westtirol" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                    <Label fx:id="lbPlaceEmployee" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -147,7 +147,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbPhoneEmployee" text="+43 664 1234567" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                    <Label fx:id="lbPhoneEmployee" GridPane.columnIndex="1" GridPane.rowIndex="8">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -157,7 +157,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbEmailEmployee" text="person@gmail.com" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                    <Label fx:id="lbEmailEmployee" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="9">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -170,7 +170,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbIbanEmployee" text="1234-1234-4321-1234-0000" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                    <Label fx:id="lbIbanEmployee" GridPane.columnIndex="1" GridPane.rowIndex="11">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -180,7 +180,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbBicEmployee" text="ATC011234567" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                                    <Label fx:id="lbBicEmployee" GridPane.columnIndex="1" GridPane.rowIndex="12">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -228,7 +228,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbVolunteeringEmployee" text="Ehrenamt" wrapText="true" GridPane.columnIndex="1">
+                                    <Label fx:id="lbVolunteeringEmployee" wrapText="true" GridPane.columnIndex="1">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -241,7 +241,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbOccupationGroupEmployee" text="3" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <Label fx:id="lbOccupationGroupEmployee" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -254,7 +254,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbStreetClient1" text="4a" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <Label fx:id="lbStreetClient1" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -267,7 +267,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbSalaryLevelEmployee" text="60" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                    <Label fx:id="lbSalaryLevelEmployee" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -289,12 +289,12 @@
                                        </font>
                                     </Label>
                                     <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                    <Label fx:id="lbDateSalaryLevelEmployee" text="12.02.2020" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                    <Label fx:id="lbDateSalaryLevelEmployee" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbDateOfEmploymentEmployee" text="21.05.1999" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                    <Label fx:id="lbDateOfEmploymentEmployee" GridPane.columnIndex="1" GridPane.rowIndex="9">
                                        <font>
                                           <Font size="14.0" />
                                        </font>

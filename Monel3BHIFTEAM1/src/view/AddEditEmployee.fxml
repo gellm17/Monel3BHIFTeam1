@@ -188,7 +188,7 @@
                         <Font size="14.0" />
                      </font>
                 </TitledPane>
-                <TitledPane text="Adresse">
+                <TitledPane fx:id="tPaneAddress" text="Adresse">
                   <content>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
                            <content>
@@ -294,7 +294,7 @@
                         <Font size="14.0" />
                      </font>
                 </TitledPane>
-                <TitledPane text="Datenschutz">
+                <TitledPane fx:id="tPanePrivacy" text="Datenschutz">
                   <content>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
                            <content>
@@ -344,7 +344,7 @@
                         <Font size="14.0" />
                      </font>
                 </TitledPane>
-                  <TitledPane text="Kontakt">
+                  <TitledPane fx:id="tPaneContact" text="Kontakt">
                     <content>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
                            <content>
@@ -391,7 +391,7 @@
                         <Font size="14.0" />
                      </font>
                   </TitledPane>
-                  <TitledPane layoutX="10.0" layoutY="130.0" text="Informationen">
+                  <TitledPane fx:id="tPaneInformation" layoutX="10.0" layoutY="130.0" text="Informationen">
                      <content>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
                            <content>
@@ -501,7 +501,7 @@
                         <Font size="14.0" />
                      </font>
                   </TitledPane>
-                  <TitledPane text="Bankverbindung">
+                  <TitledPane fx:id="tPaneBank" text="Bankverbindung">
                     <content>
                         <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
                            <content>
@@ -558,7 +558,7 @@
          <top>
             <VBox BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fx:id="imgEmployee" fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imgEmployee" fitHeight="400.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/icon_Photo_HQ_white.png" />
                      </image>
