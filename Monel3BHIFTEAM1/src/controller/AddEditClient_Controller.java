@@ -331,7 +331,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
                     tfLastnameClient.getText()
             );}
 
-        setAllPersonFields(clientToAdd, tfTitleClient, tfFirstnameClient, tfLastnameClient, tfSsnrClient, tfStreetClient, tfHousenumberClient, tfZipClient, tfPlaceClient, tfTelNrClient, tfEmailClient, dpBirthdateClient, comboSalutationClient);
+        setAllPersonFieldsMandatory(clientToAdd, tfTitleClient, tfFirstnameClient, tfLastnameClient, tfSsnrClient, tfStreetClient, tfHousenumberClient, tfZipClient, tfPlaceClient, tfTelNrClient, tfEmailClient, dpBirthdateClient, comboSalutationClient);
 
         clientToAdd.setPrivacy(new Privacy(new ArrayList<Boolean>(){{add(cbPrivacy1Client.isSelected()); add(cbPrivacy2Client.isSelected()); add(cbPrivacy3Client.isSelected()); add(cbPrivacy4Client.isSelected());}}));
 
@@ -340,14 +340,14 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         clientToAdd.setEsv(esv);
 
         Person ec1 = new Person();
-        setAllPersonFields(ec1, tfTitleContact1, tfFirstnameContact1, tfLastnameContact1, tfSsnrContact1, tfStreetContact1, tfHousenumberContact1, tfZipContact1, tfPlaceContact1, tfTelNrContact1, tfEmailContact1, dpBirthdateContact1, comboSalutationContact1);
+        setAllPersonFieldsMandatory(ec1, tfTitleContact1, tfFirstnameContact1, tfLastnameContact1, tfSsnrContact1, tfStreetContact1, tfHousenumberContact1, tfZipContact1, tfPlaceContact1, tfTelNrContact1, tfEmailContact1, dpBirthdateContact1, comboSalutationContact1);
         clientToAdd.setEmergencyContact1(ec1);
 
         Person ec2 = new Person();
         setAllPersonFields(ec2, tfTitleContact2, tfFirstnameContact2, tfLastnameContact2, tfSsnrContact2, tfStreetContact2, tfHousenumberContact2, tfZipContact2, tfPlaceContact2, tfTelNrContact2, tfEmailContact2, dpBirthdateContact2, comboSalutationContact2);
         clientToAdd.setEmergencyContact2(ec2);
 
-        if (!tfCheck(tfSsnrClient, "^([1-9][0-9]{9})?$")) {
+        if (!tfCheck(tfSsnrClient, "^[1-9][0-9]{9}$")) {
             try {
                 clientToAdd.setSsnr(Integer.parseInt(tfSsnrClient.getText()));
             } catch (Exception e) { }
@@ -367,7 +367,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             errors.add(true);
         }
 
-        if (!taCheck(taDiagnoseClient,"^(\\D+)?$")) {
+        if (!taCheck(taDiagnoseClient,"^\\D+$")) {
             clientToAdd.setDiagnose(taDiagnoseClient.getText());
         } else {
             errors.add(true);
@@ -417,14 +417,15 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             }
         }
 
-        try {
-            LocalDateStringConverter ldsc = new LocalDateStringConverter();
-            p.setBirthDate(ldsc.fromString(dpBirthdate.getEditor().getText()));
-            dpBirthdate.setStyle(null);
-        } catch (Exception e) {
-            dpBirthdate.setStyle("-FX-Border-Color: red");
-            errors.add(true);
-        }
+            try {
+                LocalDateStringConverter ldsc = new LocalDateStringConverter();
+                p.setBirthDate(ldsc.fromString(dpBirthdate.getEditor().getText()));
+                dpBirthdate.setStyle(null);
+            } catch (Exception e) {
+                dpBirthdate.setStyle("-FX-Border-Color: red");
+                errors.add(true);
+            }
+
 
 
         if (!tfCheck(tfStreet, "^(\\D+)?$") && !tfCheck(tfHousenumber, "^([1-9][0-9]*)?$")) {
@@ -455,6 +456,76 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         }
 
         if (!tfCheck(tfEmail, "^([a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+)?$")) {
+            p.setEmail(tfEmail.getText());
+        } else {
+            errors.add(true);
+        }
+    }
+
+    private void setAllPersonFieldsMandatory(Person p, TextField tfTitle, TextField tfFirstname, TextField tfLastname, TextField tfSsnr, TextField tfStreet, TextField tfHousenumber, TextField tfZip, TextField tfPlace, TextField tfTelNr, TextField tfEmail, DatePicker dpBirthdate, ComboBox<Salutation> comboSalutation) {
+
+        if (!tfCheck(tfTitle, "^(\\D+)?$")) {
+            p.setTitle(tfTitle.getText());
+        } else {
+            errors.add(true);
+        }
+        if (!(p instanceof Client)) {
+            comboSalutation.getSelectionModel().getSelectedItem();
+            if (!tfCheck(tfFirstname, "^\\D+$")) {
+                p.setFirstName(tfFirstname.getText());
+            } else {
+                errors.add(true);
+            }
+
+            if(!tfCheck(tfLastname, "^\\D+$")){
+                p.setLastName(tfLastname.getText());
+            } else {
+                errors.add(true);
+            }
+        }
+
+        if (dpBirthdate.getEditor().getText() == ""){
+            dpBirthdate.setStyle("-FX-Border-Color: red");
+        } else {
+            try {
+                LocalDateStringConverter ldsc = new LocalDateStringConverter();
+                p.setBirthDate(ldsc.fromString(dpBirthdate.getEditor().getText()));
+                dpBirthdate.setStyle(null);
+            } catch (Exception e) {
+                dpBirthdate.setStyle("-FX-Border-Color: red");
+                errors.add(true);
+            }
+        }
+
+
+        if (!tfCheck(tfStreet, "^\\D+$") && !tfCheck(tfHousenumber, "^[1-9][0-9]*$")) {
+            p.setStreetAndNr(tfStreet.getText() + " " + tfHousenumber.getText());
+        } else {
+            errors.add(true);
+        }
+
+        if (!tfCheck(tfZip, "^[1-9][0-9]{3}$")) {
+            try {
+                p.setZipCode(Integer.parseInt(tfZip.getText()));
+            } catch (Exception e) { }
+
+        } else {
+            errors.add(true);
+        }
+
+        if (!tfCheck(tfPlace, "^\\D+$")){
+            p.setPlace(tfPlace.getText());
+        } else {
+            errors.add(true);
+        }
+
+        if (!tfCheck(tfTelNr, "^[0-9]*$")) {
+            p.setTelNr(tfTelNr.getText());
+        } else {
+            errors.add(true);
+        }
+
+        if (!tfCheck(tfEmail, "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")) {
             p.setEmail(tfEmail.getText());
         } else {
             errors.add(true);
@@ -522,10 +593,10 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         comboSalutationContact2.getSelectionModel().select(0);
         comboSalutationEsv.getSelectionModel().select(0);
 
-        addFocusedProperty(tfSsnrClient, "^([1-9][0-9]{9})?$");
+        /*addFocusedProperty(tfSsnrClient, "^([1-9][0-9]{9})?$");
         addFocusedProperty(tfZipClient, "^([1-9][0-9]{3})?$");
         addFocusedProperty(tfEmailClient, "^([a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+)?$");
-        addFocusedProperty(tfIbanClient, "^([A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?)?$");
+        addFocusedProperty(tfIbanClient, "^([A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?)?$");*/
 
         this.accordionClients.setExpandedPane(this.tPaneBasicData);
     }
