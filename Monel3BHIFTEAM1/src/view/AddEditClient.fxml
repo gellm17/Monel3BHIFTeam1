@@ -345,7 +345,7 @@
                         <Font size="14.0" />
                      </font>
                 </TitledPane>
-                  <TitledPane fx:id="tPaneEsv" text="ESV / Notfallkontakte">
+                  <TitledPane fx:id="tPaneEsv" contentDisplay="RIGHT" text="ESV / Notfallkontakte">
                     <content>
                         <VBox>
                            <children>
@@ -1157,6 +1157,13 @@
                      <font>
                         <Font size="14.0" />
                      </font>
+                     <graphic>
+                        <CheckBox fx:id="cbSelfDetermined" mnemonicParsing="false" text="Selbstbestimmt">
+                           <padding>
+                              <Insets left="50.0" />
+                           </padding>
+                        </CheckBox>
+                     </graphic>
                   </TitledPane>
                   <TitledPane fx:id="tPaneContact" text="Kontakt">
                     <content>
