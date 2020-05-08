@@ -63,20 +63,33 @@ public class PersonDAO {
 
     public void loadPersons(ResultSet rs) throws SQLException {
         String persontyp = "";
+        Person esv;
+        Person notfall1;
+        Person notfall2;
         while(rs.next()) {
             persontyp = rs.getString("personentyp");
+            esv = null;
+            notfall1 = null;
+            notfall2 = null;
             if(persontyp == "KLIENT") {
-                //addPerson(new Client(Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer").split(" ")[0], rs.getString("strasse_hausnummer"), rs.getInt("svnr"), rs.getString("diagnose"), rs.getString("beschaeftigung"), "iban", "bic", rs.getString("allergien"), esv, nofall1, notfall2); //parameter noch nicht alle richtig
+                if (rs.getInt("esv") != 0) {
+                    esv = new Person(rs.getInt("esv"));
+                }
+                if (rs.getInt("notfallkontakt1") != 0) {
+                    notfall1 = new Person(rs.getInt("notfallkontakt1"));
+                }
+                if (rs.getInt("notfallkontakt2") != 0) {
+                    notfall2 = new Person(rs.getInt("notfallkontakt2"));
+                addPerson(new Client(Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")), rs.getInt("svnr"), rs.getString("diagnose"), rs.getString("beschaeftigung"), rs.getString("iban"), rs.getString("bic"), rs.getString("allergien"), esv, notfall1, notfall2)); //parameter noch nicht alle richtig
             } else if(persontyp == "MITARBEITER") {
-                //addPerson(new Employee(Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer").split(" ")[0], rs.getString("strasse_hausnummer"), rs.getInt("svnr")); //fehlen noch parameter
+                //addPerson(new Employee(Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("svnr")); //fehlen noch parameter
             } else if(persontyp == "SPONSOR") {
                 //addPerson(new Sponsor(Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer").split(" ")[0], rs.getString("strasse_hausnummer")); // fehlen noch parameter
             } else {
-                addPerson(new Person(Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer").split(" ")[0], rs.getString("strasse_hausnummer").split(" ")[1], Integer.parseInt(rs.getString("plz")), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum"))));
+                addPerson(new Person(Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum"))));
             }
         }
     }
-
 
 
     // GETTER

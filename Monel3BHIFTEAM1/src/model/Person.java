@@ -3,6 +3,7 @@ package model;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Person {
     private IntegerProperty id;
@@ -19,13 +20,13 @@ public class Person {
 
     private static int counterForID = 0;
 
-    public Person(Salutation salutation, String title, String firstName, String lastName,String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate) {
+    public Person(Salutation salutation, String title, String firstName, String lastName,String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate) {
         this.id = new SimpleIntegerProperty(this, "id", counterForID++);
         this.salutation = new SimpleObjectProperty<Salutation>(this, "salutation", salutation);
         this.title = new SimpleStringProperty(this, "title", title);
         this.firstName = new SimpleStringProperty(this, "firstName", firstName);
         this.lastName = new SimpleStringProperty(this, "lastName", lastName);
-        this.streetAndNr = new SimpleStringProperty(this, "streetAndNr", street + " " + houseNumber);
+        this.streetAndNr = new SimpleStringProperty(this, "streetAndNr", adress);
         this.zipCode = new SimpleIntegerProperty(this, "zipCode", zipCode);
         this.place = new SimpleStringProperty(this, "place", place);
         this.telNr = new SimpleStringProperty(this, "telNr", telNr);
@@ -44,6 +45,10 @@ public class Person {
         this.title = new SimpleStringProperty(this, "title", "");
         this.telNr = new SimpleStringProperty(this, "telNr", "");
         this.email = new SimpleStringProperty(this, "email", "");
+    }
+
+    public Person(int id) {
+        this.id = new SimpleIntegerProperty(this, "id", id);
     }
 
     public Person(Salutation salutation, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, LocalDate birthDate) {
@@ -191,5 +196,18 @@ public class Person {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate.set(birthDate);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(id, person.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
