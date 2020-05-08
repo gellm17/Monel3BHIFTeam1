@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   `notfallkontakt1` int(11) DEFAULT NULL,
   `notfallkontakt2` int(11) DEFAULT NULL,
   `personentyp` varchar(11) NOT NULL,
-  `anrede` varchar(11) DEFAULT NULL,
+  `anrede` varchar(9) DEFAULT NULL,
   `titel` varchar(50) DEFAULT NULL,
   `vorname` varchar(50) DEFAULT NULL,
   `nachname` varchar(50) DEFAULT NULL,
@@ -87,22 +87,24 @@ CREATE TABLE IF NOT EXISTS `person` (
   `ort` varchar(50) DEFAULT NULL,
   `telefonnummer` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
-  `geburtstag` date DEFAULT NULL,
+  `geburtsdatum` date DEFAULT NULL,
   `svnr` int(10) DEFAULT NULL,
   `diagnose` varchar(500) DEFAULT NULL,
   `allergien` varchar(500) DEFAULT NULL,
   `sonstiges` varchar(50) DEFAULT NULL,
   `beschaeftigung` varchar(50) DEFAULT NULL,
-  `ehrenamt` tinyint(1) DEFAULT NULL COMMENT 'bei Null Hauptamt',
+  `amt` tinyint(1) DEFAULT NULL COMMENT '1 = ehrenamt, 0 = hauptamt',
   `verwendungsgruppe` varchar(50) DEFAULT NULL,
   `gehaltsstufe` varchar(50) DEFAULT NULL,
   `wochenstunden` tinyint(2) DEFAULT NULL,
-  `bankverbindung` varchar(50) DEFAULT NULL,
+  `iban` varchar(20) DEFAULT NULL,
+  `bic` varchar(8) DEFAULT NULL,
   `vorrückdatum` date DEFAULT NULL,
   `einstelldatum` date DEFAULT NULL,
   `firmenname` varchar(50) DEFAULT NULL,
   `firmentelefonnummer` varchar(50) DEFAULT NULL,
   `firmenemail` varchar(50) DEFAULT NULL,
+  `gelöscht` tinyint(1) DEFAULT NULL COMMENT '1 = true, 0 = false',
   PRIMARY KEY (`id`),
   KEY `FKesv` (`esv`),
   KEY `FKnotfallkontakt1` (`notfallkontakt1`),
@@ -110,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   CONSTRAINT `FKesv` FOREIGN KEY (`esv`) REFERENCES `person` (`id`),
   CONSTRAINT `FKnotfallkontakt1` FOREIGN KEY (`notfallkontakt1`) REFERENCES `person` (`id`),
   CONSTRAINT `FKnotfallkontakt2` FOREIGN KEY (`notfallkontakt2`) REFERENCES `person` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 
