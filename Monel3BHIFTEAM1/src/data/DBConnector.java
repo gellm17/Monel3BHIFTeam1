@@ -4,7 +4,7 @@ import java.sql.*;
 public class DBConnector {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
-    static final String DB_URL = "jdbc:mariadb://192.168.100.174/db";
+    static final String DB_URL = "jdbc:mariadb://127.0.0.1/monel";
 
     //  Database credentials
     static final String USER = "madmin";
@@ -20,7 +20,7 @@ public class DBConnector {
             System.out.println("Verbindung wurde erfolgreich aufgebaut");
             stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM person");
-            //PersonDAO.getInstance().loadPersons(rs);
+            PersonDAO.getInstance().loadPersons(rs);
             //rs = stmt.executeQuery("SELECT * FROM aktivitaet");
             //AktivitaetDAO.getInstance().loadAktivitaet(rs);
             //rs = stmt.executeQuery("SELECT * FROM aktivitaetsprotokoll");

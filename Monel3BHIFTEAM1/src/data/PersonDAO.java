@@ -57,6 +57,8 @@ public class PersonDAO {
         } else if (p instanceof Sponsor){
             Sponsor sp = (Sponsor) p;
             success = sponsor.remove(sp);
+        } else {
+            success = persons.remove(p);
         }
         return success;
     }
@@ -66,12 +68,16 @@ public class PersonDAO {
         Person esv;
         Person notfall1;
         Person notfall2;
+        LocalDate vorrueckdatum;
+        LocalDate einstelldatum;
         while(rs.next()) {
             persontyp = rs.getString("personentyp");
             esv = null;
             notfall1 = null;
             notfall2 = null;
-            if(persontyp == "KLIENT") {
+            vorrueckdatum = null;
+            einstelldatum = null;
+            if(persontyp.equals("KLIENT")) {
                 if (rs.getInt("esv") != 0) {
                     esv = new Person(rs.getInt("esv"));
                 }
@@ -80,18 +86,21 @@ public class PersonDAO {
                 }
                 if (rs.getInt("notfallkontakt2") != 0) {
                     notfall2 = new Person(rs.getInt("notfallkontakt2"));
-                addPerson(new Client(Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")), rs.getInt("svnr"), rs.getString("diagnose"), rs.getString("beschaeftigung"), rs.getString("iban"), rs.getString("bic"), rs.getString("allergien"), esv, notfall1, notfall2)); //parameter noch nicht alle richtig
-            } else if(persontyp == "MITARBEITER") {
-                //addPerson(new Employee(Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("svnr")); //fehlen noch parameter
-            } else if(persontyp == "SPONSOR") {
+                }
+                addPerson(new Client(Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")), rs.getInt("svnr"), rs.getString("diagnose"), rs.getString("beschaeftigung"), rs.getString("iban"), rs.getString("bic"), rs.getString("allergien"), esv, notfall1, notfall2));
+            } else if(persontyp.equals("MITARBEITER")) {
+                if (rs.getString("vorrueckdatum") != null) {
+                    vorrueckdatum = LocalDate.parse(rs.getString("vorrueckdatum"));
+                }
+                addPerson(new Employee(Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")), rs.getInt("svnr"), (rs.getInt("amt") == 1 ? true : false), OccupationGroup.valueOf(rs.getString("verwendungsgruppe")), SalaryLevel.GS1/*SalaryLevel.valueOf(rs.getString("gehaltsstufe"))*/, rs.getInt("wochenstunden"), vorrueckdatum, rs.getString("iban"), rs.getString("bic"), LocalDate.parse(rs.getString("einstelldatum"))));
+            } else if(persontyp.equals("SPONSOR")) {
                 //addPerson(new Sponsor(Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer").split(" ")[0], rs.getString("strasse_hausnummer")); // fehlen noch parameter
             } else {
                 addPerson(new Person(Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum"))));
             }
         }
     }
-
-
+    
     // GETTER
     public ObservableList<Sponsor> getSponsor() {
         return sponsor;
