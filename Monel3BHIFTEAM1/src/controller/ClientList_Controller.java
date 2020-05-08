@@ -48,10 +48,10 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
     private TableColumn<Client, String> tcLastname;
 
     @FXML
-    private TableColumn<Client, Integer> tcSsnr;
+    private TableColumn<Client, Integer> tcZipCode;
 
     @FXML
-    private TableColumn<Client, String> tcTelnr;
+    private TableColumn<Client, String> tcPlace;
 
     private Object selectedItem;
 
@@ -161,8 +161,8 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
         //Picture
         tcFirstname = new TableColumn<Client, String>("Vorname");
         tcLastname = new TableColumn<Client, String>("Nachname");
-        tcSsnr = new TableColumn<Client, Integer>("Ssnr");
-        tcTelnr = new TableColumn<Client, String>("Telefon");
+        tcZipCode = new TableColumn<Client, Integer>("Postleitzahl");
+        tcPlace = new TableColumn<Client, String>("Ort");
 
         //Weitere Table Options
         //tcDiagnose = new TableColumn<Client, String>("Diagnose");
@@ -172,20 +172,23 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
 
 
 
-        tcSsnr.setCellValueFactory(new PropertyValueFactory<Client, Integer>("ssnr"));
+
         tcFirstname.setCellValueFactory(new PropertyValueFactory<Client, String>("firstName"));
         tcLastname.setCellValueFactory(new PropertyValueFactory<Client, String>("lastName"));
-        tcTelnr.setCellValueFactory(new PropertyValueFactory<Client, String>("telNr"));
-        this.tableClients.getColumns().addAll(tcSsnr, tcFirstname, tcLastname, tcTelnr);
+        tcZipCode.setCellValueFactory(new PropertyValueFactory<Client, Integer>("zipCode"));
+        tcPlace.setCellValueFactory(new PropertyValueFactory<Client, String>("place"));
+
+        this.tableClients.getColumns().addAll(tcFirstname, tcLastname, tcZipCode, tcPlace);
 
     }
 
     public void ConfigureTableView(ObservableList<Client> clients) {
         //Width
-        tcSsnr.prefWidthProperty().bind(tableClients.widthProperty().divide(5)); // w * 1/4
-        tcFirstname.prefWidthProperty().bind(tableClients.widthProperty().divide(5)); // w * 1/2
+
+        tcFirstname.prefWidthProperty().bind(tableClients.widthProperty().divide(4)); // w * 1/2
         tcLastname.prefWidthProperty().bind(tableClients.widthProperty().divide(4));
-        tcTelnr.prefWidthProperty().bind(tableClients.widthProperty().divide(3));
+        tcZipCode.prefWidthProperty().bind(tableClients.widthProperty().divide(4)); // w * 1/4
+        tcPlace.prefWidthProperty().bind(tableClients.widthProperty().divide(4));
 
     }
 

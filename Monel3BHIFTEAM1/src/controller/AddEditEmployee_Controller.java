@@ -206,12 +206,6 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
         Employee employeeToAdd = new Employee();
         errors.clear();
 
-        if (!tfCheck(tfTitleEmployee, "^(\\D+)?$")) {
-            employeeToAdd.setTitle(tfTitleEmployee.getText());
-        } else {
-            errors.add(true);
-        }
-
         errors.add(tfCheck(tfFirstnameEmployee, "^\\D+$"));
         errors.add(tfCheck(tfLastnameEmployee, "^\\D+$"));
 
@@ -221,8 +215,13 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
                     tfLastnameEmployee.getText()
             );}
 
+        if (!tfCheck(tfTitleEmployee, "^(\\D+)?$")) {
+            employeeToAdd.setTitle(tfTitleEmployee.getText());
+        } else {
+            errors.add(true);
+        }
 
-        if (!tfCheck(tfSsnrEmployee, "^([1-9][0-9]{9})?$")) {
+        if (!tfCheck(tfSsnrEmployee, "^[1-9][0-9]{9}$")) {
             try {
                 employeeToAdd.setSsnr(Integer.parseInt(tfSsnrEmployee.getText()));
             } catch (Exception ex){
@@ -241,13 +240,13 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
             errors.add(true);
         }
 
-        if (!tfCheck(tfStreetEmployee, "^(\\D+)?$") && !tfCheck(tfHousenumberEmployee, "^([1-9][0-9]*)?$")) {
+        if (!tfCheck(tfStreetEmployee, "^\\D+$") && !tfCheck(tfHousenumberEmployee, "^[1-9][0-9]*$")) {
             employeeToAdd.setStreetAndNr(tfStreetEmployee.getText() + " " + tfHousenumberEmployee.getText());
         } else {
             errors.add(true);
         }
 
-        if (!tfCheck(tfZipEmployee, "^([1-9][0-9]{3})?$")) {
+        if (!tfCheck(tfZipEmployee, "^[1-9][0-9]{3}$")) {
             try {
                 employeeToAdd.setZipCode(Integer.parseInt(tfZipEmployee.getText()));
             } catch (Exception e) { }
@@ -256,7 +255,7 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
             errors.add(true);
         }
 
-        if (!tfCheck(tfPlaceEmployee, "^(\\D+)?$")){
+        if (!tfCheck(tfPlaceEmployee, "^\\D+$")){
             employeeToAdd.setPlace(tfPlaceEmployee.getText());
         } else {
             errors.add(true);
@@ -264,7 +263,7 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
 
         employeeToAdd.setPrivacy(new Privacy(new ArrayList<Boolean>(){{add(cbPrivacy1Employee.isSelected()); add(cbPrivacy2Employee.isSelected()); add(cbPrivacy3Employee.isSelected()); add(cbPrivacy4Employee.isSelected());}}));
 
-        if (!tfCheck(tfTelNrEmployee, "^([0-9]*)?$")) {
+        if (!tfCheck(tfTelNrEmployee, "^[0-9]*$")) {
             employeeToAdd.setTelNr(tfTelNrEmployee.getText());
         } else {
             errors.add(true);
@@ -287,6 +286,8 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
             errors.add(true);
         }
 
+        employeeToAdd.setVolunteering(tglBtnVolunteeringEmployee.isSelected());
+
         try {
             LocalDateStringConverter ldsc = new LocalDateStringConverter();
             employeeToAdd.setDateSalaryLevel(ldsc.fromString(dpDateSalaryLevelEmployee.getEditor().getText()));
@@ -296,22 +297,26 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
             errors.add(true);
         }
 
-        try {
-            LocalDateStringConverter ldsc = new LocalDateStringConverter();
-            employeeToAdd.setDateOfEmployment(ldsc.fromString(dpDateOfEmploymentEmployee.getEditor().getText()));
-            dpDateOfEmploymentEmployee.setStyle(null);
-        } catch (Exception e) {
+        if (dpDateOfEmploymentEmployee.getEditor().getText() == ""){
             dpDateOfEmploymentEmployee.setStyle("-FX-Border-Color: red");
             errors.add(true);
+        } else {
+            try {
+                LocalDateStringConverter ldsc = new LocalDateStringConverter();
+                employeeToAdd.setDateOfEmployment(ldsc.fromString(dpDateOfEmploymentEmployee.getEditor().getText()));
+                dpDateOfEmploymentEmployee.setStyle(null);
+            } catch (Exception e) {
+                dpDateOfEmploymentEmployee.setStyle("-FX-Border-Color: red");
+                errors.add(true);
+            }
         }
-
-        if (!tfCheck(tfIbanEmployee, "^([A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?)?$")) {
+        if (!tfCheck(tfIbanEmployee, "^[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?$")) {
             employeeToAdd.setIban(tfIbanEmployee.getText());
         } else {
             errors.add(true);
         }
 
-        if (!tfCheck(tfBicEmployee, "^([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)?$")){
+        if (!tfCheck(tfBicEmployee, "^[a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?$")){
             employeeToAdd.setBic(tfBicEmployee.getText());
         } else {
             errors.add(true);
@@ -339,6 +344,7 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
         if (!tf.getText().matches(regex)) {
             error = true;
             tf.setStyle("-FX-Border-Color: red");
+            //lbMessage.setText(tf.getId() + ": " + tf.getText() + "hat das falsche Format");
         } else {
             error = false;
             tf.setStyle(null);

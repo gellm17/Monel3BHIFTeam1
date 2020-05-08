@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
+import model.Client;
 import model.Employee;
 import model.Person;
 
@@ -51,7 +52,14 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
     private TableColumn<Employee, Boolean> tcVolunteering;
 
     @FXML
-    private TableColumn<Employee, String> tcOccupationGroup;
+    private TableColumn<Employee, Integer> tcZipCode;
+
+    @FXML
+    private TableColumn<Employee, String> tcPlace;
+
+    @FXML
+    private TableColumn<Employee, String> tcTelNr;
+
 
     private Object selectedItem;
 
@@ -146,7 +154,9 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
         tcFirstname = new TableColumn<Employee, String>("Vorname");
         tcLastname = new TableColumn<Employee, String>("Nachname");
         tcVolunteering = new TableColumn<Employee, Boolean>("Ehrenamt");
-        tcOccupationGroup = new TableColumn<Employee, String>("Beschäftigungsgruppe");
+        tcZipCode = new TableColumn<Employee, Integer>("zipCode");
+        tcPlace = new TableColumn<Employee, String>("place");
+        tcTelNr = new TableColumn<Employee, String>("telNr");
 
         //Weitere Table Options
         //tcDiagnose = new TableColumn<Client, String>("Diagnose");
@@ -159,17 +169,21 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
         tcVolunteering.setCellValueFactory(new PropertyValueFactory<Employee, Boolean>("volunteering"));
         tcFirstname.setCellValueFactory(new PropertyValueFactory<Employee, String>("firstName"));
         tcLastname.setCellValueFactory(new PropertyValueFactory<Employee, String>("lastName"));
-        tcOccupationGroup.setCellValueFactory(new PropertyValueFactory<Employee, String>("occupationGroup"));
-        this.tableEmployees.getColumns().addAll(tcFirstname, tcLastname, tcVolunteering, tcOccupationGroup);
+        tcZipCode.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("zipCode"));
+        tcPlace.setCellValueFactory(new PropertyValueFactory<Employee, String>("place"));
+        tcTelNr.setCellValueFactory(new PropertyValueFactory<Employee, String>("telNr"));
+        this.tableEmployees.getColumns().addAll(tcFirstname, tcLastname, tcVolunteering, tcZipCode, tcPlace, tcTelNr);
 
     }
 
     public void ConfigureTableView() {
         //Width
-        tcVolunteering.prefWidthProperty().bind(tableEmployees.widthProperty().divide(5)); // w * 1/4
-        tcFirstname.prefWidthProperty().bind(tableEmployees.widthProperty().divide(5)); // w * 1/2
-        tcLastname.prefWidthProperty().bind(tableEmployees.widthProperty().divide(4));
-        tcOccupationGroup.prefWidthProperty().bind(tableEmployees.widthProperty().divide(3));
+        tcVolunteering.prefWidthProperty().bind(tableEmployees.widthProperty().divide(6)); // w * 1/4
+        tcFirstname.prefWidthProperty().bind(tableEmployees.widthProperty().divide(6)); // w * 1/2
+        tcLastname.prefWidthProperty().bind(tableEmployees.widthProperty().divide(6));
+        tcPlace.prefWidthProperty().bind(tableEmployees.widthProperty().divide(6));
+        tcZipCode.prefWidthProperty().bind(tableEmployees.widthProperty().divide(6));
+        tcTelNr.prefWidthProperty().bind(tableEmployees.widthProperty().divide(6));
 
     }
 
