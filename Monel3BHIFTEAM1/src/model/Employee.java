@@ -16,8 +16,8 @@ public class Employee extends Person {
     private ObjectProperty<LocalDate> dateOfEmployment;
     private ObjectProperty<Privacy> privacy;
 
-    public Employee(Salutation salutation, String title, String firstName, String lastName, String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate, int ssnr, boolean volunteering, OccupationGroup occupationGroup, SalaryLevel salaryLevel, int hoursPerWeek, LocalDate dateSalaryLevel, String iban, String bic, LocalDate dateOfEmployment/*, Privacy privacy*/) {
-        super(salutation, title, firstName, lastName, adress, zipCode, place, telNr, email, birthDate);
+    public Employee(int id, Salutation salutation, String title, String firstName, String lastName, String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate, int ssnr, boolean volunteering, OccupationGroup occupationGroup, SalaryLevel salaryLevel, int hoursPerWeek, LocalDate dateSalaryLevel, String iban, String bic, LocalDate dateOfEmployment/*, Privacy privacy*/) {
+        super(id, salutation, title, firstName, lastName, adress, zipCode, place, telNr, email, birthDate);
         this.ssnr = new SimpleIntegerProperty(this, "ssnr", ssnr);
         this.volunteering = new SimpleBooleanProperty(this, "volunteering", volunteering);
         this.occupationGroup = new SimpleObjectProperty<OccupationGroup>(this, "occupationGroup", occupationGroup);

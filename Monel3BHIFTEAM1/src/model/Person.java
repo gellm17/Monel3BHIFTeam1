@@ -20,8 +20,8 @@ public class Person {
 
     private static int counterForID = 0;
 
-    public Person(Salutation salutation, String title, String firstName, String lastName,String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate) {
-        this.id = new SimpleIntegerProperty(this, "id", counterForID++);
+    public Person(int id, Salutation salutation, String title, String firstName, String lastName,String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate) {
+        this.id = new SimpleIntegerProperty(this, "id", id);
         this.salutation = new SimpleObjectProperty<Salutation>(this, "salutation", salutation);
         this.title = new SimpleStringProperty(this, "title", title);
         this.firstName = new SimpleStringProperty(this, "firstName", firstName);
