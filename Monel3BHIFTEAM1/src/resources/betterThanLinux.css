@@ -89,6 +89,7 @@
 }
 
 .tab-header-area .tab {
+    -fx-cursor: hand;
     -fx-padding: 7 10;
     -fx-background-radius: 0;
     -fx-background-color: transparent;

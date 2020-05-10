@@ -147,7 +147,7 @@
                                           <Insets bottom="40.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <Label text="SvNr">
+                                    <Label text="SvNr (Pflichtfeld)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -198,7 +198,7 @@
                                        <children>
                                           <VBox prefHeight="200.0">
                                              <children>
-                                                <Label text="Straße">
+                                                <Label text="Straße (Pflichtfeld)">
                                                    <font>
                                                       <Font name="Gill Sans MT" size="16.0" />
                                                    </font>
@@ -242,7 +242,7 @@
                                        <children>
                                           <VBox prefHeight="200.0">
                                              <children>
-                                                <Label text="PLZ">
+                                                <Label text="PLZ (Pflichtfeld)">
                                                    <font>
                                                       <Font name="Gill Sans MT" size="16.0" />
                                                    </font>
@@ -262,7 +262,7 @@
                                           </VBox>
                                           <VBox prefHeight="200.0">
                                              <children>
-                                                <Label text="Ort">
+                                                <Label text="Ort (Pflichtfeld)">
                                                    <font>
                                                       <Font name="Gill Sans MT" size="16.0" />
                                                    </font>
@@ -510,7 +510,7 @@
                                     <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
                                  </padding>
                                  <children>
-                                    <Label text="IBAN">
+                                    <Label text="IBAN (Pflichtfeld)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -526,7 +526,7 @@
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <Label text="BIC">
+                                    <Label text="BIC (Pflichtfeld)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -610,7 +610,7 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </Label>
-          <Button fx:id="btnCancelEmployee" mnemonicParsing="false" onAction="#btnCancelEmployee_Clicked" prefHeight="50.0" prefWidth="130.0" styleClass="cancelButton" text="Abbrechen">
+          <Button fx:id="btnCancelEmployee" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnCancelEmployee_Clicked" prefHeight="50.0" prefWidth="130.0" styleClass="cancelButton" text="Abbrechen">
                <font>
                   <Font size="20.0" />
                </font>
