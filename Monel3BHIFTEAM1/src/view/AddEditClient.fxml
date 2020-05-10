@@ -148,7 +148,7 @@
                                           <Insets bottom="40.0" />
                                        </VBox.margin>
                                     </TextField>
-                                    <Label text="SvNr">
+                                    <Label text="SvNr (Pflichtfeld)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -199,7 +199,7 @@
                                        <children>
                                           <VBox prefHeight="200.0">
                                              <children>
-                                                <Label text="Straße">
+                                                <Label text="Straße (Pflichtfeld)">
                                                    <font>
                                                       <Font name="Gill Sans MT" size="16.0" />
                                                    </font>
@@ -243,7 +243,7 @@
                                        <children>
                                           <VBox prefHeight="200.0">
                                              <children>
-                                                <Label text="PLZ">
+                                                <Label text="PLZ (Pflichtfeld)">
                                                    <font>
                                                       <Font name="Gill Sans MT" size="16.0" />
                                                    </font>
@@ -263,7 +263,7 @@
                                           </VBox>
                                           <VBox prefHeight="200.0">
                                              <children>
-                                                <Label text="Ort">
+                                                <Label text="Ort (Pflichtfeld)">
                                                    <font>
                                                       <Font name="Gill Sans MT" size="16.0" />
                                                    </font>
@@ -737,7 +737,7 @@
                                                                <children>
                                                                   <VBox prefHeight="0.0">
                                                                      <children>
-                                                                        <Label text="Straße">
+                                                                        <Label text="Straße (Pflichtfeld)">
                                                                            <font>
                                                                               <Font name="Gill Sans MT" size="16.0" />
                                                                            </font>
@@ -787,7 +787,7 @@
                                                                <children>
                                                                   <VBox prefHeight="200.0">
                                                                      <children>
-                                                                        <Label text="PLZ">
+                                                                        <Label text="PLZ (Pflichtfeld)">
                                                                            <font>
                                                                               <Font name="Gill Sans MT" size="16.0" />
                                                                            </font>
@@ -807,7 +807,7 @@
                                                                   </VBox>
                                                                   <VBox prefHeight="200.0">
                                                                      <children>
-                                                                        <Label text="Ort">
+                                                                        <Label text="Ort (Pflichtfeld)">
                                                                            <font>
                                                                               <Font name="Gill Sans MT" size="16.0" />
                                                                            </font>
@@ -1218,7 +1218,7 @@
                            <content>
                               <VBox>
                                  <children>
-                                    <Label text="Diagnose">
+                                    <Label text="Diagnose (Pflichtfeld)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
@@ -1390,7 +1390,7 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </Label>
-          <Button fx:id="btnCancelClient" mnemonicParsing="false" onAction="#btnCancelClient_Clicked" prefHeight="50.0" prefWidth="130.0" styleClass="cancelButton" text="Abbrechen">
+          <Button fx:id="btnCancelClient" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnCancelClient_Clicked" prefHeight="50.0" prefWidth="130.0" styleClass="cancelButton" text="Abbrechen">
                <font>
                   <Font size="20.0" />
                </font>
@@ -1398,7 +1398,7 @@
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="btnOkClient" mnemonicParsing="false" onAction="#btnOkClient_Clicked" prefHeight="50.0" prefWidth="130.0" styleClass="okButton" text="Fertig">
+            <Button fx:id="btnOkClient" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnOkClient_Clicked" prefHeight="50.0" prefWidth="130.0" styleClass="okButton" text="Fertig">
                <font>
                   <Font size="20.0" />
                </font>
