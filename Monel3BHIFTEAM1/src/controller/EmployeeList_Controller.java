@@ -154,9 +154,9 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
         tcFirstname = new TableColumn<Employee, String>("Vorname");
         tcLastname = new TableColumn<Employee, String>("Nachname");
         tcVolunteering = new TableColumn<Employee, Boolean>("Ehrenamt");
-        tcZipCode = new TableColumn<Employee, Integer>("zipCode");
-        tcPlace = new TableColumn<Employee, String>("place");
-        tcTelNr = new TableColumn<Employee, String>("telNr");
+        tcZipCode = new TableColumn<Employee, Integer>("Postleitzahl");
+        tcPlace = new TableColumn<Employee, String>("Ort");
+        tcTelNr = new TableColumn<Employee, String>("Telefon");
 
         //Weitere Table Options
         //tcDiagnose = new TableColumn<Client, String>("Diagnose");
