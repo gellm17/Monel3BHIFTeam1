@@ -183,6 +183,9 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
             //CONTACT
             tfTelNrEmployee.setText(editableEmployee.getTelNr());
             tfEmailEmployee.setText(editableEmployee.getEmail());
+            //BANK
+            tfBicEmployee.setText(editableEmployee.getBic());
+            tfIbanEmployee.setText(editableEmployee.getIban());
         }
     }
 
@@ -344,7 +347,7 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
         if (!tf.getText().matches(regex)) {
             error = true;
             tf.setStyle("-FX-Border-Color: red");
-            //lbMessage.setText(tf.getId() + ": " + tf.getText() + "hat das falsche Format");
+            lbMessage.setText(lbMessage.getText() + tf.getId() + ",");
         } else {
             error = false;
             tf.setStyle(null);

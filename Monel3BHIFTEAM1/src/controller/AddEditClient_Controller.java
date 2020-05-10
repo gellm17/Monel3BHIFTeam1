@@ -548,6 +548,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             if (!tf.getText().matches(regex)) {
                 error = true;
                 tf.setStyle("-FX-Border-Color: red");
+                //lbMessage.setText(lbMessage.getText() + tf.getId() + ",");
             } else {
                 error = false;
                 tf.setStyle(null);
@@ -560,6 +561,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         if (!ta.getText().matches(regex)) {
             error = true;
             ta.setStyle("-FX-Border-Color: red");
+            //lbMessage.setText(lbMessage.getText() + ta.getId() + ",");
         } else {
             error = false;
             ta.setStyle(null);
