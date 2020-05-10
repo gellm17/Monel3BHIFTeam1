@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   `telefonnummer` varchar(50) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
   `geburtsdatum` date NOT NULL,
-  `svnr` int(10) DEFAULT NULL,
+  `svnr` bigint(10) DEFAULT NULL,
   `diagnose` varchar(500) DEFAULT NULL,
   `allergien` varchar(500) DEFAULT NULL,
   `sonstiges` varchar(50) DEFAULT NULL,
