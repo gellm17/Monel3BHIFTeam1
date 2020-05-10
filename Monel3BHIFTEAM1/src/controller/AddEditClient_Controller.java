@@ -238,6 +238,9 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     @FXML
     private Button btnCancelClient;
 
+    @FXML
+    private Label lbMessage;
+
 
     private Client editableClient = null;
     private ArrayList<Boolean> errors = new ArrayList<Boolean>();
@@ -279,6 +282,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             taDiagnoseClient.setText(editableClient.getDiagnose());
             tfJobClient.setText(editableClient.getJob());
             taAllergiesClient.setText(editableClient.getAllergies());
+            tfOtherClient.setText(editableClient.getOther());
             //BANK
             tfBicClient.setText(editableClient.getBic());
             tfIbanClient.setText(editableClient.getIban());
@@ -373,6 +377,12 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
         if (!taCheck(taDiagnoseClient,"^\\D+$")) {
             clientToAdd.setDiagnose(taDiagnoseClient.getText());
+        } else {
+            errors.add(true);
+        }
+
+        if (!tfCheck(tfOtherClient, "^(\\D+)?$")){
+            clientToAdd.setOther(tfOtherClient.getText());
         } else {
             errors.add(true);
         }
@@ -529,7 +539,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             errors.add(true);
         }
 
-        if (!tfCheck(tfEmail, "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")) {
+        if (!tfCheck(tfEmail, "^([a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+)?$")) {
             p.setEmail(tfEmail.getText());
         } else {
             errors.add(true);
@@ -552,7 +562,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             if (!tf.getText().matches(regex)) {
                 error = true;
                 tf.setStyle("-FX-Border-Color: red");
-                //lbMessage.setText(lbMessage.getText() + tf.getId() + ",");
+                lbMessage.setText(lbMessage.getText() + tf.getId() + ",");
             } else {
                 error = false;
                 tf.setStyle(null);
@@ -565,7 +575,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         if (!ta.getText().matches(regex)) {
             error = true;
             ta.setStyle("-FX-Border-Color: red");
-            //lbMessage.setText(lbMessage.getText() + ta.getId() + ",");
+            lbMessage.setText(lbMessage.getText() + ta.getId() + ",");
         } else {
             error = false;
             ta.setStyle(null);

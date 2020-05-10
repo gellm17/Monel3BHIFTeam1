@@ -15,6 +15,7 @@ public class Client extends Person{
     private ObjectProperty<Person> emergencyContact1;
     private ObjectProperty<Person> emergencyContact2;
     private ObjectProperty<Privacy> privacy;
+    private StringProperty other;
 
     public Client(int id,Salutation salutation, String title, String firstName, String lastName, String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate, int ssnr, String diagnose, String job, String iban, String bic, String allergies, Person esv, Person emergencyContact1, Person emergencyContact2, Privacy privacy) {
         super(id, salutation, title, firstName, lastName, adress, zipCode, place, telNr, email, birthDate);
@@ -28,6 +29,7 @@ public class Client extends Person{
         this.emergencyContact1 = new SimpleObjectProperty<Person>(this, "emergencyContact1", emergencyContact1);
         this.emergencyContact2 = new SimpleObjectProperty<Person>(this, "emergencyContact2", emergencyContact2);
         this.privacy = new SimpleObjectProperty<Privacy>(this, "privacy", privacy);
+        //this.other = new SimpleStringProperty(this, "other", other);
     }
 
     public Client() {
@@ -42,6 +44,7 @@ public class Client extends Person{
         this.emergencyContact1 = new SimpleObjectProperty<Person>(this, "emergencyContact1", null);
         this.emergencyContact2 = new SimpleObjectProperty<Person>(this, "emergencyContact2", null);
         this.privacy = new SimpleObjectProperty<Privacy>(this, "privacy");
+        this.other = new SimpleStringProperty(this, "other");
     }
 
     public Client(Salutation salutation, String firstName, String lastName) {
@@ -57,6 +60,7 @@ public class Client extends Person{
         this.emergencyContact1 = new SimpleObjectProperty<Person>(this, "emergencyContact1", null);
         this.emergencyContact2 = new SimpleObjectProperty<Person>(this, "emergencyContact2", null);
         this.privacy = new SimpleObjectProperty<Privacy>(this, "privacy");
+        this.other = new SimpleStringProperty(this, "other");
     }
 
    /* public Client(Salutation salutation, String title, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate, IntegerProperty ssnr, StringProperty iban, StringProperty bic) {
@@ -137,6 +141,14 @@ public class Client extends Person{
         return privacy;
     }
 
+    public String getOther() {
+        return other.get();
+    }
+
+    public StringProperty otherProperty() {
+        return other;
+    }
+
     //SETTER
     public void setDiagnose(String diagnose) {
         this.diagnose.set(diagnose);
@@ -178,5 +190,7 @@ public class Client extends Person{
         this.bic.set(bic);
     }
 
-
+    public void setOther(String other) {
+        this.other.set(other);
+    }
 }
