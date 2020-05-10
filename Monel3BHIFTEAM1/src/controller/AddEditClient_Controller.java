@@ -267,9 +267,13 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             cbPrivacy3Client.setSelected(privacyOfEditableClient.getPrivacies().get(2));
             cbPrivacy4Client.setSelected(privacyOfEditableClient.getPrivacies().get(3));
 
-            loadPersonProperties(editableClient.getEsv(), tfTitleEsv, tfFirstnameEsv, tfLastnameEsv, tfStreetEsv, tfHousenumberEsv, tfZipEsv, tfPlaceEsv, tfTelNrEsv, tfEmailEsv, dpBirthdateEsv, comboSalutationEsv);
+            if (editableClient.getEsv() != null) {
+                loadPersonProperties(editableClient.getEsv(), tfTitleEsv, tfFirstnameEsv, tfLastnameEsv, tfStreetEsv, tfHousenumberEsv, tfZipEsv, tfPlaceEsv, tfTelNrEsv, tfEmailEsv, dpBirthdateEsv, comboSalutationEsv);
+            }
             loadPersonProperties(editableClient.getEmergencyContact1(), tfTitleContact1, tfFirstnameContact1, tfLastnameContact1, tfStreetContact1, tfHousenumberContact1, tfZipContact1, tfPlaceContact1, tfTelNrContact1, tfEmailContact1, dpBirthdateContact1, comboSalutationContact1);
-            loadPersonProperties(editableClient.getEmergencyContact2(), tfTitleContact2, tfFirstnameContact2, tfLastnameContact2, tfStreetContact2, tfHousenumberContact2, tfZipContact2, tfPlaceContact2, tfTelNrContact2, tfEmailContact2, dpBirthdateContact2, comboSalutationContact2);
+            if (editableClient.getEmergencyContact2() != null) {
+                loadPersonProperties(editableClient.getEmergencyContact2(), tfTitleContact2, tfFirstnameContact2, tfLastnameContact2, tfStreetContact2, tfHousenumberContact2, tfZipContact2, tfPlaceContact2, tfTelNrContact2, tfEmailContact2, dpBirthdateContact2, comboSalutationContact2);
+            }
 
             //INFO
             taDiagnoseClient.setText(editableClient.getDiagnose());
@@ -290,8 +294,8 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         dpBirthdate.setValue(p.getBirthDate());
         //ADDRESS
         try {
-            tfStreet.setText(p.getStreetAndNr().split(" ")[0]);
-            tfHousenumber.setText(p.getStreetAndNr().split(" ")[1]);
+            tfStreet.setText(p.getStreetAndNr().substring(0, p.getStreetAndNr().lastIndexOf(' ')));
+            tfHousenumber.setText(p.getStreetAndNr().split(" ")[p.getStreetAndNr().split(" ").length-1]);
         } catch (Exception ex) {}
         if (p.getZipCode() != 0){
             tfZip.setText(""+p.getZipCode());

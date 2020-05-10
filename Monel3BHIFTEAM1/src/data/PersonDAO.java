@@ -21,8 +21,8 @@ public class PersonDAO {
         //clients.add(new Client(Salutation.Herr, "Dr.", "Michael", "Gell", "Sägestraße", "543", 5582, "St.Michael", "066666666606", "michael.gell@gmx.at", LocalDate.now(), 11111));
         //clients.add(new Client(Salutation.Herr, "Dr.", "Michael", "Gell", "Sägestraße", "543", 5582, "St.Michael", "066666666606", "michael.gell@gmx.at", LocalDate.now(), 22222));
         //clients.add(new Client(Salutation.Herr, "Dr.", "Michael", "Gell", "Sägestraße", "543", 5582, "St.Michael", "066666666606", "michael.gell@gmx.at", LocalDate.now(), 23452));
-        clients.add(new Client(Salutation.Herr, "Clemens", "Burgmann"));
-        employees.add(new Employee(Salutation.Herr, "Mike", "Gell"));
+        //clients.add(new Client(Salutation.Herr, "Clemens", "Burgmann"));
+        //employees.add(new Employee(Salutation.Herr, "Mike", "Gell"));
     }
     public static PersonDAO getInstance() {
         if (instance == null) {
@@ -92,12 +92,12 @@ public class PersonDAO {
                 if (rs.getInt("notfallkontakt2") != 0) {
                     notfall2 = new Person(rs.getInt("notfallkontakt2"));
                 }
-                addPerson(new Client(rs.getInt("id"), Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")), rs.getInt("svnr"), rs.getString("diagnose"), rs.getString("beschaeftigung"), rs.getString("iban"), rs.getString("bic"), rs.getString("allergien"), esv, notfall1, notfall2));
+                addPerson(new Client(rs.getInt("id"), Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")), rs.getInt("svnr"), rs.getString("diagnose"), rs.getString("beschaeftigung"), rs.getString("iban"), rs.getString("bic"), rs.getString("allergien"), esv, notfall1, notfall2, new Privacy()));
             } else if(persontyp.equals("MITARBEITER")) {
                 if (rs.getString("vorrueckdatum") != null) {
                     vorrueckdatum = LocalDate.parse(rs.getString("vorrueckdatum"));
                 }
-                addPerson(new Employee(rs.getInt("id"), Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")), rs.getInt("svnr"), (rs.getInt("amt") == 1 ? true : false), OccupationGroup.valueOf(rs.getString("verwendungsgruppe")), SalaryLevel.GS1/*SalaryLevel.valueOf(rs.getString("gehaltsstufe"))*/, rs.getInt("wochenstunden"), vorrueckdatum, rs.getString("iban"), rs.getString("bic"), LocalDate.parse(rs.getString("einstelldatum"))));
+                addPerson(new Employee(rs.getInt("id"), Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")), rs.getInt("svnr"), (rs.getInt("amt") == 1 ? true : false), OccupationGroup.valueOf(rs.getString("verwendungsgruppe")), SalaryLevel.valueOf(rs.getString("gehaltsstufe")), rs.getInt("wochenstunden"), vorrueckdatum, rs.getString("iban"), rs.getString("bic"), LocalDate.parse(rs.getString("einstelldatum")), new Privacy()));
             } else if(persontyp.equals("SPONSOR")) {
                 //addPerson(new Sponsor(Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer").split(" ")[0], rs.getString("strasse_hausnummer")); // fehlen noch parameter
             } else {

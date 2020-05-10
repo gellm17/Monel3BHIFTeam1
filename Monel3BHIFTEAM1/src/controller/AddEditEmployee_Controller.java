@@ -153,8 +153,8 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
             dpBirthdateEmployee.setValue(editableEmployee.getBirthDate());
             //ADDRESS
             try {
-                tfStreetEmployee.setText(editableEmployee.getStreetAndNr().split(" ")[0]);
-                tfHousenumberEmployee.setText(editableEmployee.getStreetAndNr().split(" ")[1]);
+                tfStreetEmployee.setText(editableEmployee.getStreetAndNr().substring(0, editableEmployee.getStreetAndNr().lastIndexOf(' ')));
+                tfHousenumberEmployee.setText(editableEmployee.getStreetAndNr().split(" ")[editableEmployee.getStreetAndNr().split(" ").length -1]);
             } catch (Exception ex) {}
             if (editableEmployee.getZipCode() != 0){
                 tfZipEmployee.setText(""+editableEmployee.getZipCode());

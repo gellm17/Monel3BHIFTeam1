@@ -16,7 +16,7 @@ public class Employee extends Person {
     private ObjectProperty<LocalDate> dateOfEmployment;
     private ObjectProperty<Privacy> privacy;
 
-    public Employee(int id, Salutation salutation, String title, String firstName, String lastName, String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate, int ssnr, boolean volunteering, OccupationGroup occupationGroup, SalaryLevel salaryLevel, int hoursPerWeek, LocalDate dateSalaryLevel, String iban, String bic, LocalDate dateOfEmployment/*, Privacy privacy*/) {
+    public Employee(int id, Salutation salutation, String title, String firstName, String lastName, String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate, int ssnr, boolean volunteering, OccupationGroup occupationGroup, SalaryLevel salaryLevel, int hoursPerWeek, LocalDate dateSalaryLevel, String iban, String bic, LocalDate dateOfEmployment, Privacy privacy) {
         super(id, salutation, title, firstName, lastName, adress, zipCode, place, telNr, email, birthDate);
         this.ssnr = new SimpleIntegerProperty(this, "ssnr", ssnr);
         this.volunteering = new SimpleBooleanProperty(this, "volunteering", volunteering);
@@ -27,7 +27,7 @@ public class Employee extends Person {
         this.iban = new SimpleStringProperty(this, "iban", iban);
         this.bic = new SimpleStringProperty(this, "bic", bic);
         this.dateOfEmployment = new SimpleObjectProperty<LocalDate>(this, "dateOfEmployment", dateOfEmployment);
-        //this.privacy = new SimpleObjectProperty<Privacy>(this, "privacy", privacy);
+        this.privacy = new SimpleObjectProperty<Privacy>(this, "privacy", privacy);
     }
 
     public Employee() {
