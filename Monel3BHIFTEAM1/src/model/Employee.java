@@ -5,7 +5,7 @@ import javafx.beans.property.*;
 import java.time.LocalDate;
 
 public class Employee extends Person {
-    private IntegerProperty ssnr;
+    private LongProperty ssnr;
     private BooleanProperty volunteering;
     private ObjectProperty<OccupationGroup> occupationGroup;
     private ObjectProperty<SalaryLevel> salaryLevel;
@@ -16,9 +16,9 @@ public class Employee extends Person {
     private ObjectProperty<LocalDate> dateOfEmployment;
     private ObjectProperty<Privacy> privacy;
 
-    public Employee(int id, Salutation salutation, String title, String firstName, String lastName, String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate, int ssnr, boolean volunteering, OccupationGroup occupationGroup, SalaryLevel salaryLevel, int hoursPerWeek, LocalDate dateSalaryLevel, String iban, String bic, LocalDate dateOfEmployment, Privacy privacy) {
+    public Employee(int id, Salutation salutation, String title, String firstName, String lastName, String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate, long ssnr, boolean volunteering, OccupationGroup occupationGroup, SalaryLevel salaryLevel, int hoursPerWeek, LocalDate dateSalaryLevel, String iban, String bic, LocalDate dateOfEmployment, Privacy privacy) {
         super(id, salutation, title, firstName, lastName, adress, zipCode, place, telNr, email, birthDate);
-        this.ssnr = new SimpleIntegerProperty(this, "ssnr", ssnr);
+        this.ssnr = new SimpleLongProperty(this, "ssnr", ssnr);
         this.volunteering = new SimpleBooleanProperty(this, "volunteering", volunteering);
         this.occupationGroup = new SimpleObjectProperty<OccupationGroup>(this, "occupationGroup", occupationGroup);
         this.salaryLevel = new SimpleObjectProperty<SalaryLevel>(this, "salaryLevel", salaryLevel);
@@ -33,7 +33,7 @@ public class Employee extends Person {
     public Employee() {
         super();
 
-        ssnr = new SimpleIntegerProperty(this, "ssnr");
+        ssnr = new SimpleLongProperty(this, "ssnr");
         volunteering = new SimpleBooleanProperty(this, "volunteering");
         occupationGroup = new SimpleObjectProperty<OccupationGroup>(this, "occupationGroup", OccupationGroup.VG1);
         salaryLevel = new SimpleObjectProperty<SalaryLevel>(this, "salaryLevel", SalaryLevel.GS1);
@@ -48,7 +48,7 @@ public class Employee extends Person {
     public Employee(Salutation salutation, String firstName, String lastName) {
         super(salutation, firstName, lastName);
 
-        ssnr = new SimpleIntegerProperty(this, "ssnr");
+        ssnr = new SimpleLongProperty(this, "ssnr");
         volunteering = new SimpleBooleanProperty(this, "volunteering");
         occupationGroup = new SimpleObjectProperty<OccupationGroup>(this, "occupationGroup", OccupationGroup.VG1);
         salaryLevel = new SimpleObjectProperty<SalaryLevel>(this, "salaryLevel", SalaryLevel.GS1);
@@ -60,15 +60,15 @@ public class Employee extends Person {
         privacy = new SimpleObjectProperty<Privacy>(this, "privacy");
     }
 
-    public int getSsnr() {
+    public long getSsnr() {
         return ssnr.get();
     }
 
-    public IntegerProperty ssnrProperty() {
+    public LongProperty ssnrProperty() {
         return ssnr;
     }
 
-    public void setSsnr(int ssnr) {
+    public void setSsnr(long ssnr) {
         this.ssnr.set(ssnr);
     }
 
@@ -179,5 +179,7 @@ public class Employee extends Person {
     public void setPrivacy(Privacy privacy) {
         this.privacy.set(privacy);
     }
+
+
 
 }

@@ -5,7 +5,7 @@ import javafx.beans.property.*;
 import java.time.LocalDate;
 
 public class Client extends Person{
-    private IntegerProperty ssnr;
+    private LongProperty ssnr;
     private StringProperty diagnose;
     private StringProperty job;                         //deutsch --> Beschäftigung
     private StringProperty iban;
@@ -17,9 +17,9 @@ public class Client extends Person{
     private ObjectProperty<Privacy> privacy;
     private StringProperty other;
 
-    public Client(int id,Salutation salutation, String title, String firstName, String lastName, String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate, int ssnr, String diagnose, String job, String iban, String bic, String allergies, Person esv, Person emergencyContact1, Person emergencyContact2, Privacy privacy) {
+    public Client(int id,Salutation salutation, String title, String firstName, String lastName, String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate, long ssnr, String diagnose, String job, String iban, String bic, String allergies, Person esv, Person emergencyContact1, Person emergencyContact2, Privacy privacy) {
         super(id, salutation, title, firstName, lastName, adress, zipCode, place, telNr, email, birthDate);
-        this.ssnr = new SimpleIntegerProperty(this, "ssnr", ssnr);
+        this.ssnr = new SimpleLongProperty(this, "ssnr", ssnr);
         this.diagnose = new SimpleStringProperty(this, "diagnose", diagnose);
         this.job = new SimpleStringProperty(this, "job", job);
         this.iban = new SimpleStringProperty(this, "iban", iban);
@@ -34,7 +34,7 @@ public class Client extends Person{
 
     public Client() {
         super();
-        this.ssnr = new SimpleIntegerProperty(this, "ssnr");
+        this.ssnr = new SimpleLongProperty(this, "ssnr");
         this.iban = new SimpleStringProperty(this, "iban", "");
         this.bic = new SimpleStringProperty(this, "bic", "");
         this.diagnose = new SimpleStringProperty(this, "diagnose", "");
@@ -50,7 +50,7 @@ public class Client extends Person{
     public Client(Salutation salutation, String firstName, String lastName) {
         super(salutation, firstName, lastName);
 
-        this.ssnr = new SimpleIntegerProperty(this, "ssnr");
+        this.ssnr = new SimpleLongProperty(this, "ssnr");
         this.iban = new SimpleStringProperty(this, "iban", "");
         this.bic = new SimpleStringProperty(this, "bic", "");
         this.diagnose = new SimpleStringProperty(this, "diagnose", "");
@@ -73,11 +73,11 @@ public class Client extends Person{
     /*
                 GETTERS FOR VALUES AND PROPERTIES
                  */
-    public int getSsnr() {
+    public long getSsnr() {
         return ssnr.get();
     }
 
-    public IntegerProperty ssnrProperty() {
+    public LongProperty ssnrProperty() {
         return ssnr;
     }
 
@@ -178,7 +178,7 @@ public class Client extends Person{
         this.privacy.set(privacy);
     }
 
-    public void setSsnr(int ssnr) {
+    public void setSsnr(long ssnr) {
         this.ssnr.set(ssnr);
     }
 
