@@ -1158,7 +1158,7 @@
                         <Font size="14.0" />
                      </font>
                      <graphic>
-                        <CheckBox fx:id="cbSelfDetermined" mnemonicParsing="false" text="Selbstbestimmt">
+                        <CheckBox fx:id="cbSelfDetermined" mnemonicParsing="false" onAction="#cbSelfDetermined_OnAction" text="Selbstbestimmt">
                            <padding>
                               <Insets left="50.0" />
                            </padding>

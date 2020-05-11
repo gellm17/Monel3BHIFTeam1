@@ -259,6 +259,9 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     @FXML
     private Label lbMessage;
 
+    @FXML
+    private CheckBox cbSelfDetermined;
+
 
     private Client editableClient = null;
     private ArrayList<Boolean> errors = new ArrayList<Boolean>();
@@ -384,7 +387,9 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         clientToAdd.setPrivacy(new Privacy(new ArrayList<Boolean>(){{add(cbPrivacy1Client.isSelected()); add(cbPrivacy2Client.isSelected()); add(cbPrivacy3Client.isSelected()); add(cbPrivacy4Client.isSelected());}}));
 
         Person esv = new Person();
-        setAllPersonFields(esv, tfTitleEsv, tfFirstnameEsv, tfLastnameEsv, tfSsnrEsv, tfStreetEsv, tfHousenumberEsv, tfZipEsv, tfPlaceEsv, tfTelNrEsv, tfEmailEsv, dpBirthdateEsv, comboSalutationEsv, tPaneEsv, tPaneEsv, tPaneEsv);
+        if (!cbSelfDetermined.isSelected()){
+            setAllPersonFieldsMandatory(esv, tfTitleEsv, tfFirstnameEsv, tfLastnameEsv, tfSsnrEsv, tfStreetEsv, tfHousenumberEsv, tfZipEsv, tfPlaceEsv, tfTelNrEsv, tfEmailEsv, dpBirthdateEsv, comboSalutationEsv, tPaneEsv, tPaneEsv, tPaneEsv, true);
+        }
         clientToAdd.setEsv(esv);
 
         Person ec1 = new Person();
@@ -710,6 +715,10 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
     }
 
+    @FXML
+    void cbSelfDetermined_OnAction(ActionEvent event) {
+        tabEsv.setDisable(cbSelfDetermined.isSelected());
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -723,6 +732,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         comboSalutationContact2.getSelectionModel().select(0);
         comboSalutationEsv.getSelectionModel().select(0);
 
+        tabEsv.setDisable(cbSelfDetermined.isSelected());
 
         this.accordionClients.setExpandedPane(this.tPaneBasicData);
     }
