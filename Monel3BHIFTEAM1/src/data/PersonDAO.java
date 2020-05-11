@@ -92,7 +92,7 @@ public class PersonDAO {
                 if (rs.getInt("notfallkontakt2") != 0) {
                     notfall2 = new Person(rs.getInt("notfallkontakt2"));
                 }
-                addPerson(new Client(rs.getInt("id"), Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")), rs.getInt("svnr"), rs.getString("diagnose"), rs.getString("beschaeftigung"), rs.getString("iban"), rs.getString("bic"), rs.getString("allergien"), esv, notfall1, notfall2, new Privacy()));
+                addPerson(new Client(rs.getInt("id"), Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")), rs.getInt("svnr"), rs.getString("diagnose"), rs.getString("beschaeftigung"), rs.getString("iban"), rs.getString("bic"), rs.getString("allergien"), esv, notfall1, notfall2, new Privacy(), rs.getString("sonstiges")));
             } else if(persontyp.equals("MITARBEITER")) {
                 if (rs.getString("vorrueckdatum") != null) {
                     vorrueckdatum = LocalDate.parse(rs.getString("vorrueckdatum"));
