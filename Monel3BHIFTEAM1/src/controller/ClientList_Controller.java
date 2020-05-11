@@ -134,7 +134,7 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
             public void handle(MouseEvent event) {
                 if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
                     try {
-                        startAddEdit();
+                       showClient();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -287,12 +287,40 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
         this.getPrimStage().show();
 
 
+
         AddEditClient_Controller editController = fxml.getController();
         //Pass whatever data you want. You can have multiple method calls here
         editController.setEditableClient((Client) selectedItem);
 
 
         SceneLoader loader = editController;
+        loader.setPrimaryStage(this.getPrimStage());
+
+    }
+
+    private void showClient() throws IOException {
+        FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/ClientSummary.fxml"));
+        BorderPane root = fxml.load();
+        Scene scene = new Scene(root);
+        this.getPrimStage().setScene(scene);
+        Screen screen = Screen.getPrimary();
+
+        //Maximized
+        Rectangle2D bounds = screen.getVisualBounds();
+        this.getPrimStage().setX(bounds.getMinX());
+        this.getPrimStage().setY(bounds.getMinY());
+        this.getPrimStage().setWidth(bounds.getWidth());
+        this.getPrimStage().setHeight(bounds.getHeight());
+        this.getPrimStage().show();
+
+
+
+        ClientSummary_Controller showController = fxml.getController();
+        //Pass whatever data you want. You can have multiple method calls here
+        showController.setEditableClient((Client) selectedItem);
+
+
+        SceneLoader loader = showController;
         loader.setPrimaryStage(this.getPrimStage());
 
     }
