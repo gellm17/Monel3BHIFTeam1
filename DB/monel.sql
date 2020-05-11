@@ -22,12 +22,12 @@ DROP TABLE IF EXISTS `aktivitaet`;
 CREATE TABLE IF NOT EXISTS `aktivitaet` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `datum` date DEFAULT NULL,
-  `aktivitätsbezeichnung` varchar(50) DEFAULT NULL,
+  `aktivitaetsbezeichnung` varchar(50) DEFAULT NULL,
   `kategorie` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Daten Export vom Benutzer nicht ausgewählt
+-- Daten Export vom Benutzer nicht ausgewaehlt
 
 -- Exportiere Struktur von Tabelle monel.aktivitaetsprotokoll
 DROP TABLE IF EXISTS `aktivitaetsprotokoll`;
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `aktivitaetsprotokoll` (
   CONSTRAINT `FKrechnung` FOREIGN KEY (`rechnung`) REFERENCES `rechnung` (`rechnungsnummmer`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Daten Export vom Benutzer nicht ausgewählt
+-- Daten Export vom Benutzer nicht ausgewaehlt
 
 -- Exportiere Struktur von Tabelle monel.dokument
 DROP TABLE IF EXISTS `dokument`;
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `dokument` (
   CONSTRAINT `FKbesitzer` FOREIGN KEY (`besitzerid`) REFERENCES `person` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Daten Export vom Benutzer nicht ausgewählt
+-- Daten Export vom Benutzer nicht ausgewaehlt
 
 -- Exportiere Struktur von Tabelle monel.person
 DROP TABLE IF EXISTS `person`;
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   `firmenname` varchar(50) DEFAULT NULL,
   `firmentelefonnummer` varchar(50) DEFAULT NULL,
   `firmenemail` varchar(50) DEFAULT NULL,
-  `gelöscht` tinyint(1) DEFAULT NULL COMMENT '1 = true, 0 = false',
+  `geloescht` tinyint(1) DEFAULT NULL COMMENT '1 = true, 0 = false',
   PRIMARY KEY (`id`),
   KEY `FKesv` (`esv`),
   KEY `FKnotfallkontakt1` (`notfallkontakt1`),
@@ -114,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   CONSTRAINT `FKnotfallkontakt2` FOREIGN KEY (`notfallkontakt2`) REFERENCES `person` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- Daten Export vom Benutzer nicht ausgewählt
+-- Daten Export vom Benutzer nicht ausgewaehlt
 
 -- Exportiere Struktur von Tabelle monel.rechnung
 DROP TABLE IF EXISTS `rechnung`;
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `rechnung` (
   CONSTRAINT `FKklient_rechnung` FOREIGN KEY (`klient`) REFERENCES `klient` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Daten Export vom Benutzer nicht ausgewählt
+-- Daten Export vom Benutzer nicht ausgewaehlt
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;

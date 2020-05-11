@@ -17,7 +17,7 @@ public class Client extends Person{
     private ObjectProperty<Privacy> privacy;
     private StringProperty other;
 
-    public Client(int id,Salutation salutation, String title, String firstName, String lastName, String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate, long ssnr, String diagnose, String job, String iban, String bic, String allergies, Person esv, Person emergencyContact1, Person emergencyContact2, Privacy privacy) {
+    public Client(int id,Salutation salutation, String title, String firstName, String lastName, String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate, long ssnr, String diagnose, String job, String iban, String bic, String allergies, Person esv, Person emergencyContact1, Person emergencyContact2, Privacy privacy, String other) {
         super(id, salutation, title, firstName, lastName, adress, zipCode, place, telNr, email, birthDate);
         this.ssnr = new SimpleLongProperty(this, "ssnr", ssnr);
         this.diagnose = new SimpleStringProperty(this, "diagnose", diagnose);
@@ -29,7 +29,7 @@ public class Client extends Person{
         this.emergencyContact1 = new SimpleObjectProperty<Person>(this, "emergencyContact1", emergencyContact1);
         this.emergencyContact2 = new SimpleObjectProperty<Person>(this, "emergencyContact2", emergencyContact2);
         this.privacy = new SimpleObjectProperty<Privacy>(this, "privacy", privacy);
-        //this.other = new SimpleStringProperty(this, "other", other);
+        this.other = new SimpleStringProperty(this, "other", other);
     }
 
     public Client() {

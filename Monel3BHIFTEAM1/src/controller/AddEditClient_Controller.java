@@ -236,7 +236,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     private TextArea taAllergiesClient;
 
     @FXML
-    private TextField tfOtherClient;
+    private TextArea taOtherClient;
 
     @FXML
     private TextField tfIbanClient;
@@ -300,7 +300,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             taDiagnoseClient.setText(editableClient.getDiagnose());
             tfJobClient.setText(editableClient.getJob());
             taAllergiesClient.setText(editableClient.getAllergies());
-            tfOtherClient.setText(editableClient.getOther());
+            taOtherClient.setText(editableClient.getOther());
             //BANK
             tfBicClient.setText(editableClient.getBic());
             tfIbanClient.setText(editableClient.getIban());
@@ -400,11 +400,11 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             errors.add(true);
         }
 
-        if (!tfCheck(tfOtherClient, "^(\\D+)?$", tPaneInformation)){
-            clientToAdd.setOther(tfOtherClient.getText());
+        /*if (!tfCheck(taOtherClient, "^(\\D+)?$", tPaneInformation)){
+            clientToAdd.setOther(taOtherClient.getText());
         } else {
             errors.add(true);
-        }
+        }*/
 
 
         if (!tfCheck(tfIbanClient, "^([A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?)?$", tPaneBank)) {
