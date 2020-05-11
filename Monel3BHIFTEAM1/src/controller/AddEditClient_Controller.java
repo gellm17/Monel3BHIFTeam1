@@ -2,11 +2,14 @@ package controller;
 
 import app.SceneLoader;
 import data.PersonDAO;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.util.converter.LocalDateStringConverter;
 import javafx.util.converter.LocalDateTimeStringConverter;
 import model.Client;
@@ -15,6 +18,7 @@ import model.Privacy;
 import model.Salutation;
 import org.w3c.dom.Text;
 
+import javax.swing.event.ChangeEvent;
 import java.net.URL;
 import java.sql.SQLInvalidAuthorizationSpecException;
 import java.util.ArrayList;
@@ -105,6 +109,12 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
     @FXML
     private Tab tabEsv;
+
+    @FXML
+    private CheckBox cbSelfDetermined;
+
+    @FXML
+    private VBox vboxEsv;
 
     @FXML
     private ComboBox<Salutation> comboSalutationEsv;
@@ -626,5 +636,12 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
 
         this.accordionClients.setExpandedPane(this.tPaneBasicData);
+
+        this.cbSelfDetermined.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                vboxEsv.setDisable(newValue);
+            }
+        });
     }
 }
