@@ -263,6 +263,13 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     private Client editableClient = null;
     private ArrayList<Boolean> errors = new ArrayList<Boolean>();
 
+    private int basicErrorCounter = 0;
+    private int addressErrorCounter = 0;
+    private int contactErrorCounter = 0;
+    private int infoErrorCounter = 0;
+    private int bankErrorCounter = 0;
+    private int esvErrorCounter = 0;
+
     public Client getEditableClient() {
         return editableClient;
     }
@@ -346,11 +353,25 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     @FXML
     void btnOkClient_Clicked(ActionEvent event) {
         Client clientToAdd = new Client();
+
+        basicErrorCounter = 0;
+        addressErrorCounter = 0;
+        contactErrorCounter = 0;
+        infoErrorCounter = 0;
+        bankErrorCounter = 0;
+        esvErrorCounter = 0;
+
         lbMessage.setText("");
         errors.clear();
 
-        errors.add(tfCheck(tfFirstnameClient, "^\\D+$", tPaneBasicData));
-        errors.add(tfCheck(tfLastnameClient, "^\\D+$", tPaneBasicData));
+        errors.add(tfCheck(tfFirstnameClient, "^\\D+$", tPaneBasicData, basicErrorCounter));
+        if (errors.get(0) == true){
+            basicErrorCounter++;
+        }
+        errors.add(tfCheck(tfLastnameClient, "^\\D+$", tPaneBasicData, basicErrorCounter));
+        if (errors.get(1) == true){
+            basicErrorCounter++;
+        }
 
         if (!errors.contains(true)){
             clientToAdd = new Client(   comboSalutationClient.getSelectionModel().getSelectedItem(),
@@ -358,7 +379,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
                     tfLastnameClient.getText()
             );}
 
-        setAllPersonFieldsMandatory(clientToAdd, tfTitleClient, tfFirstnameClient, tfLastnameClient, tfSsnrClient, tfStreetClient, tfHousenumberClient, tfZipClient, tfPlaceClient, tfTelNrClient, tfEmailClient, dpBirthdateClient, comboSalutationClient, tPaneBasicData, tPaneAddress, tPaneContact);
+        setAllPersonFieldsMandatory(clientToAdd, tfTitleClient, tfFirstnameClient, tfLastnameClient, tfSsnrClient, tfStreetClient, tfHousenumberClient, tfZipClient, tfPlaceClient, tfTelNrClient, tfEmailClient, dpBirthdateClient, comboSalutationClient, tPaneBasicData, tPaneAddress, tPaneContact, false);
 
         clientToAdd.setPrivacy(new Privacy(new ArrayList<Boolean>(){{add(cbPrivacy1Client.isSelected()); add(cbPrivacy2Client.isSelected()); add(cbPrivacy3Client.isSelected()); add(cbPrivacy4Client.isSelected());}}));
 
@@ -367,55 +388,62 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         clientToAdd.setEsv(esv);
 
         Person ec1 = new Person();
-        setAllPersonFieldsMandatory(ec1, tfTitleContact1, tfFirstnameContact1, tfLastnameContact1, tfSsnrContact1, tfStreetContact1, tfHousenumberContact1, tfZipContact1, tfPlaceContact1, tfTelNrContact1, tfEmailContact1, dpBirthdateContact1, comboSalutationContact1, tPaneEsv, tPaneEsv, tPaneEsv);
+        setAllPersonFieldsMandatory(ec1, tfTitleContact1, tfFirstnameContact1, tfLastnameContact1, tfSsnrContact1, tfStreetContact1, tfHousenumberContact1, tfZipContact1, tfPlaceContact1, tfTelNrContact1, tfEmailContact1, dpBirthdateContact1, comboSalutationContact1, tPaneEsv, tPaneEsv, tPaneEsv, true);
         clientToAdd.setEmergencyContact1(ec1);
 
         Person ec2 = new Person();
         setAllPersonFields(ec2, tfTitleContact2, tfFirstnameContact2, tfLastnameContact2, tfSsnrContact2, tfStreetContact2, tfHousenumberContact2, tfZipContact2, tfPlaceContact2, tfTelNrContact2, tfEmailContact2, dpBirthdateContact2, comboSalutationContact2, tPaneEsv, tPaneEsv, tPaneEsv);
         clientToAdd.setEmergencyContact2(ec2);
 
-        if (!tfCheck(tfSsnrClient, "^[1-9][0-9]{9}$", tPaneBasicData)) {
+        if (!tfCheck(tfSsnrClient, "^[1-9][0-9]{9}$", tPaneBasicData, basicErrorCounter)) {
             try {
                 clientToAdd.setSsnr(Integer.parseInt(tfSsnrClient.getText()));
             } catch (Exception e) { }
         } else {
+            basicErrorCounter++;
             errors.add(true);
         }
 
-        if (!taCheck(taAllergiesClient,"^(\\D+)?$", tPaneInformation)) {
+        if (!taCheck(taAllergiesClient,"^(\\D+)?$", tPaneInformation, infoErrorCounter)) {
             clientToAdd.setAllergies(taAllergiesClient.getText());
         } else {
+            infoErrorCounter++;
             errors.add(true);
         }
 
-        if (!tfCheck(tfJobClient,"^(\\D+)?$", tPaneInformation)) {
+        if (!tfCheck(tfJobClient,"^(\\D+)?$", tPaneInformation, infoErrorCounter)) {
             clientToAdd.setJob(tfJobClient.getText());
         } else {
+            infoErrorCounter++;
             errors.add(true);
         }
 
-        if (!taCheck(taDiagnoseClient,"^\\D+$", tPaneInformation)) {
+        if (!taCheck(taDiagnoseClient,"^\\D+$", tPaneInformation, infoErrorCounter)) {
             clientToAdd.setDiagnose(taDiagnoseClient.getText());
         } else {
+            infoErrorCounter++;
             errors.add(true);
         }
 
-        /*if (!tfCheck(taOtherClient, "^(\\D+)?$", tPaneInformation)){
+        if (!taCheck(taOtherClient, "^(\\D+)?$", tPaneInformation, infoErrorCounter)){
             clientToAdd.setOther(taOtherClient.getText());
         } else {
-            errors.add(true);
-        }*/
-
-
-        if (!tfCheck(tfIbanClient, "^([A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?)?$", tPaneBank)) {
-            clientToAdd.setIban(tfIbanClient.getText());
-        } else {
+            infoErrorCounter++;
             errors.add(true);
         }
 
-        if (!tfCheck(tfBicClient, "^([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)?$", tPaneBank)){
+
+        if (!tfCheck(tfIbanClient, "^([A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?)?$", tPaneBank, bankErrorCounter)) {
+            clientToAdd.setIban(tfIbanClient.getText());
+        } else {
+            bankErrorCounter++;
+            errors.add(true);
+        }
+
+        if (!tfCheck(tfBicClient, "^([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)?$", tPaneBank, bankErrorCounter)){
             clientToAdd.setBic(tfBicClient.getText());
         } else {
+            bankErrorCounter++;
             errors.add(true);
         }
 
@@ -430,20 +458,20 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
     private void setAllPersonFields(Person p, TextField tfTitle, TextField tfFirstname, TextField tfLastname, TextField tfSsnr, TextField tfStreet, TextField tfHousenumber, TextField tfZip, TextField tfPlace, TextField tfTelNr, TextField tfEmail, DatePicker dpBirthdate, ComboBox<Salutation> comboSalutation, TitledPane tpBasic, TitledPane tpAddress, TitledPane tpContact) {
 
-        if (!tfCheck(tfTitle, "^(\\D+)?$", tpBasic)) {
+        if (!tfCheck(tfTitle, "^(\\D+)?$", tpBasic, esvErrorCounter)) {
             p.setTitle(tfTitle.getText());
         } else {
             errors.add(true);
         }
         if (!(p instanceof Client)) {
             comboSalutation.getSelectionModel().getSelectedItem();
-            if (!tfCheck(tfFirstname, "^(\\D+)?$", tpBasic)) {
+            if (!tfCheck(tfFirstname, "^(\\D+)?$", tpBasic, esvErrorCounter)) {
                 p.setFirstName(tfFirstname.getText());
             } else {
                 errors.add(true);
             }
 
-            if(!tfCheck(tfLastname, "^(\\D+)?$", tpBasic)){
+            if(!tfCheck(tfLastname, "^(\\D+)?$", tpBasic, esvErrorCounter)){
                 p.setLastName(tfLastname.getText());
             } else {
                 errors.add(true);
@@ -461,13 +489,13 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
 
 
-        if (!tfCheck(tfStreet, "^(\\D+)?$", tpAddress) && !tfCheck(tfHousenumber, "^(([0-9]+)([^0-9]*))?$", tpAddress)) {
+        if (!tfCheck(tfStreet, "^(\\D+)?$", tpAddress, esvErrorCounter) && !tfCheck(tfHousenumber, "^(([0-9]+)([^0-9]*))?$", tpAddress, esvErrorCounter)) {
             p.setStreetAndNr(tfStreet.getText() + " " + tfHousenumber.getText());
         } else {
             errors.add(true);
         }
 
-        if (!tfCheck(tfZip, "^([1-9][0-9]{3})?$", tpAddress)) {
+        if (!tfCheck(tfZip, "^([1-9][0-9]{3})?$", tpAddress, esvErrorCounter)) {
             try {
                 p.setZipCode(Integer.parseInt(tfZip.getText()));
             } catch (Exception e) { }
@@ -476,43 +504,57 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             errors.add(true);
         }
 
-        if (!tfCheck(tfPlace, "^(\\D+)?$", tpAddress)){
+        if (!tfCheck(tfPlace, "^(\\D+)?$", tpAddress, esvErrorCounter)){
             p.setPlace(tfPlace.getText());
         } else {
             errors.add(true);
         }
 
-        if (!tfCheck(tfTelNr, "^([0-9]*)?$", tpContact)) {
+        if (!tfCheck(tfTelNr, "^([0-9]*)?$", tpContact, esvErrorCounter)) {
             p.setTelNr(tfTelNr.getText());
         } else {
             errors.add(true);
         }
 
-        if (!tfCheck(tfEmail, "^([a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+)?$", tpContact)) {
+        if (!tfCheck(tfEmail, "^([a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+)?$", tpContact, esvErrorCounter)) {
             p.setEmail(tfEmail.getText());
         } else {
             errors.add(true);
         }
     }
 
-    private void setAllPersonFieldsMandatory(Person p, TextField tfTitle, TextField tfFirstname, TextField tfLastname, TextField tfSsnr, TextField tfStreet, TextField tfHousenumber, TextField tfZip, TextField tfPlace, TextField tfTelNr, TextField tfEmail, DatePicker dpBirthdate, ComboBox<Salutation> comboSalutation, TitledPane tpBasic, TitledPane tpAddress, TitledPane tpContact) {
+    private void setAllPersonFieldsMandatory(Person p, TextField tfTitle, TextField tfFirstname, TextField tfLastname, TextField tfSsnr, TextField tfStreet, TextField tfHousenumber, TextField tfZip, TextField tfPlace, TextField tfTelNr, TextField tfEmail, DatePicker dpBirthdate, ComboBox<Salutation> comboSalutation, TitledPane tpBasic, TitledPane tpAddress, TitledPane tpContact, boolean esv) {
+        p.setSalutation(comboSalutation.getSelectionModel().getSelectedItem());
 
-        if (!tfCheck(tfTitle, "^(\\D+)?$", tpBasic)) {
-            p.setTitle(tfTitle.getText());
+        if (esv){
+            if (!tfCheck(tfTitle, "^(\\D+)?$", tpBasic, esvErrorCounter)) {
+                p.setTitle(tfTitle.getText());
+            } else {
+                esvErrorCounter++;
+                errors.add(true);
+            }
         } else {
-            errors.add(true);
+            if (!tfCheck(tfTitle, "^(\\D+)?$", tpBasic, basicErrorCounter)) {
+                p.setTitle(tfTitle.getText());
+            } else {
+                basicErrorCounter++;
+                errors.add(true);
+            }
         }
+
         if (!(p instanceof Client)) {
             comboSalutation.getSelectionModel().getSelectedItem();
-            if (!tfCheck(tfFirstname, "^\\D+$", tpBasic)) {
+            if (!tfCheck(tfFirstname, "^\\D+$", tpBasic, esvErrorCounter)) {
                 p.setFirstName(tfFirstname.getText());
             } else {
+                esvErrorCounter++;
                 errors.add(true);
             }
 
-            if(!tfCheck(tfLastname, "^\\D+$", tpBasic)){
+            if(!tfCheck(tfLastname, "^\\D+$", tpBasic, esvErrorCounter)){
                 p.setLastName(tfLastname.getText());
             } else {
+                esvErrorCounter++;
                 errors.add(true);
             }
         }
@@ -530,39 +572,92 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             }
         }
 
-
-        if (!tfCheck(tfStreet, "^\\D+$", tpAddress) && !tfCheck(tfHousenumber, "^([0-9]+)([^0-9]*)$", tpAddress)) {
-            p.setStreetAndNr(tfStreet.getText() + " " + tfHousenumber.getText());
+        if (esv){
+            if (!tfCheck(tfStreet, "^\\D+$", tpAddress, esvErrorCounter) && !tfCheck(tfHousenumber, "^([0-9]+)([^0-9]*)$", tpAddress, esvErrorCounter)) {
+                p.setStreetAndNr(tfStreet.getText() + " " + tfHousenumber.getText());
+            } else {
+                esvErrorCounter++;
+                errors.add(true);
+            }
         } else {
-            errors.add(true);
+            if (!tfCheck(tfStreet, "^\\D+$", tpAddress, addressErrorCounter) && !tfCheck(tfHousenumber, "^([0-9]+)([^0-9]*)$", tpAddress, addressErrorCounter)) {
+                p.setStreetAndNr(tfStreet.getText() + " " + tfHousenumber.getText());
+            } else {
+                addressErrorCounter++;
+                errors.add(true);
+            }
         }
 
-        if (!tfCheck(tfZip, "^[1-9][0-9]{3}$", tpAddress)) {
-            try {
-                p.setZipCode(Integer.parseInt(tfZip.getText()));
-            } catch (Exception e) { }
+        if (esv){
+            if (!tfCheck(tfZip, "^[1-9][0-9]{3}$", tpAddress, esvErrorCounter)) {
+                try {
+                    p.setZipCode(Integer.parseInt(tfZip.getText()));
+                } catch (Exception e) { }
 
+            } else {
+                esvErrorCounter++;
+                errors.add(true);
+            }
         } else {
-            errors.add(true);
+            if (!tfCheck(tfZip, "^[1-9][0-9]{3}$", tpAddress, addressErrorCounter)) {
+                try {
+                    p.setZipCode(Integer.parseInt(tfZip.getText()));
+                } catch (Exception e) { }
+
+            } else {
+                addressErrorCounter++;
+                errors.add(true);
+            }
         }
 
-        if (!tfCheck(tfPlace, "^\\D+$", tpAddress)){
-            p.setPlace(tfPlace.getText());
+        if (esv){
+            if (!tfCheck(tfPlace, "^\\D+$", tpAddress, esvErrorCounter)){
+                p.setPlace(tfPlace.getText());
+            } else {
+                esvErrorCounter++;
+                errors.add(true);
+            }
         } else {
-            errors.add(true);
+            if (!tfCheck(tfPlace, "^\\D+$", tpAddress, addressErrorCounter)){
+                p.setPlace(tfPlace.getText());
+            } else {
+                addressErrorCounter++;
+                errors.add(true);
+            }
         }
 
-        if (!tfCheck(tfTelNr, "^[0-9]+$", tpContact)) {
-            p.setTelNr(tfTelNr.getText());
+        if (esv){
+            if (!tfCheck(tfTelNr, "^[0-9]+$", tpContact, esvErrorCounter)) {
+                p.setTelNr(tfTelNr.getText());
+            } else {
+                esvErrorCounter++;
+                errors.add(true);
+            }
         } else {
-            errors.add(true);
+            if (!tfCheck(tfTelNr, "^[0-9]+$", tpContact, contactErrorCounter)) {
+                p.setTelNr(tfTelNr.getText());
+            } else {
+                contactErrorCounter++;
+                errors.add(true);
+            }
         }
 
-        if (!tfCheck(tfEmail, "^([a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+)?$", tpContact)) {
-            p.setEmail(tfEmail.getText());
+        if (esv){
+            if (!tfCheck(tfEmail, "^([a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+)?$", tpContact, esvErrorCounter)) {
+                p.setEmail(tfEmail.getText());
+            } else {
+                esvErrorCounter++;
+                errors.add(true);
+            }
         } else {
-            errors.add(true);
+            if (!tfCheck(tfEmail, "^([a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+)?$", tpContact, contactErrorCounter)) {
+                p.setEmail(tfEmail.getText());
+            } else {
+                contactErrorCounter++;
+                errors.add(true);
+            }
         }
+
     }
 
     @FXML
@@ -576,7 +671,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
     }
 
-    private boolean tfCheck(TextField tf, String regex, TitledPane tp){
+    private boolean tfCheck(TextField tf, String regex, TitledPane tp, int counter){
         boolean error = true;
             if (!tf.getText().matches(regex)) {
                 error = true;
@@ -586,12 +681,14 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             } else {
                 error = false;
                 tf.setStyle(null);
-                tp.setStyle(null);
+                if (counter == 0){
+                    tp.setStyle(null);
+                }
             }
         return error;
     }
 
-    private boolean taCheck(TextArea ta, String regex, TitledPane tp) {
+    private boolean taCheck(TextArea ta, String regex, TitledPane tp, int counter) {
         boolean error = true;
         if (!ta.getText().matches(regex)) {
             error = true;
@@ -601,7 +698,9 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         } else {
             error = false;
             ta.setStyle(null);
-            tp.setStyle(null);
+            if (counter == 0){
+                tp.setStyle(null);
+            }
         }
         return error;
     }
