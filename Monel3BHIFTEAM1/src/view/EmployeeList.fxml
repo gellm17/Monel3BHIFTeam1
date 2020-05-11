@@ -34,14 +34,18 @@
                         <String fx:value="transparentButton" />
                         <String fx:value="circular" />
                      </styleClass></Button>
-                  <Button fx:id="btnSettings" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnSettings_Clicked" prefHeight="65.0" prefWidth="65.0" style="-fx-background-color: transparent;">
+                  <Button fx:id="btnSettings" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnSettings_Clicked" prefHeight="65.0" prefWidth="65.0">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../resources/icon_Einst.png" />
                            </image>
                         </ImageView>
-                     </graphic></Button>
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="transparentButton" />
+                        <String fx:value="circular" />
+                     </styleClass></Button>
               </buttons>
             </ButtonBar>
          </right>

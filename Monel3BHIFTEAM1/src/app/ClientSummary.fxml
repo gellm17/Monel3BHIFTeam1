@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
@@ -225,7 +226,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbNameClient1" wrapText="true" GridPane.columnIndex="1">
+                                    <Label fx:id="lbDiagnosisClient" wrapText="true" GridPane.columnIndex="1">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -238,7 +239,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbBirthdateClient1" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <Label fx:id="lbOccupationClient" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -251,7 +252,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbStreetClient1" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                    <Label fx:id="lbAllergiesClient" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -264,7 +265,7 @@
                                           <Font name="System Bold" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="lbPhoneClient1" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                    <Label fx:id="lbOtherClient" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -283,6 +284,58 @@
                            </padding>
                         </ScrollPane>
                      </content>
+                  </Tab>
+                  <Tab closable="false" text="Datenschutz">
+                    <content>
+                        <ScrollPane fitToWidth="true">
+                           <content>
+                              <GridPane>
+                                 <columnConstraints>
+                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="40.0" prefWidth="40.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="1.7976931348623157E308" valignment="TOP" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                                 </rowConstraints>
+                                 <children>
+                                    <Label text="Fotos dürfen gemacht werden" wrapText="true" GridPane.columnIndex="1">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <GridPane.margin>
+                                          <Insets bottom="10.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label layoutX="130.0" layoutY="10.0" text="Fotos dürfen bearbeitet werden" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="130.0" layoutY="40.0" text="Fotos dürfen veröffentlicht werden" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="10.0" text="Fotos dürfen gezeigt werden" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <CheckBox fx:id="cbPrivacy1Client" disable="true" mnemonicParsing="false" />
+                                    <CheckBox fx:id="cbPrivacy4Client" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" GridPane.rowIndex="3" />
+                                    <CheckBox fx:id="cbPrivacy3Client" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" GridPane.rowIndex="2" />
+                                    <CheckBox fx:id="cbPrivacy2Client" disable="true" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" GridPane.rowIndex="1" />
+                                 </children>
+                              </GridPane>
+                           </content>
+                           <padding>
+                              <Insets bottom="20.0" left="30.0" right="20.0" top="20.0" />
+                           </padding>
+                        </ScrollPane>
+                    </content>
                   </Tab>
                </tabs>
             </TabPane>
