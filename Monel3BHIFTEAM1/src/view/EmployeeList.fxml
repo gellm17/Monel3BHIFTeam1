@@ -189,7 +189,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnNavActivities" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavActivities_Clicked" styleClass="navButton" text="Aktivitäten">
+            <Button fx:id="btnNavActivities" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavActivities_Clicked" styleClass="navButton" text="Aktivitäten">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -198,7 +198,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnNavBills" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavBills_Clicked" styleClass="navButton" text="Rechnungen" GridPane.rowIndex="1">
+            <Button fx:id="btnNavBills" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavBills_Clicked" styleClass="navButton" text="Rechnungen" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -207,7 +207,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnNavClients" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavClients_Clicked" text="Klienten" GridPane.rowIndex="2">
+            <Button fx:id="btnNavClients" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavClients_Clicked" text="Klienten" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -220,7 +220,7 @@
                   <String fx:value="roundBottomRight" />
                </styleClass>
             </Button>
-            <Button fx:id="btnNavEmployees" contentDisplay="TOP" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavEmployees_Clicked" style="-fx-background-color: transparent;" text="Mitarbeiter" GridPane.rowIndex="3">
+            <Button fx:id="btnNavEmployees" contentDisplay="TOP" disable="true" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavEmployees_Clicked" style="-fx-background-color: transparent;" text="Mitarbeiter" GridPane.rowIndex="3">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -229,7 +229,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnNavSponsors" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavSponsors_Clicked" text="Sponsoren" GridPane.rowIndex="4">
+            <Button fx:id="btnNavSponsors" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavSponsors_Clicked" text="Sponsoren" GridPane.rowIndex="4">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -242,7 +242,7 @@
                   <String fx:value="roundTopRight" />
                </styleClass>
             </Button>
-            <Button fx:id="btnNavPhotos" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavPhotos_Clicked" styleClass="navButton" text="Fotos" GridPane.rowIndex="5">
+            <Button fx:id="btnNavPhotos" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavPhotos_Clicked" styleClass="navButton" text="Fotos" GridPane.rowIndex="5">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -251,7 +251,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnNavBirthdays" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavBirthdays_Clicked" styleClass="navButton" text="Geburtstage" GridPane.rowIndex="6">
+            <Button fx:id="btnNavBirthdays" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavBirthdays_Clicked" styleClass="navButton" text="Geburtstage" GridPane.rowIndex="6">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
