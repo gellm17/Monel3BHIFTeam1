@@ -25,11 +25,13 @@ CREATE TABLE IF NOT EXISTS `aktivitaet` (
   `aktivitaetsbezeichnung` varchar(50) DEFAULT NULL,
   `kategorie` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle monel.aktivitaet: ~0 rows (ungefaehr)
+-- Exportiere Daten aus Tabelle monel.aktivitaet: ~1 rows (ungefaehr)
 DELETE FROM `aktivitaet`;
 /*!40000 ALTER TABLE `aktivitaet` DISABLE KEYS */;
+INSERT INTO `aktivitaet` (`id`, `datum`, `aktivitaetsbezeichnung`, `kategorie`) VALUES
+	(1, '2020-05-12', 'test', 'test');
 /*!40000 ALTER TABLE `aktivitaet` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle monel.aktivitaetsprotokoll
@@ -46,19 +48,21 @@ CREATE TABLE IF NOT EXISTS `aktivitaetsprotokoll` (
   `stundensatz` int(11) DEFAULT NULL,
   `fahrtkosten` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKmitarbeiter` (`mitarbeiter`),
-  KEY `FKklient_aktivitaetsprotokoll` (`klient`),
   KEY `FKaktivitaet` (`aktivitaet`),
   KEY `FKrechnung` (`rechnung`),
+  KEY `FKklient_aktivitaetsprotokoll` (`klient`),
+  KEY `FKmitarbeiter` (`mitarbeiter`),
   CONSTRAINT `FKaktivitaet` FOREIGN KEY (`aktivitaet`) REFERENCES `aktivitaet` (`id`),
-  CONSTRAINT `FKklient_aktivitaetsprotokoll` FOREIGN KEY (`klient`) REFERENCES `klient` (`id`),
-  CONSTRAINT `FKmitarbeiter` FOREIGN KEY (`mitarbeiter`) REFERENCES `mirarbeiter` (`id`),
+  CONSTRAINT `FKklient_aktivitaetsprotokoll` FOREIGN KEY (`klient`) REFERENCES `person` (`id`),
+  CONSTRAINT `FKmitarbeiter` FOREIGN KEY (`mitarbeiter`) REFERENCES `person` (`id`),
   CONSTRAINT `FKrechnung` FOREIGN KEY (`rechnung`) REFERENCES `rechnung` (`rechnungsnummmer`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle monel.aktivitaetsprotokoll: ~0 rows (ungefaehr)
 DELETE FROM `aktivitaetsprotokoll`;
 /*!40000 ALTER TABLE `aktivitaetsprotokoll` DISABLE KEYS */;
+INSERT INTO `aktivitaetsprotokoll` (`id`, `aktivitaet`, `mitarbeiter`, `klient`, `rechnung`, `startzeit`, `endzeit`, `jahr_Monat`, `stundensatz`, `fahrtkosten`) VALUES
+	(1, 1, 4, 3, NULL, '16:30:00', '18:30:00', '2020-05-12', 12, 13);
 /*!40000 ALTER TABLE `aktivitaetsprotokoll` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle monel.dokument
@@ -74,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `dokument` (
   CONSTRAINT `FKbesitzer` FOREIGN KEY (`besitzerid`) REFERENCES `person` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle monel.dokument: ~0 rows (ungefaehr)
+-- Exportiere Daten aus Tabelle monel.dokument: ~0 rows (ungefähr)
 DELETE FROM `dokument`;
 /*!40000 ALTER TABLE `dokument` DISABLE KEYS */;
 /*!40000 ALTER TABLE `dokument` ENABLE KEYS */;
@@ -83,9 +87,9 @@ DELETE FROM `dokument`;
 DROP TABLE IF EXISTS `person`;
 CREATE TABLE IF NOT EXISTS `person` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `esv` int(11) DEFAULT 0,
-  `notfallkontakt1` int(11) DEFAULT 0,
-  `notfallkontakt2` int(11) DEFAULT 0,
+  `esv` int(11) DEFAULT NULL,
+  `notfallkontakt1` int(11) DEFAULT NULL,
+  `notfallkontakt2` int(11) DEFAULT NULL,
   `personentyp` varchar(11) NOT NULL,
   `anrede` varchar(9) DEFAULT NULL,
   `titel` varchar(50) DEFAULT NULL,
