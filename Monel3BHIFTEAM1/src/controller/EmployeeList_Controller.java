@@ -5,6 +5,7 @@ import controller.AddEditEmployee_Controller;
 import data.PersonDAO;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import model.Client;
@@ -133,6 +135,19 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
         this.ConfigureTableView();
         this.btnDeleteEmployee.setDisable(true);
         this.btnEditEmployee.setDisable(true);
+
+        tableEmployees.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                    try {
+                        showEmployee();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
 
         //this.tabActivities.setGraphic(buildImage("../resources/iconAkt.png");
 
@@ -282,6 +297,34 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
 
     @FXML
     void btnSettings_Clicked(ActionEvent event) {
+
+    }
+
+
+    private void showEmployee() throws IOException {
+        FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/EmployeeSummary.fxml"));
+        BorderPane root = fxml.load();
+        Scene scene = new Scene(root);
+        this.getPrimStage().setScene(scene);
+        Screen screen = Screen.getPrimary();
+
+        //Maximized
+        Rectangle2D bounds = screen.getVisualBounds();
+        this.getPrimStage().setX(bounds.getMinX());
+        this.getPrimStage().setY(bounds.getMinY());
+        this.getPrimStage().setWidth(bounds.getWidth());
+        this.getPrimStage().setHeight(bounds.getHeight());
+        this.getPrimStage().show();
+
+
+
+        EmployeeSummary_Controller showController = fxml.getController();
+        //Pass whatever data you want. You can have multiple method calls here
+        showController.setshowEmployee((Employee) selectedItem);
+
+
+        SceneLoader loader = showController;
+        loader.setPrimaryStage(this.getPrimStage());
 
     }
 

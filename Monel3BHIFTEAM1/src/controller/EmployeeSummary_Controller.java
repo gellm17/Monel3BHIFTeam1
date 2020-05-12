@@ -1,5 +1,6 @@
 package controller;
 
+import app.SceneLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +11,7 @@ import model.Client;
 import model.Employee;
 import model.Privacy;
 
-public class EmployeeSummary_Controller {
+public class EmployeeSummary_Controller extends SceneLoader {
 
     @FXML
     private ImageView imgEmployee;
@@ -91,15 +92,15 @@ public class EmployeeSummary_Controller {
                 lbSsnrEmployee.setText(""+showEmployee.getSsnr());
             }
             lbNameEmployee.setText(showEmployee.getSalutation() + " " + showEmployee.getTitle() + " " + showEmployee.getFirstName() + " " + showEmployee.getLastName());
-            lbBirthdateEmployee.setText(showEmployee.getBirthDate().toString());
+            lbBirthdateEmployee.setText(showEmployee.getBirthDate() != null? showEmployee.getBirthDate().toString() : "");
             lbStreetEmployee.setText(showEmployee.getStreetAndNr());
             lbPlaceEmployee.setText(showEmployee.getPlace());
             lbPhoneEmployee.setText(showEmployee.getTelNr());
             lbEmailEmployee.setText(showEmployee.getEmail());
             lbIbanEmployee.setText(showEmployee.getIban());
             lbBicEmployee.setText(showEmployee.getBic());
-            lbDateOfEmploymentEmployee.setText(showEmployee.getDateOfEmployment().toString());
-            lbDateSalaryLevelEmployee.setText(showEmployee.getDateSalaryLevel().toString());
+            lbDateOfEmploymentEmployee.setText(showEmployee.getDateOfEmployment() != null? showEmployee.getDateOfEmployment().toString() : "");
+            lbDateSalaryLevelEmployee.setText(showEmployee.getDateSalaryLevel() != null? showEmployee.getDateSalaryLevel().toString() : "");
             lbOccupationGroupEmployee.setText(showEmployee.getOccupationGroup().toString());
             lbVolunteeringEmployee.setText(showEmployee.isVolunteering() ? "Ehrenamt" : "Hauptamt");
             lbSalaryLevelEmployee.setText(showEmployee.getSalaryLevel().toString());
@@ -112,9 +113,6 @@ public class EmployeeSummary_Controller {
             cbPrivacy1Employee.setSelected(privacyOfshowEmployee.getPrivacies().get(1));
             cbPrivacy1Employee.setSelected(privacyOfshowEmployee.getPrivacies().get(2));
             cbPrivacy1Employee.setSelected(privacyOfshowEmployee.getPrivacies().get(3));
-
-
-
         }
     }
 
