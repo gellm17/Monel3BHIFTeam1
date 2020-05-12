@@ -22,12 +22,15 @@ DROP TABLE IF EXISTS `aktivitaet`;
 CREATE TABLE IF NOT EXISTS `aktivitaet` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `datum` date DEFAULT NULL,
-  `aktivitätsbezeichnung` varchar(50) DEFAULT NULL,
+  `aktivitaetsbezeichnung` varchar(50) DEFAULT NULL,
   `kategorie` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Daten Export vom Benutzer nicht ausgewählt
+-- Exportiere Daten aus Tabelle monel.aktivitaet: ~0 rows (ungefaehr)
+DELETE FROM `aktivitaet`;
+/*!40000 ALTER TABLE `aktivitaet` DISABLE KEYS */;
+/*!40000 ALTER TABLE `aktivitaet` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle monel.aktivitaetsprotokoll
 DROP TABLE IF EXISTS `aktivitaetsprotokoll`;
@@ -53,7 +56,10 @@ CREATE TABLE IF NOT EXISTS `aktivitaetsprotokoll` (
   CONSTRAINT `FKrechnung` FOREIGN KEY (`rechnung`) REFERENCES `rechnung` (`rechnungsnummmer`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Daten Export vom Benutzer nicht ausgewählt
+-- Exportiere Daten aus Tabelle monel.aktivitaetsprotokoll: ~0 rows (ungefaehr)
+DELETE FROM `aktivitaetsprotokoll`;
+/*!40000 ALTER TABLE `aktivitaetsprotokoll` DISABLE KEYS */;
+/*!40000 ALTER TABLE `aktivitaetsprotokoll` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle monel.dokument
 DROP TABLE IF EXISTS `dokument`;
@@ -68,7 +74,10 @@ CREATE TABLE IF NOT EXISTS `dokument` (
   CONSTRAINT `FKbesitzer` FOREIGN KEY (`besitzerid`) REFERENCES `person` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Daten Export vom Benutzer nicht ausgewählt
+-- Exportiere Daten aus Tabelle monel.dokument: ~0 rows (ungefaehr)
+DELETE FROM `dokument`;
+/*!40000 ALTER TABLE `dokument` DISABLE KEYS */;
+/*!40000 ALTER TABLE `dokument` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle monel.person
 DROP TABLE IF EXISTS `person`;
@@ -104,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `person` (
   `firmenname` varchar(50) DEFAULT NULL,
   `firmentelefonnummer` varchar(50) DEFAULT NULL,
   `firmenemail` varchar(50) DEFAULT NULL,
-  `gelöscht` tinyint(1) DEFAULT NULL COMMENT '1 = true, 0 = false',
+  `geloescht` tinyint(1) DEFAULT NULL COMMENT '1 = true, 0 = false',
   PRIMARY KEY (`id`),
   KEY `FKesv` (`esv`),
   KEY `FKnotfallkontakt1` (`notfallkontakt1`),
@@ -114,7 +123,15 @@ CREATE TABLE IF NOT EXISTS `person` (
   CONSTRAINT `FKnotfallkontakt2` FOREIGN KEY (`notfallkontakt2`) REFERENCES `person` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- Daten Export vom Benutzer nicht ausgewählt
+-- Exportiere Daten aus Tabelle monel.person: ~4 rows (ungefaehr)
+DELETE FROM `person`;
+/*!40000 ALTER TABLE `person` DISABLE KEYS */;
+INSERT INTO `person` (`id`, `esv`, `notfallkontakt1`, `notfallkontakt2`, `personentyp`, `anrede`, `titel`, `vorname`, `nachname`, `strasse_hausnummer`, `plz`, `ort`, `telefonnummer`, `email`, `geburtsdatum`, `svnr`, `diagnose`, `allergien`, `sonstiges`, `beschaeftigung`, `amt`, `verwendungsgruppe`, `gehaltsstufe`, `wochenstunden`, `iban`, `bic`, `vorrueckdatum`, `einstelldatum`, `firmenname`, `firmentelefonnummer`, `firmenemail`, `geloescht`) VALUES
+	(1, NULL, NULL, NULL, 'SONSTIGES', 'Sonstige', 'Mag.', 'esvTest', 'esvtest', 'Südtiroler Straße 1', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(2, NULL, NULL, NULL, 'SONSTIGES', 'Herr', 'Mag.', 'notfallTest', 'notfallTest', 'Südtiroler Straße 2', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(3, 1, 2, NULL, 'KLIENT', 'Herr', 'Mag.', 'klientTest', 'klientTest', 'Südtiroler Straße 3', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, 'Alter', 'Nussalergie', 'test', 'in Rente', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(4, NULL, NULL, NULL, 'MITARBEITER', 'Frau', 'Mag.', 'mitarbeiterTest', 'mitarbeiterTest', 'Südtiroler Straße 4', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, NULL, NULL, NULL, NULL, 1, 'VG1', 'GS8', 40, 'AT123456789012345678', 'ABCDEFGH', '2020-06-10', '2016-01-01', NULL, NULL, NULL, NULL);
+/*!40000 ALTER TABLE `person` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle monel.rechnung
 DROP TABLE IF EXISTS `rechnung`;
@@ -128,7 +145,10 @@ CREATE TABLE IF NOT EXISTS `rechnung` (
   CONSTRAINT `FKklient_rechnung` FOREIGN KEY (`klient`) REFERENCES `klient` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Daten Export vom Benutzer nicht ausgewählt
+-- Exportiere Daten aus Tabelle monel.rechnung: ~0 rows (ungefaehr)
+DELETE FROM `rechnung`;
+/*!40000 ALTER TABLE `rechnung` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rechnung` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
