@@ -1,7 +1,7 @@
 package model;
 
-import gnu.trove.TByteDoubleProcedure;
-import org.jetbrains.debugger.ObjectProperty;
+
+import javafx.beans.property.*;
 
 import java.time.LocalDate;
 
@@ -13,10 +13,10 @@ public class EventProtocol {
     private DoubleProperty hourlyRate;
     private ObjectProperty<Employee> employee;
     private ObjectProperty<Client> client;
-    private ObjectProperty<event> event;
+    private ObjectProperty<Event> event;
 
     public EventProtocol(LocalDate startTime, LocalDate endTime, LocalDate year_month, double hourlyRate, Employee employee, Client client, Event event) {
-        this.id = new SimpleIntProperty(this, "id", 0);
+        this.id = new SimpleIntegerProperty(this, "id", 0);
         this.startTime = new SimpleObjectProperty(this, "startTime", startTime);
         this.endTime = new SimpleObjectProperty(this, "endTIme", endTime);
         this.year_month = new SimpleObjectProperty(this, "year_month", year_month);
@@ -26,66 +26,98 @@ public class EventProtocol {
         this.event = new SimpleObjectProperty<Event>(this, "event", event);
     }
 
+    public int getId() {
+        return id.get();
+    }
+
     public IntegerProperty idProperty() {
         return id;
     }
-    public int getId() { return this.id.get(); }
+
     public void setId(int id) {
         this.id.set(id);
+    }
+
+    public LocalDate getStartTime() {
+        return startTime.get();
     }
 
     public ObjectProperty<LocalDate> startTimeProperty() {
         return startTime;
     }
-    public LocalDate getStartTime() { return this.startTime.get(); }
-    public void setStartTim(LocalDate startTime) {
+
+    public void setStartTime(LocalDate startTime) {
         this.startTime.set(startTime);
     }
 
-    public ObjectProperty<LocalDate> EndTimeProperty() {
+    public LocalDate getEndTime() {
+        return endTime.get();
+    }
+
+    public ObjectProperty<LocalDate> endTimeProperty() {
         return endTime;
     }
-    public LocalDate getEndTime() { return this.endTime.get(); }
+
     public void setEndTime(LocalDate endTime) {
         this.endTime.set(endTime);
+    }
+
+    public LocalDate getYear_month() {
+        return year_month.get();
     }
 
     public ObjectProperty<LocalDate> year_monthProperty() {
         return year_month;
     }
-    public LocalDate getYear_Month() { return this.year_month.get(); }
+
     public void setYear_month(LocalDate year_month) {
         this.year_month.set(year_month);
+    }
+
+    public double getHourlyRate() {
+        return hourlyRate.get();
     }
 
     public DoubleProperty hourlyRateProperty() {
         return hourlyRate;
     }
-    public double getHourlyRate() { return this.hourlyRate.get(); }
+
     public void setHourlyRate(double hourlyRate) {
         this.hourlyRate.set(hourlyRate);
     }
 
-    public Employee employeeProperty() {
+    public Employee getEmployee() {
+        return employee.get();
+    }
+
+    public ObjectProperty<Employee> employeeProperty() {
         return employee;
     }
-    public Employee getEmployee() { return this.employee.get(); }
+
     public void setEmployee(Employee employee) {
         this.employee.set(employee);
     }
 
-    public Client clientProperty() {
+    public Client getClient() {
+        return client.get();
+    }
+
+    public ObjectProperty<Client> clientProperty() {
         return client;
     }
-    public Client getClient() { return this.client.get(); }
+
     public void setClient(Client client) {
         this.client.set(client);
     }
 
-    public Event eventProperty() {
+    public Event getEvent() {
+        return event.get();
+    }
+
+    public ObjectProperty<Event> eventProperty() {
         return event;
     }
-    public Event getEvent() { return this.event.get();}
+
     public void setEvent(Event event) {
         this.event.set(event);
     }

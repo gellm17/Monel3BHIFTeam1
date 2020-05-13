@@ -1,52 +1,55 @@
 package model;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-import java.time.LocalDate;
-
 public class Sponsor extends Person {
 
-    private StringProperty firmenname;
-    private StringProperty firmenTelNr;
-    private StringProperty firmenEmail;
+    private StringProperty companyName;
+    private StringProperty companyTelNr;
+    private StringProperty companyEmail;
 
     public Sponsor(Salutation salutation, String firstName, String lastName) {
         super(salutation, firstName, lastName );
 
-        firmenname = new SimpleStringProperty(this, "firmenname");
-        firmenTelNr = new SimpleStringProperty(this, "firmenTelNr");
-        firmenEmail = new SimpleStringProperty(this, "firmenEmail");
+        companyName = new SimpleStringProperty(this, "companyName");
+        companyTelNr = new SimpleStringProperty(this, "companyTelNr");
+        companyEmail = new SimpleStringProperty(this, "companyEmail");
     }
 
-    public String getFirmenname() {
-        return firmenname.get();
-    }
-    public StringProperty getFirmennameProperty() {
-        return firmenname;
-    }
-    public void setFirmenname(StringProperty firmenname) {
-        this.firmenname = firmenname;
+    public String getCompanyName() {
+        return companyName.get();
     }
 
-    public String getFirmenTalNr() {
-        return firmenTelNr.get();
-    }
-    public StringProperty getFirmenTalNrProperty() {
-        return firmenTelNr;
-    }
-    public void setFirmenTalNr(StringProperty firmenTelNr) {
-        this.firmenTelNr = firmenTelNr;
+    public StringProperty companyNameProperty() {
+        return companyName;
     }
 
-    public String getFirmenEmail() {
-        return firmenEmail.get();
+    public void setCompanyName(String companyName) {
+        this.companyName.set(companyName);
     }
-    public StringProperty getFirmenEmailProperty() {
-        return firmenEmail;
+
+    public String getCompanyTelNr() {
+        return companyTelNr.get();
     }
-    public void setFirmenEmail(StringProperty firmenEmail) {
-        this.firmenEmail = firmenEmail;
+
+    public StringProperty companyTelNrProperty() {
+        return companyTelNr;
+    }
+
+    public void setCompanyTelNr(String companyTelNr) {
+        this.companyTelNr.set(companyTelNr);
+    }
+
+    public String getCompanyEmail() {
+        return companyEmail.get();
+    }
+
+    public StringProperty companyEmailProperty() {
+        return companyEmail;
+    }
+
+    public void setCompanyEmail(String companyEmail) {
+        this.companyEmail.set(companyEmail);
     }
 }
