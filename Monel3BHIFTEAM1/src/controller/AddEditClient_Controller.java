@@ -762,7 +762,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         this.cbSelfDetermined.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                vboxEsv.setDisable(newValue);
+                tabEsv.setDisable(newValue);
             }
         });
     }
