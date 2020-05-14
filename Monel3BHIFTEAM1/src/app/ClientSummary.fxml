@@ -84,9 +84,6 @@
                                     <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="20.0" valignment="TOP" vgrow="SOMETIMES" />
                                     <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="20.0" valignment="TOP" vgrow="SOMETIMES" />
                                     <RowConstraints maxHeight="1.7976931348623157E308" valignment="TOP" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="20.0" valignment="TOP" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="20.0" valignment="TOP" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="1.7976931348623157E308" valignment="TOP" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
                                     <Label text="Name">
@@ -166,33 +163,9 @@
                                           <Insets bottom="20.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="IBAN" GridPane.rowIndex="11">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lbIbanClient" GridPane.columnIndex="1" GridPane.rowIndex="11">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="BIC" GridPane.rowIndex="12">
-                                       <font>
-                                          <Font name="System Bold" size="14.0" />
-                                       </font>
-                                    </Label>
-                                    <Label fx:id="lbBicClient" GridPane.columnIndex="1" GridPane.rowIndex="12">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                       <GridPane.margin>
-                                          <Insets />
-                                       </GridPane.margin>
-                                    </Label>
                                     <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                    <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                                  </children>
                               </GridPane>
                            </content>
