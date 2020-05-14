@@ -1,7 +1,6 @@
 package app;
 
 import controller.ClientList_Controller;
-import data.DBConnector;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,7 +11,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        DBConnector.loadDB();
+        //DBConnector.loadDB();
         FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/ClientList.fxml"));
         primaryStage.setMaximized(true);
         primaryStage.setTitle("Monel Pro");

@@ -1,7 +1,9 @@
-package data;
+package db;
+import data.PersonDAO;
+
 import java.sql.*;
 
-public class DBConnector {
+public class ConnectionFactory {
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "org.mariadb.jdbc.Driver";
     static final String DB_URL = "jdbc:mariadb://127.0.0.1/monel";
