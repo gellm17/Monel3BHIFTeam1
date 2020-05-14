@@ -24,7 +24,7 @@ public class Event {
     }
 
     public static Event fromResults(ResultSet rs) throws SQLException {
-        return new Event(rs.getInt("id"), LocalDate.parse(rs.getString("datum")), rs.getString("aktivitaetsbezeichnung"), rs.getBoolean("kategorie"));
+        return new Event(rs.getInt("id"), LocalDate.parse(rs.getString("datum")), rs.getString("aktivitaetsbezeichnung"), (rs.getInt("kategorie") == 1 ? true : false));
     }
 
     public int getId() {
