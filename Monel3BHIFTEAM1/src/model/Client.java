@@ -57,7 +57,11 @@ public class Client extends Person{
         this.other = new SimpleStringProperty(this, "other");
     }
 
-   /* public Client(Salutation salutation, String title, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate, IntegerProperty ssnr, StringProperty iban, StringProperty bic) {
+    public Client(int id) {
+        super(id);
+    }
+
+    /* public Client(Salutation salutation, String title, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, String telNr, String email, LocalDate birthDate, IntegerProperty ssnr, StringProperty iban, StringProperty bic) {
         super(salutation, title, firstName, lastName, street, houseNumber, zipCode, place, telNr, email, birthDate);
         this.ssnr = ssnr;
         this.iban = iban;

@@ -62,6 +62,10 @@ public class Employee extends Person {
         privacy = new SimpleObjectProperty<Privacy>(this, "privacy");
     }
 
+    public Employee(int id) {
+        super(id);
+    }
+
     public static Employee fromResults(ResultSet rs) throws SQLException {
         LocalDate vorrueckdatum = null;
                 if (rs.getString("vorrueckdatum") != null) {

@@ -2,23 +2,29 @@ package model;
 
 import javafx.beans.property.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class Event {
     private IntegerProperty id;
     private ObjectProperty<LocalDate> date;
     private StringProperty name;                //activity
-    private StringProperty description;
-    private DoubleProperty rideCosts;
     private BooleanProperty isGroup;            //if the event is a group event
 
-    public Event(LocalDate date, String name, String description, double rideCosts, boolean isGroup) {
-        this.id = new SimpleIntegerProperty(this, "id", 0);
+    public Event(Integer id, LocalDate date, String name, boolean isGroup) {
+        this.id = new SimpleIntegerProperty(this, "id", id);
         this.date = new SimpleObjectProperty<LocalDate>(this, "date", date);
         this.name = new SimpleStringProperty(this, "name", name);
-        this.description = new SimpleStringProperty(this, "description", description);
-        this.rideCosts = new SimpleDoubleProperty(this, "rideCosts", rideCosts);
         this.isGroup = new SimpleBooleanProperty(this, "isGroup", isGroup);
+    }
+
+    public Event(Integer id) {
+        this.id = new SimpleIntegerProperty(this, "id", id);
+    }
+
+    public static Event fromResults(ResultSet rs) throws SQLException {
+        return new Event(rs.getInt("id"), LocalDate.parse(rs.getString("datum")), rs.getString("aktivitaetsbezeichnung"), rs.getBoolean("kategorie"));
     }
 
     public int getId() {
@@ -55,30 +61,6 @@ public class Event {
 
     public void setName(String name) {
         this.name.set(name);
-    }
-
-    public String getDescription() {
-        return description.get();
-    }
-
-    public StringProperty descriptionProperty() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description.set(description);
-    }
-
-    public double getRideCosts() {
-        return rideCosts.get();
-    }
-
-    public DoubleProperty rideCostsProperty() {
-        return rideCosts;
-    }
-
-    public void setRideCosts(double rideCosts) {
-        this.rideCosts.set(rideCosts);
     }
 
     public boolean getIsGroup() {

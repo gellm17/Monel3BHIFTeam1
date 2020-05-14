@@ -4,6 +4,7 @@ import data.PersonDAO;
 import model.Client;
 import model.Employee;
 import model.Person;
+import model.Sponsor;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -60,7 +61,7 @@ public class DBManager {
             } else if(persontyp.equals("MITARBEITER")) {
                 PersonDAO.getInstance().addPerson(Employee.fromResults(rs));
             } else if(persontyp.equals("SPONSOR")) {
-                //PersonDAO.getInstance().addPerson(Sponsor.fromResults(rs));
+                PersonDAO.getInstance().addPerson(Sponsor.fromResults(rs));
             } else {
                 PersonDAO.getInstance().addPerson(Person.fromResults(rs));
             }

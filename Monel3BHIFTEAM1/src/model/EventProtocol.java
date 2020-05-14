@@ -3,19 +3,23 @@ package model;
 
 import javafx.beans.property.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class EventProtocol {
     private IntegerProperty id;
-    private ObjectProperty<LocalDate> startTime;
-    private ObjectProperty<LocalDate> endTime;
+    private ObjectProperty<LocalTime> startTime;
+    private ObjectProperty<LocalTime> endTime;
     private ObjectProperty<LocalDate> year_month;
     private DoubleProperty hourlyRate;
     private ObjectProperty<Employee> employee;
     private ObjectProperty<Client> client;
     private ObjectProperty<Event> event;
+    private DoubleProperty rideCosts;
 
-    public EventProtocol(LocalDate startTime, LocalDate endTime, LocalDate year_month, double hourlyRate, Employee employee, Client client, Event event) {
+    public EventProtocol(Integer id, LocalTime startTime, LocalTime endTime, LocalDate year_month, Double hourlyRate, Employee employee, Client client, Event event, Double rideCosts) {
         this.id = new SimpleIntegerProperty(this, "id", 0);
         this.startTime = new SimpleObjectProperty(this, "startTime", startTime);
         this.endTime = new SimpleObjectProperty(this, "endTIme", endTime);
@@ -24,6 +28,23 @@ public class EventProtocol {
         this.employee = new SimpleObjectProperty<Employee>(this, "employee", employee);
         this.client = new SimpleObjectProperty<Client>(this, "client", client);
         this.event = new SimpleObjectProperty<Event>(this, "event", event);
+        this.rideCosts = new SimpleDoubleProperty(this, "rideCosts", rideCosts);
+    }
+
+    public static EventProtocol fromResults(ResultSet rs) throws SQLException { //mandatory startTime, endTime and year_month
+        Employee e = null;
+        Client c = null;
+        Event ev = null;
+        if (rs.getInt("mitarbeiter") != 0) {
+            e = new Employee(rs.getInt("mitarbeiter"));
+        }
+        if (rs.getInt("klient") != 0) {
+            c = new Client(rs.getInt("klient"));
+        }
+        if (rs.getInt("aktivitaet") != 0) {
+            ev = new Event(rs.getInt("aktivitaet"));
+        }
+        return new EventProtocol(rs.getInt("id"), LocalTime.parse(rs.getString("startzeit")), LocalTime.parse(rs.getString("endzeit")), LocalDate.parse(rs.getString("jahr_Monat")), rs.getDouble("stundensatz"), e, c, ev, rs.getDouble("fahrtkosten"));
     }
 
     public int getId() {
@@ -38,27 +59,25 @@ public class EventProtocol {
         this.id.set(id);
     }
 
-    public LocalDate getStartTime() {
+    public LocalTime getStartTime() {
         return startTime.get();
     }
 
-    public ObjectProperty<LocalDate> startTimeProperty() {
-        return startTime;
-    }
+    public ObjectProperty<LocalTime> startTimeProperty() { return startTime; }
 
-    public void setStartTime(LocalDate startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime.set(startTime);
     }
 
-    public LocalDate getEndTime() {
+    public LocalTime getEndTime() {
         return endTime.get();
     }
 
-    public ObjectProperty<LocalDate> endTimeProperty() {
+    public ObjectProperty<LocalTime> endTimeProperty() {
         return endTime;
     }
 
-    public void setEndTime(LocalDate endTime) {
+    public void setEndTime(LocalTime endTime) {
         this.endTime.set(endTime);
     }
 
@@ -121,4 +140,10 @@ public class EventProtocol {
     public void setEvent(Event event) {
         this.event.set(event);
     }
+
+    public double getRideCosts() { return rideCosts.get(); }
+
+    public DoubleProperty rideCostsProperty() { return rideCosts; }
+
+    public void setRideCosts(double rideCosts) { this.rideCosts.set(rideCosts); }
 }
