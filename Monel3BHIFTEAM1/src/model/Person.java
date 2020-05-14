@@ -2,6 +2,8 @@ package model;
 
 import javafx.beans.property.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -81,9 +83,13 @@ public class Person {
         this.email = new SimpleStringProperty(this, "email", "");
     }
 
+    public static Person fromResults(ResultSet rs) throws SQLException {
+        return new Person(rs.getInt("id"), Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")));
+    }
+
     /*
-            GETTERS FOR PROPERTIES AND VALUES
-             */
+     * GETTERS FOR PROPERTIES AND VALUES
+     */
     public int getId() {
         return id.get();
     }

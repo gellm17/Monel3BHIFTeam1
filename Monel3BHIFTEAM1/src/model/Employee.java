@@ -2,6 +2,8 @@ package model;
 
 import javafx.beans.property.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class Employee extends Person {
@@ -58,6 +60,14 @@ public class Employee extends Person {
         bic = new SimpleStringProperty(this, "bic", "");
         dateOfEmployment = new SimpleObjectProperty<LocalDate>(this, "dateOfEmployment");
         privacy = new SimpleObjectProperty<Privacy>(this, "privacy");
+    }
+
+    public static Employee fromResults(ResultSet rs) throws SQLException {
+        LocalDate vorrueckdatum = null;
+                if (rs.getString("vorrueckdatum") != null) {
+            vorrueckdatum = LocalDate.parse(rs.getString("vorrueckdatum"));
+        }
+        return new Employee(rs.getInt("id"), Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")), rs.getInt("svnr"), (rs.getInt("amt") == 1 ? true : false), OccupationGroup.valueOf(rs.getString("verwendungsgruppe")), SalaryLevel.valueOf(rs.getString("gehaltsstufe")), rs.getInt("wochenstunden"), vorrueckdatum, rs.getString("iban"), rs.getString("bic"), LocalDate.parse(rs.getString("einstelldatum")), new Privacy());
     }
 
     public long getSsnr() {

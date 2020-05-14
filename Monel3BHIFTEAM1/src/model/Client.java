@@ -2,6 +2,8 @@ package model;
 
 import javafx.beans.property.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 public class Client extends Person{
@@ -62,9 +64,25 @@ public class Client extends Person{
         this.bic = bic;
     }*/
 
+   public static Client fromResults(ResultSet rs) throws SQLException {
+       Person esv = null;
+       Person notfall1 = null;
+       Person notfall2 = null;
+       if (rs.getInt("esv") != 0) {
+           esv = new Person(rs.getInt("esv"));
+       }
+       if (rs.getInt("notfallkontakt1") != 0) {
+           notfall1 = new Person(rs.getInt("notfallkontakt1"));
+       }
+       if (rs.getInt("notfallkontakt2") != 0) {
+           notfall2 = new Person(rs.getInt("notfallkontakt2"));
+       }
+       return new Client(rs.getInt("id"), Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")), rs.getInt("svnr"), rs.getString("diagnose"), rs.getString("beschaeftigung"), rs.getString("allergien"), esv, notfall1, notfall2, new Privacy(), rs.getString("sonstiges"));
+   }
+
     /*
-                GETTERS FOR VALUES AND PROPERTIES
-                 */
+     * GETTERS FOR VALUES AND PROPERTIES
+     */
     public long getSsnr() {
         return ssnr.get();
     }

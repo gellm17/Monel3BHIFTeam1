@@ -11,10 +11,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class PersonDAO {
-    private ObservableMap<Integer, Person> persons = FXCollections.observableMap(new HashMap<Integer, Person>());   // HashMap mit allen Personen (ESV und Notfallkontakte)
-    private ObservableList<Client> clients = FXCollections.observableList(new ArrayList<Client>());                 // ArrayList mit allen Personen
-    private ObservableList<Employee> employees = FXCollections.observableList(new ArrayList<Employee>());           // ArrayList mit allen Employees
-    private ObservableList<Sponsor> sponsor = FXCollections.observableList(new ArrayList<>());                      // ArrayList mit allen Company
+    private HashMap<Integer, Person> persons = new HashMap<Integer, Person>();                              // HashMap mit allen Personen (ESV und Notfallkontakte)
+    private ObservableList<Client> clients = FXCollections.observableList(new ArrayList<Client>());         // ArrayList mit allen Personen
+    private ObservableList<Employee> employees = FXCollections.observableList(new ArrayList<Employee>());   // ArrayList mit allen Employees
+    private ObservableList<Sponsor> sponsor = FXCollections.observableList(new ArrayList<>());              // ArrayList mit allen Company
     private static PersonDAO instance = null;
 
     private PersonDAO() {
@@ -65,59 +65,6 @@ public class PersonDAO {
         }
         return success;
     }
-
-    public void loadPersons(ResultSet rs) throws SQLException {
-        String persontyp = "";
-        int index;
-        Person esv;
-        Person notfall1;
-        Person notfall2;
-        Client c;
-        LocalDate vorrueckdatum;
-        LocalDate einstelldatum;
-        while(rs.next()) {
-            persontyp = rs.getString("personentyp");
-            esv = null;
-            notfall1 = null;
-            notfall2 = null;
-            vorrueckdatum = null;
-            einstelldatum = null;
-            if(persontyp.equals("KLIENT")) {
-                if (rs.getInt("esv") != 0) {
-                    esv = new Person(rs.getInt("esv"));
-                }
-                if (rs.getInt("notfallkontakt1") != 0) {
-                    notfall1 = new Person(rs.getInt("notfallkontakt1"));
-                }
-                if (rs.getInt("notfallkontakt2") != 0) {
-                    notfall2 = new Person(rs.getInt("notfallkontakt2"));
-                }
-                addPerson(new Client(rs.getInt("id"), Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")), rs.getInt("svnr"), rs.getString("diagnose"), rs.getString("beschaeftigung"), rs.getString("allergien"), esv, notfall1, notfall2, new Privacy(), rs.getString("sonstiges")));
-            } else if(persontyp.equals("MITARBEITER")) {
-                if (rs.getString("vorrueckdatum") != null) {
-                    vorrueckdatum = LocalDate.parse(rs.getString("vorrueckdatum"));
-                }
-                addPerson(new Employee(rs.getInt("id"), Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")), rs.getInt("svnr"), (rs.getInt("amt") == 1 ? true : false), OccupationGroup.valueOf(rs.getString("verwendungsgruppe")), SalaryLevel.valueOf(rs.getString("gehaltsstufe")), rs.getInt("wochenstunden"), vorrueckdatum, rs.getString("iban"), rs.getString("bic"), LocalDate.parse(rs.getString("einstelldatum")), new Privacy()));
-            } else if(persontyp.equals("SPONSOR")) {
-                //addPerson(new Sponsor(Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer").split(" ")[0], rs.getString("strasse_hausnummer")); // fehlen noch parameter
-            } else {
-                addPerson(new Person(rs.getInt("id"), Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum"))));
-            }
-        }
-        Iterator<Client> it = clients.iterator();
-        while (it.hasNext()) {
-            c = it.next();
-            if (c.getEsv() != null) {
-                c.setEsv(persons.get(c.getEsv().getId()));
-            }
-            if (c.getEmergencyContact1() != null) {
-                c.setEmergencyContact1(persons.get(c.getEmergencyContact1().getId()));
-            }
-            if (c.getEmergencyContact2() != null) {
-                c.setEmergencyContact2(persons.get(c.getEmergencyContact2().getId()));
-            }
-        }
-    }
     
     // GETTER
     public ObservableList<Sponsor> getSponsor() {
@@ -130,5 +77,9 @@ public class PersonDAO {
 
     public ObservableList<Employee> getEmployees() {
         return employees;
+    }
+
+    public HashMap<Integer, Person> getPersons() {
+        return persons;
     }
 }
