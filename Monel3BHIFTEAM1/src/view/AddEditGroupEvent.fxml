@@ -4,9 +4,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="847.0" prefWidth="1232.0" styleClass="background" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddEditEventProtocol_Controller">
+<BorderPane prefHeight="847.0" prefWidth="1232.0" styleClass="background" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddEditGroupEvent_Controller">
    <top>
       <BorderPane maxHeight="-Infinity" prefHeight="90.0" styleClass="programHeader" BorderPane.alignment="CENTER">
          <right>
@@ -61,7 +61,7 @@
             <Insets bottom="5.0" left="5.0" right="20.0" top="5.0" />
          </padding>
          <center>
-            <Label fx:id="lbTitle" text="Einzelaktivität erfassen" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label fx:id="lbTitle" text="Gruppenaktivität erfassen" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Gill Sans MT" size="36.0" />
                </font>
@@ -73,6 +73,9 @@
       <VBox>
          <children>
             <HBox>
+               <VBox.margin>
+                  <Insets bottom="30.0" />
+               </VBox.margin>
                <children>
                   <VBox>
                      <children>
@@ -84,13 +87,13 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Label>
-                        <DatePicker fx:id="dpDateEvent" prefWidth="130.0" promptText="12/05/2020" />
+                        <DatePicker fx:id="dpDateEvent" prefWidth="130.0" />
                      </children>
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox maxWidth="1.7976931348623157E308">
+                  <VBox layoutX="10.0" layoutY="10.0">
                      <children>
                         <Label text="Name">
                            <font>
@@ -108,133 +111,66 @@
                      </children>
                   </VBox>
                </children>
-               <VBox.margin>
-                  <Insets bottom="40.0" />
-               </VBox.margin>
             </HBox>
-            <Label text="Klient">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </Label>
-            <ComboBox fx:id="comboClientEvent" prefWidth="500.0">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </ComboBox>
-            <Label layoutX="30.0" layoutY="95.0" text="Mitarbeiter">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </Label>
-            <ComboBox fx:id="comboEmployeeEvent" layoutX="30.0" layoutY="120.0" prefWidth="500.0">
-               <VBox.margin>
-                  <Insets bottom="40.0" />
-               </VBox.margin>
-            </ComboBox>
-            <HBox layoutX="30.0" layoutY="30.0">
-               <children>
-                  <VBox>
-                     <children>
-                        <Label text="Startzeit">
+            <BorderPane>
+               <center>
+                  <TableView fx:id="tableProtocols" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="999999.0">
+                     <BorderPane.margin>
+                        <Insets top="15.0" />
+                     </BorderPane.margin>
+                  </TableView>
+               </center>
+               <top>
+                  <BorderPane>
+                     <right>
+                        <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="btnAddProtocol" mnemonicParsing="false" onAction="#btnAddProtocol_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                                 <graphic>
+                                    <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/icon_AddK.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnDeleteProtocol" layoutX="1148.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnDeleteProtocol_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                                 <graphic>
+                                    <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/icon_Del.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnEditProtocol" layoutX="1158.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnEditProtocol_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                                 <graphic>
+                                    <ImageView fitHeight="150.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/icon_Edit.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </right>
+                     <left>
+                        <Label text="Teilnehmer" BorderPane.alignment="CENTER">
                            <font>
-                              <Font size="14.0" />
+                              <Font size="24.0" />
                            </font>
-                           <VBox.margin>
-                              <Insets bottom="5.0" />
-                           </VBox.margin>
                         </Label>
-                        <TextField fx:id="tfStartEvent" prefWidth="60.0" promptText="08:00">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox maxWidth="1.7976931348623157E308">
-                     <children>
-                        <Label text="Endzeit">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="5.0" />
-                           </VBox.margin>
-                        </Label>
-                        <TextField fx:id="tfEndEvent" prefWidth="60.0" promptText="10:00">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </TextField>
-                     </children>
-                  </VBox>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </HBox>
-            <Label text="Stundensatz">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </Label>
-            <HBox alignment="CENTER_LEFT">
-               <children>
-                  <TextField fx:id="tfHourlyRateEvent" maxWidth="-Infinity" prefWidth="60.0" promptText="3.10">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
-                  <Label text="€">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </HBox>
-            <Label layoutX="30.0" layoutY="287.0" text="Fahrtkosten">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </Label>
-            <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="307.0">
-               <children>
-                  <TextField fx:id="tfRideCostsEvent" maxWidth="-Infinity" prefWidth="60.0" promptText="20.50">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
-                  <Label text="€">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-            </HBox>
+                     </left>
+                  </BorderPane>
+               </top>
+            </BorderPane>
          </children>
          <BorderPane.margin>
             <Insets />
@@ -270,7 +206,7 @@
             </Button>
          </children>
          <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
          </padding>
       </HBox>
    </bottom>

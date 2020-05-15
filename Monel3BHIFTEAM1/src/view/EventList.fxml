@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="847.0" prefWidth="1233.0" styleClass="background" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ActivityList_Controller">
+<BorderPane prefHeight="847.0" prefWidth="1233.0" styleClass="background" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EventList_Controller">
    <top>
       <BorderPane maxHeight="-Infinity" prefHeight="90.0" styleClass="programHeader" BorderPane.alignment="CENTER">
          <right>
@@ -71,7 +71,7 @@
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>
-            <TableView fx:id="tableActivities" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="tableEvents" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <BorderPane.margin>
                   <Insets top="35.0" />
                </BorderPane.margin>
@@ -80,7 +80,7 @@
          <top>
             <BorderPane styleClass="background" BorderPane.alignment="CENTER">
                <center>
-                  <TextField fx:id="tfSearchClients" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" BorderPane.alignment="CENTER">
+                  <TextField fx:id="tfSearchEvents" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -92,7 +92,7 @@
                         <Insets />
                      </BorderPane.margin>
                      <children>
-                        <Button fx:id="btnSearchActivities" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnSearchActivities_Clicked" prefHeight="44.0" prefWidth="44.0">
+                        <Button fx:id="btnSearchEvents" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnSearchEvents_Clicked" prefHeight="44.0" prefWidth="44.0">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -111,7 +111,7 @@
                               <String fx:value="searchButton" />
                            </styleClass>
                         </Button>
-                        <Button fx:id="btnFilterActivities" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnFilterActivities_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                        <Button fx:id="btnFilterEvents" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnFilterEvents_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -126,7 +126,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                      <Button fx:id="btnAddActivity" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnAddActivity_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                      <Button fx:id="btnAddSingleEvent" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnAddSingleEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -141,7 +141,22 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="btnDeleteActivity" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnDeleteActivity_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                        <Button fx:id="btnAddGroupEvent" layoutX="154.0" layoutY="10.0" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnAddGroupEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/icon_AddK.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnDeleteEvent" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnDeleteEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -156,7 +171,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button fx:id="btnEditActivity" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnEditActivity_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                        <Button fx:id="btnEditEvent" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnEditEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
                            <font>
                               <Font size="16.0" />
                            </font>

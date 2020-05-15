@@ -3,13 +3,13 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class AddEditEventProtocol_Controller {
+public class AddEditGroupEvent_Controller {
 
     @FXML
     private Button btnInfo;
@@ -30,22 +30,16 @@ public class AddEditEventProtocol_Controller {
     private TextField tfNameEvent;
 
     @FXML
-    private ComboBox<?> comboClientEvent;
+    private TableView<?> tableProtocols;
 
     @FXML
-    private ComboBox<?> comboEmployeeEvent;
+    private Button btnAddProtocol;
 
     @FXML
-    private TextField tfStartEvent;
+    private Button btnDeleteProtocol;
 
     @FXML
-    private TextField tfEndEvent;
-
-    @FXML
-    private TextField tfHourlyRateEvent;
-
-    @FXML
-    private TextField tfRideCostsEvent;
+    private Button btnEditProtocol;
 
     @FXML
     private Label lbMessage;
@@ -57,7 +51,22 @@ public class AddEditEventProtocol_Controller {
     private Button btnOkEvent;
 
     @FXML
+    void btnAddProtocol_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
     void btnCancelEvent_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnDeleteProtocol_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnEditProtocol_Clicked(ActionEvent event) {
 
     }
 

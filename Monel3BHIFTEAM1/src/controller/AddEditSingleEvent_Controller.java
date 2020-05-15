@@ -4,13 +4,25 @@ import app.SceneLoader;
 import data.PersonDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+<<<<<<< HEAD:Monel3BHIFTEAM1/src/controller/AddEditSingleEvent_Controller.java
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+=======
 import javafx.scene.control.*;
+>>>>>>> 5a38d2b83b760d6c6bdc362b97871c060e396d42:Monel3BHIFTEAM1/src/controller/AddEditEvent_Controller.java
 import javafx.scene.image.ImageView;
 import javafx.util.converter.LocalDateStringConverter;
 import model.Employee;
 import model.Event;
 
+<<<<<<< HEAD:Monel3BHIFTEAM1/src/controller/AddEditSingleEvent_Controller.java
+public class AddEditSingleEvent_Controller {
+=======
 public class AddEditEvent_Controller extends SceneLoader {
+>>>>>>> 5a38d2b83b760d6c6bdc362b97871c060e396d42:Monel3BHIFTEAM1/src/controller/AddEditEvent_Controller.java
 
     @FXML
     private Button btnInfo;
@@ -31,7 +43,19 @@ public class AddEditEvent_Controller extends SceneLoader {
     private TextField tfNameEvent;
 
     @FXML
-    private TextArea taDescriptionEvent;
+    private ComboBox<?> comboClientEvent;
+
+    @FXML
+    private ComboBox<?> comboEmployeeEvent;
+
+    @FXML
+    private TextField tfStartEvent;
+
+    @FXML
+    private TextField tfEndEvent;
+
+    @FXML
+    private TextField tfHourlyRateEvent;
 
     @FXML
     private TextField tfRideCostsEvent;
