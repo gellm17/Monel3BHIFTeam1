@@ -70,13 +70,13 @@ public class DBManager {
         while (it.hasNext()) {
             c = it.next();
             if (c.getEsv() != null) {
-                c.setEsv(PersonDAO.getInstance().getPersons().get(c.getEsv().getId()));
+                c.setEsv(PersonDAO.getInstance().getPersonFromId(c.getEsv().getId()));
             }
             if (c.getEmergencyContact1() != null) {
-                c.setEmergencyContact1(PersonDAO.getInstance().getPersons().get(c.getEmergencyContact1().getId()));
+                c.setEmergencyContact1(PersonDAO.getInstance().getPersonFromId(c.getEmergencyContact1().getId()));
             }
             if (c.getEmergencyContact2() != null) {
-                c.setEmergencyContact2(PersonDAO.getInstance().getPersons().get(c.getEmergencyContact2().getId()));
+                c.setEmergencyContact2(PersonDAO.getInstance().getPersonFromId(c.getEmergencyContact2().getId()));
             }
         }
     }
