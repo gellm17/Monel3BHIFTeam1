@@ -1,10 +1,8 @@
 package db;
 
+import data.EventDAO;
 import data.PersonDAO;
-import model.Client;
-import model.Employee;
-import model.Person;
-import model.Sponsor;
+import model.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,10 +19,10 @@ public class DBManager {
             stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM person");
             loadPersons(rs);
-            //rs = stmt.executeQuery("SELECT * FROM aktivitaet");
-            //loadAktivitaet(rs);
-            //rs = stmt.executeQuery("SELECT * FROM aktivitaetsprotokoll");
-            //laodAktivitaetsprotokoll(rs);
+            rs = stmt.executeQuery("SELECT * FROM aktivitaet");
+            loadAktivitaet(rs);
+            rs = stmt.executeQuery("SELECT * FROM aktivitaetsprotokoll");
+            laodAktivitaetsprotokoll(rs);
             //rs = stmt.executeQuery("SELECT * FROM rechnung");
             //loadRechnung(rs);
             //rs = stmt.executeQuery("SELECT * FROM dokument");
@@ -54,7 +52,7 @@ public class DBManager {
     private static void loadPersons(ResultSet rs) throws SQLException {
         String persontyp;
         Client c;
-        while(rs.next()) {
+        while (rs.next()) {
             persontyp = rs.getString("personentyp");
             if(persontyp.equals("KLIENT")) {
                 PersonDAO.getInstance().addPerson(Client.fromResults(rs));
@@ -77,6 +75,32 @@ public class DBManager {
             }
             if (c.getEmergencyContact2() != null) {
                 c.setEmergencyContact2(PersonDAO.getInstance().getPersonFromId(c.getEmergencyContact2().getId()));
+            }
+        }
+    }
+
+    private static void loadAktivitaet(ResultSet rs) throws SQLException {
+        while (rs.next()) {
+            EventDAO.getInstance().addEvent(Event.fromResults(rs));
+        }
+    }
+
+    private static void laodAktivitaetsprotokoll(ResultSet rs) throws SQLException {
+        EventProtocol e;
+        while (rs.next()) {
+            EventDAO.getInstance().addEventProtcol(EventProtocol.fromResults(rs));
+        }
+        Iterator<EventProtocol> it = EventDAO.getInstance().getEventProtocols().iterator();
+        while (it.hasNext()) {
+            e = it.next();
+            if (e.getClient() != null) {
+                e.setClient(PersonDAO.getInstance().getClientFromId(e.getClient().getId()));
+            }
+            if (e.getEmployee() != null) {
+                e.setEmployee(PersonDAO.getInstance().getEmployeeFromId(e.getEmployee().getId()));
+            }
+            if (e.getEvent() != null) {
+                e.setEvent(EventDAO.getInstance().getEventFromId(e.getEvent().getId()));
             }
         }
     }

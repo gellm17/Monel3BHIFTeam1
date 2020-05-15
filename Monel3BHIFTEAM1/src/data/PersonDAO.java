@@ -69,6 +69,32 @@ public class PersonDAO {
     public Person getPersonFromId(int id) {
         return persons.get(id);
     }
+
+    public Client getClientFromId(int id) {
+        Client res = null;
+        Client c = null;
+        Iterator<Client> it = clients.iterator();
+        while(res == null && it.hasNext()) {
+            c = it.next();
+            if(c.getId() == id) {
+                res = c;
+            }
+        }
+        return res;
+    }
+
+    public Employee getEmployeeFromId(int id) {
+        Employee res = null;
+        Employee e = null;
+        Iterator<Employee> it = employees.iterator();
+        while(res == null && it.hasNext()) {
+            e = it.next();
+            if(e.getId() == id) {
+                res = e;
+            }
+        }
+        return res;
+    }
     
     // GETTER
     public ObservableList<Sponsor> getSponsor() {

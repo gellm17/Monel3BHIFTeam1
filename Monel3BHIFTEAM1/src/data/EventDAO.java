@@ -42,9 +42,17 @@ public class EventDAO {
         return eventProtocols.remove(ep);
     }
 
-
-    public void loadPersons(ResultSet rs) throws SQLException {
-       // JEG's part
+    public Event getEventFromId(int id) {
+        Event res = null;
+        Event e;
+        Iterator<Event> it = events.iterator();
+        while(it.hasNext() && res == null) {
+            e = it.next();
+            if(e.getId() == id) {
+                res = e;
+            }
+        }
+        return res;
     }
 
     public ObservableList<Event> getEvents() {
