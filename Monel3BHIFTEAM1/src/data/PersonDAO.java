@@ -65,6 +65,10 @@ public class PersonDAO {
         }
         return success;
     }
+
+    public Person getPersonFromId(int id) {
+        return persons.get(id);
+    }
     
     // GETTER
     public ObservableList<Sponsor> getSponsor() {
