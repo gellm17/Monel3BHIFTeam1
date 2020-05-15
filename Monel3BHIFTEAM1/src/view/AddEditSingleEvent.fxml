@@ -4,9 +4,9 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="847.0" prefWidth="1232.0" styleClass="background" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddEditEvent_Controller">
+<BorderPane prefHeight="847.0" prefWidth="1232.0" styleClass="background" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddEditSingleEvent_Controller">
    <top>
       <BorderPane maxHeight="-Infinity" prefHeight="90.0" styleClass="programHeader" BorderPane.alignment="CENTER">
          <right>
@@ -61,7 +61,7 @@
             <Insets bottom="5.0" left="5.0" right="20.0" top="5.0" />
          </padding>
          <center>
-            <Label fx:id="lbTitle" text="Aktivität erfassen" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label fx:id="lbTitle" text="Einzelaktivität erfassen" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Gill Sans MT" size="36.0" />
                </font>
@@ -72,7 +72,47 @@
    <center>
       <VBox>
          <children>
-            <Label text="Datum">
+            <HBox>
+               <children>
+                  <VBox>
+                     <children>
+                        <Label text="Datum">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <DatePicker fx:id="dpDateEvent" prefWidth="130.0" promptText="12/05/2020" />
+                     </children>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox maxWidth="1.7976931348623157E308">
+                     <children>
+                        <Label text="Name">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="tfNameEvent" prefWidth="700.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin>
+            </HBox>
+            <Label text="Klient">
                <font>
                   <Font size="14.0" />
                </font>
@@ -80,28 +120,12 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <DatePicker fx:id="dpDateEvent" prefWidth="150.0">
-               <VBox.margin>
-                  <Insets bottom="30.0" />
-               </VBox.margin>
-            </DatePicker>
-            <Label layoutX="30.0" layoutY="160.0" text="Name">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </Label>
-            <TextField fx:id="tfNameEvent" maxWidth="1.7976931348623157E308">
-               <font>
-                  <Font size="14.0" />
-               </font>
+            <ComboBox fx:id="comboClientEvent" prefWidth="500.0">
                <VBox.margin>
                   <Insets bottom="10.0" />
                </VBox.margin>
-            </TextField>
-            <Label layoutX="30.0" layoutY="265.0" text="Beschreibung">
+            </ComboBox>
+            <Label layoutX="30.0" layoutY="95.0" text="Mitarbeiter">
                <font>
                   <Font size="14.0" />
                </font>
@@ -109,13 +133,56 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <HBox />
-            <TextArea fx:id="taDescriptionEvent" maxWidth="1.7976931348623157E308" prefHeight="200.0">
+            <ComboBox fx:id="comboEmployeeEvent" layoutX="30.0" layoutY="120.0" prefWidth="500.0">
                <VBox.margin>
-                  <Insets bottom="30.0" />
+                  <Insets bottom="40.0" />
                </VBox.margin>
-            </TextArea>
-            <Label layoutX="30.0" layoutY="115.0" text="Fahrtkosten">
+            </ComboBox>
+            <HBox layoutX="30.0" layoutY="30.0">
+               <children>
+                  <VBox>
+                     <children>
+                        <Label text="Startzeit">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="tfStartEvent" prefWidth="60.0" promptText="08:00">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox maxWidth="1.7976931348623157E308">
+                     <children>
+                        <Label text="Endzeit">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="tfEndEvent" prefWidth="60.0" promptText="10:00">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <Label text="Stundensatz">
                <font>
                   <Font size="14.0" />
                </font>
@@ -123,11 +190,51 @@
                   <Insets bottom="5.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="tfRideCostsEvent" layoutX="30.0" layoutY="140.0" maxWidth="-Infinity" prefWidth="150.0">
+            <HBox alignment="CENTER_LEFT">
+               <children>
+                  <TextField fx:id="tfHourlyRateEvent" maxWidth="-Infinity" prefWidth="60.0" promptText="3.10">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Label text="€">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <Label layoutX="30.0" layoutY="287.0" text="Fahrtkosten">
                <font>
                   <Font size="14.0" />
                </font>
-            </TextField>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="307.0">
+               <children>
+                  <TextField fx:id="tfRideCostsEvent" maxWidth="-Infinity" prefWidth="60.0" promptText="20.50">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Label text="€">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
          </children>
          <BorderPane.margin>
             <Insets />

@@ -5,11 +5,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class AddEditEvent_Controller {
+public class AddEditGroupEvent_Controller {
 
     @FXML
     private Button btnInfo;
@@ -30,10 +30,16 @@ public class AddEditEvent_Controller {
     private TextField tfNameEvent;
 
     @FXML
-    private TextArea taDescriptionEvent;
+    private TableView<?> tableProtocols;
 
     @FXML
-    private TextField tfRideCostsEvent;
+    private Button btnAddProtocol;
+
+    @FXML
+    private Button btnDeleteProtocol;
+
+    @FXML
+    private Button btnEditProtocol;
 
     @FXML
     private Label lbMessage;
@@ -45,7 +51,22 @@ public class AddEditEvent_Controller {
     private Button btnOkEvent;
 
     @FXML
+    void btnAddProtocol_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
     void btnCancelEvent_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnDeleteProtocol_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnEditProtocol_Clicked(ActionEvent event) {
 
     }
 
