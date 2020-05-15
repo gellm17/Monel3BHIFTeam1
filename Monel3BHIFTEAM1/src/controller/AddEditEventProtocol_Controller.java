@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -23,6 +24,12 @@ public class AddEditEventProtocol_Controller {
     private Label lbTitle;
 
     @FXML
+    private DatePicker dpDateEvent;
+
+    @FXML
+    private TextField tfNameEvent;
+
+    @FXML
     private ComboBox<?> comboClientEvent;
 
     @FXML
@@ -36,6 +43,9 @@ public class AddEditEventProtocol_Controller {
 
     @FXML
     private TextField tfHourlyRateEvent;
+
+    @FXML
+    private TextField tfRideCostsEvent;
 
     @FXML
     private Label lbMessage;

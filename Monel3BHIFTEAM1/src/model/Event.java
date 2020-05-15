@@ -23,6 +23,10 @@ public class Event {
         this.id = new SimpleIntegerProperty(this, "id", id);
     }
 
+    public Event() {
+
+    }
+
     public static Event fromResults(ResultSet rs) throws SQLException {
         return new Event(rs.getInt("id"), LocalDate.parse(rs.getString("datum")), rs.getString("aktivitaetsbezeichnung"), (rs.getInt("kategorie") == 1 ? true : false));
     }
