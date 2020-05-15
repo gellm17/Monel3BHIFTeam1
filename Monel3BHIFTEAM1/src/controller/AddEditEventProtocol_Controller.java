@@ -2,12 +2,12 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import model.Client;
+import model.Employee;
+import model.Event;
+import model.EventProtocol;
 
 public class AddEditEventProtocol_Controller {
 
@@ -33,10 +33,10 @@ public class AddEditEventProtocol_Controller {
     private TextField tfEndProtocol;
 
     @FXML
-    private ComboBox<?> comboClientProtocol;
+    private ComboBox<Client> comboClientProtocol;
 
     @FXML
-    private ComboBox<?> comboEmployeeProtocol;
+    private ComboBox<Employee> comboEmployeeProtocol;
 
     @FXML
     private TextField tfHourlyRateProtocol;
@@ -55,6 +55,20 @@ public class AddEditEventProtocol_Controller {
 
     @FXML
     private Button btnOkProtocol;
+
+    private EventProtocol editableEventProtocol = null;
+    private int errorCounter = 0;
+
+    public EventProtocol getEditableEventProtocol() {
+        return editableEventProtocol;
+    }
+
+    public void setEditableEventProtocol(EventProtocol editableEventProtocol) {
+        this.editableEventProtocol = editableEventProtocol;
+        if (editableEventProtocol != null){
+            tfHourlyRateProtocol.setText(""+editableEventProtocol.getHourlyRate());
+        }
+    }
 
     @FXML
     void btnCancelProtocol_Clicked(ActionEvent event) {
@@ -76,4 +90,32 @@ public class AddEditEventProtocol_Controller {
 
     }
 
+
+    private boolean tfCheck(TextField tf, String regex){
+        boolean error = true;
+        if (!tf.getText().matches(regex)) {
+            error = true;
+            errorCounter++;
+            tf.setStyle("-FX-Border-Color: red");
+            lbMessage.setText("Es sind " + errorCounter + " Fehler aufgetreten!");
+        } else {
+            error = false;
+            tf.setStyle(null);
+        }
+        return error;
+    }
+
+    private boolean taCheck(TextArea ta, String regex){
+        boolean error = true;
+        if (!ta.getText().matches(regex)) {
+            error = true;
+            errorCounter++;
+            ta.setStyle("-FX-Border-Color: red");
+            lbMessage.setText("Es sind " + errorCounter + " Fehler aufgetreten!");
+        } else {
+            error = false;
+            ta.setStyle(null);
+        }
+        return error;
+    }
 }
