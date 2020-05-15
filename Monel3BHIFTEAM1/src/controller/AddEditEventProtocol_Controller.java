@@ -1,5 +1,6 @@
 package controller;
 
+import app.SceneLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class AddEditEventProtocol_Controller {
+public class AddEditEventProtocol_Controller extends SceneLoader {
 
     @FXML
     private Button btnInfo;

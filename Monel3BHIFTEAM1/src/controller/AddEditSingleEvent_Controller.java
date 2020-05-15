@@ -16,7 +16,7 @@ import javafx.util.converter.LocalDateStringConverter;
 import model.Employee;
 import model.Event;
 
-public class AddEditSingleEvent_Controller {
+public class AddEditSingleEvent_Controller extends SceneLoader {
 
     public class AddEditEvent_Controller extends SceneLoader {
 
