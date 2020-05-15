@@ -32,7 +32,7 @@ public class DBManager {
             //rs = stmt.executeQuery("SELECT * FROM datenschutz");
             //loadDatenschutz(rs);
             System.out.println("Daten wurden erfolgreich eingelesen");
-        } catch (SQLException se) {
+        } catch (Exception se) {
             System.out.println("could not execute a stmt");
             se.printStackTrace();
         } finally {
