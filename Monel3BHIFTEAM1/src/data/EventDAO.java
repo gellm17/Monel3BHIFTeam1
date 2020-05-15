@@ -20,6 +20,8 @@ public class EventDAO {
     private static EventDAO instance = null;
 
     private EventDAO() {
+        this.events.add(new Event(1, LocalDate.now(), "Kino", true));
+        this.events.add(new Event(2, LocalDate.now(), "Fußball", false));
     }
     public static EventDAO getInstance() {
         if (instance == null) {

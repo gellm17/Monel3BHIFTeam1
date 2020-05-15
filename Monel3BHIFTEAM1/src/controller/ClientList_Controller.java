@@ -228,7 +228,7 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
 
     @FXML
     void btnNavActivities_Clicked(ActionEvent event) {
-        showScene("Activity");
+        showScene("EventList");
     }
 
     @FXML
