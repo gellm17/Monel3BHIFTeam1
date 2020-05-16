@@ -21,9 +21,9 @@ public class EventProtocol {
 
     public EventProtocol(Integer id, LocalTime startTime, LocalTime endTime, LocalDate year_month, Double hourlyRate, Employee employee, Client client, Event event, Double rideCosts) {
         this.id = new SimpleIntegerProperty(this, "id", 0);
-        this.startTime = new SimpleObjectProperty(this, "startTime", startTime);
-        this.endTime = new SimpleObjectProperty(this, "endTIme", endTime);
-        this.year_month = new SimpleObjectProperty(this, "year_month", year_month);
+        this.startTime = new SimpleObjectProperty<LocalTime>(this, "startTime", startTime);
+        this.endTime = new SimpleObjectProperty<LocalTime>(this, "endTIme", endTime);
+        this.year_month = new SimpleObjectProperty<LocalDate>(this, "year_month", year_month);
         this.hourlyRate = new SimpleDoubleProperty(this, "hourlyRate", hourlyRate);
         this.employee = new SimpleObjectProperty<Employee>(this, "employee", employee);
         this.client = new SimpleObjectProperty<Client>(this, "client", client);
@@ -33,9 +33,9 @@ public class EventProtocol {
 
     public EventProtocol() {
         this.id = new SimpleIntegerProperty(this, "id");
-        this.startTime = new SimpleObjectProperty(this, "startTime");
-        this.endTime = new SimpleObjectProperty(this, "endTIme");
-        this.year_month = new SimpleObjectProperty(this, "year_month");
+        this.startTime = new SimpleObjectProperty<LocalTime>(this, "startTime");
+        this.endTime = new SimpleObjectProperty<LocalTime>(this, "endTIme");
+        this.year_month = new SimpleObjectProperty<LocalDate>(this, "year_month");
         this.hourlyRate = new SimpleDoubleProperty(this, "hourlyRate");
         this.employee = new SimpleObjectProperty<Employee>(this, "employee");
         this.client = new SimpleObjectProperty<Client>(this, "client");
