@@ -24,7 +24,10 @@ public class Event {
     }
 
     public Event() {
-
+        this.id = new SimpleIntegerProperty(this, "id");
+        this.date = new SimpleObjectProperty<LocalDate>(this, "date");
+        this.name = new SimpleStringProperty(this, "name");
+        this.isGroup = new SimpleBooleanProperty(this, "isGroup");
     }
 
     public static Event fromResults(ResultSet rs) throws SQLException {

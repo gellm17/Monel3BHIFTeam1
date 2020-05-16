@@ -5,6 +5,7 @@ import data.EventDAO;
 import data.PersonDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -13,12 +14,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.util.converter.LocalDateStringConverter;
-import model.Employee;
-import model.Event;
+import javafx.util.converter.LocalTimeStringConverter;
+import model.*;
 
-public class AddEditSingleEvent_Controller extends SceneLoader {
+import java.net.URL;
+import java.time.LocalTime;
+import java.util.ResourceBundle;
 
-    public class AddEditEvent_Controller extends SceneLoader {
+public class AddEditSingleEvent_Controller extends SceneLoader implements Initializable {
 
 
         @FXML
@@ -40,10 +43,10 @@ public class AddEditSingleEvent_Controller extends SceneLoader {
         private TextField tfNameEvent;
 
         @FXML
-        private ComboBox<?> comboClientEvent;
+        private ComboBox<Client> comboClientEvent;
 
         @FXML
-        private ComboBox<?> comboEmployeeEvent;
+        private ComboBox<Employee> comboEmployeeEvent;
 
         @FXML
         private TextField tfStartEvent;
@@ -67,14 +70,21 @@ public class AddEditSingleEvent_Controller extends SceneLoader {
         private Button btnOkEvent;
 
         private Event editableEvent = null;
+        private EventProtocol editableEventProtocol = null;
         private int errorCounter = 0;
 
         public Event getEditableEvent() {
             return editableEvent;
         }
+        public EventProtocol getEditableEventProtocol() {
+        return editableEventProtocol;
+    }
 
-        public void setEditableEvent(Event editableEvent) {
+        public void setEditableEvent(Event editableEvent, EventProtocol editableEventProtocol) {
             this.editableEvent = editableEvent;
+            this.editableEventProtocol = editableEventProtocol;
+            comboClientEvent.getItems().setAll(PersonDAO.getInstance().getClients());
+            comboEmployeeEvent.getItems().setAll(PersonDAO.getInstance().getEmployees());
             if (editableEvent != null) {
                 dpDateEvent.setValue(editableEvent.getDate());
                 tfNameEvent.setText(editableEvent.getName());
@@ -94,11 +104,13 @@ public class AddEditSingleEvent_Controller extends SceneLoader {
         @FXML
         void btnOkEvent_Clicked(ActionEvent event) {
             Event eventToAdd = new Event();
+            EventProtocol eventProtocolToAdd = new EventProtocol();
             errorCounter = 0;
 
             try {
                 LocalDateStringConverter ldsc = new LocalDateStringConverter();
                 eventToAdd.setDate(ldsc.fromString(dpDateEvent.getEditor().getText()));
+                eventProtocolToAdd.setYear_month(ldsc.fromString(dpDateEvent.getEditor().getText()));
                 dpDateEvent.setStyle(null);
             } catch (Exception e) {
                 dpDateEvent.setStyle("-FX-Border-Color: red");
@@ -110,9 +122,35 @@ public class AddEditSingleEvent_Controller extends SceneLoader {
                 eventToAdd.setName(tfNameEvent.getText());
             }
 
-            if (errorCounter == 0 && EventDAO.getInstance().addEvent(eventToAdd)) {
-                if (editableEvent != null) {
+            eventToAdd.setIsGroup(false);
+            eventProtocolToAdd.setClient(comboClientEvent.getSelectionModel().getSelectedItem());
+            eventProtocolToAdd.setEmployee(comboEmployeeEvent.getSelectionModel().getSelectedItem());
+
+            if (!tfCheck(tfStartEvent, "^([0-1][0-9]|[2][0-3]):([0-5][0-9])$")){
+                eventProtocolToAdd.setStartTime(LocalTime.parse(tfStartEvent.getText()));
+            }
+
+            if (!tfCheck(tfEndEvent, "^([0-1][0-9]|[2][0-3]):([0-5][0-9])$")){
+                if (LocalTime.parse(tfEndEvent.getText()).isAfter(eventProtocolToAdd.getStartTime())){
+                    eventProtocolToAdd.setEndTime(LocalTime.parse(tfEndEvent.getText()));
+                } else {
+                    lbMessage.setText(lbMessage.getText() + ", Endzeit später als Startzeit");
+                    errorCounter++;
+                }
+            }
+
+            if (!tfCheck(tfHourlyRateEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){
+                eventProtocolToAdd.setHourlyRate(Double.parseDouble(tfHourlyRateEvent.getText()));
+            }
+
+            if (!tfCheck(tfRideCostsEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){
+                eventProtocolToAdd.setRideCosts(Double.parseDouble(tfRideCostsEvent.getText()));
+            }
+
+            if (errorCounter == 0 && EventDAO.getInstance().addEvent(eventToAdd) && EventDAO.getInstance().addEventProtcol(eventProtocolToAdd)) {
+                if (editableEvent != null && editableEventProtocol != null) {
                     EventDAO.getInstance().deleteEvent(editableEvent);
+                    EventDAO.getInstance().deleteEventProtcol(editableEventProtocol);
                 }
                 super.showScene("EmployeeList");
             }
@@ -150,5 +188,10 @@ public class AddEditSingleEvent_Controller extends SceneLoader {
             }
             return error;
         }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        comboClientEvent.getItems().setAll(PersonDAO.getInstance().getClients());
+        comboEmployeeEvent.getItems().setAll(PersonDAO.getInstance().getEmployees());
     }
 }

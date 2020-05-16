@@ -31,6 +31,18 @@ public class EventProtocol {
         this.rideCosts = new SimpleDoubleProperty(this, "rideCosts", rideCosts);
     }
 
+    public EventProtocol() {
+        this.id = new SimpleIntegerProperty(this, "id");
+        this.startTime = new SimpleObjectProperty(this, "startTime");
+        this.endTime = new SimpleObjectProperty(this, "endTIme");
+        this.year_month = new SimpleObjectProperty(this, "year_month");
+        this.hourlyRate = new SimpleDoubleProperty(this, "hourlyRate");
+        this.employee = new SimpleObjectProperty<Employee>(this, "employee");
+        this.client = new SimpleObjectProperty<Client>(this, "client");
+        this.event = new SimpleObjectProperty<Event>(this, "event");
+        this.rideCosts = new SimpleDoubleProperty(this, "rideCosts");
+    }
+
     public static EventProtocol fromResults(ResultSet rs) throws SQLException { //mandatory startTime, endTime and year_month
         Employee e = null;
         Client c = null;
