@@ -85,9 +85,13 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
             this.editableEventProtocol = editableEventProtocol;
             comboClientEvent.getItems().setAll(PersonDAO.getInstance().getClients());
             comboEmployeeEvent.getItems().setAll(PersonDAO.getInstance().getEmployees());
-            if (editableEvent != null) {
+            if (editableEvent != null && editableEventProtocol != null) {
                 dpDateEvent.setValue(editableEvent.getDate());
                 tfNameEvent.setText(editableEvent.getName());
+                tfStartEvent.setText(""+editableEventProtocol.getStartTime());
+                tfEndEvent.setText(""+editableEventProtocol.getStartTime());
+                tfHourlyRateEvent.setText(""+editableEventProtocol.getHourlyRate());
+                tfRideCostsEvent.setText(""+editableEventProtocol.getRideCosts());
             }
         }
 

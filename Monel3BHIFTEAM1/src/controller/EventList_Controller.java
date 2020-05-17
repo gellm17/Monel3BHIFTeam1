@@ -172,7 +172,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
                 if (empty) {
                     setText("");
                 } else {
-                    if (group) {
+                    if (!group) {
                         setText("Einzel-Aktivität");
                     } else {
                         setText("Gruppen-Aktivität");
