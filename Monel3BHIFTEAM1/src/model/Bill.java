@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -11,14 +12,14 @@ import javafx.beans.property.StringProperty;
 
 public class Bill {
 	private IntegerProperty nr;
-	private IntegerProperty klientId;	
+	private ObjectProperty<Client> clientId;	
 	private ObjectProperty<LocalDate> dateOfIssue;		//time where you get the bill
 	private StringProperty use;							//purpose of use
+	private ArrayList<EventProtocol> eventProtocols;			//List of all eventProtocols
 	
-	public Bill(int nr, int klientId, LocalDate dateOfIssue, String use) {
-		super();
+	public Bill(int nr, Client clientId, LocalDate dateOfIssue, String use) {
 		this.nr = new SimpleIntegerProperty(this, "nr", nr);
-		this.klientId = new SimpleIntegerProperty(this, "klientId", klientId);
+		this.clientId = new SimpleObjectProperty<Client>(this, "clientId", clientId);
 		this.dateOfIssue = new SimpleObjectProperty<LocalDate>(this, "dateOfIssue", dateOfIssue);
 		this.use = new SimpleStringProperty(this, "use", use);
 	}
@@ -33,14 +34,14 @@ public class Bill {
 		this.nr.set(nr);
 	}
 
-	public IntegerProperty klientIdProperty() {
-		return klientId;
+	public ObjectProperty<Client> clientIdProperty() {
+		return clientId;
 	}
-	public int getKlientId() {
-		return klientId.get();
+	public Client getKlientId() {
+		return clientId.get();
 	}
-	public void setKlientId(int klientId) {
-		this.klientId.set(klientId);
+	public void setKlientId(Client clientId) {
+		this.clientId.set(clientId);
 	}
 
 	public ObjectProperty<LocalDate> dateOfIssueProperty() {
@@ -61,5 +62,18 @@ public class Bill {
 	}
 	public void setUse(String use) {
 		this.use.set(use);
+	}
+	
+	public ArrayList<EventProtocol> getEventProtocols() {
+		return this.eventProtocols;
+	}
+	public void setEventProtocols(ArrayList<EventProtocol> eventProtocols) {
+		this.eventProtocols = eventProtocols;
+	}
+	public boolean addEventProtocol(EventProtocol eventProtocol) {
+		return this.eventProtocols.add(eventProtocol);
+	}
+	public boolean removeEventProtocol(EventProtocol eventProtocol) {
+		return this.eventProtocols.remove(eventProtocol);
 	}
 }
