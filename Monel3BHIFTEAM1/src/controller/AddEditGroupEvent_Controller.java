@@ -85,7 +85,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
     void btnAddProtocol_Clicked(ActionEvent event) {
         try {
 
-            FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditEmployee.fxml"));
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditEventProtocol.fxml"));
             BorderPane root = fxml.load();
             Scene scene = new Scene(root);
             this.getPrimStage().setScene(scene);
