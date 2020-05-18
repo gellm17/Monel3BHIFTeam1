@@ -69,10 +69,15 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
     private Button btnOkEvent;
 
     private EventProtocol editableEventProtocol = null;
+    private Event assignedEvent = null;
     private int errorCounter = 0;
 
     public EventProtocol getEditableEventProtocol() {
         return editableEventProtocol;
+    }
+
+    public void setAssignedEvent(Event assignedEvent){
+        this.assignedEvent = assignedEvent;
     }
 
     public void setEditableEvent(EventProtocol editableEventProtocol) {
@@ -127,9 +132,11 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
         }
 
         if (errorCounter == 0 && EventDAO.getInstance().addEventProtcol(eventProtocolToAdd)) {
+            eventProtocolToAdd.setEvent(assignedEvent);
             if (editableEventProtocol != null) {
                 EventDAO.getInstance().deleteEventProtcol(editableEventProtocol);
             }
+
             //super.showScene("EmployeeList"); MIKE ! WIE SOLL MAN DO WIDO ZUR VORHERIGEN LISTE KEMMEN
         }
     }

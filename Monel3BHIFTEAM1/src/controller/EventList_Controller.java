@@ -5,11 +5,17 @@ import data.EventDAO;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
+import model.Employee;
 import model.Event;
 
 import java.io.IOException;
@@ -173,9 +179,9 @@ public class EventList_Controller extends SceneLoader implements Initializable {
                     setText("");
                 } else {
                     if (!group) {
-                        setText("Einzel-Aktivität");
+                        setText("Einzelaktivität");
                     } else {
-                        setText("Gruppen-Aktivität");
+                        setText("Gruppenaktivität");
                     }
                 }
             }
@@ -198,12 +204,59 @@ public class EventList_Controller extends SceneLoader implements Initializable {
 
     @FXML
     void btnDeleteEvent_Clicked(ActionEvent event) {
-
+        EventDAO.getInstance().deleteEvent(selectedItem);
     }
 
     @FXML
     void btnEditEvent_Clicked(ActionEvent event) {
+        try {
 
+
+            if (selectedItem.getIsGroup()) {
+                FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditGroupEvent.fxml"));
+                BorderPane root = fxml.load();
+                Scene scene = new Scene(root);
+                this.getPrimStage().setScene(scene);
+                Screen screen = Screen.getPrimary();
+
+                //Maximized
+                Rectangle2D bounds = screen.getVisualBounds();
+                this.getPrimStage().setX(bounds.getMinX());
+                this.getPrimStage().setY(bounds.getMinY());
+                this.getPrimStage().setWidth(bounds.getWidth());
+                this.getPrimStage().setHeight(bounds.getHeight());
+                this.getPrimStage().show();
+                AddEditGroupEvent_Controller editController = fxml.getController();
+                editController.setEditableEvent((Event) selectedItem);
+                SceneLoader loader = editController;
+                loader.setPrimaryStage(this.getPrimStage());
+            } else {
+                FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditSingleEvent.fxml"));
+                BorderPane root = fxml.load();
+                Scene scene = new Scene(root);
+                this.getPrimStage().setScene(scene);
+                Screen screen = Screen.getPrimary();
+
+                //Maximized
+                Rectangle2D bounds = screen.getVisualBounds();
+                this.getPrimStage().setX(bounds.getMinX());
+                this.getPrimStage().setY(bounds.getMinY());
+                this.getPrimStage().setWidth(bounds.getWidth());
+                this.getPrimStage().setHeight(bounds.getHeight());
+                this.getPrimStage().show();
+                AddEditSingleEvent_Controller editController = fxml.getController();
+                editController.setEditableEvent((Event) selectedItem, null);
+                SceneLoader loader = editController;
+                loader.setPrimaryStage(this.getPrimStage());
+            }
+
+
+
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
