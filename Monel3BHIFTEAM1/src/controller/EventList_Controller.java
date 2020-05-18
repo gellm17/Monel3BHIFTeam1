@@ -2,6 +2,8 @@ package controller;
 
 import app.SceneLoader;
 import data.EventDAO;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -125,6 +127,8 @@ public class EventList_Controller extends SceneLoader implements Initializable {
     private TableColumn<EventProtocol, Double> tcHourlyRate;
     @FXML
     private TableColumn<EventProtocol, Event> tcEvent;
+    @FXML
+    private TextField tfSearch = new TextField();
 
 
     private Event selectedItem;
@@ -132,9 +136,43 @@ public class EventList_Controller extends SceneLoader implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<EventProtocol> filteredData = new FilteredList<>(EventDAO.getInstance().getEventProtocols(), p -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        tfSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(eventProtocol -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (eventProtocol.getClient().toString().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (eventProtocol.getEmployee().toString().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<EventProtocol> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(tableProtocols.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        tableProtocols.setItems(sortedData);
+
+
         //ObservableList<Client> clients = FXCollections.observableArrayList(PersonDAO.getInstance().getClients());
         this.tableEvents.setItems(EventDAO.getInstance().getEvents());
-        this.tableProtocols.setItems(EventDAO.getInstance().getEventProtocols());
+
         this.CreateColumns();
         this.ConfigureTableView();
         this.btnDeleteEvent.setDisable(true);
@@ -146,11 +184,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
-                    try {
-                        throw new IOException("Hallo");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    goToEdit();
                 }
             }
         });
@@ -160,6 +194,24 @@ public class EventList_Controller extends SceneLoader implements Initializable {
                 btnDeleteEvent.setDisable(false);
                 btnEditEvent.setDisable(false);
                 selectedItem = newSelection;
+                System.out.println(selectedItem);
+
+
+            }
+        });
+
+        tableProtocols.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                    goToEdit();
+                }
+            }
+        });
+
+        tableProtocols.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                selectedItem = newSelection.getEvent();
                 System.out.println(selectedItem);
 
 
@@ -327,52 +379,7 @@ tcDateProtocol.setCellFactory(column -> new TableCell<EventProtocol, LocalDate>(
 
     @FXML
     void btnEditEvent_Clicked(ActionEvent event) {
-        try {
-
-
-            if (selectedItem.getIsGroup()) {
-                FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditGroupEvent.fxml"));
-                BorderPane root = fxml.load();
-                Scene scene = new Scene(root);
-                this.getPrimStage().setScene(scene);
-                Screen screen = Screen.getPrimary();
-
-                //Maximized
-                Rectangle2D bounds = screen.getVisualBounds();
-                this.getPrimStage().setX(bounds.getMinX());
-                this.getPrimStage().setY(bounds.getMinY());
-                this.getPrimStage().setWidth(bounds.getWidth());
-                this.getPrimStage().setHeight(bounds.getHeight());
-                this.getPrimStage().show();
-                AddEditGroupEvent_Controller editController = fxml.getController();
-                editController.setEditableEvent((Event) selectedItem);
-                SceneLoader loader = editController;
-                loader.setPrimaryStage(this.getPrimStage());
-            } else {
-                FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditSingleEvent.fxml"));
-                BorderPane root = fxml.load();
-                Scene scene = new Scene(root);
-                this.getPrimStage().setScene(scene);
-                Screen screen = Screen.getPrimary();
-
-                //Maximized
-                Rectangle2D bounds = screen.getVisualBounds();
-                this.getPrimStage().setX(bounds.getMinX());
-                this.getPrimStage().setY(bounds.getMinY());
-                this.getPrimStage().setWidth(bounds.getWidth());
-                this.getPrimStage().setHeight(bounds.getHeight());
-                this.getPrimStage().show();
-                AddEditSingleEvent_Controller editController = fxml.getController();
-                editController.setEditableEvent((Event) selectedItem, EventDAO.getInstance().getEventProtocolByEvent((Event) selectedItem));
-                SceneLoader loader = editController;
-                loader.setPrimaryStage(this.getPrimStage());
-            }
-
-
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        goToEdit();
     }
 
     @FXML
@@ -428,6 +435,55 @@ tcDateProtocol.setCellFactory(column -> new TableCell<EventProtocol, LocalDate>(
     @FXML
     void btnSettings_Clicked(ActionEvent event) {
 
+    }
+
+    private void goToEdit() {
+        try {
+
+
+            if (selectedItem.getIsGroup()) {
+                FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditGroupEvent.fxml"));
+                BorderPane root = fxml.load();
+                Scene scene = new Scene(root);
+                this.getPrimStage().setScene(scene);
+                Screen screen = Screen.getPrimary();
+
+                //Maximized
+                Rectangle2D bounds = screen.getVisualBounds();
+                this.getPrimStage().setX(bounds.getMinX());
+                this.getPrimStage().setY(bounds.getMinY());
+                this.getPrimStage().setWidth(bounds.getWidth());
+                this.getPrimStage().setHeight(bounds.getHeight());
+                this.getPrimStage().show();
+                AddEditGroupEvent_Controller editController = fxml.getController();
+                editController.setEditableEvent((Event) selectedItem);
+                SceneLoader loader = editController;
+                loader.setPrimaryStage(this.getPrimStage());
+            } else {
+                FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditSingleEvent.fxml"));
+                BorderPane root = fxml.load();
+                Scene scene = new Scene(root);
+                this.getPrimStage().setScene(scene);
+                Screen screen = Screen.getPrimary();
+
+                //Maximized
+                Rectangle2D bounds = screen.getVisualBounds();
+                this.getPrimStage().setX(bounds.getMinX());
+                this.getPrimStage().setY(bounds.getMinY());
+                this.getPrimStage().setWidth(bounds.getWidth());
+                this.getPrimStage().setHeight(bounds.getHeight());
+                this.getPrimStage().show();
+                AddEditSingleEvent_Controller editController = fxml.getController();
+                editController.setEditableEvent((Event) selectedItem, EventDAO.getInstance().getEventProtocolByEvent((Event) selectedItem));
+                SceneLoader loader = editController;
+                loader.setPrimaryStage(this.getPrimStage());
+            }
+
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 }

@@ -84,6 +84,6 @@ public class Event {
 
     @Override
     public String toString() {
-        return this.name.getValue();
+        return this.name.getValue() + " (" + (this.isGroup.getValue() ? "Gruppenakt." : "Einzelakt.") + ")";
     }
 }
