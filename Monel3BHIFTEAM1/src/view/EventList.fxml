@@ -4,7 +4,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -14,6 +17,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="847.0" prefWidth="1233.0" styleClass="background" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EventList_Controller">
@@ -69,129 +73,204 @@
       </BorderPane>
    </top>
    <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <center>
-            <TableView fx:id="tableEvents" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets top="35.0" />
-               </BorderPane.margin>
-            </TableView>
-         </center>
-         <top>
-            <BorderPane styleClass="background" BorderPane.alignment="CENTER">
-               <center>
-                  <TextField fx:id="tfSearchEvents" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </TextField>
-               </center>
-               <right>
-                  <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
-                     <BorderPane.margin>
-                        <Insets />
-                     </BorderPane.margin>
-                     <children>
-                        <Button fx:id="btnSearchEvents" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnSearchEvents_Clicked" prefHeight="44.0" prefWidth="44.0">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="40.0" />
-                           </HBox.margin>
-                           <graphic>
-                              <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/icon_Such.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <styleClass>
-                              <String fx:value="toolButton" />
-                              <String fx:value="searchButton" />
-                           </styleClass>
-                        </Button>
-                        <Button fx:id="btnFilterEvents" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnFilterEvents_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                           <graphic>
-                              <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/icon_Filt.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                      <Button fx:id="btnAddSingleEvent" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnAddSingleEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                           <graphic>
-                              <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/icon_AddK.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btnAddGroupEvent" layoutX="154.0" layoutY="10.0" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnAddGroupEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/icon_AddK.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="btnDeleteEvent" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnDeleteEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                           <graphic>
-                              <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/icon_Del.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                        <Button fx:id="btnEditEvent" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnEditEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                           <graphic>
-                              <ImageView fitHeight="100.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../resources/icon_Edit.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </children>
-                  </HBox>
-               </right>
-            </BorderPane>
-         </top>
-         <padding>
-            <Insets bottom="30.0" left="100.0" right="30.0" top="35.0" />
-         </padding>
-      </BorderPane>
+      <TabPane nodeOrientation="RIGHT_TO_LEFT" BorderPane.alignment="CENTER">
+         <tabs>
+            <Tab closable="false" text="Protokolle">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="tableProtocols" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets top="35.0" />
+                           </BorderPane.margin>
+                        </TableView>
+                     </center>
+                     <top>
+                        <VBox>
+                           <children>
+                              <BorderPane nodeOrientation="LEFT_TO_RIGHT" styleClass="background">
+                                 <left>
+                                    <Label text="Klient filtern" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </left>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                                 <right>
+                                    <HBox BorderPane.alignment="CENTER">
+                                       <children>
+                                          <ComboBox fx:id="comboClient" prefWidth="400.0">
+                                             <HBox.margin>
+                                                <Insets right="10.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                          <Button fx:id="btnResetClient" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnResetClient_Clicked" styleClass="toolButton" text="Zurücksetzen" />
+                                       </children>
+                                    </HBox>
+                                 </right>
+                              </BorderPane>
+                              <BorderPane layoutX="10.0" layoutY="10.0" nodeOrientation="LEFT_TO_RIGHT" styleClass="background">
+                                 <left>
+                                    <Label text="Mitarbeiter filtern" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </left>
+                                 <right>
+                                    <HBox BorderPane.alignment="CENTER">
+                                       <children>
+                                          <ComboBox fx:id="comboEmployee" prefWidth="400.0">
+                                             <HBox.margin>
+                                                <Insets right="10.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                          <Button fx:id="btnResetEmployee" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnResetEmployee_Clicked" styleClass="toolButton" text="Zurücksetzen" />
+                                       </children>
+                                    </HBox>
+                                 </right>
+                              </BorderPane>
+                           </children>
+                        </VBox>
+                     </top>
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="100.0" top="35.0" />
+                     </padding>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab closable="false" text="Aktivitäten">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="tableEvents" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets top="35.0" />
+                           </BorderPane.margin>
+                        </TableView>
+                     </center>
+                     <top>
+                        <BorderPane nodeOrientation="LEFT_TO_RIGHT" styleClass="background" BorderPane.alignment="CENTER">
+                           <center>
+                              <TextField fx:id="tfSearchEvents" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                           </center>
+                           <right>
+                              <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <children>
+                                    <Button fx:id="btnSearchEvents" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnSearchEvents_Clicked" prefHeight="44.0" prefWidth="44.0">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="40.0" />
+                                       </HBox.margin>
+                                       <graphic>
+                                          <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/icon_Such.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <styleClass>
+                                          <String fx:value="toolButton" />
+                                          <String fx:value="searchButton" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button fx:id="btnFilterEvents" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnFilterEvents_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                       <graphic>
+                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/icon_Filt.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                  <Button fx:id="btnAddSingleEvent" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnAddSingleEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                       <graphic>
+                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/icon_AddK.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="btnAddGroupEvent" layoutX="154.0" layoutY="10.0" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnAddGroupEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="150.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/icon_AddGroup.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="btnDeleteEvent" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnDeleteEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                       <graphic>
+                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/icon_Del.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="btnEditEvent" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnEditEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="100.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/icon_Edit.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </right>
+                        </BorderPane>
+                     </top>
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" right="100.0" top="35.0" />
+                     </padding>
+                  </BorderPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
    </center>
    <left>
       <GridPane prefWidth="140.0" BorderPane.alignment="CENTER">
