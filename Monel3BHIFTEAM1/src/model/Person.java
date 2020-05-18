@@ -53,6 +53,8 @@ public class Person {
         this.id = new SimpleIntegerProperty(this, "id", id);
     }
 
+
+
     public Person(Salutation salutation, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, LocalDate birthDate) {
         this.id = new SimpleIntegerProperty(this, "id", counterForID++);
         this.salutation = new SimpleObjectProperty<Salutation>(this, "salutation", salutation);
@@ -215,5 +217,10 @@ public class Person {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+
+    @Override
+    public String toString() {
+        return this.lastName.getValue() + " "+ this.firstName.getValue();
     }
 }

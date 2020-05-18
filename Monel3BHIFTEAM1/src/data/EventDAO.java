@@ -9,6 +9,7 @@ import model.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -20,8 +21,10 @@ public class EventDAO {
     private static EventDAO instance = null;
 
     private EventDAO() {
+        Event e = new Event(2, LocalDate.now(), "Fußball", false);
         this.events.add(new Event(1, LocalDate.now(), "Kino", true));
-        this.events.add(new Event(2, LocalDate.now(), "Fußball", false));
+        this.events.add(e);
+        this.eventProtocols.add(new EventProtocol(1, LocalTime.now(), LocalTime.now(), LocalDate.now(), 10.03, new Employee(Salutation.Herr,"Herbert", "Gell"), new Client(Salutation.Herr, "Michael", "Gell"), e, 100.01));
     }
     public static EventDAO getInstance() {
         if (instance == null) {

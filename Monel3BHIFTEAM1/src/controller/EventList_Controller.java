@@ -15,13 +15,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
-import model.Employee;
-import model.Event;
+import model.*;
 
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
@@ -40,7 +40,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
     private Label lbTitle;
 
     @FXML
-    private TableView<?> tableProtocols;
+    private TableView<EventProtocol> tableProtocols;
 
     @FXML
     private ComboBox<?> comboClient;
@@ -98,13 +98,34 @@ public class EventList_Controller extends SceneLoader implements Initializable {
 
     @FXML
     private Button btnNavBirthdays;
+
+    //Col for Event
     @FXML
     private TableColumn<Event, LocalDate> tcDate;
     @FXML
     private TableColumn<Event, String> tcBezeichnung;
-
     @FXML
     private TableColumn<Event, Boolean> tcKategorie;
+
+    // Col for EventProtocol
+    //Col for Event
+    @FXML
+    private TableColumn<EventProtocol, Client> tcClient;
+    @FXML
+    private TableColumn<EventProtocol, Employee> tcEmployee;
+    @FXML
+    private TableColumn<EventProtocol, LocalTime> tcStart;
+    @FXML
+    private TableColumn<EventProtocol, LocalTime> tcEnd;
+    @FXML
+    private TableColumn<EventProtocol, LocalDate> tcDateProtocol;
+    @FXML
+    private TableColumn<EventProtocol, Double> tcRideCosts;
+    @FXML
+    private TableColumn<EventProtocol, Double> tcHourlyRate;
+    @FXML
+    private TableColumn<EventProtocol, Event> tcEvent;
+
 
     private Event selectedItem;
 
@@ -113,6 +134,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //ObservableList<Client> clients = FXCollections.observableArrayList(PersonDAO.getInstance().getClients());
         this.tableEvents.setItems(EventDAO.getInstance().getEvents());
+        this.tableProtocols.setItems(EventDAO.getInstance().getEventProtocols());
         this.CreateColumns();
         this.ConfigureTableView();
         this.btnDeleteEvent.setDisable(true);
@@ -154,6 +176,14 @@ public class EventList_Controller extends SceneLoader implements Initializable {
         tcBezeichnung = new TableColumn<Event, String>("Bezeichnung");
         tcKategorie = new TableColumn<Event, Boolean>("Kategorie");
 
+        tcDateProtocol = new TableColumn<EventProtocol, LocalDate>("Datum");
+        tcEvent = new TableColumn<EventProtocol, Event>("Aktivität");
+        tcClient = new TableColumn<EventProtocol, Client>("Klient");
+        tcEmployee = new TableColumn<EventProtocol, Employee>("Mitarbeiter");
+        tcHourlyRate = new TableColumn<EventProtocol, Double>("Stundensatz");
+        tcRideCosts = new TableColumn<EventProtocol, Double>("Fahrtkosten");
+        tcStart = new TableColumn<EventProtocol, LocalTime>("Start");
+        tcEnd = new TableColumn<EventProtocol, LocalTime>("Ende");
         //Weitere Table Options
         //tcDiagnose = new TableColumn<Client, String>("Diagnose");
         //tcJob = new TableColumn<Client, String>("Beschäftigung");
@@ -168,13 +198,27 @@ public class EventList_Controller extends SceneLoader implements Initializable {
         tcKategorie.setCellValueFactory(new PropertyValueFactory<Event, Boolean>("isGroup"));
 
 
+        tcDateProtocol.setCellValueFactory(new PropertyValueFactory<EventProtocol, LocalDate>("year_month"));
+        tcEvent.setCellValueFactory(new PropertyValueFactory<EventProtocol, Event>("event"));
+        tcClient.setCellValueFactory(new PropertyValueFactory<EventProtocol, Client>("client"));
+        tcEmployee.setCellValueFactory(new PropertyValueFactory<EventProtocol, Employee>("employee"));
+        tcHourlyRate.setCellValueFactory(new PropertyValueFactory<EventProtocol, Double>("hourlyRate"));
+        tcRideCosts.setCellValueFactory(new PropertyValueFactory<EventProtocol, Double>("rideCosts"));
+        tcStart.setCellValueFactory(new PropertyValueFactory<EventProtocol, LocalTime>("startTime"));
+        tcEnd.setCellValueFactory(new PropertyValueFactory<EventProtocol, LocalTime>("endTime"));
+
+
         this.tableEvents.getColumns().addAll(tcDate, tcBezeichnung, tcKategorie);
+
+        this.tableProtocols.getColumns().addAll(tcDateProtocol, tcEvent, tcClient, tcEmployee, tcHourlyRate, tcRideCosts, tcStart, tcEnd);
 
     }
 
     public void ConfigureTableView() {
         //Width
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+        //Event
         tcDate.setCellFactory(column -> new TableCell<Event, LocalDate>() {
             @Override
             protected void updateItem(LocalDate date, boolean empty) {
@@ -205,6 +249,54 @@ public class EventList_Controller extends SceneLoader implements Initializable {
         tcDate.prefWidthProperty().bind(tableEvents.widthProperty().divide(3)); // w * 1/2
         tcBezeichnung.prefWidthProperty().bind(tableEvents.widthProperty().divide(3));
         tcKategorie.prefWidthProperty().bind(tableEvents.widthProperty().divide(3)); // w * 1/4
+
+        //EventProtocol
+tcDateProtocol.setCellFactory(column -> new TableCell<EventProtocol, LocalDate>() {
+            @Override
+            protected void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                if (empty) {
+                    setText("");
+                } else {
+                    setText(formatter.format(date));
+                }
+            }
+        });
+        tcHourlyRate.setCellFactory(column -> new TableCell<EventProtocol, Double>() {
+            @Override
+            protected void updateItem(Double value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty) {
+                    setText("");
+                } else {
+                    setText(value+" €");
+                }
+            }
+        });
+
+        tcRideCosts.setCellFactory(column -> new TableCell<EventProtocol, Double>() {
+            @Override
+            protected void updateItem(Double value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty) {
+                    setText("");
+                } else {
+                    setText(value+" €");
+                }
+            }
+        });
+
+
+
+        tcDateProtocol.prefWidthProperty().bind(tableEvents.widthProperty().divide(8)); // w * 1/4
+        tcEvent.prefWidthProperty().bind(tableEvents.widthProperty().divide(8)); // w * 1/4
+        tcClient.prefWidthProperty().bind(tableEvents.widthProperty().divide(8)); // w * 1/4
+        tcEmployee.prefWidthProperty().bind(tableEvents.widthProperty().divide(8)); // w * 1/4
+        tcHourlyRate.prefWidthProperty().bind(tableEvents.widthProperty().divide(8)); // w * 1/4
+        tcRideCosts.prefWidthProperty().bind(tableEvents.widthProperty().divide(8)); // w * 1/4
+        tcStart.prefWidthProperty().bind(tableEvents.widthProperty().divide(8)); // w * 1/4
+        tcEnd.prefWidthProperty().bind(tableEvents.widthProperty().divide(8)); // w * 1/4
+
 
     }
 
