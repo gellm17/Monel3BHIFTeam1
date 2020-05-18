@@ -85,9 +85,13 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
             this.editableEventProtocol = editableEventProtocol;
             comboClientEvent.getItems().setAll(PersonDAO.getInstance().getClients());
             comboEmployeeEvent.getItems().setAll(PersonDAO.getInstance().getEmployees());
-            if (editableEvent != null && editableEventProtocol != null) {
+            if (editableEvent != null) {
                 dpDateEvent.setValue(editableEvent.getDate());
                 tfNameEvent.setText(editableEvent.getName());
+            }
+            if (editableEventProtocol != null){
+                comboClientEvent.getSelectionModel().select(editableEventProtocol.getClient());
+                comboEmployeeEvent.getSelectionModel().select(editableEventProtocol.getEmployee());
                 tfStartEvent.setText(""+editableEventProtocol.getStartTime());
                 tfEndEvent.setText(""+editableEventProtocol.getStartTime());
                 tfHourlyRateEvent.setText(""+editableEventProtocol.getHourlyRate());
@@ -97,7 +101,7 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
 
         @FXML
         void btnCancelEvent_Clicked(ActionEvent event) {
-
+            showScene("EventList");
         }
 
         @FXML
@@ -156,7 +160,7 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
                     EventDAO.getInstance().deleteEvent(editableEvent);
                     EventDAO.getInstance().deleteEventProtcol(editableEventProtocol);
                 }
-                super.showScene("EmployeeList");
+                super.showScene("EventList");
             }
         }
 

@@ -271,12 +271,10 @@ public class EventList_Controller extends SceneLoader implements Initializable {
                 this.getPrimStage().setHeight(bounds.getHeight());
                 this.getPrimStage().show();
                 AddEditSingleEvent_Controller editController = fxml.getController();
-                editController.setEditableEvent((Event) selectedItem, null);
+                editController.setEditableEvent((Event) selectedItem, EventDAO.getInstance().getEventProtocolByEvent((Event) selectedItem));
                 SceneLoader loader = editController;
                 loader.setPrimaryStage(this.getPrimStage());
             }
-
-
 
 
 
