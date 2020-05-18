@@ -119,7 +119,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader {
             if (editableEvent != null) {
                 EventDAO.getInstance().deleteEvent(editableEvent);
             }
-            super.showScene("EmployeeList");
+            super.showScene("EventList");
         }
     }
 

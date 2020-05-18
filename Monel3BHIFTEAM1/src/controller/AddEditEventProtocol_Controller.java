@@ -130,6 +130,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
             if (editableEventProtocol != null) {
                 EventDAO.getInstance().deleteEventProtcol(editableEventProtocol);
             }
+
             //super.showScene("EmployeeList"); MIKE ! WIE SOLL MAN DO WIDO ZUR VORHERIGEN LISTE KEMMEN
         }
     }
