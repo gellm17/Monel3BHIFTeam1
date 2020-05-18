@@ -44,6 +44,18 @@ public class EventDAO {
         return eventProtocols.remove(ep);
     }
 
+    public EventProtocol getEventProtocolByEvent(Event event) {
+        Iterator<EventProtocol> it = eventProtocols.iterator();
+        EventProtocol res = null;
+        while (it.hasNext() && res == null){
+            res = it.next();
+            if (res.getEvent() != event){ //recognises no equal
+                res = null;
+            }
+        }
+        return res;
+    }
+
     public Event getEventFromId(int id) {
         Event res = null;
         Event e;
