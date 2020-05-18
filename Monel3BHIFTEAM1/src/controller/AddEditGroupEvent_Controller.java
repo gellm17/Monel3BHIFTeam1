@@ -4,16 +4,27 @@ import app.SceneLoader;
 import data.EventDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
 import javafx.util.converter.LocalDateStringConverter;
+import model.Employee;
 import model.Event;
 
-public class AddEditGroupEvent_Controller extends SceneLoader {
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AddEditGroupEvent_Controller extends SceneLoader implements Initializable {
 
     @FXML
     private Button btnInfo;
@@ -55,6 +66,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader {
     private Button btnOkEvent;
 
     private Event editableEvent = null;
+    private Event thisEvent = null;
     private int errorCounter = 0;
 
     public Event getEditableEvent() {
@@ -71,7 +83,34 @@ public class AddEditGroupEvent_Controller extends SceneLoader {
 
     @FXML
     void btnAddProtocol_Clicked(ActionEvent event) {
+        try {
 
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditEmployee.fxml"));
+            BorderPane root = fxml.load();
+            Scene scene = new Scene(root);
+            this.getPrimStage().setScene(scene);
+            Screen screen = Screen.getPrimary();
+
+            //Maximized
+            Rectangle2D bounds = screen.getVisualBounds();
+            this.getPrimStage().setX(bounds.getMinX());
+            this.getPrimStage().setY(bounds.getMinY());
+            this.getPrimStage().setWidth(bounds.getWidth());
+            this.getPrimStage().setHeight(bounds.getHeight());
+            this.getPrimStage().show();
+
+
+            AddEditEventProtocol_Controller editController = fxml.getController();
+            editController.setAssignedEvent(thisEvent);
+
+
+            SceneLoader loader = editController;
+            loader.setPrimaryStage(this.getPrimStage());
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -96,12 +135,11 @@ public class AddEditGroupEvent_Controller extends SceneLoader {
 
     @FXML
     void btnOkEvent_Clicked(ActionEvent event) {
-        Event eventToAdd = new Event();
         errorCounter = 0;
 
         try {
             LocalDateStringConverter ldsc = new LocalDateStringConverter();
-            eventToAdd.setDate(ldsc.fromString(dpDateEvent.getEditor().getText()));
+            thisEvent.setDate(ldsc.fromString(dpDateEvent.getEditor().getText()));
             dpDateEvent.setStyle(null);
         } catch (Exception e) {
             dpDateEvent.setStyle("-FX-Border-Color: red");
@@ -110,12 +148,12 @@ public class AddEditGroupEvent_Controller extends SceneLoader {
         }
 
         if (!tfCheck(tfNameEvent, "^.+$")) {
-            eventToAdd.setName(tfNameEvent.getText());
+            thisEvent.setName(tfNameEvent.getText());
         }
 
-        eventToAdd.setIsGroup(true);
+        thisEvent.setIsGroup(true);
 
-        if (errorCounter == 0 && EventDAO.getInstance().addEvent(eventToAdd)) {
+        if (errorCounter == 0 && EventDAO.getInstance().addEvent(thisEvent)) {
             if (editableEvent != null) {
                 EventDAO.getInstance().deleteEvent(editableEvent);
             }
@@ -142,4 +180,8 @@ public class AddEditGroupEvent_Controller extends SceneLoader {
         return error;
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        thisEvent = new Event();
+    }
 }
