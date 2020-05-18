@@ -18,6 +18,7 @@ import javafx.stage.Screen;
 import model.Employee;
 import model.Event;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -37,6 +38,21 @@ public class EventList_Controller extends SceneLoader implements Initializable {
 
     @FXML
     private Label lbTitle;
+
+    @FXML
+    private TableView<?> tableProtocols;
+
+    @FXML
+    private ComboBox<?> comboClient;
+
+    @FXML
+    private Button btnResetClient;
+
+    @FXML
+    private ComboBox<?> comboEmployee;
+
+    @FXML
+    private Button btnResetEmployee;
 
     @FXML
     private TableView<Event> tableEvents;
@@ -189,6 +205,16 @@ public class EventList_Controller extends SceneLoader implements Initializable {
         tcDate.prefWidthProperty().bind(tableEvents.widthProperty().divide(3)); // w * 1/2
         tcBezeichnung.prefWidthProperty().bind(tableEvents.widthProperty().divide(3));
         tcKategorie.prefWidthProperty().bind(tableEvents.widthProperty().divide(3)); // w * 1/4
+
+    }
+
+    @FXML
+    void btnResetClient_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnResetEmployee_Clicked(ActionEvent event) {
 
     }
 
