@@ -81,4 +81,9 @@ public class Event {
     public void setIsGroup(boolean isGroup) {
         this.isGroup.set(isGroup);
     }
+
+    @Override
+    public String toString() {
+        return this.name.getValue() + " (" + (this.isGroup.getValue() ? "Gruppenakt." : "Einzelakt.") + ")";
+    }
 }

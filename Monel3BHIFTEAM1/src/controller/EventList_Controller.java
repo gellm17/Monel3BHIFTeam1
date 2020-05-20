@@ -2,6 +2,8 @@ package controller;
 
 import app.SceneLoader;
 import data.EventDAO;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,12 +17,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
-import model.Employee;
-import model.Event;
+import model.*;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
@@ -37,6 +40,21 @@ public class EventList_Controller extends SceneLoader implements Initializable {
 
     @FXML
     private Label lbTitle;
+
+    @FXML
+    private TableView<EventProtocol> tableProtocols;
+
+    @FXML
+    private ComboBox<?> comboClient;
+
+    @FXML
+    private Button btnResetClient;
+
+    @FXML
+    private ComboBox<?> comboEmployee;
+
+    @FXML
+    private Button btnResetEmployee;
 
     @FXML
     private TableView<Event> tableEvents;
@@ -82,21 +100,79 @@ public class EventList_Controller extends SceneLoader implements Initializable {
 
     @FXML
     private Button btnNavBirthdays;
+
+    //Col for Event
     @FXML
     private TableColumn<Event, LocalDate> tcDate;
     @FXML
     private TableColumn<Event, String> tcBezeichnung;
-
     @FXML
     private TableColumn<Event, Boolean> tcKategorie;
+
+    // Col for EventProtocol
+    //Col for Event
+    @FXML
+    private TableColumn<EventProtocol, Client> tcClient;
+    @FXML
+    private TableColumn<EventProtocol, Employee> tcEmployee;
+    @FXML
+    private TableColumn<EventProtocol, LocalTime> tcStart;
+    @FXML
+    private TableColumn<EventProtocol, LocalTime> tcEnd;
+    @FXML
+    private TableColumn<EventProtocol, LocalDate> tcDateProtocol;
+    @FXML
+    private TableColumn<EventProtocol, Double> tcRideCosts;
+    @FXML
+    private TableColumn<EventProtocol, Double> tcHourlyRate;
+    @FXML
+    private TableColumn<EventProtocol, Event> tcEvent;
+    @FXML
+    private TextField tfSearch = new TextField();
+
 
     private Event selectedItem;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<EventProtocol> filteredData = new FilteredList<>(EventDAO.getInstance().getEventProtocols(), p -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        tfSearch.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(eventProtocol -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (eventProtocol.getClient().toString().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (eventProtocol.getEmployee().toString().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<EventProtocol> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(tableProtocols.comparatorProperty());
+
+        // 5. Add sorted (and filtered) data to the table.
+        tableProtocols.setItems(sortedData);
+
+
         //ObservableList<Client> clients = FXCollections.observableArrayList(PersonDAO.getInstance().getClients());
         this.tableEvents.setItems(EventDAO.getInstance().getEvents());
+
         this.CreateColumns();
         this.ConfigureTableView();
         this.btnDeleteEvent.setDisable(true);
@@ -108,11 +184,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
             @Override
             public void handle(MouseEvent event) {
                 if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
-                    try {
-                        throw new IOException("Hallo");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    goToEdit();
                 }
             }
         });
@@ -122,6 +194,24 @@ public class EventList_Controller extends SceneLoader implements Initializable {
                 btnDeleteEvent.setDisable(false);
                 btnEditEvent.setDisable(false);
                 selectedItem = newSelection;
+                System.out.println(selectedItem);
+
+
+            }
+        });
+
+        tableProtocols.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                    goToEdit();
+                }
+            }
+        });
+
+        tableProtocols.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                selectedItem = newSelection.getEvent();
                 System.out.println(selectedItem);
 
 
@@ -138,6 +228,14 @@ public class EventList_Controller extends SceneLoader implements Initializable {
         tcBezeichnung = new TableColumn<Event, String>("Bezeichnung");
         tcKategorie = new TableColumn<Event, Boolean>("Kategorie");
 
+        tcDateProtocol = new TableColumn<EventProtocol, LocalDate>("Datum");
+        tcEvent = new TableColumn<EventProtocol, Event>("Aktivität");
+        tcClient = new TableColumn<EventProtocol, Client>("Klient");
+        tcEmployee = new TableColumn<EventProtocol, Employee>("Mitarbeiter");
+        tcHourlyRate = new TableColumn<EventProtocol, Double>("Stundensatz");
+        tcRideCosts = new TableColumn<EventProtocol, Double>("Fahrtkosten");
+        tcStart = new TableColumn<EventProtocol, LocalTime>("Start");
+        tcEnd = new TableColumn<EventProtocol, LocalTime>("Ende");
         //Weitere Table Options
         //tcDiagnose = new TableColumn<Client, String>("Diagnose");
         //tcJob = new TableColumn<Client, String>("Beschäftigung");
@@ -152,13 +250,27 @@ public class EventList_Controller extends SceneLoader implements Initializable {
         tcKategorie.setCellValueFactory(new PropertyValueFactory<Event, Boolean>("isGroup"));
 
 
+        tcDateProtocol.setCellValueFactory(new PropertyValueFactory<EventProtocol, LocalDate>("year_month"));
+        tcEvent.setCellValueFactory(new PropertyValueFactory<EventProtocol, Event>("event"));
+        tcClient.setCellValueFactory(new PropertyValueFactory<EventProtocol, Client>("client"));
+        tcEmployee.setCellValueFactory(new PropertyValueFactory<EventProtocol, Employee>("employee"));
+        tcHourlyRate.setCellValueFactory(new PropertyValueFactory<EventProtocol, Double>("hourlyRate"));
+        tcRideCosts.setCellValueFactory(new PropertyValueFactory<EventProtocol, Double>("rideCosts"));
+        tcStart.setCellValueFactory(new PropertyValueFactory<EventProtocol, LocalTime>("startTime"));
+        tcEnd.setCellValueFactory(new PropertyValueFactory<EventProtocol, LocalTime>("endTime"));
+
+
         this.tableEvents.getColumns().addAll(tcDate, tcBezeichnung, tcKategorie);
+
+        this.tableProtocols.getColumns().addAll(tcDateProtocol, tcEvent, tcClient, tcEmployee, tcHourlyRate, tcRideCosts, tcStart, tcEnd);
 
     }
 
     public void ConfigureTableView() {
         //Width
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+        //Event
         tcDate.setCellFactory(column -> new TableCell<Event, LocalDate>() {
             @Override
             protected void updateItem(LocalDate date, boolean empty) {
@@ -190,6 +302,64 @@ public class EventList_Controller extends SceneLoader implements Initializable {
         tcBezeichnung.prefWidthProperty().bind(tableEvents.widthProperty().divide(3));
         tcKategorie.prefWidthProperty().bind(tableEvents.widthProperty().divide(3)); // w * 1/4
 
+        //EventProtocol
+tcDateProtocol.setCellFactory(column -> new TableCell<EventProtocol, LocalDate>() {
+            @Override
+            protected void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                if (empty) {
+                    setText("");
+                } else {
+                    setText(formatter.format(date));
+                }
+            }
+        });
+        tcHourlyRate.setCellFactory(column -> new TableCell<EventProtocol, Double>() {
+            @Override
+            protected void updateItem(Double value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty) {
+                    setText("");
+                } else {
+                    setText(value+" €");
+                }
+            }
+        });
+
+        tcRideCosts.setCellFactory(column -> new TableCell<EventProtocol, Double>() {
+            @Override
+            protected void updateItem(Double value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty) {
+                    setText("");
+                } else {
+                    setText(value+" €");
+                }
+            }
+        });
+
+
+
+        tcDateProtocol.prefWidthProperty().bind(tableEvents.widthProperty().divide(8)); // w * 1/4
+        tcEvent.prefWidthProperty().bind(tableEvents.widthProperty().divide(8)); // w * 1/4
+        tcClient.prefWidthProperty().bind(tableEvents.widthProperty().divide(8)); // w * 1/4
+        tcEmployee.prefWidthProperty().bind(tableEvents.widthProperty().divide(8)); // w * 1/4
+        tcHourlyRate.prefWidthProperty().bind(tableEvents.widthProperty().divide(8)); // w * 1/4
+        tcRideCosts.prefWidthProperty().bind(tableEvents.widthProperty().divide(8)); // w * 1/4
+        tcStart.prefWidthProperty().bind(tableEvents.widthProperty().divide(8)); // w * 1/4
+        tcEnd.prefWidthProperty().bind(tableEvents.widthProperty().divide(8)); // w * 1/4
+
+
+    }
+
+    @FXML
+    void btnResetClient_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnResetEmployee_Clicked(ActionEvent event) {
+
     }
 
     @FXML
@@ -209,52 +379,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
 
     @FXML
     void btnEditEvent_Clicked(ActionEvent event) {
-        try {
-
-
-            if (selectedItem.getIsGroup()) {
-                FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditGroupEvent.fxml"));
-                BorderPane root = fxml.load();
-                Scene scene = new Scene(root);
-                this.getPrimStage().setScene(scene);
-                Screen screen = Screen.getPrimary();
-
-                //Maximized
-                Rectangle2D bounds = screen.getVisualBounds();
-                this.getPrimStage().setX(bounds.getMinX());
-                this.getPrimStage().setY(bounds.getMinY());
-                this.getPrimStage().setWidth(bounds.getWidth());
-                this.getPrimStage().setHeight(bounds.getHeight());
-                this.getPrimStage().show();
-                AddEditGroupEvent_Controller editController = fxml.getController();
-                editController.setEditableEvent((Event) selectedItem);
-                SceneLoader loader = editController;
-                loader.setPrimaryStage(this.getPrimStage());
-            } else {
-                FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditSingleEvent.fxml"));
-                BorderPane root = fxml.load();
-                Scene scene = new Scene(root);
-                this.getPrimStage().setScene(scene);
-                Screen screen = Screen.getPrimary();
-
-                //Maximized
-                Rectangle2D bounds = screen.getVisualBounds();
-                this.getPrimStage().setX(bounds.getMinX());
-                this.getPrimStage().setY(bounds.getMinY());
-                this.getPrimStage().setWidth(bounds.getWidth());
-                this.getPrimStage().setHeight(bounds.getHeight());
-                this.getPrimStage().show();
-                AddEditSingleEvent_Controller editController = fxml.getController();
-                editController.setEditableEvent((Event) selectedItem, EventDAO.getInstance().getEventProtocolByEvent((Event) selectedItem));
-                SceneLoader loader = editController;
-                loader.setPrimaryStage(this.getPrimStage());
-            }
-
-
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+        goToEdit();
     }
 
     @FXML
@@ -310,6 +435,55 @@ public class EventList_Controller extends SceneLoader implements Initializable {
     @FXML
     void btnSettings_Clicked(ActionEvent event) {
 
+    }
+
+    private void goToEdit() {
+        try {
+
+
+            if (selectedItem.getIsGroup()) {
+                FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditGroupEvent.fxml"));
+                BorderPane root = fxml.load();
+                Scene scene = new Scene(root);
+                this.getPrimStage().setScene(scene);
+                Screen screen = Screen.getPrimary();
+
+                //Maximized
+                Rectangle2D bounds = screen.getVisualBounds();
+                this.getPrimStage().setX(bounds.getMinX());
+                this.getPrimStage().setY(bounds.getMinY());
+                this.getPrimStage().setWidth(bounds.getWidth());
+                this.getPrimStage().setHeight(bounds.getHeight());
+                this.getPrimStage().show();
+                AddEditGroupEvent_Controller editController = fxml.getController();
+                editController.setEditableEvent((Event) selectedItem);
+                SceneLoader loader = editController;
+                loader.setPrimaryStage(this.getPrimStage());
+            } else {
+                FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditSingleEvent.fxml"));
+                BorderPane root = fxml.load();
+                Scene scene = new Scene(root);
+                this.getPrimStage().setScene(scene);
+                Screen screen = Screen.getPrimary();
+
+                //Maximized
+                Rectangle2D bounds = screen.getVisualBounds();
+                this.getPrimStage().setX(bounds.getMinX());
+                this.getPrimStage().setY(bounds.getMinY());
+                this.getPrimStage().setWidth(bounds.getWidth());
+                this.getPrimStage().setHeight(bounds.getHeight());
+                this.getPrimStage().show();
+                AddEditSingleEvent_Controller editController = fxml.getController();
+                editController.setEditableEvent((Event) selectedItem, EventDAO.getInstance().getEventProtocolByEvent((Event) selectedItem));
+                SceneLoader loader = editController;
+                loader.setPrimaryStage(this.getPrimStage());
+            }
+
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
