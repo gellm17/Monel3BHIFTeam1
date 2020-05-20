@@ -11,7 +11,7 @@ public class ConnectionFactory {
     private static final String DB_HOST_KEY = "dbHost";
     private static final String DB_NAME_KEY = "dbName";
     private static final String DB_USER_KEY = "dbUser";
-    private static final String DB_PASSWD_KEY = "dbPawweord";
+    private static final String DB_PASSWD_KEY = "dbPasswd";
 
     // Values
     private static final String DB_DRIVER = "org.mariadb.jdbc.Driver";
