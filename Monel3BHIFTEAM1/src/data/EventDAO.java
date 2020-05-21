@@ -21,10 +21,10 @@ public class EventDAO {
     private static EventDAO instance = null;
 
     private EventDAO() {
-        Event e = new Event(2, LocalDate.now(), "Fußball", false);
+        /*Event e = new Event(2, LocalDate.now(), "Fußball", false);
         this.events.add(new Event(1, LocalDate.now(), "Kino", true));
-        this.events.add(e);
-        this.eventProtocols.add(new EventProtocol(1, LocalTime.now(), LocalTime.now(), LocalDate.now(), 10.03, new Employee(Salutation.Herr,"Herbert", "Gell"), new Client(Salutation.Herr, "Michael", "Gell"), e, 100.01));
+        this.events.add(e);*/
+        //this.eventProtocols.add(new EventProtocol(1, LocalTime.now(), LocalTime.now(), LocalDate.now(), 10.03, new Employee(Salutation.Herr,"Herbert", "Gell"), new Client(Salutation.Herr, "Michael", "Gell"), e, 100.01));
     }
     public static EventDAO getInstance() {
         if (instance == null) {
@@ -52,7 +52,7 @@ public class EventDAO {
         EventProtocol res = null;
         while (it.hasNext() && res == null){
             res = it.next();
-            if (res.getEvent() != event){ //recognises no equal
+            if (res.getEvent().getName() != event.getName()){ //recognises no equal //TODO
                 res = null;
             }
         }

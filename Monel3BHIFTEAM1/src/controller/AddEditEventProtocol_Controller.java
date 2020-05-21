@@ -5,18 +5,24 @@ import data.EventDAO;
 import data.PersonDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
 import model.Client;
 import model.Employee;
 import model.Event;
 import model.EventProtocol;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
@@ -131,13 +137,38 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
             eventProtocolToAdd.setRideCosts(Double.parseDouble(tfRideCostsEvent.getText()));
         }
 
+        eventProtocolToAdd.setEvent(assignedEvent);
+
         if (errorCounter == 0 && EventDAO.getInstance().addEventProtcol(eventProtocolToAdd)) {
-            eventProtocolToAdd.setEvent(assignedEvent);
             if (editableEventProtocol != null) {
                 EventDAO.getInstance().deleteEventProtcol(editableEventProtocol);
             }
 
-            //super.showScene("EmployeeList"); MIKE ! WIE SOLL MAN DO WIDO ZUR VORHERIGEN LISTE KEMMEN
+            showSceneBefore();
+        }
+    }
+
+    private void showSceneBefore() {
+        try {
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditGroupEvent.fxml"));
+            BorderPane root = fxml.load();
+            Scene scene = new Scene(root);
+            this.getPrimStage().setScene(scene);
+            Screen screen = Screen.getPrimary();
+
+            //Maximized
+            Rectangle2D bounds = screen.getVisualBounds();
+            this.getPrimStage().setX(bounds.getMinX());
+            this.getPrimStage().setY(bounds.getMinY());
+            this.getPrimStage().setWidth(bounds.getWidth());
+            this.getPrimStage().setHeight(bounds.getHeight());
+            this.getPrimStage().show();
+            AddEditGroupEvent_Controller editController = fxml.getController();
+            editController.setEditableEvent(assignedEvent);
+            SceneLoader loader = editController;
+            loader.setPrimaryStage(this.getPrimStage());
+        } catch (Exception ex){
+            ex.printStackTrace();
         }
     }
 

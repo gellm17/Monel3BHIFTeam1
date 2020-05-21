@@ -93,7 +93,7 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
                 comboClientEvent.getSelectionModel().select(editableEventProtocol.getClient());
                 comboEmployeeEvent.getSelectionModel().select(editableEventProtocol.getEmployee());
                 tfStartEvent.setText(""+editableEventProtocol.getStartTime());
-                tfEndEvent.setText(""+editableEventProtocol.getStartTime());
+                tfEndEvent.setText(""+editableEventProtocol.getEndTime());
                 tfHourlyRateEvent.setText(""+editableEventProtocol.getHourlyRate());
                 tfRideCostsEvent.setText(""+editableEventProtocol.getRideCosts());
             }
@@ -154,6 +154,8 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
             if (!tfCheck(tfRideCostsEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){
                 eventProtocolToAdd.setRideCosts(Double.parseDouble(tfRideCostsEvent.getText()));
             }
+
+            eventProtocolToAdd.setEvent(eventToAdd);
 
             if (errorCounter == 0 && EventDAO.getInstance().addEvent(eventToAdd) && EventDAO.getInstance().addEventProtcol(eventProtocolToAdd)) {
                 if (editableEvent != null && editableEventProtocol != null) {

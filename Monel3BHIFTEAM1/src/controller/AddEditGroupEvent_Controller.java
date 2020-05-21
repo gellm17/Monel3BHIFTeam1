@@ -68,6 +68,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
     private Event editableEvent = null;
     private Event thisEvent = null;
     private int errorCounter = 0;
+    private boolean wantToAddAPerson = false;
 
     public Event getEditableEvent() {
         return editableEvent;
@@ -83,34 +84,8 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
 
     @FXML
     void btnAddProtocol_Clicked(ActionEvent event) {
-        try {
-
-            FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditEventProtocol.fxml"));
-            BorderPane root = fxml.load();
-            Scene scene = new Scene(root);
-            this.getPrimStage().setScene(scene);
-            Screen screen = Screen.getPrimary();
-
-            //Maximized
-            Rectangle2D bounds = screen.getVisualBounds();
-            this.getPrimStage().setX(bounds.getMinX());
-            this.getPrimStage().setY(bounds.getMinY());
-            this.getPrimStage().setWidth(bounds.getWidth());
-            this.getPrimStage().setHeight(bounds.getHeight());
-            this.getPrimStage().show();
-
-
-            AddEditEventProtocol_Controller editController = fxml.getController();
-            editController.setAssignedEvent(thisEvent);
-
-
-            SceneLoader loader = editController;
-            loader.setPrimaryStage(this.getPrimStage());
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        wantToAddAPerson = true;
+        btnOkEvent_Clicked(event);
     }
 
     @FXML
@@ -136,7 +111,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
     @FXML
     void btnOkEvent_Clicked(ActionEvent event) {
         errorCounter = 0;
-
+        thisEvent = new Event();
         try {
             LocalDateStringConverter ldsc = new LocalDateStringConverter();
             thisEvent.setDate(ldsc.fromString(dpDateEvent.getEditor().getText()));
@@ -157,7 +132,36 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
             if (editableEvent != null) {
                 EventDAO.getInstance().deleteEvent(editableEvent);
             }
-            super.showScene("EventList");
+            if (wantToAddAPerson) {
+                try {
+                    FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditEventProtocol.fxml"));
+                    BorderPane root = fxml.load();
+                    Scene scene = new Scene(root);
+                    this.getPrimStage().setScene(scene);
+                    Screen screen = Screen.getPrimary();
+
+                    //Maximized
+                    Rectangle2D bounds = screen.getVisualBounds();
+                    this.getPrimStage().setX(bounds.getMinX());
+                    this.getPrimStage().setY(bounds.getMinY());
+                    this.getPrimStage().setWidth(bounds.getWidth());
+                    this.getPrimStage().setHeight(bounds.getHeight());
+                    this.getPrimStage().show();
+
+
+                    AddEditEventProtocol_Controller editController = fxml.getController();
+                    editController.setAssignedEvent(thisEvent);
+
+
+                    SceneLoader loader = editController;
+                    loader.setPrimaryStage(this.getPrimStage());
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            } else {
+                super.showScene("EventList");
+            }
         }
     }
 
