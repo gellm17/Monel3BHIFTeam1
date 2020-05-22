@@ -137,6 +137,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
             eventProtocolToAdd.setRideCosts(Double.parseDouble(tfRideCostsEvent.getText()));
         }
 
+        eventProtocolToAdd.setYear_month(assignedEvent.getDate());
         eventProtocolToAdd.setEvent(assignedEvent);
 
         if (errorCounter == 0 && EventDAO.getInstance().addEventProtcol(eventProtocolToAdd)) {
