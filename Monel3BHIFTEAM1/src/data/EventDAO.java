@@ -59,19 +59,6 @@ public class EventDAO {
         return res;
     }
 
-    public Event getEventFromId(int id) {
-        Event res = null;
-        Event e;
-        Iterator<Event> it = events.iterator();
-        while(it.hasNext() && res == null) {
-            e = it.next();
-            if(e.getId() == id) {
-                res = e;
-            }
-        }
-        return res;
-    }
-
     public ObservableList<Event> getEvents() {
         return events;
     }

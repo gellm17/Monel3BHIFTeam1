@@ -7,38 +7,54 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class Document {
-	private IntegerProperty 				dID;
+	private IntegerProperty 				id;
 	private StringProperty 					path;
 	private StringProperty 					documentType;
-	private SimpleObjectProperty<Owner>							owner;
-	private ObjectProperty<Person> 			ownerIdPerson;
-	private ObjectProperty<EventProtocol> 	ownerIdEvent;
-	
-	public Document(int dID, String path, String documentType, Owner owner, Person ownerIdPerson) {
-		this.dID = new SimpleIntegerProperty(this, "dID", dID);
+	private SimpleObjectProperty<Owner>		owner;
+	private ObjectProperty<Person> 			ownerPerson;
+	private ObjectProperty<EventProtocol> 	ownerEvent;
+
+	public Document(int id, String path, String documentType, Owner owner, Person ownerIdPerson, EventProtocol ownerIdEvent) {
+		this.id = new SimpleIntegerProperty(this, "dID", id);
 		this.path = new SimpleStringProperty(this, "path", path);
 		this.documentType = new SimpleStringProperty(this, "documentType", documentType);
 		this.owner = new SimpleObjectProperty<Owner>(this, "owner", owner);
-		this.ownerIdPerson = new SimpleObjectProperty<Person>(this, "ownerIdPerson", ownerIdPerson);
+		this.ownerPerson = new SimpleObjectProperty<Person>(this, "ownerIdPerson", ownerIdPerson);
+		this.ownerEvent = new SimpleObjectProperty<EventProtocol>(this, "ownerIdEvent", ownerIdEvent);
+	}
+
+	public Document(int id, String path, String documentType, Owner owner, Person ownerIdPerson) {
+		this.id = new SimpleIntegerProperty(this, "dID", id);
+		this.path = new SimpleStringProperty(this, "path", path);
+		this.documentType = new SimpleStringProperty(this, "documentType", documentType);
+		this.owner = new SimpleObjectProperty<Owner>(this, "owner", owner);
+		this.ownerPerson = new SimpleObjectProperty<Person>(this, "ownerIdPerson", ownerIdPerson);
 	}
 	
-	public Document(int dID, String path, String documentType, Owner owner, EventProtocol ownerIdEvent) {
-		this.dID = new SimpleIntegerProperty(this, "dID", dID);
+	public Document(int id, String path, String documentType, Owner owner, EventProtocol ownerIdEvent) {
+		this.id = new SimpleIntegerProperty(this, "dID", id);
 		this.path = new SimpleStringProperty(this, "path", path);
 		this.documentType = new SimpleStringProperty(this, "documentType", documentType);
 		this.owner = new SimpleObjectProperty<Owner>(this, "owner", owner);
-		this.ownerIdEvent = new SimpleObjectProperty<EventProtocol>(this, "ownerIdEvent", ownerIdEvent);
+		this.ownerEvent = new SimpleObjectProperty<EventProtocol>(this, "ownerIdEvent", ownerIdEvent);
+	}
+
+	public static Document fromResults(ResultSet rs) throws SQLException {
+		return new Document(rs.getInt("id"), rs.getString("pfad"), rs.getString("dokumentenart"), Owner.valueOf(rs.getString("besitzer")), null, null);
 	}
 
 	public IntegerProperty idPeopwery() {
-		return dID;
+		return id;
 	}
 	public int getID() {
-		return this.dID.get();
+		return this.id.get();
 	}
 	public void setdID(int dID) {
-		this.dID.set(dID);
+		this.id.set(dID);
 	}
 
 	public StringProperty pathProperty() {
@@ -72,23 +88,23 @@ public class Document {
 	}
 
 	public ObjectProperty<Person> ownerIdPersonProperty() {
-		return ownerIdPerson;
+		return ownerPerson;
 	}
 	public Person getOwnerIdPerson() {
-		return this.ownerIdPerson.get();
+		return this.ownerPerson.get();
 	}
 	public void setOwnerIdPerson(Person ownerIdPerson) {
-		this.ownerIdPerson.set(ownerIdPerson);
+		this.ownerPerson.set(ownerIdPerson);
 	}
 
 	public ObjectProperty<EventProtocol> ownerIdEventProperty() {
-		return ownerIdEvent;
+		return ownerEvent;
 	}
 	public EventProtocol getOwnerIdEvent() {
-		return this.ownerIdEvent.get();
+		return this.ownerEvent.get();
 	}
 	public void setOwnerIdEvent(EventProtocol ownerIdEvent) {
-		this.ownerIdEvent.set(ownerIdEvent);
+		this.ownerEvent.set(ownerIdEvent);
 	}
 	
 	
