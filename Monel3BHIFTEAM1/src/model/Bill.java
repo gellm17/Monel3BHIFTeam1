@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -12,16 +14,20 @@ import javafx.beans.property.StringProperty;
 
 public class Bill {
 	private IntegerProperty nr;
-	private ObjectProperty<Client> clientId;	
+	private ObjectProperty<Client> client;
 	private ObjectProperty<LocalDate> dateOfIssue;		//time where you get the bill
 	private StringProperty use;							//purpose of use
 	private ArrayList<EventProtocol> eventProtocols;			//List of all eventProtocols
 	
-	public Bill(int nr, Client clientId, LocalDate dateOfIssue, String use) {
+	public Bill(int nr, Client client, LocalDate dateOfIssue, String use) {
 		this.nr = new SimpleIntegerProperty(this, "nr", nr);
-		this.clientId = new SimpleObjectProperty<Client>(this, "clientId", clientId);
+		this.client = new SimpleObjectProperty<Client>(this, "client", client);
 		this.dateOfIssue = new SimpleObjectProperty<LocalDate>(this, "dateOfIssue", dateOfIssue);
 		this.use = new SimpleStringProperty(this, "use", use);
+	}
+
+	public static Bill fromResults(ResultSet rs) throws SQLException {
+		return new Bill(rs.getInt("rechnungsnummer"), null, LocalDate.parse(rs.getString("ausstellungsdatum")), rs.getString("verwendungszweck"));
 	}
 
 	public IntegerProperty nrProperty() {
@@ -35,13 +41,13 @@ public class Bill {
 	}
 
 	public ObjectProperty<Client> clientIdProperty() {
-		return clientId;
+		return client;
 	}
-	public Client getKlientId() {
-		return clientId.get();
+	public Client getClient() {
+		return client.get();
 	}
-	public void setKlientId(Client clientId) {
-		this.clientId.set(clientId);
+	public void setClient(Client client) {
+		this.client.set(client);
 	}
 
 	public ObjectProperty<LocalDate> dateOfIssueProperty() {

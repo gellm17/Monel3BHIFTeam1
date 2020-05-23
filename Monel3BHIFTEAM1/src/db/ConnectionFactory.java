@@ -83,5 +83,10 @@ public class ConnectionFactory {
         return con;
     }
 
+    public void close() throws SQLException {
+        con.close();
+        con = null;
+    }
+
     public Exception getLastException() { return ex; }
 }

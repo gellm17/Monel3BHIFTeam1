@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class PersonDAO {
-    private HashMap<Integer, Person> persons = new HashMap<Integer, Person>();                              // HashMap mit allen Personen (ESV und Notfallkontakte)
     private ObservableList<Client> clients = FXCollections.observableList(new ArrayList<Client>());         // ArrayList mit allen Personen
     private ObservableList<Employee> employees = FXCollections.observableList(new ArrayList<Employee>());   // ArrayList mit allen Employees
     private ObservableList<Sponsor> sponsor = FXCollections.observableList(new ArrayList<>());              // ArrayList mit allen Company
@@ -42,9 +41,6 @@ public class PersonDAO {
         } else if (p instanceof Sponsor){
             Sponsor sp = (Sponsor) p;
             success = sponsor.add(sp);
-        } else {
-            persons.put(p.getId(), p);
-            success = true;
         }
         return success;
     }
@@ -60,14 +56,8 @@ public class PersonDAO {
         } else if (p instanceof Sponsor){
             Sponsor sp = (Sponsor) p;
             success = sponsor.remove(sp);
-        } else {
-            success = persons.remove(p.getId(), p);
         }
         return success;
-    }
-
-    public Person getPersonFromId(int id) {
-        return persons.get(id);
     }
 
     public Client getClientFromId(int id) {
@@ -107,9 +97,5 @@ public class PersonDAO {
 
     public ObservableList<Employee> getEmployees() {
         return employees;
-    }
-
-    public HashMap<Integer, Person> getPersons() {
-        return persons;
     }
 }
