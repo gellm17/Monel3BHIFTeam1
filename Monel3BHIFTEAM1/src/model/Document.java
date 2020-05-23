@@ -87,24 +87,24 @@ public class Document {
 		this.owner.set(owner);
 	}
 
-	public ObjectProperty<Person> ownerIdPersonProperty() {
+	public ObjectProperty<Person> ownerPersonProperty() {
 		return ownerPerson;
 	}
-	public Person getOwnerIdPerson() {
+	public Person getOwnerPerson() {
 		return this.ownerPerson.get();
 	}
-	public void setOwnerIdPerson(Person ownerIdPerson) {
-		this.ownerPerson.set(ownerIdPerson);
+	public void setOwnerPerson(Person ownerPerson) {
+		this.ownerPerson.set(ownerPerson);
 	}
 
-	public ObjectProperty<EventProtocol> ownerIdEventProperty() {
+	public ObjectProperty<EventProtocol> ownerEventProperty() {
 		return ownerEvent;
 	}
-	public EventProtocol getOwnerIdEvent() {
+	public EventProtocol getOwnerEvent() {
 		return this.ownerEvent.get();
 	}
-	public void setOwnerIdEvent(EventProtocol ownerIdEvent) {
-		this.ownerEvent.set(ownerIdEvent);
+	public void setOwnerEvent(EventProtocol ownerEvent) {
+		this.ownerEvent.set(ownerEvent);
 	}
 	
 	

@@ -4,17 +4,24 @@ import data.EventDAO;
 import data.PersonDAO;
 import model.*;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 public class DBManager {
 
-    private static String sqlInsertPerson = "INSERT INTO person (id,esv,notfallkontkt1,notfallkontakt2,personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,svnr,diagnose,allergien,sonstiges,beschaeftigung,amt,verwendungsgruppe,gehaltsstufe,wochenstunden,iban,bic,vorrueckdatum,einstelldatum,firmenname,firmentelefonnummer,firmenemail,geloescht) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static String sqlInsertPerson = "INSERT INTO person (id,esv,notfallkontkt1,notfallkontakt2,personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,svnr,diagnose,allergien,sonstiges,beschaeftigung,amt,verwendungsgruppe,gehaltsstufe,wochenstunden,iban,bic,vorrueckdatum,einstelldatum,firmenname,firmentelefonnummer,firmenemail,geloescht) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static String sqlInsertAktivitaet = "INSERT INTO aktivitaet (id,datum,aktivitaetsbezeichnung,kategorie) VALUES (?,?,?,?)";
+    private static String sqlInsertAktivitaetsprotokoll = "INSERT INTO aktivitaetsprotokoll (id,aktivitaet,mitarbeiter,klient,rechnung,startzeit,endzeit,jahr_Monat,stundensatz,fahrtkosten) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    private static String sqlInsertRechnung = "INSERT INTO rechnung (rechnungsnummer,klient,ausstellungsdatum,verwendungszweck) VALUES (?,?,?,?)";
+    private static String sqlInsertDokument = "INSERT INTO dokument (id,besitzerIdPerson,besitzerIdAktivitaet,pfad,dokumentenart,besitzer) VALUES (?,?,?,?,?,?)";
+
+    private static PreparedStatement stmtInsertPerson = null;
+    private static PreparedStatement stmtInsertAktivitaet = null;
+    private static PreparedStatement stmtInsertAktiivitaetsprotokoll = null;
+    private static PreparedStatement stmtInsertRechnung = null;
+    private static PreparedStatement stmtInsertDokument = null;
 
     private static Connection conn = null;
 
@@ -104,7 +111,18 @@ public class DBManager {
         return evns;
     }
 
-    // returns a HashMap of all Eventprotokolls from the DB with Objects (event, employee, client)
+    // returns a HashMap of all Eventprotokolls from the DB without Objects (event, employee, client)
+    private static HashMap<Integer, EventProtocol> getEventProtocolls() throws SQLException{
+        HashMap<Integer, EventProtocol> evps = new HashMap<Integer, EventProtocol>();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM aktivitaetsprotokoll");
+        while (rs.next()) {
+            evps.put(rs.getInt("id"), EventProtocol.fromResults(rs));
+        }
+        return evps;
+    }
+
+    // returns a ArrayList of all Eventprotokolls from the DB with Objects (event, employee, client)
     public static ArrayList<EventProtocol> getAllEventProtokolls() throws SQLException {
         ArrayList<EventProtocol> evps = new ArrayList<EventProtocol>();
         Statement stmt = conn.createStatement();
@@ -161,12 +179,70 @@ public class DBManager {
         return bils;
     }
 
-    public void open() {
-        conn = ConnectionFactory.getInstance().getConnection();
+    // returns an ArrayList of all Documents from the DB with Objects (ownerPerson or ownerEvent)
+    public static ArrayList<Document> getAllDocuments() throws SQLException {
+        ArrayList<Document> docs = new ArrayList<Document>();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM dokument");
+        HashMap<Integer, EventProtocol> evps = getEventProtocolls();
+        HashMap<Integer, Client> clis = getClients();
+        HashMap<Integer, Employee> emps = getAllEmployees();
+        HashMap<Integer, Sponsor> spns = getAllSponsors();
+        Document d;
+        while (rs.next()) {
+            d = Document.fromResults(rs);
+            if (Owner.valueOf(rs.getString("besitzer")) == Owner.Aktivitaet) {
+                d.setOwnerEvent(evps.get(rs.getInt("besitzerIdAktivitaet")));
+            }
+            if (Owner.valueOf(rs.getString("besitzer")) == Owner.Klient) {
+                d.setOwnerPerson(clis.get(rs.getInt("besitzerIdPerson")));
+            }
+            if (Owner.valueOf(rs.getString("besitzer")) == Owner.Mitarbeiter) {
+                d.setOwnerPerson(emps.get(rs.getInt("besitzerIdPerson")));
+            }
+            if (Owner.valueOf(rs.getString("besitzer")) == Owner.Sponsor) {
+                d.setOwnerPerson(spns.get(rs.getInt("besitzerIdPerson")));
+            }
+            docs.add(d);
+        }
+        return docs;
     }
 
+    // creates the DB Connection and sends the PreparedStatements to the DB
+    public void open() throws SQLException {
+        conn = ConnectionFactory.getInstance().getConnection();
+        stmtInsertPerson.executeUpdate(sqlInsertPerson, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertAktivitaet.executeUpdate(sqlInsertAktivitaet, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertAktiivitaetsprotokoll.executeUpdate(sqlInsertAktivitaetsprotokoll, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertRechnung.executeUpdate(sqlInsertRechnung, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertDokument.executeUpdate(sqlInsertDokument, Statement.RETURN_GENERATED_KEYS);
+    }
+
+    // closes the DB Connection and the PreparedStatements
     public void close() throws SQLException {
-        ConnectionFactory.getInstance().close();
-        conn.close();
+        if (conn != null) {
+            ConnectionFactory.getInstance().close();
+            conn.close();
+        }
+        if (stmtInsertPerson != null) {
+            stmtInsertPerson.close();
+            stmtInsertPerson = null;
+        }
+        if (stmtInsertAktivitaet != null) {
+            stmtInsertAktivitaet.close();
+            stmtInsertAktivitaet = null;
+        }
+        if (stmtInsertAktiivitaetsprotokoll != null) {
+            stmtInsertAktiivitaetsprotokoll.close();
+            stmtInsertAktiivitaetsprotokoll = null;
+        }
+        if (stmtInsertRechnung != null) {
+            stmtInsertRechnung.close();
+            stmtInsertRechnung = null;
+        }
+        if (stmtInsertDokument != null) {
+            stmtInsertDokument.close();
+            stmtInsertDokument = null;
+        }
     }
 }
