@@ -11,19 +11,293 @@ import java.util.Iterator;
 
 public class DBManager {
 
-    private static String sqlInsertPerson = "INSERT INTO person (id,esv,notfallkontkt1,notfallkontakt2,personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,svnr,diagnose,allergien,sonstiges,beschaeftigung,amt,verwendungsgruppe,gehaltsstufe,wochenstunden,iban,bic,vorrueckdatum,einstelldatum,firmenname,firmentelefonnummer,firmenemail,geloescht) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    private static String sqlInsertAktivitaet = "INSERT INTO aktivitaet (id,datum,aktivitaetsbezeichnung,kategorie) VALUES (?,?,?,?)";
-    private static String sqlInsertAktivitaetsprotokoll = "INSERT INTO aktivitaetsprotokoll (id,aktivitaet,mitarbeiter,klient,rechnung,startzeit,endzeit,jahr_Monat,stundensatz,fahrtkosten) VALUES (?,?,?,?,?,?,?,?,?,?)";
-    private static String sqlInsertRechnung = "INSERT INTO rechnung (rechnungsnummer,klient,ausstellungsdatum,verwendungszweck) VALUES (?,?,?,?)";
-    private static String sqlInsertDokument = "INSERT INTO dokument (id,besitzerIdPerson,besitzerIdAktivitaet,pfad,dokumentenart,besitzer) VALUES (?,?,?,?,?,?)";
+    private static String sqlInsertPerson = "INSERT INTO person (personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    private static String sqlInsertClient = "INSERT INTO person (Personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,esv,notfallkontakt1,notfallkontakt2,svnr,diagnose,allergien,sonstiges,beschaeftigung) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static String sqlInsertEmployee = "INSERT INTO person (personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,svnr,amt,verwendungsgruppe,gehaltsstufe,wochenstunden,iban,bic,vorrueckdatum,einstelldatum) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static String sqlInsertSponsor = "INSERT INTO person (personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,firmenname,firmentelefonnummer,firmenemail) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static String sqlInsertEvent = "INSERT INTO aktivitaet (datum,aktivitaetsbezeichnung,kategorie) VALUES (?,?,?)";
+    private static String sqlInsertEventprotocol = "INSERT INTO aktivitaetsprotokoll (aktivitaet,mitarbeiter,klient,rechnung,startzeit,endzeit,jahr_Monat,stundensatz,fahrtkosten) VALUES (?,?,?,?,?,?,?,?,?)";
+    private static String sqlInsertBill = "INSERT INTO rechnung (klient,ausstellungsdatum,verwendungszweck) VALUES (?,?,?)";
+    private static String sqlInsertDocument = "INSERT INTO dokument (besitzerIdPerson,besitzerIdAktivitaet,pfad,dokumentenart,besitzer) VALUES (?,?,?,?,?)";
 
     private static PreparedStatement stmtInsertPerson = null;
-    private static PreparedStatement stmtInsertAktivitaet = null;
-    private static PreparedStatement stmtInsertAktiivitaetsprotokoll = null;
-    private static PreparedStatement stmtInsertRechnung = null;
-    private static PreparedStatement stmtInsertDokument = null;
+    private static PreparedStatement stmtInsertClient = null;
+    private static PreparedStatement stmtInsertEmployee = null;
+    private static PreparedStatement stmtInsertSponsor = null;
+    private static PreparedStatement stmtInsertEvent = null;
+    private static PreparedStatement stmtInsertEventprotocol = null;
+    private static PreparedStatement stmtInsertBill = null;
+    private static PreparedStatement stmtInsertDocument = null;
 
     private static Connection conn = null;
+
+    // inserts a Person into the DB
+    public static int insertPerson(Person p) {
+        int newId = -1;
+        try {
+            stmtInsertPerson.setString(1, "SONSTIGES");
+            stmtInsertPerson.setString(2, p.getSalutation().toString());
+            stmtInsertPerson.setString(3, p.getTitle());
+            stmtInsertPerson.setString(4, p.getFirstName());
+            stmtInsertPerson.setString(5, p.getLastName());
+            stmtInsertPerson.setString(6, p.getStreetAndNr());
+            stmtInsertPerson.setInt(7, p.getZipCode());
+            stmtInsertPerson.setString(8, p.getPlace());
+            stmtInsertPerson.setString(9, p.getTelNr());
+            stmtInsertPerson.setString(10, p.getEmail());
+            stmtInsertPerson.setDate(11, Date.valueOf(p.getBirthDate()));
+            boolean added = (stmtInsertPerson.executeUpdate() == 1);
+            ResultSet rs = stmtInsertPerson.getGeneratedKeys();
+            if(rs != null && rs.next()) {
+                newId = rs.getInt(1);
+            }
+            stmtInsertPerson.clearParameters();
+            if (!added) {
+                newId = -1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newId;
+    }
+
+    // inserts a Klient into the DB
+    public static int insertClient(Client c) {
+        int newId = -1;
+        try {
+            stmtInsertClient.setString(1, "KLIENT");
+            stmtInsertClient.setString(2, c.getSalutation().toString());
+            stmtInsertClient.setString(3, c.getTitle());
+            stmtInsertClient.setString(4, c.getFirstName());
+            stmtInsertClient.setString(5, c.getLastName());
+            stmtInsertClient.setString(6, c.getStreetAndNr());
+            stmtInsertClient.setInt(7, c.getZipCode());
+            stmtInsertClient.setString(8, c.getPlace());
+            stmtInsertClient.setString(9, c.getTelNr());
+            stmtInsertClient.setString(10, c.getEmail());
+            stmtInsertClient.setDate(11, Date.valueOf(c.getBirthDate()));
+            if (c.getEsv() != null) {
+                stmtInsertClient.setInt(12, c.getEsv().getId());
+            } else {
+                stmtInsertClient.setNull(12, Types.NULL);
+            }
+            stmtInsertClient.setInt(13, c.getEmergencyContact1().getId());
+            if (c.getEmergencyContact2() != null) {
+                stmtInsertClient.setInt(14, c.getEmergencyContact2().getId());
+            } else {
+                stmtInsertClient.setNull(14, Types.NULL);
+            }
+            stmtInsertClient.setLong(15, c.getSsnr());
+            stmtInsertClient.setString(16, c.getDiagnose());
+            stmtInsertClient.setString(17, c.getAllergies());
+            stmtInsertClient.setString(18, c.getOther());
+            stmtInsertClient.setString(19, c.getJob());
+            boolean added = (stmtInsertClient.executeUpdate() == 1);
+            ResultSet rs = stmtInsertClient.getGeneratedKeys();
+            if(rs != null && rs.next()) {
+                newId = rs.getInt(1);
+            }
+            stmtInsertClient.clearParameters();
+            if (!added) {
+                newId = -1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newId;
+    }
+
+    // inserts an Employee into the DB
+    public static int insertEmployee(Employee e) {
+        int newId = -1;
+        try {
+            stmtInsertEmployee.setString(1, "MITARBEITER");
+            stmtInsertEmployee.setString(2, e.getSalutation().toString());
+            stmtInsertEmployee.setString(3, e.getTitle());
+            stmtInsertEmployee.setString(4, e.getFirstName());
+            stmtInsertEmployee.setString(5, e.getLastName());
+            stmtInsertEmployee.setString(6, e.getStreetAndNr());
+            stmtInsertEmployee.setInt(7, e.getZipCode());
+            stmtInsertEmployee.setString(8, e.getPlace());
+            stmtInsertEmployee.setString(9, e.getTelNr());
+            stmtInsertEmployee.setString(10, e.getEmail());
+            stmtInsertEmployee.setDate(11, Date.valueOf(e.getBirthDate()));
+            stmtInsertEmployee.setLong(12, e.getSsnr());
+            stmtInsertEmployee.setInt(13, (e.isVolunteering() ? 1 : 0));
+            stmtInsertEmployee.setString(14, e.getOccupationGroup().toString());
+            stmtInsertEmployee.setString(15, e.getSalaryLevel().toString());
+            stmtInsertEmployee.setInt(16, e.getHoursPerWeek());
+            stmtInsertEmployee.setString(17, e.getIban());
+            stmtInsertEmployee.setString(18, e.getBic());
+            stmtInsertEmployee.setDate(19, Date.valueOf(e.getDateSalaryLevel()));
+            stmtInsertEmployee.setDate(20, Date.valueOf(e.getDateOfEmployment()));
+            boolean added = (stmtInsertEmployee.executeUpdate() == 1);
+            ResultSet rs = stmtInsertEmployee.getGeneratedKeys();
+            if(rs != null && rs.next()) {
+                newId = rs.getInt(1);
+            }
+            stmtInsertEmployee.clearParameters();
+            if (!added) {
+                newId = -1;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return newId;
+    }
+
+    // inserts a Sponsor into the DB
+    public static int insertSponsor(Sponsor s) {
+        int newId = -1;
+        try {
+            stmtInsertSponsor.setString(1, "SPONSOR");
+            stmtInsertSponsor.setString(2, s.getSalutation().toString());
+            stmtInsertSponsor.setString(3, s.getTitle());
+            stmtInsertSponsor.setString(4, s.getFirstName());
+            stmtInsertSponsor.setString(5, s.getLastName());
+            stmtInsertSponsor.setString(6, s.getStreetAndNr());
+            stmtInsertSponsor.setInt(7, s.getZipCode());
+            stmtInsertSponsor.setString(8, s.getPlace());
+            stmtInsertSponsor.setString(9, s.getTelNr());
+            stmtInsertSponsor.setString(10, s.getEmail());
+            stmtInsertSponsor.setDate(11, Date.valueOf(s.getBirthDate()));
+            stmtInsertSponsor.setString(12, s.getCompanyName());
+            stmtInsertSponsor.setString(13, s.getCompanyTelNr());
+            stmtInsertSponsor.setString(14, s.getCompanyEmail());
+            boolean added = (stmtInsertSponsor.executeUpdate() == 1);
+            ResultSet rs = stmtInsertSponsor.getGeneratedKeys();
+            if(rs != null && rs.next()) {
+                newId = rs.getInt(1);
+            }
+            stmtInsertSponsor.clearParameters();
+            if (!added) {
+                newId = -1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newId;
+    }
+
+    // inserts an Event into the DB
+    public static int insertEvent(Event e) {
+        int newId = -1;
+        try {
+            stmtInsertEvent.setDate(1, Date.valueOf(e.getDate()));
+            stmtInsertEvent.setString(2, e.getName());
+            stmtInsertEvent.setInt(3, (e.getIsGroup() ? 1 : 0));
+            boolean added = (stmtInsertEvent.executeUpdate() == 1);
+            ResultSet rs = stmtInsertEvent.getGeneratedKeys();
+            if(rs != null && rs.next()) {
+                newId = rs.getInt(1);
+            }
+            stmtInsertEvent.clearParameters();
+            if (!added) {
+                newId = -1;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return newId;
+    }
+
+    // inserts an Eventprotocol into the DB
+    public static int insertEventprotocol(EventProtocol ep) {
+        int newId = -1;
+        try {
+            if (ep.getEvent() != null) {
+                stmtInsertEventprotocol.setInt(1, ep.getEvent().getId());
+            } else {
+                stmtInsertEventprotocol.setNull(1, Types.NULL);
+            }
+            if (ep.getEmployee() != null) {
+                stmtInsertEventprotocol.setInt(2, ep.getEmployee().getId());
+            } else {
+                stmtInsertEventprotocol.setNull(2, Types.NULL);
+            }
+            if (ep.getClient() != null) {
+                stmtInsertEventprotocol.setInt(3, ep.getClient().getId());
+            } else {
+                stmtInsertEventprotocol.setNull(3, Types.NULL);
+            }
+            if (ep.getBill() != null) {
+                stmtInsertEventprotocol.setInt(4, ep.getBill().getNr());
+            } else {
+                stmtInsertEventprotocol.setNull(4, Types.NULL);
+            }
+            stmtInsertEventprotocol.setTime(5, Time.valueOf(ep.getStartTime()));
+            stmtInsertEventprotocol.setTime(6, Time.valueOf(ep.getEndTime()));
+            stmtInsertEventprotocol.setDate(7, Date.valueOf(ep.getYear_month()));
+            stmtInsertEventprotocol.setDouble(8, ep.getHourlyRate()); // must be changed to decimal
+            stmtInsertEventprotocol.setDouble(9, ep.getRideCosts()); // must be changed to decimal
+            boolean added = (stmtInsertEventprotocol.executeUpdate() == 1);
+            ResultSet rs = stmtInsertEventprotocol.getGeneratedKeys();
+            if(rs != null && rs.next()) {
+                newId = rs.getInt(1);
+            }
+            stmtInsertEventprotocol.clearParameters();
+            if (!added) {
+                newId = -1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newId;
+    }
+
+    // inserts a Bill into the DB
+    public static int insertBill(Bill b) {
+        int newId = -1;
+        try {
+            stmtInsertBill.setInt(1, b.getClient().getId());
+            stmtInsertBill.setDate(2, Date.valueOf(b.getDateOfIssue()));
+            stmtInsertBill.setString(3, b.getUse());
+            boolean added = (stmtInsertBill.executeUpdate() == 1);
+            ResultSet rs = stmtInsertBill.getGeneratedKeys();
+            if(rs != null && rs.next()) {
+                newId = rs.getInt(1);
+            }
+            stmtInsertBill.clearParameters();
+            if (!added) {
+                newId = -1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newId;
+    }
+
+    // inserts a Document into the DB
+    public static int insertDocument(Document d) {
+        int newId = -1;
+        try {
+            if (d.getOwnerPerson() != null) {
+                stmtInsertDocument.setInt(1, d.getOwnerPerson().getId());
+            } else {
+                stmtInsertDocument.setNull(1, Types.NULL);
+            }
+            if (d.getOwnerEvent() != null) {
+                stmtInsertDocument.setInt(2, d.getOwnerEvent().getId());
+            } else {
+                stmtInsertDocument.setNull(2, Types.NULL);
+            }
+            stmtInsertDocument.setString(3, d.getPath());
+            stmtInsertDocument.setString(4, d.getDocumentType());
+            stmtInsertDocument.setString(5, d.getOwner().toString());
+            boolean added = (stmtInsertDocument.executeUpdate() == 1);
+            ResultSet rs = stmtInsertDocument.getGeneratedKeys();
+            if(rs != null && rs.next()) {
+                newId = rs.getInt(1);
+            }
+            stmtInsertDocument.clearParameters();
+            if (!added) {
+                newId = -1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return newId;
+    }
 
     // returns a HashMap of all Persons from the DB
     private static HashMap<Integer, Person> getPersons() throws SQLException {
@@ -31,7 +305,7 @@ public class DBManager {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM person");
         while (rs.next()) {
-            if (rs.getString("personentyp").equals("SONSTIGES")) {
+            if (rs.getString("personentyp").equals("SONSTIGES") && rs.getInt("geloescht") != 1) {
                 pers.put(rs.getInt("id"), Person.fromResults(rs));
             }
         }
@@ -44,7 +318,9 @@ public class DBManager {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM person");
         while (rs.next()) {
-            clis.put(rs.getInt("id"), Client.fromResults(rs));
+            if (rs.getString("personentyp").equals("KLIENT") && rs.getInt("geloescht") != 1) {
+                clis.put(rs.getInt("id"), Client.fromResults(rs));
+            }
         }
         return clis;
     }
@@ -57,7 +333,7 @@ public class DBManager {
         HashMap<Integer, Person> pers = getPersons();
         Client c = null;
         while (rs.next()) {
-            if (rs.getString("personentyp").equals("KLIENT")) {
+            if (rs.getString("personentyp").equals("KLIENT") && rs.getInt("geloescht") != 1) {
                 c = Client.fromResults(rs);
                 if (rs.getInt("esv") != 0) {
                     c.setEsv(pers.get(rs.getInt("esv")));
@@ -80,7 +356,7 @@ public class DBManager {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM person");
         while (rs.next()) {
-            if (rs.getString("personentyp").equals("MITARBEITER")) {
+            if (rs.getString("personentyp").equals("MITARBEITER") && rs.getInt("geloescht") != 1) {
                 emps.put(rs.getInt("id"), Employee.fromResults(rs));
             }
         }
@@ -93,7 +369,7 @@ public class DBManager {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM person");
         while (rs.next()) {
-            if (rs.getString("personentyp").equals("SPONSOR")) {
+            if (rs.getString("personentyp").equals("SPONSOR") && rs.getInt("geloescht") != 1) {
                 spns.put(rs.getInt("id"), Sponsor.fromResults(rs));
             }
         }
@@ -112,7 +388,7 @@ public class DBManager {
     }
 
     // returns a HashMap of all Eventprotokolls from the DB without Objects (event, employee, client)
-    private static HashMap<Integer, EventProtocol> getEventProtocolls() throws SQLException{
+    private static HashMap<Integer, EventProtocol> getEventprotocols() throws SQLException{
         HashMap<Integer, EventProtocol> evps = new HashMap<Integer, EventProtocol>();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM aktivitaetsprotokoll");
@@ -184,7 +460,7 @@ public class DBManager {
         ArrayList<Document> docs = new ArrayList<Document>();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM dokument");
-        HashMap<Integer, EventProtocol> evps = getEventProtocolls();
+        HashMap<Integer, EventProtocol> evps = getEventprotocols();
         HashMap<Integer, Client> clis = getClients();
         HashMap<Integer, Employee> emps = getAllEmployees();
         HashMap<Integer, Sponsor> spns = getAllSponsors();
@@ -211,38 +487,53 @@ public class DBManager {
     // creates the DB Connection and sends the PreparedStatements to the DB
     public void open() throws SQLException {
         conn = ConnectionFactory.getInstance().getConnection();
-        stmtInsertPerson.executeUpdate(sqlInsertPerson, Statement.RETURN_GENERATED_KEYS);
-        stmtInsertAktivitaet.executeUpdate(sqlInsertAktivitaet, Statement.RETURN_GENERATED_KEYS);
-        stmtInsertAktiivitaetsprotokoll.executeUpdate(sqlInsertAktivitaetsprotokoll, Statement.RETURN_GENERATED_KEYS);
-        stmtInsertRechnung.executeUpdate(sqlInsertRechnung, Statement.RETURN_GENERATED_KEYS);
-        stmtInsertDokument.executeUpdate(sqlInsertDokument, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertPerson = conn.prepareStatement(sqlInsertPerson, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertClient = conn.prepareStatement(sqlInsertClient, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertEmployee = conn.prepareStatement(sqlInsertEmployee, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertSponsor = conn.prepareStatement(sqlInsertSponsor, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertEvent = conn.prepareStatement(sqlInsertEvent, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertEventprotocol = conn.prepareStatement(sqlInsertEventprotocol, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertBill = conn.prepareStatement(sqlInsertBill, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertDocument = conn.prepareStatement(sqlInsertDocument, Statement.RETURN_GENERATED_KEYS);
     }
 
     // closes the DB Connection and the PreparedStatements
     public void close() throws SQLException {
-        if (conn != null) {
-            ConnectionFactory.getInstance().close();
-            conn.close();
-        }
         if (stmtInsertPerson != null) {
             stmtInsertPerson.close();
             stmtInsertPerson = null;
         }
-        if (stmtInsertAktivitaet != null) {
-            stmtInsertAktivitaet.close();
-            stmtInsertAktivitaet = null;
+        if (stmtInsertClient != null) {
+            stmtInsertClient.close();
+            stmtInsertClient = null;
         }
-        if (stmtInsertAktiivitaetsprotokoll != null) {
-            stmtInsertAktiivitaetsprotokoll.close();
-            stmtInsertAktiivitaetsprotokoll = null;
+        if (stmtInsertEmployee != null) {
+            stmtInsertEmployee.close();
+            stmtInsertEmployee = null;
         }
-        if (stmtInsertRechnung != null) {
-            stmtInsertRechnung.close();
-            stmtInsertRechnung = null;
+        if (stmtInsertSponsor != null) {
+            stmtInsertSponsor.close();
+            stmtInsertSponsor = null;
         }
-        if (stmtInsertDokument != null) {
-            stmtInsertDokument.close();
-            stmtInsertDokument = null;
+        if (stmtInsertEvent != null) {
+            stmtInsertEvent.close();
+            stmtInsertEvent = null;
+        }
+        if (stmtInsertEventprotocol != null) {
+            stmtInsertEventprotocol.close();
+            stmtInsertEventprotocol = null;
+        }
+        if (stmtInsertBill != null) {
+            stmtInsertBill.close();
+            stmtInsertBill = null;
+        }
+        if (stmtInsertDocument != null) {
+            stmtInsertDocument.close();
+            stmtInsertDocument = null;
+        }
+        if (conn != null) {
+            ConnectionFactory.getInstance().close();
+            conn.close();
         }
     }
 }
