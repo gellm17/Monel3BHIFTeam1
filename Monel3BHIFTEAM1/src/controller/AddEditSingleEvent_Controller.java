@@ -18,7 +18,9 @@ import javafx.util.converter.LocalTimeStringConverter;
 import model.*;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalTime;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class AddEditSingleEvent_Controller extends SceneLoader implements Initializable {
@@ -94,8 +96,8 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
                 comboEmployeeEvent.getSelectionModel().select(editableEventProtocol.getEmployee());
                 tfStartEvent.setText(""+editableEventProtocol.getStartTime());
                 tfEndEvent.setText(""+editableEventProtocol.getEndTime());
-                tfHourlyRateEvent.setText(""+editableEventProtocol.getHourlyRate());
-                tfRideCostsEvent.setText(""+editableEventProtocol.getRideCosts());
+                tfHourlyRateEvent.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getHourlyRate()));
+                tfRideCostsEvent.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getRideCosts()));
             }
         }
 

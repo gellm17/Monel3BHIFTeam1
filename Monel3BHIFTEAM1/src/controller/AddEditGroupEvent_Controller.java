@@ -8,20 +8,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.util.converter.LocalDateStringConverter;
+import model.Client;
 import model.Employee;
 import model.Event;
+import model.EventProtocol;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class AddEditGroupEvent_Controller extends SceneLoader implements Initializable {
@@ -45,7 +47,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
     private TextField tfNameEvent;
 
     @FXML
-    private TableView<?> tableProtocols;
+    private TableView<EventProtocol> tableProtocols;
 
     @FXML
     private Button btnAddProtocol;
@@ -58,6 +60,25 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
 
     @FXML
     private Label lbMessage;
+
+    // Col for EventProtocol
+    //Col for Event
+    @FXML
+    private TableColumn<EventProtocol, Client> tcClient;
+    @FXML
+    private TableColumn<EventProtocol, Employee> tcEmployee;
+    @FXML
+    private TableColumn<EventProtocol, LocalTime> tcStart;
+    @FXML
+    private TableColumn<EventProtocol, LocalTime> tcEnd;
+    @FXML
+    private TableColumn<EventProtocol, LocalDate> tcDateProtocol;
+    @FXML
+    private TableColumn<EventProtocol, Double> tcRideCosts;
+    @FXML
+    private TableColumn<EventProtocol, Double> tcHourlyRate;
+    @FXML
+    private TableColumn<EventProtocol, Event> tcEvent;
 
     @FXML
     private Button btnCancelEvent;
@@ -79,7 +100,79 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
         if (editableEvent != null) {
             dpDateEvent.setValue(editableEvent.getDate());
             tfNameEvent.setText(editableEvent.getName());
+
         }
+    }
+
+    public void configureTableView() {
+        //Width
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
+
+        //EventProtocol
+        tcDateProtocol.setCellFactory(column -> new TableCell<EventProtocol, LocalDate>() {
+            @Override
+            protected void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                if (empty) {
+                    setText("");
+                } else {
+                    setText(formatter.format(date));
+                }
+            }
+        });
+        tcHourlyRate.setCellFactory(column -> new TableCell<EventProtocol, Double>() {
+            @Override
+            protected void updateItem(Double value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty) {
+                    setText("");
+                } else {
+                    setText(value+" €");
+                }
+            }
+        });
+
+        tcRideCosts.setCellFactory(column -> new TableCell<EventProtocol, Double>() {
+            @Override
+            protected void updateItem(Double value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty) {
+                    setText("");
+                } else {
+                    setText(value+" €");
+                }
+            }
+        });
+
+
+
+    }
+
+    @SuppressWarnings("unchecked")
+    public void createColumns() {
+
+        tcDateProtocol = new TableColumn<EventProtocol, LocalDate>("Datum");
+        tcEvent = new TableColumn<EventProtocol, Event>("Aktivität");
+        tcClient = new TableColumn<EventProtocol, Client>("Klient");
+        tcEmployee = new TableColumn<EventProtocol, Employee>("Mitarbeiter");
+        tcHourlyRate = new TableColumn<EventProtocol, Double>("Stundensatz");
+        tcRideCosts = new TableColumn<EventProtocol, Double>("Fahrtkosten");
+        tcStart = new TableColumn<EventProtocol, LocalTime>("Start");
+        tcEnd = new TableColumn<EventProtocol, LocalTime>("Ende");
+
+
+        tcDateProtocol.setCellValueFactory(new PropertyValueFactory<EventProtocol, LocalDate>("year_month"));
+        tcEvent.setCellValueFactory(new PropertyValueFactory<EventProtocol, Event>("event"));
+        tcClient.setCellValueFactory(new PropertyValueFactory<EventProtocol, Client>("client"));
+        tcEmployee.setCellValueFactory(new PropertyValueFactory<EventProtocol, Employee>("employee"));
+        tcHourlyRate.setCellValueFactory(new PropertyValueFactory<EventProtocol, Double>("hourlyRate"));
+        tcRideCosts.setCellValueFactory(new PropertyValueFactory<EventProtocol, Double>("rideCosts"));
+        tcStart.setCellValueFactory(new PropertyValueFactory<EventProtocol, LocalTime>("startTime"));
+        tcEnd.setCellValueFactory(new PropertyValueFactory<EventProtocol, LocalTime>("endTime"));
+
+        this.tableProtocols.getColumns().addAll(tcDateProtocol, tcEvent, tcClient, tcEmployee, tcHourlyRate, tcRideCosts, tcStart, tcEnd);
+
     }
 
     @FXML
@@ -90,7 +183,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
 
     @FXML
     void btnCancelEvent_Clicked(ActionEvent event) {
-
+        showScene("EventList");
     }
 
     @FXML
@@ -191,5 +284,12 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         thisEvent = new Event();
+
+        if (editableEvent != null) {
+            tableProtocols.setItems(EventDAO.getInstance().getEventProtocolsByEvent(editableEvent));
+        }
+
+        createColumns();
+        configureTableView();
     }
 }

@@ -25,6 +25,7 @@ import model.EventProtocol;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class AddEditEventProtocol_Controller extends SceneLoader implements Initializable {
@@ -93,14 +94,14 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
         if (editableEventProtocol != null) {
             tfStartEvent.setText(""+editableEventProtocol.getStartTime());
             tfEndEvent.setText(""+editableEventProtocol.getStartTime());
-            tfHourlyRateEvent.setText(""+editableEventProtocol.getHourlyRate());
-            tfRideCostsEvent.setText(""+editableEventProtocol.getRideCosts());
+            tfHourlyRateEvent.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getHourlyRate()));
+            tfRideCostsEvent.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getRideCosts()));
         }
     }
 
     @FXML
     void btnCancelEvent_Clicked(ActionEvent event) {
-
+        showSceneBefore();
     }
 
     @FXML

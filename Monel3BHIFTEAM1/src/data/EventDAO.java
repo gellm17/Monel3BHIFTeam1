@@ -52,8 +52,20 @@ public class EventDAO {
         EventProtocol res = null;
         while (it.hasNext() && res == null){
             res = it.next();
-            if (res.getEvent().getName() != event.getName()){ //recognises no equal //TODO
+            if (res.getEvent().getId() != event.getId()){ //recognises no equal //TODO
                 res = null;
+            }
+        }
+        return res;
+    }
+
+    public ObservableList<EventProtocol> getEventProtocolsByEvent(Event event){
+        Iterator<EventProtocol> it = eventProtocols.iterator();
+        ObservableList<EventProtocol> res = FXCollections.observableList(new ArrayList<EventProtocol>());
+        while (it.hasNext()){
+            EventProtocol current = it.next();
+            if (current.getEvent().getId() == event.getId()){ //recognises no equal //TODO
+                res.add(current);
             }
         }
         return res;
