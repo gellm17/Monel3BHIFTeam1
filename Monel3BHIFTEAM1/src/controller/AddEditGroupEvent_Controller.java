@@ -128,6 +128,10 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
 
         thisEvent.setIsGroup(true);
 
+        if (editableEvent != null){
+            thisEvent.setId(editableEvent.getId());
+        }
+
         if (errorCounter == 0 && EventDAO.getInstance().addEvent(thisEvent)) {
             if (editableEvent != null) {
                 EventDAO.getInstance().deleteEvent(editableEvent);

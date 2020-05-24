@@ -454,6 +454,10 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             errors.add(true);
         }*/
 
+        if (editableClient != null){
+            clientToAdd.setId(editableClient.getId());
+        }
+
 
         if(!errors.contains(true) && PersonDAO.getInstance().addPerson(clientToAdd)) {
             if (editableClient != null) { PersonDAO.getInstance().deletePerson(editableClient);

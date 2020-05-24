@@ -157,6 +157,14 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
 
             eventProtocolToAdd.setEvent(eventToAdd);
 
+            if (editableEventProtocol != null){
+                eventProtocolToAdd.setId(editableEventProtocol.getId());
+            }
+            if (editableEvent != null){
+                eventToAdd.setId(editableEvent.getId());
+            }
+
+
             if (errorCounter == 0 && EventDAO.getInstance().addEvent(eventToAdd) && EventDAO.getInstance().addEventProtcol(eventProtocolToAdd)) {
                 if (editableEvent != null && editableEventProtocol != null) {
                     EventDAO.getInstance().deleteEvent(editableEvent);

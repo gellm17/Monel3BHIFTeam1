@@ -20,7 +20,6 @@ public class Person {
     private StringProperty email;
     private ObjectProperty<LocalDate> birthDate;
 
-    private static int counterForID = 0;
 
     public Person(int id, Salutation salutation, String title, String firstName, String lastName,String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate) {
         this.id = new SimpleIntegerProperty(this, "id", id);
@@ -36,7 +35,7 @@ public class Person {
         this.birthDate = new SimpleObjectProperty<LocalDate>(this, "birthDate", birthDate);
     }
     public Person(){
-        this.id = new SimpleIntegerProperty(this, "id", counterForID++);
+        this.id = new SimpleIntegerProperty(this, "id", 0);
         this.salutation = new SimpleObjectProperty<Salutation>(this, "salutation", Salutation.Herr);
         this.firstName = new SimpleStringProperty(this, "firstName", "");
         this.lastName = new SimpleStringProperty(this, "lastName", "");
@@ -56,7 +55,7 @@ public class Person {
 
 
     public Person(Salutation salutation, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, LocalDate birthDate) {
-        this.id = new SimpleIntegerProperty(this, "id", counterForID++);
+        this.id = new SimpleIntegerProperty(this, "id", 0);
         this.salutation = new SimpleObjectProperty<Salutation>(this, "salutation", salutation);
         this.firstName = new SimpleStringProperty(this, "firstName", firstName);
         this.lastName = new SimpleStringProperty(this, "lastName", lastName);
@@ -71,7 +70,7 @@ public class Person {
     }
 
     public Person(Salutation salutation, String firstName, String lastName){
-        this.id = new SimpleIntegerProperty(this, "id", counterForID++);
+        this.id = new SimpleIntegerProperty(this, "id", 0);
         this.salutation = new SimpleObjectProperty<Salutation>(this, "salutation", salutation);
         this.firstName = new SimpleStringProperty(this, "firstName", firstName);
         this.lastName = new SimpleStringProperty(this, "lastName", lastName);
@@ -165,6 +164,8 @@ public class Person {
     public ObjectProperty<LocalDate> birthDateProperty() {
         return birthDate;
     }
+
+    public void setId(int id) { this.id.set(id); }
 
     public void setTitle(String title) {
         this.title.setValue(title);

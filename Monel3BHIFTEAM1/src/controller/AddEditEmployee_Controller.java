@@ -384,6 +384,10 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
             bankErrorCounter++;
         }
 
+        if (editableEmployee != null){
+            employeeToAdd.setId(editableEmployee.getId());
+        }
+
         if(!errors.contains(true) && PersonDAO.getInstance().addPerson(employeeToAdd)) {
             if (editableEmployee != null) { PersonDAO.getInstance().deletePerson(editableEmployee);
             }

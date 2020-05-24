@@ -168,7 +168,6 @@ public class Client extends Person{
         this.ssnr.set(ssnr);
     }
 
-
     public void setOther(String other) {
         this.other.set(other);
     }
