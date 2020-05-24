@@ -2,6 +2,7 @@ package controller;
 
 import app.SceneLoader;
 import data.EventDAO;
+import data.PersonDAO;
 import db.DBManager;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
@@ -48,13 +49,13 @@ public class EventList_Controller extends SceneLoader implements Initializable {
     private TableView<EventProtocol> tableProtocols;
 
     @FXML
-    private ComboBox<?> comboClient;
+    private ComboBox<Client> comboClient;
 
     @FXML
     private Button btnResetClient;
 
     @FXML
-    private ComboBox<?> comboEmployee;
+    private ComboBox<Employee> comboEmployee;
 
     @FXML
     private Button btnResetEmployee;
@@ -143,6 +144,8 @@ public class EventList_Controller extends SceneLoader implements Initializable {
             DBManager.open();
             EventDAO.getInstance().setEvents(FXCollections.observableArrayList(DBManager.getAllEvents().values()));
             EventDAO.getInstance().setEventProtocols(FXCollections.observableArrayList(DBManager.getAllEventProtokolls()));
+            PersonDAO.getInstance().setEmployees(FXCollections.observableArrayList(DBManager.getAllEmployees().values()));
+            PersonDAO.getInstance().setClients(FXCollections.observableArrayList(DBManager.getAllClients()));
             DBManager.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -229,7 +232,8 @@ public class EventList_Controller extends SceneLoader implements Initializable {
             }
         });
 
-
+        this.comboClient.getItems().setAll(PersonDAO.getInstance().getClients());
+        this.comboEmployee.getItems().setAll(PersonDAO.getInstance().getEmployees());
     }
 
     @SuppressWarnings("unchecked")
