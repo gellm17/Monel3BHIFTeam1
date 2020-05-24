@@ -59,17 +59,19 @@ CREATE TABLE IF NOT EXISTS `person` (
   CONSTRAINT `FKesv` FOREIGN KEY (`esv`) REFERENCES `person` (`id`),
   CONSTRAINT `FKnotfallkontakt1` FOREIGN KEY (`notfallkontakt1`) REFERENCES `person` (`id`),
   CONSTRAINT `FKnotfallkontakt2` FOREIGN KEY (`notfallkontakt2`) REFERENCES `person` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle monel.person: ~4 rows (ungefaehr)
+-- Exportiere Daten aus Tabelle monel.person: ~7 rows (ungefaehr)
 DELETE FROM `person`;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
 INSERT INTO `person` (`id`, `esv`, `notfallkontakt1`, `notfallkontakt2`, `personentyp`, `anrede`, `titel`, `vorname`, `nachname`, `strasse_hausnummer`, `plz`, `ort`, `telefonnummer`, `email`, `geburtsdatum`, `svnr`, `diagnose`, `allergien`, `sonstiges`, `beschaeftigung`, `amt`, `verwendungsgruppe`, `gehaltsstufe`, `wochenstunden`, `iban`, `bic`, `vorrueckdatum`, `einstelldatum`, `firmenname`, `firmentelefonnummer`, `firmenemail`, `geloescht`) VALUES
-	(1, NULL, NULL, NULL, 'SONSTIGES', 'Sonstige', 'Mag.', 'esvTest', 'esvtest', 'Südtiroler Straße 1', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(2, NULL, NULL, NULL, 'SONSTIGES', 'Herr', 'Mag.', 'notfallTest', 'notfallTest', 'Südtiroler Straße 2', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(3, 1, 2, NULL, 'KLIENT', 'Herr', 'Mag.', 'klientTest', 'klientTest', 'Südtiroler Straße 3', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, 'Alter', 'Nussalergie', 'test', 'in Rente', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(1, NULL, NULL, NULL, 'SONSTIGES', 'Sonstige', 'Mag.', 'esvTest', 'esvTest', 'Südtiroler Straße 1', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(2, NULL, NULL, NULL, 'SONSTIGES', 'Herr', 'Mag.', 'notfallTest', 'notfall1Test', 'Südtiroler Straße 2', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(3, 1, 2, NULL, 'KLIENT', 'Herr', 'Mag.', 'klient1Test', 'klient1Test', 'Südtiroler Straße 3', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, 'Alter', 'Nussalergie', 'test', 'in Rente', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(4, NULL, NULL, NULL, 'MITARBEITER', 'Frau', 'Mag.', 'mitarbeiterTest', 'mitarbeiterTest', 'Südtiroler Straße 4', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, NULL, NULL, NULL, NULL, 1, 'VG1', 'GS8', 40, 'AT123456789012345678', 'ABCDEFGH', '2020-06-10', '2016-01-01', NULL, NULL, NULL, NULL),
-	(5, NULL, NULL, NULL, 'SPONSOR', 'Frau', 'Mag.', 'FirmaTest', 'FirmaTest', 'Südtiroler Straße 5', 1234, 'Sillian', '01234567890', 'test@tes.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'TEST GmbH.', '01234567890', 'test@test.at', NULL);
+	(5, NULL, NULL, NULL, 'SPONSOR', 'Frau', 'Mag.', 'FirmaTest', 'FirmaTest', 'Südtiroler Straße 5', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'TEST GmbH.', '01234567890', 'test@test.at', NULL),
+	(6, NULL, NULL, NULL, 'SONSTIGES', 'Sonstige', 'Mag.', 'notfall2Test', 'notfall2Test', 'Südtiroler Straße 6', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(7, NULL, 2, 6, 'KLIENT', 'Herr', 'Mag.', 'klient2Test', 'klient2Test', 'Südtiroler Straße 7', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, 'Alter', 'Heuschnupfen', 'test', 'in Rente', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle monel.rechnung
@@ -97,13 +99,14 @@ CREATE TABLE IF NOT EXISTS `aktivitaet` (
   `aktivitaetsbezeichnung` varchar(50) DEFAULT NULL,
   `kategorie` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle monel.aktivitaet: ~0 rows (ungefaehr)
+-- Exportiere Daten aus Tabelle monel.aktivitaet: ~1 rows (ungefaehr)
 DELETE FROM `aktivitaet`;
 /*!40000 ALTER TABLE `aktivitaet` DISABLE KEYS */;
 INSERT INTO `aktivitaet` (`id`, `datum`, `aktivitaetsbezeichnung`, `kategorie`) VALUES
-	(1, '2020-05-12', 'test', 0);
+	(1, '2020-05-12', 'Einzelaktivität', 0),
+	(2, '2020-05-24', 'Gruppenaktivität', 1);
 /*!40000 ALTER TABLE `aktivitaet` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle monel.aktivitaetsprotokoll
@@ -128,13 +131,15 @@ CREATE TABLE IF NOT EXISTS `aktivitaetsprotokoll` (
   CONSTRAINT `FKklient_aktivitaetsprotokoll` FOREIGN KEY (`klient`) REFERENCES `person` (`id`),
   CONSTRAINT `FKmitarbeiter` FOREIGN KEY (`mitarbeiter`) REFERENCES `person` (`id`),
   CONSTRAINT `FKrechnung` FOREIGN KEY (`rechnung`) REFERENCES `rechnung` (`rechnungsnummmer`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle monel.aktivitaetsprotokoll: ~0 rows (ungefaehr)
+-- Exportiere Daten aus Tabelle monel.aktivitaetsprotokoll: ~3 rows (ungefaehr)
 DELETE FROM `aktivitaetsprotokoll`;
 /*!40000 ALTER TABLE `aktivitaetsprotokoll` DISABLE KEYS */;
 INSERT INTO `aktivitaetsprotokoll` (`id`, `aktivitaet`, `mitarbeiter`, `klient`, `rechnung`, `startzeit`, `endzeit`, `jahr_Monat`, `stundensatz`, `fahrtkosten`) VALUES
-	(1, 1, 4, 3, NULL, '16:30:00', '18:30:00', '2020-05-12', 12.25, 13.50);
+	(1, 1, 4, 3, NULL, '16:30:00', '18:30:00', '2020-05-12', 12.25, 13.50),
+	(2, 2, 4, 3, NULL, '14:15:00', '18:00:00', '2020-05-24', 12.25, 13.50),
+	(3, 2, 4, 7, NULL, '14:15:00', '18:00:00', '2020-05-24', 12.25, 13.50);
 /*!40000 ALTER TABLE `aktivitaetsprotokoll` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle monel.dokument
