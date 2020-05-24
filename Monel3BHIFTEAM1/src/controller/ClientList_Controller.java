@@ -3,6 +3,8 @@ package controller;
 import app.SceneLoader;
 import controller.AddEditClient_Controller;
 import data.PersonDAO;
+import db.DBManager;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,6 +24,7 @@ import model.Person;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ClientList_Controller extends SceneLoader implements Initializable {
@@ -120,6 +123,13 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            DBManager.open();
+            PersonDAO.getInstance().setClients(FXCollections.observableArrayList(DBManager.getAllClients()));
+            DBManager.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         //ObservableList<Client> clients = FXCollections.observableArrayList(PersonDAO.getInstance().getClients());
         this.tableClients.setItems(PersonDAO.getInstance().getClients());
         this.CreateColumns();
@@ -323,5 +333,6 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
         loader.setPrimaryStage(this.getPrimStage());
 
     }
+
 
 }

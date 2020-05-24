@@ -72,4 +72,10 @@ public class PersonDAO {
     public ObservableList<Employee> getEmployees() {
         return employees;
     }
+
+    public void setClients(ObservableList<Client> clients) { this.clients = clients; }
+
+    public void setEmployees(ObservableList<Employee> employees) { this.employees = employees; }
+
+    public void setSponsor(ObservableList<Sponsor> sponsor) { this.sponsor = sponsor; }
 }

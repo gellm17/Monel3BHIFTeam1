@@ -1,15 +1,24 @@
 package controller;
 
 import app.SceneLoader;
+import data.PersonDAO;
+import db.DBManager;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class SponsorList_Controller extends SceneLoader {
+import java.io.Serializable;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
+public class SponsorList_Controller extends SceneLoader implements Initializable {
 
     @FXML
     private Button btnInfo;
@@ -135,4 +144,14 @@ public class SponsorList_Controller extends SceneLoader {
 
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            DBManager.open();
+            PersonDAO.getInstance().setSponsor(FXCollections.observableArrayList(DBManager.getAllSponsors().values()));
+            DBManager.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

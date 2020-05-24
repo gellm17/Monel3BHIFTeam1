@@ -2,6 +2,8 @@ package controller;
 
 import app.SceneLoader;
 import data.EventDAO;
+import db.DBManager;
+import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
@@ -22,6 +24,7 @@ import model.*;
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -136,6 +139,14 @@ public class EventList_Controller extends SceneLoader implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            DBManager.open();
+            EventDAO.getInstance().setEvents(FXCollections.observableArrayList(DBManager.getAllEvents().values()));
+            EventDAO.getInstance().setEventProtocols(FXCollections.observableArrayList(DBManager.getAllEventProtokolls()));
+            DBManager.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         // 1. Wrap the ObservableList in a FilteredList (initially display all data).
         FilteredList<EventProtocol> filteredData = new FilteredList<>(EventDAO.getInstance().getEventProtocols(), p -> true);

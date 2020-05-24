@@ -23,7 +23,6 @@ import java.util.ResourceBundle;
 
 public class ClientSummary_Controller extends SceneLoader implements Initializable {
 
-
     @FXML
     private ImageView imgClient;
 
@@ -161,11 +160,6 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
                 btnDeleteClient.setVisible(false);
                 btnEditClient.setVisible(false);
             }
-
-
-
-
-
         }
     }
 
@@ -246,7 +240,5 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.personType = false;
-    }
+    public void initialize(URL url, ResourceBundle resourceBundle) { this.personType = false; }
 }

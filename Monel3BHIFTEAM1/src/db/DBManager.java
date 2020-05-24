@@ -338,11 +338,11 @@ public class DBManager {
                 if (rs.getInt("esv") != 0) {
                     c.setEsv(pers.get(rs.getInt("esv")));
                 }
-                if (rs.getInt("notfall1") != 0) {
-                    c.setEmergencyContact1(pers.get(rs.getInt("notfall1")));
+                if (rs.getInt("notfallkontakt1") != 0) {
+                    c.setEmergencyContact1(pers.get(rs.getInt("notfallkontakt1")));
                 }
-                if (rs.getInt("notfall2") != 0) {
-                    c.setEmergencyContact2(pers.get(rs.getInt("notfall2")));
+                if (rs.getInt("notfallkontakt2") != 0) {
+                    c.setEmergencyContact2(pers.get(rs.getInt("notfallkontakt2")));
                 }
                 clis.add(c);
             }
@@ -377,7 +377,7 @@ public class DBManager {
     }
 
     // returns a HashMap of all Events from the DB
-    private static HashMap<Integer, Event> getEvent() throws SQLException {
+    public static HashMap<Integer, Event> getAllEvents() throws SQLException {
         HashMap<Integer, Event> evns = new HashMap<Integer, Event>();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM aktivitaet");
@@ -403,7 +403,7 @@ public class DBManager {
         ArrayList<EventProtocol> evps = new ArrayList<EventProtocol>();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM aktivitaetsprotokoll");
-        HashMap<Integer, Event> evns = getEvent();
+        HashMap<Integer, Event> evns = getAllEvents();
         HashMap<Integer, Client> clis = getClients();
         HashMap<Integer, Employee> emps = getAllEmployees();
         HashMap<Integer, Bill> bils = getBills();
@@ -485,7 +485,7 @@ public class DBManager {
     }
 
     // creates the DB Connection and sends the PreparedStatements to the DB
-    public void open() throws SQLException {
+    public static void open() throws SQLException {
         conn = ConnectionFactory.getInstance().getConnection();
         stmtInsertPerson = conn.prepareStatement(sqlInsertPerson, Statement.RETURN_GENERATED_KEYS);
         stmtInsertClient = conn.prepareStatement(sqlInsertClient, Statement.RETURN_GENERATED_KEYS);
@@ -498,7 +498,7 @@ public class DBManager {
     }
 
     // closes the DB Connection and the PreparedStatements
-    public void close() throws SQLException {
+    public static void close() throws SQLException {
         if (stmtInsertPerson != null) {
             stmtInsertPerson.close();
             stmtInsertPerson = null;

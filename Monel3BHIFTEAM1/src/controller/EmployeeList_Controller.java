@@ -3,6 +3,8 @@ package controller;
 import app.SceneLoader;
 import controller.AddEditEmployee_Controller;
 import data.PersonDAO;
+import db.DBManager;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,6 +25,7 @@ import model.Person;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class EmployeeList_Controller extends SceneLoader implements Initializable {
@@ -130,6 +133,13 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            DBManager.open();
+            PersonDAO.getInstance().setEmployees(FXCollections.observableArrayList(DBManager.getAllEmployees().values()));
+            DBManager.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         this.tableEmployees.setItems((ObservableList<Employee>) PersonDAO.getInstance().getEmployees());
         this.CreateColumns();
         this.ConfigureTableView();
