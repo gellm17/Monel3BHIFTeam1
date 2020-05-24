@@ -388,9 +388,11 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
         clientToAdd.setPrivacy(new Privacy(new ArrayList<Boolean>(){{add(cbPrivacy1Client.isSelected()); add(cbPrivacy2Client.isSelected()); add(cbPrivacy3Client.isSelected()); add(cbPrivacy4Client.isSelected());}}));
 
-        Person esv = new Person();
-        setAllPersonFields(esv, tfTitleEsv, tfFirstnameEsv, tfLastnameEsv, tfSsnrEsv, tfStreetEsv, tfHousenumberEsv, tfZipEsv, tfPlaceEsv, tfTelNrEsv, tfEmailEsv, dpBirthdateEsv, comboSalutationEsv, tPaneEsv, tPaneEsv, tPaneEsv);
-        clientToAdd.setEsv(esv);
+        if (!cbSelfDetermined.isSelected()){
+            Person esv = new Person();
+            setAllPersonFieldsMandatory(esv, tfTitleEsv, tfFirstnameEsv, tfLastnameEsv, tfSsnrEsv, tfStreetEsv, tfHousenumberEsv, tfZipEsv, tfPlaceEsv, tfTelNrEsv, tfEmailEsv, dpBirthdateEsv, comboSalutationEsv, tPaneEsv, tPaneEsv, tPaneEsv, true);
+            clientToAdd.setEsv(esv);
+        }
 
         Person ec1 = new Person();
         setAllPersonFieldsMandatory(ec1, tfTitleContact1, tfFirstnameContact1, tfLastnameContact1, tfSsnrContact1, tfStreetContact1, tfHousenumberContact1, tfZipContact1, tfPlaceContact1, tfTelNrContact1, tfEmailContact1, dpBirthdateContact1, comboSalutationContact1, tPaneEsv, tPaneEsv, tPaneEsv, true);
