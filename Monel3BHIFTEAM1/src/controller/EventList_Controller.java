@@ -47,15 +47,16 @@ public class EventList_Controller extends SceneLoader implements Initializable {
 
     @FXML
     private TableView<EventProtocol> tableProtocols;
-
+/*
     @FXML
     private ComboBox<Client> comboClient;
-
+*/
     @FXML
     private Button btnResetClient;
-
+/*
     @FXML
     private ComboBox<Employee> comboEmployee;
+*/
 
     @FXML
     private Button btnResetEmployee;
@@ -232,8 +233,8 @@ public class EventList_Controller extends SceneLoader implements Initializable {
             }
         });
 
-        this.comboClient.getItems().setAll(PersonDAO.getInstance().getClients());
-        this.comboEmployee.getItems().setAll(PersonDAO.getInstance().getEmployees());
+        //this.comboClient.getItems().setAll(PersonDAO.getInstance().getClients());
+        //this.comboEmployee.getItems().setAll(PersonDAO.getInstance().getEmployees());
     }
 
     @SuppressWarnings("unchecked")
