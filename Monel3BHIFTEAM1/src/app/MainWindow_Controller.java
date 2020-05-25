@@ -340,7 +340,6 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
             */
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

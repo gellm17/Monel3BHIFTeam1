@@ -2,6 +2,8 @@ package controller;
 
 import app.SceneLoader;
 import data.EventDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,12 +20,14 @@ import model.Client;
 import model.Employee;
 import model.Event;
 import model.EventProtocol;
+import org.mariadb.jdbc.internal.protocol.Protocol;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class AddEditGroupEvent_Controller extends SceneLoader implements Initializable {
@@ -82,6 +86,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
     @FXML
     private TableColumn<EventProtocol, Event> tcEvent;
 
+
     @FXML
     private Button btnCancelEvent;
 
@@ -89,7 +94,6 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
     private Button btnOkEvent;
 
     private Event editableEvent = null;
-    private Event thisEvent = null;
     private int errorCounter = 0;
     private boolean wantToAddAPerson = false;
 
@@ -191,6 +195,8 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
     @FXML
     void btnDeleteProtocol_Clicked(ActionEvent event) {
         EventDAO.getInstance().deleteEventProtcol(selectedItem);
+        tableProtocols.setItems(EventDAO.getInstance().getEventProtocolsByEvent(editableEvent));
+        //tableProtocols.getItems().setAll(EventDAO.getInstance().getEventProtocolByEvent(editableEvent));
     }
 
     @FXML
@@ -231,7 +237,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
     @FXML
     void btnOkEvent_Clicked(ActionEvent event) {
         errorCounter = 0;
-        thisEvent = new Event();
+        Event thisEvent = new Event();
         try {
             LocalDateStringConverter ldsc = new LocalDateStringConverter();
             thisEvent.setDate(ldsc.fromString(dpDateEvent.getEditor().getText()));
@@ -280,7 +286,6 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
                     SceneLoader loader = editController;
                     loader.setPrimaryStage(this.getPrimStage());
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             } else {
@@ -310,10 +315,11 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        thisEvent = new Event();
+
+
 
         if (editableEvent != null) {
-            tableProtocols.getItems().addAll(EventDAO.getInstance().getEventProtocolsByEvent(editableEvent));
+            tableProtocols.setItems(EventDAO.getInstance().getEventProtocolsByEvent(editableEvent));
         }
 
         createColumns();

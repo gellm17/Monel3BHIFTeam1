@@ -220,7 +220,6 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
         try {
             startAddEdit();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 

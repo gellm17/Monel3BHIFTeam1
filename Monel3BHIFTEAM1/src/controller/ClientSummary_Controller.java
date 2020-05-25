@@ -197,7 +197,6 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
             SceneLoader loader = editController;
             loader.setPrimaryStage(this.getPrimStage());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -207,7 +206,6 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
         try {
             showPerson(editableClient.getEmergencyContact1());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
@@ -218,7 +216,6 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
         try {
             showPerson(editableClient.getEmergencyContact2());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -228,7 +225,6 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
         try {
             showPerson(editableClient.getEsv());
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

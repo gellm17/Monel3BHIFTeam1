@@ -250,7 +250,6 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
             loader.setPrimaryStage(this.getPrimStage());
 
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

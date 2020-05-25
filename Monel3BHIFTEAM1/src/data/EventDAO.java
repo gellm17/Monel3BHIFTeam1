@@ -71,7 +71,7 @@ public class EventDAO {
         EventProtocol res = null;
         while (it.hasNext() && res == null){
             res = it.next();
-            if (res.getEvent().getId() != event.getId()){ //recognises no equal //TODO
+            if (res.getEvent().getId() != event.getId()){
                 res = null;
             }
         }
@@ -83,7 +83,7 @@ public class EventDAO {
         ObservableList<EventProtocol> res = FXCollections.observableList(new ArrayList<EventProtocol>());
         while (it.hasNext()){
             EventProtocol current = it.next();
-            if (current.getEvent().getId() == event.getId()){ //recognises no equal //TODO
+            if (current.getEvent().getId() == event.getId()){
                 res.add(current);
             }
         }

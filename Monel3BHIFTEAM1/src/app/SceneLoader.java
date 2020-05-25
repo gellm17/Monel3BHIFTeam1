@@ -31,7 +31,6 @@ public abstract class SceneLoader {
             SceneLoader loader = fxml.getController();
             loader.setPrimaryStage(primStage);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
