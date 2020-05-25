@@ -132,7 +132,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
     @FXML
     private TableColumn<EventProtocol, Event> tcEvent;
     @FXML
-    private TextField tfSearch = new TextField();
+    private TextField tfSearch;
 
 
     private Event selectedItem;
