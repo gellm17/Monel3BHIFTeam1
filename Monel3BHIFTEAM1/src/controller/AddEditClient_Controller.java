@@ -716,7 +716,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
                 error = true;
                 tf.setStyle("-FX-Border-Color: red");
                 tp.setStyle("-FX-Text-Fill: red");
-                lbMessage.setText(lbMessage.getText() + tf.getId() + ",");
+                lbMessage.setText("Es gibt Fehler!");
             } else {
                 error = false;
                 tf.setStyle(null);
