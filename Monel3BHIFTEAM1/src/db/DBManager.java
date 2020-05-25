@@ -545,7 +545,7 @@ public class DBManager {
     }
 
     // creates the DB Connection and sends the PreparedStatements to the DB
-    public static void open() throws SQLException {
+    public static void open() throws NullPointerException, SQLException {
         conn = ConnectionFactory.getInstance().getConnection();
         stmtInsertPerson = conn.prepareStatement(sqlInsertPerson, Statement.RETURN_GENERATED_KEYS);
         stmtInsertClient = conn.prepareStatement(sqlInsertClient, Statement.RETURN_GENERATED_KEYS);
@@ -558,7 +558,7 @@ public class DBManager {
     }
 
     // closes the DB Connection and the PreparedStatements
-    public static void close() throws SQLException {
+    public static void close() throws NullPointerException, SQLException {
         if (stmtInsertPerson != null) {
             stmtInsertPerson.close();
             stmtInsertPerson = null;
