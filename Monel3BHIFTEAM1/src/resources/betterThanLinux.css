@@ -47,6 +47,11 @@
 
 }
 
+.searchButton:disabled {
+    -fx-background-color: white;
+    -fx-border-color: gray;
+}
+
 .cancelButton {
     -fx-background-color: rgb(220, 220, 220);
 }

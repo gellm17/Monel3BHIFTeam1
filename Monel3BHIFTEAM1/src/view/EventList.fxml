@@ -16,7 +16,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="847.0" prefWidth="1233.0" styleClass="background" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EventList_Controller">
@@ -85,21 +84,61 @@
                         </TableView>
                      </center>
                      <top>
-                        <VBox>
+                        <HBox nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER_LEFT">
                            <children>
-                              <TextField fx:id="tfSearch" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0">
+                              <TextField fx:id="tfSearchClient" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefWidth="300.0" promptText="Suche Klienten">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
-                                 <VBox.margin>
-                                    <Insets left="100.0" />
-                                 </VBox.margin>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
                               </TextField>
+                              <Button disable="true" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="44.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/icon_Such_black.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="toolButton" />
+                                    <String fx:value="searchButton" />
+                                 </styleClass>
+                              </Button>
+                              <TextField fx:id="tfSearchEmployee" maxWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefWidth="300.0" promptText="Suche Mitarbeiter">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Button disable="true" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="44.0">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../resources/icon_Such_black.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <styleClass>
+                                    <String fx:value="toolButton" />
+                                    <String fx:value="searchButton" />
+                                 </styleClass>
+                              </Button>
                            </children>
-                        </VBox>
+                        </HBox>
                      </top>
                      <padding>
-                        <Insets bottom="30.0" left="30.0" right="100.0" top="35.0" />
+                        <Insets bottom="30.0" left="30.0" top="35.0" />
                      </padding>
                   </BorderPane>
                </content>
@@ -117,7 +156,7 @@
                      <top>
                         <BorderPane nodeOrientation="LEFT_TO_RIGHT" styleClass="background" BorderPane.alignment="CENTER">
                            <center>
-                              <TextField fx:id="tfSearchEvents" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" BorderPane.alignment="CENTER">
+                              <TextField fx:id="tfSearchEvents" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" promptText="Suche nach Aktivitätsbezeichnung" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -129,7 +168,7 @@
                                     <Insets />
                                  </BorderPane.margin>
                                  <children>
-                                    <Button fx:id="btnSearchEvents" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnSearchEvents_Clicked" prefHeight="44.0" prefWidth="44.0">
+                                    <Button disable="true" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="44.0">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
@@ -139,7 +178,7 @@
                                        <graphic>
                                           <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../resources/icon_Such.png" />
+                                                <Image url="@../resources/icon_Such_black.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -147,21 +186,6 @@
                                           <String fx:value="toolButton" />
                                           <String fx:value="searchButton" />
                                        </styleClass>
-                                    </Button>
-                                    <Button fx:id="btnFilterEvents" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnFilterEvents_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_Filt.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
                                     </Button>
                                   <Button fx:id="btnAddSingleEvent" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnAddSingleEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
                                        <font>
@@ -226,12 +250,15 @@
                         </BorderPane>
                      </top>
                      <padding>
-                        <Insets bottom="30.0" left="30.0" right="100.0" top="35.0" />
+                        <Insets bottom="30.0" left="30.0" top="35.0" />
                      </padding>
                   </BorderPane>
                </content>
             </Tab>
          </tabs>
+         <BorderPane.margin>
+            <Insets left="100.0" />
+         </BorderPane.margin>
       </TabPane>
    </center>
    <left>
