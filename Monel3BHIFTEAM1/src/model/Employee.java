@@ -39,7 +39,7 @@ public class Employee extends Person {
         volunteering = new SimpleBooleanProperty(this, "volunteering");
         occupationGroup = new SimpleObjectProperty<OccupationGroup>(this, "occupationGroup", OccupationGroup.VG1);
         salaryLevel = new SimpleObjectProperty<SalaryLevel>(this, "salaryLevel", SalaryLevel.GS1);
-        hoursPerWeek = new SimpleIntegerProperty(this, "hoursPerWeek");
+        hoursPerWeek = new SimpleIntegerProperty(this, "hoursPerWeek", 0);
         dateSalaryLevel = new SimpleObjectProperty<LocalDate>(this, "dateSalaryLevel");
         iban = new SimpleStringProperty(this, "iban", "");
         bic = new SimpleStringProperty(this, "bic", "");

@@ -37,15 +37,27 @@ public class DBManager {
         try {
             stmtInsertPerson.setString(1, "SONSTIGES");
             stmtInsertPerson.setString(2, p.getSalutation().toString());
-            stmtInsertPerson.setString(3, p.getTitle());
+            if (p.getTitle() != null) {
+                stmtInsertPerson.setString(3, p.getTitle());
+            } else {
+                stmtInsertPerson.setNull(3, Types.NULL);
+            }
             stmtInsertPerson.setString(4, p.getFirstName());
             stmtInsertPerson.setString(5, p.getLastName());
             stmtInsertPerson.setString(6, p.getStreetAndNr());
             stmtInsertPerson.setInt(7, p.getZipCode());
             stmtInsertPerson.setString(8, p.getPlace());
             stmtInsertPerson.setString(9, p.getTelNr());
-            stmtInsertPerson.setString(10, p.getEmail());
-            stmtInsertPerson.setDate(11, Date.valueOf(p.getBirthDate()));
+            if (p.getEmail() != null) {
+                stmtInsertPerson.setString(10, p.getEmail());
+            } else {
+                stmtInsertPerson.setNull(10, Types.NULL);
+            }
+            if (p.getBirthDate() != null) {
+                stmtInsertPerson.setDate(11, Date.valueOf(p.getBirthDate()));
+            } else {
+                stmtInsertPerson.setNull(11, Types.NULL);
+            }
             boolean added = (stmtInsertPerson.executeUpdate() == 1);
             ResultSet rs = stmtInsertPerson.getGeneratedKeys();
             if(rs != null && rs.next()) {
@@ -67,14 +79,22 @@ public class DBManager {
         try {
             stmtInsertClient.setString(1, "KLIENT");
             stmtInsertClient.setString(2, c.getSalutation().toString());
-            stmtInsertClient.setString(3, c.getTitle());
+            if (c.getTitle() != null) {
+                stmtInsertClient.setString(3, c.getTitle());
+            } else {
+                stmtInsertClient.setNull(3, Types.NULL);
+            }
             stmtInsertClient.setString(4, c.getFirstName());
             stmtInsertClient.setString(5, c.getLastName());
             stmtInsertClient.setString(6, c.getStreetAndNr());
             stmtInsertClient.setInt(7, c.getZipCode());
             stmtInsertClient.setString(8, c.getPlace());
             stmtInsertClient.setString(9, c.getTelNr());
-            stmtInsertClient.setString(10, c.getEmail());
+            if(c.getEmail() != null) {
+                stmtInsertClient.setString(10, c.getEmail());
+            } else {
+                stmtInsertClient.setNull(10, Types.NULL);
+            }
             if (c.getBirthDate() != null) {
                 stmtInsertClient.setDate(11, Date.valueOf(c.getBirthDate()));
             } else {
@@ -93,9 +113,21 @@ public class DBManager {
             }
             stmtInsertClient.setLong(15, c.getSsnr());
             stmtInsertClient.setString(16, c.getDiagnose());
-            stmtInsertClient.setString(17, c.getAllergies());
-            stmtInsertClient.setString(18, c.getOther());
-            stmtInsertClient.setString(19, c.getJob());
+            if (c.getAllergies() != null) {
+                stmtInsertClient.setString(17, c.getAllergies());
+            } else {
+                stmtInsertClient.setNull( 17, Types.NULL);
+            }
+            if (c.getOther() != null) {
+                stmtInsertClient.setString(18, c.getOther());
+            } else {
+                stmtInsertClient.setNull(18, Types.NULL);
+            }
+            if (c.getJob() != null) {
+                stmtInsertClient.setString(19, c.getJob());
+            } else {
+                stmtInsertClient.setNull(19, Types.NULL);
+            }
             boolean added = (stmtInsertClient.executeUpdate() == 1);
             ResultSet rs = stmtInsertClient.getGeneratedKeys();
             if(rs != null && rs.next()) {
@@ -117,24 +149,48 @@ public class DBManager {
         try {
             stmtInsertEmployee.setString(1, "MITARBEITER");
             stmtInsertEmployee.setString(2, e.getSalutation().toString());
-            stmtInsertEmployee.setString(3, e.getTitle());
+            if (e.getTitle() != null) {
+                stmtInsertEmployee.setString(3, e.getTitle());
+            } else {
+                stmtInsertEmployee.setNull(3, Types.NULL);
+            }
             stmtInsertEmployee.setString(4, e.getFirstName());
             stmtInsertEmployee.setString(5, e.getLastName());
             stmtInsertEmployee.setString(6, e.getStreetAndNr());
             stmtInsertEmployee.setInt(7, e.getZipCode());
             stmtInsertEmployee.setString(8, e.getPlace());
             stmtInsertEmployee.setString(9, e.getTelNr());
-            stmtInsertEmployee.setString(10, e.getEmail());
-            stmtInsertEmployee.setDate(11, Date.valueOf(e.getBirthDate()));
+            if (e.getEmail() != null) {
+                stmtInsertEmployee.setString(10, e.getEmail());
+            } else {
+                stmtInsertEmployee.setString(10, e.getEmail());
+            }
+            if (e.getBirthDate() != null) {
+                stmtInsertEmployee.setDate(11, Date.valueOf(e.getBirthDate()));
+            } else {
+                stmtInsertEmployee.setNull(11, Types.NULL);
+            }
             stmtInsertEmployee.setLong(12, e.getSsnr());
             stmtInsertEmployee.setInt(13, (e.isVolunteering() ? 1 : 0));
             stmtInsertEmployee.setString(14, e.getOccupationGroup().toString());
             stmtInsertEmployee.setString(15, e.getSalaryLevel().toString());
-            stmtInsertEmployee.setInt(16, e.getHoursPerWeek());
+            if (e.getHoursPerWeek() != 0) {
+                stmtInsertEmployee.setInt(16, e.getHoursPerWeek());
+            } else {
+                stmtInsertEmployee.setNull(16, Types.NULL);
+            }
             stmtInsertEmployee.setString(17, e.getIban());
             stmtInsertEmployee.setString(18, e.getBic());
-            stmtInsertEmployee.setDate(19, Date.valueOf(e.getDateSalaryLevel()));
-            stmtInsertEmployee.setDate(20, Date.valueOf(e.getDateOfEmployment()));
+            if (e.getDateSalaryLevel() != null) {
+                stmtInsertEmployee.setDate(19, Date.valueOf(e.getDateSalaryLevel()));
+            } else {
+                stmtInsertEmployee.setNull(19, Types.NULL);
+            }
+            if (e.getDateOfEmployment() != null) {
+                stmtInsertEmployee.setDate(20, Date.valueOf(e.getDateOfEmployment()));
+            } else {
+                stmtInsertEmployee.setNull(20, Types.NULL);
+            }
             boolean added = (stmtInsertEmployee.executeUpdate() == 1);
             ResultSet rs = stmtInsertEmployee.getGeneratedKeys();
             if(rs != null && rs.next()) {
