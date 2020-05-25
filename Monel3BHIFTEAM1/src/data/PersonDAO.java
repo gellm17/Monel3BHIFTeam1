@@ -1,4 +1,5 @@
 package data;
+import db.DBManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -34,12 +35,51 @@ public class PersonDAO {
         boolean success = false;
         if(p instanceof Client) {
             Client c = (Client)p;
+            try {
+                DBManager.open();
+                if (c.getEsv() != null) {
+                    if (c.getEsv().getId() == 0) {
+                        c.getEsv().setId(DBManager.insertPerson(c.getEsv()));
+                    }
+                }
+                if (c.getEmergencyContact1().getId() == 0) {
+                    c.getEmergencyContact1().setId(DBManager.insertPerson(c.getEmergencyContact1()));
+                }
+                if (c.getEmergencyContact2() != null) {
+                    if (c.getEmergencyContact2().getId() == 0) {
+                        c.getEmergencyContact2().setId(DBManager.insertPerson(c.getEmergencyContact2()));
+                    }
+                }
+                if (p.getId() == 0) {
+                    c.setId(DBManager.insertClient(c));
+                }
+                DBManager.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             success = clients.add(c);
         } else if (p instanceof Employee){
             Employee emp = (Employee) p;
+            if (emp.getId() == 0) {
+                try {
+                    DBManager.open();
+                    emp.setId(DBManager.insertEmployee(emp));
+                    DBManager.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
             success = employees.add(emp);
         } else if (p instanceof Sponsor){
             Sponsor sp = (Sponsor) p;
+            if (sp.getId() == 0) {
+                try {
+                    DBManager.open();
+                    sp.setId(DBManager.insertSponsor(sp));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
             success = sponsor.add(sp);
         }
         return success;

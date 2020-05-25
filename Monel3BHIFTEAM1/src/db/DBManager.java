@@ -75,7 +75,11 @@ public class DBManager {
             stmtInsertClient.setString(8, c.getPlace());
             stmtInsertClient.setString(9, c.getTelNr());
             stmtInsertClient.setString(10, c.getEmail());
-            stmtInsertClient.setDate(11, Date.valueOf(c.getBirthDate()));
+            if (c.getBirthDate() != null) {
+                stmtInsertClient.setDate(11, Date.valueOf(c.getBirthDate()));
+            } else {
+                stmtInsertClient.setNull(11, Types.NULL);
+            }
             if (c.getEsv() != null) {
                 stmtInsertClient.setInt(12, c.getEsv().getId());
             } else {
