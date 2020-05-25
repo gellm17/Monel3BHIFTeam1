@@ -61,6 +61,8 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
     @FXML
     private Label lbMessage;
 
+    private EventProtocol selectedItem;
+
     // Col for EventProtocol
     //Col for Event
     @FXML
@@ -100,7 +102,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
         if (editableEvent != null) {
             dpDateEvent.setValue(editableEvent.getDate());
             tfNameEvent.setText(editableEvent.getName());
-
+            tableProtocols.setItems(EventDAO.getInstance().getEventProtocolsByEvent(editableEvent));
         }
     }
 
@@ -188,12 +190,37 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
 
     @FXML
     void btnDeleteProtocol_Clicked(ActionEvent event) {
-
+        EventDAO.getInstance().deleteEventProtcol(selectedItem);
     }
 
     @FXML
     void btnEditProtocol_Clicked(ActionEvent event) {
+        goToEdit();
+    }
 
+    private void goToEdit() {
+        try {
+                FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditEventProtocol.fxml"));
+                BorderPane root = fxml.load();
+                Scene scene = new Scene(root);
+                this.getPrimStage().setScene(scene);
+                Screen screen = Screen.getPrimary();
+
+                //Maximized
+                Rectangle2D bounds = screen.getVisualBounds();
+                this.getPrimStage().setX(bounds.getMinX());
+                this.getPrimStage().setY(bounds.getMinY());
+                this.getPrimStage().setWidth(bounds.getWidth());
+                this.getPrimStage().setHeight(bounds.getHeight());
+                this.getPrimStage().show();
+                AddEditEventProtocol_Controller editController = fxml.getController();
+                editController.setEditableEvent((EventProtocol) selectedItem);
+                editController.setAssignedEvent(editableEvent);
+                SceneLoader loader = editController;
+                loader.setPrimaryStage(this.getPrimStage());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
@@ -286,10 +313,21 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
         thisEvent = new Event();
 
         if (editableEvent != null) {
-            tableProtocols.setItems(EventDAO.getInstance().getEventProtocolsByEvent(editableEvent));
+            tableProtocols.getItems().addAll(EventDAO.getInstance().getEventProtocolsByEvent(editableEvent));
         }
 
         createColumns();
         configureTableView();
+        this.btnDeleteProtocol.setDisable(true);
+        this.btnEditProtocol.setDisable(true);
+
+        tableProtocols.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                btnDeleteProtocol.setDisable(false);
+                btnEditProtocol.setDisable(false);
+                selectedItem = newSelection;
+                System.out.println(selectedItem);
+            }
+        });
     }
 }
