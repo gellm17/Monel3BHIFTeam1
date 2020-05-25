@@ -1,6 +1,7 @@
 
 package data;
 
+import db.DBManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -34,9 +35,27 @@ public class EventDAO {
     }
 
     public boolean addEvent(Event e) {
+        if (e.getId() == 0) {
+            try {
+                DBManager.open();
+                e.setId(DBManager.insertEvent(e));
+                DBManager.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
         return events.add(e);
     }
     public boolean addEventProtcol(EventProtocol ep) {
+        if (ep.getId() == 0) {
+            try {
+                DBManager.open();
+                ep.setId(DBManager.insertEventprotocol(ep));
+                DBManager.open();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return eventProtocols.add(ep);
     }
 

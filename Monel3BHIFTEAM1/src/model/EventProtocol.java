@@ -54,6 +54,7 @@ public class EventProtocol {
         this.employee = new SimpleObjectProperty<Employee>(this, "employee");
         this.client = new SimpleObjectProperty<Client>(this, "client");
         this.event = new SimpleObjectProperty<Event>(this, "event");
+        this.bill = new SimpleObjectProperty<Bill>(this, "bill", null);
         this.rideCosts = new SimpleDoubleProperty(this, "rideCosts");
     }
 
