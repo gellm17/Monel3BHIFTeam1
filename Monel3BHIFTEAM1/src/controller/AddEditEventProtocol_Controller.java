@@ -91,9 +91,11 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
         this.editableEventProtocol = editableEventProtocol;
         comboClientEvent.getItems().setAll(PersonDAO.getInstance().getClients());
         comboEmployeeEvent.getItems().setAll(PersonDAO.getInstance().getEmployees());
+        comboClientEvent.getSelectionModel().select(editableEventProtocol.getClient());
+        comboEmployeeEvent.getSelectionModel().select(editableEventProtocol.getEmployee());
         if (editableEventProtocol != null) {
             tfStartEvent.setText(""+editableEventProtocol.getStartTime());
-            tfEndEvent.setText(""+editableEventProtocol.getStartTime());
+            tfEndEvent.setText(""+editableEventProtocol.getEndTime());
             tfHourlyRateEvent.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getHourlyRate()));
             tfRideCostsEvent.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getRideCosts()));
         }
@@ -101,7 +103,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
 
     @FXML
     void btnCancelEvent_Clicked(ActionEvent event) {
-        showSceneBefore();
+        showSceneBefore(assignedEvent);
     }
 
     @FXML
@@ -150,11 +152,11 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
                 EventDAO.getInstance().deleteEventProtcol(editableEventProtocol);
             }
 
-            showSceneBefore();
+            showSceneBefore(eventProtocolToAdd.getEvent());
         }
     }
 
-    private void showSceneBefore() {
+    private void showSceneBefore(Event event) {
         try {
             FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditGroupEvent.fxml"));
             BorderPane root = fxml.load();
@@ -170,7 +172,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
             this.getPrimStage().setHeight(bounds.getHeight());
             this.getPrimStage().show();
             AddEditGroupEvent_Controller editController = fxml.getController();
-            editController.setEditableEvent(assignedEvent);
+            editController.setEditableEvent(event);
             SceneLoader loader = editController;
             loader.setPrimaryStage(this.getPrimStage());
         } catch (Exception ex){
