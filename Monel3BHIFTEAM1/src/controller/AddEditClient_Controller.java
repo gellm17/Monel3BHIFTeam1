@@ -117,6 +117,12 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     private VBox vboxEsv;
 
     @FXML
+    private VBox vboxContact2;
+
+    @FXML
+    private CheckBox cbContact2;
+
+    @FXML
     private ComboBox<Salutation> comboSalutationEsv;
 
     @FXML
@@ -768,7 +774,14 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         this.cbSelfDetermined.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                tabEsv.setDisable(newValue);
+                vboxEsv.setDisable(newValue);
+            }
+        });
+
+        this.cbContact2.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                vboxContact2.setDisable(newValue);
             }
         });
     }
