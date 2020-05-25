@@ -127,7 +127,7 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
             DBManager.open();
             PersonDAO.getInstance().setClients(FXCollections.observableArrayList(DBManager.getAllClients()));
             DBManager.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         //ObservableList<Client> clients = FXCollections.observableArrayList(PersonDAO.getInstance().getClients());

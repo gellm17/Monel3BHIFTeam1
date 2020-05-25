@@ -54,7 +54,7 @@ public class PersonDAO {
                     c.setId(DBManager.insertClient(c));
                 }
                 DBManager.close();
-            } catch (SQLException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             success = clients.add(c);
@@ -65,7 +65,7 @@ public class PersonDAO {
                     DBManager.open();
                     emp.setId(DBManager.insertEmployee(emp));
                     DBManager.close();
-                } catch (SQLException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -76,7 +76,7 @@ public class PersonDAO {
                 try {
                     DBManager.open();
                     sp.setId(DBManager.insertSponsor(sp));
-                } catch (SQLException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

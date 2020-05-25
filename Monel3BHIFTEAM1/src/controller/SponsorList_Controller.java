@@ -150,7 +150,7 @@ public class SponsorList_Controller extends SceneLoader implements Initializable
             DBManager.open();
             PersonDAO.getInstance().setSponsor(FXCollections.observableArrayList(DBManager.getAllSponsors().values()));
             DBManager.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

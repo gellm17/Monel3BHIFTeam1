@@ -147,7 +147,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
             PersonDAO.getInstance().setEmployees(FXCollections.observableArrayList(DBManager.getAllEmployees().values()));
             PersonDAO.getInstance().setClients(FXCollections.observableArrayList(DBManager.getAllClients()));
             DBManager.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -137,7 +137,7 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
             DBManager.open();
             PersonDAO.getInstance().setEmployees(FXCollections.observableArrayList(DBManager.getAllEmployees().values()));
             DBManager.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         this.tableEmployees.setItems((ObservableList<Employee>) PersonDAO.getInstance().getEmployees());
