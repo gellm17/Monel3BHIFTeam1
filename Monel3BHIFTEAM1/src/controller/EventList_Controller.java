@@ -22,10 +22,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import model.*;
 
-import javax.swing.*;
-import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -133,7 +130,9 @@ public class EventList_Controller extends SceneLoader implements Initializable {
     @FXML
     private TableColumn<EventProtocol, Event> tcEvent;
     @FXML
-    private TextField tfSearch;
+    private TextField tfSearchClient;
+    @FXML
+    private TextField tfSearchEmployee;
 
 
     private Event selectedItem;
@@ -152,41 +151,16 @@ public class EventList_Controller extends SceneLoader implements Initializable {
             e.printStackTrace();
         }
 
-        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
-        FilteredList<EventProtocol> filteredData = new FilteredList<>(EventDAO.getInstance().getEventProtocols(), p -> true);
 
-        // 2. Set the filter Predicate whenever the filter changes.
-        tfSearch.textProperty().addListener((observable, oldValue, newValue) -> {
-            filteredData.setPredicate(eventProtocol -> {
-                // If filter text is empty, display all persons.
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
 
-                // Compare first name and last name of every person with filter text.
-                String lowerCaseFilter = newValue.toLowerCase();
 
-                if (eventProtocol.getClient().toString().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Filter matches first name.
-                } else if (eventProtocol.getEmployee().toString().toLowerCase().contains(lowerCaseFilter)) {
-                    return true; // Filter matches last name.
-                }
-                return false; // Does not match.
-            });
-        });
-
-        // 3. Wrap the FilteredList in a SortedList.
-        SortedList<EventProtocol> sortedData = new SortedList<>(filteredData);
-
-        // 4. Bind the SortedList comparator to the TableView comparator.
-        sortedData.comparatorProperty().bind(tableProtocols.comparatorProperty());
 
         // 5. Add sorted (and filtered) data to the table.
-        tableProtocols.setItems(sortedData);
+        tableProtocols.setItems(iniSearchEventProtocol());
 
 
         //ObservableList<Client> clients = FXCollections.observableArrayList(PersonDAO.getInstance().getClients());
-        this.tableEvents.setItems(EventDAO.getInstance().getEvents());
+        this.tableEvents.setItems(iniSearchEvents());
 
         this.CreateColumns();
         this.ConfigureTableView();
@@ -235,6 +209,82 @@ public class EventList_Controller extends SceneLoader implements Initializable {
 
         //this.comboClient.getItems().setAll(PersonDAO.getInstance().getClients());
         //this.comboEmployee.getItems().setAll(PersonDAO.getInstance().getEmployees());
+    }
+
+    private SortedList<Event> iniSearchEvents() {
+        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<Event> filteredData = new FilteredList<>(EventDAO.getInstance().getEvents(), p -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        tfSearchEvents.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(event -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (event.getName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                }
+                return false; // Does not match.
+            });
+        });
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<Event> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(tableEvents.comparatorProperty());
+        return sortedData;
+    }
+
+    private SortedList<EventProtocol> iniSearchEventProtocol() {
+        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
+        FilteredList<EventProtocol> filteredData = new FilteredList<>(EventDAO.getInstance().getEventProtocols(), p -> true);
+
+        // 2. Set the filter Predicate whenever the filter changes.
+        tfSearchClient.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(eventProtocol -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (eventProtocol.getClient().toString().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                }
+                return false; // Does not match.
+            });
+        });
+        // 2. Set the filter Predicate whenever the filter changes.
+        tfSearchEmployee.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredData.setPredicate(eventProtocol -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (eventProtocol.getEmployee().toString().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                }
+                return false; // Does not match.
+            });
+        });
+
+        // 3. Wrap the FilteredList in a SortedList.
+        SortedList<EventProtocol> sortedData = new SortedList<>(filteredData);
+
+        // 4. Bind the SortedList comparator to the TableView comparator.
+        sortedData.comparatorProperty().bind(tableProtocols.comparatorProperty());
+        return sortedData;
     }
 
     @SuppressWarnings("unchecked")
