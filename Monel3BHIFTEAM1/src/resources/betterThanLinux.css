@@ -115,6 +115,14 @@
     -fx-background-color: rgb(190, 190, 190);
 }
 
+.tab-header-area .seperatorTab {
+
+}
+
+.tab-header-area .contactTab {
+
+}
+
 .programHeader {
     -fx-background-color: red;
 }
