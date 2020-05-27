@@ -359,6 +359,8 @@ public class DBManager {
         return newId;
     }
 
+    public static Bill createBill(Client c, Date month) { return null; } //TODO
+
     // returns a HashMap of all Persons from the DB
     private static HashMap<Integer, Person> getPersons() throws SQLException {
         HashMap<Integer,Person> pers = new HashMap<Integer, Person>();
@@ -498,11 +500,11 @@ public class DBManager {
         return bils;
     }
 
-    // returns an ArrayList of all Bills from the DB
-    public static ArrayList<Bill> getAllBills() throws SQLException {
+    // returns an ArrayList of all Bills from a Client from the DB
+    public static ArrayList<Bill> getAllBills(Client c) throws SQLException {
         ArrayList<Bill> bils = new ArrayList<Bill>();
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM rechnung");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM rechnung WHERE id = " + c.getId());
         HashMap<Integer, Client> clis = getClients();
         Bill b;
         while (rs.next()) {
