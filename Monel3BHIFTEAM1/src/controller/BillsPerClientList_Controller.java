@@ -18,7 +18,10 @@ public class BillsPerClientList_Controller {
     private Button btnNextMonth;
 
     @FXML
-    private TableView<?> tableProtocols;
+    private Button btnGenerateBill;
+
+    @FXML
+    private TableView<?> tableBills;
 
     @FXML
     private Button btnPrintBill;
@@ -34,6 +37,11 @@ public class BillsPerClientList_Controller {
 
     @FXML
     private Button btnBack;
+
+    @FXML
+    void btnGenerateBill_Clicked(ActionEvent event) {
+
+    }
 
     @FXML
     void btnInfo_Clicked(ActionEvent event) {

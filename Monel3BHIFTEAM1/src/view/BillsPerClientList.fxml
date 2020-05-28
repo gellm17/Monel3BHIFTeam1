@@ -42,7 +42,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" text="Neue Rechnung generieren">
+                  <Button fx:id="btnGenerateBill" mnemonicParsing="false" onAction="#btnGenerateBill_Clicked" text="Neue Rechnung generieren">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -58,7 +58,7 @@
             </HBox>
             <BorderPane>
                <center>
-                  <TableView fx:id="tableProtocols" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="999999.0">
+                  <TableView fx:id="tableBills" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="999999.0">
                      <BorderPane.margin>
                         <Insets top="15.0" />
                      </BorderPane.margin>
@@ -85,7 +85,7 @@
                         </HBox>
                      </right>
                      <left>
-                        <Label text="Teilnehmer" BorderPane.alignment="CENTER">
+                        <Label text="Rechnungen" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="24.0" />
                            </font>
