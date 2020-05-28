@@ -69,7 +69,7 @@
             <Insets bottom="5.0" left="5.0" right="20.0" top="5.0" />
          </padding>
          <center>
-            <Label fx:id="lbTitle" text="Aktivitäten" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label fx:id="lbTitle" text="Rechnungen" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Gill Sans MT" size="36.0" />
                </font>
@@ -80,7 +80,7 @@
    <center>
       <TabPane nodeOrientation="RIGHT_TO_LEFT" tabMinWidth="60.0" BorderPane.alignment="CENTER">
          <tabs>
-            <Tab closable="false" text="Protokolle">
+            <Tab closable="false" text="???">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
@@ -154,7 +154,7 @@
                   <String fx:value="borderBackgroundTab" />
                </styleClass>
             </Tab>
-            <Tab closable="false" styleClass="backgroundTab" text="Aktivitäten">
+            <Tab closable="false" styleClass="backgroundTab" text="pro Klient">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
@@ -167,7 +167,7 @@
                      <top>
                         <BorderPane nodeOrientation="LEFT_TO_RIGHT" styleClass="background" BorderPane.alignment="CENTER">
                            <center>
-                              <TextField fx:id="tfSearchEvents" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" promptText="Suche nach Aktivitätsbezeichnung" BorderPane.alignment="CENTER">
+                              <TextField fx:id="tfSearchClient" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" promptText="Suche Klienten" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -198,68 +198,14 @@
                                           <String fx:value="searchButton" />
                                        </styleClass>
                                     </Button>
-                                  <Button fx:id="btnAddSingleEvent" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnAddSingleEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_AddK.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                       <tooltip>
-                                          <Tooltip text="Einzelaktivität hinzufügen" />
-                                       </tooltip>
-                                    </Button>
-                                    <Button fx:id="btnAddGroupEvent" layoutX="154.0" layoutY="10.0" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnAddGroupEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fitHeight="150.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_AddGroup.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                       <tooltip>
-                                          <Tooltip text="Gruppenaktivität hinzufügen" />
-                                       </tooltip>
-                                    </Button>
-                                    <Button fx:id="btnDeleteEvent" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnDeleteEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_Del.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                       <tooltip>
-                                          <Tooltip text="Löschen" />
-                                       </tooltip>
-                                    </Button>
-                                    <Button fx:id="btnEditEvent" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnEditEvent_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                                    <Button fx:id="btnViewBills" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnViewBills_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                        <graphic>
                                           <ImageView fitHeight="100.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../resources/icon_Edit.png" />
+                                                <Image url="@../resources/nav_icons/icon_Bills_wf.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -299,7 +245,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnNavActivities" contentDisplay="TOP" disable="true" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavActivities_Clicked" styleClass="transparentButton" text="Aktivitäten">
+            <Button fx:id="btnNavActivities" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavActivities_Clicked" text="Aktivitäten">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -307,8 +253,12 @@
                      </image>
                   </ImageView>
                </graphic>
+               <styleClass>
+                  <String fx:value="navButton" />
+                  <String fx:value="roundBottomRight" />
+               </styleClass>
             </Button>
-            <Button fx:id="btnNavBills" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavBills_Clicked" text="Rechnungen" GridPane.rowIndex="1">
+            <Button fx:id="btnNavBills" contentDisplay="TOP" disable="true" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavBills_Clicked" styleClass="transparentButton" text="Rechnungen" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -316,12 +266,8 @@
                      </image>
                   </ImageView>
                </graphic>
-               <styleClass>
-                  <String fx:value="navButton" />
-                  <String fx:value="roundTopRight" />
-               </styleClass>
             </Button>
-            <Button fx:id="btnNavClients" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavClients_Clicked" styleClass="navButton" text="Klienten" GridPane.rowIndex="2">
+            <Button fx:id="btnNavClients" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavClients_Clicked" text="Klienten" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fitHeight="260.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -329,6 +275,10 @@
                      </image>
                   </ImageView>
                </graphic>
+               <styleClass>
+                  <String fx:value="navButton" />
+                  <String fx:value="roundTopRight" />
+               </styleClass>
             </Button>
             <Button fx:id="btnNavEmployees" contentDisplay="TOP" graphicTextGap="6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnNavEmployees_Clicked" styleClass="navButton" text="Mitarbeiter" GridPane.rowIndex="3">
                <graphic>

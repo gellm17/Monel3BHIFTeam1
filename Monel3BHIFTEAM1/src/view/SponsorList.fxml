@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -33,7 +34,10 @@
                      <styleClass>
                         <String fx:value="transparentButton" />
                         <String fx:value="circular" />
-                     </styleClass></Button>
+                     </styleClass>
+                     <tooltip>
+                        <Tooltip text="Info" />
+                     </tooltip></Button>
                   <Button fx:id="btnSettings" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnSettings_Clicked" prefHeight="65.0" prefWidth="65.0">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
@@ -45,7 +49,10 @@
                      <styleClass>
                         <String fx:value="transparentButton" />
                         <String fx:value="circular" />
-                     </styleClass></Button>
+                     </styleClass>
+                     <tooltip>
+                        <Tooltip text="Einstellungen" />
+                     </tooltip></Button>
               </buttons>
             </ButtonBar>
          </right>
@@ -125,6 +132,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Sponsor hinzufügen" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="btnDeleteSponsor" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnDeleteSponsor_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
                            <font>
@@ -140,6 +150,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Löschen" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="btnEditSponsor" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnEditSponsor_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
                            <font>
@@ -152,6 +165,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Bearbeiten" />
+                           </tooltip>
                         </Button>
                      </children>
                   </HBox>

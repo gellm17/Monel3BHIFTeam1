@@ -1,5 +1,5 @@
 .background {
-
+    -fx-background-color: -fx-background;
 }
 
 .button {
@@ -121,6 +121,17 @@
 
 .tab-header-area .contactTab {
 
+}
+
+.tab-header-area .backgroundTab:selected {
+    -fx-background-color: -fx-background;
+    -fx-border-color: rgb(200, 200, 200) rgb(200, 200, 200) -fx-background rgb(200, 200, 200);
+    -fx-border-width: 1 1 1 0;
+    -fx-padding: 6 9;
+}
+
+.tab-header-area .borderBackgroundTab:selected {
+    -fx-border-width: 1;
 }
 
 .programHeader {
