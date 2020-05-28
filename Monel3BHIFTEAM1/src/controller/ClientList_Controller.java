@@ -242,7 +242,7 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
 
     @FXML
     void btnNavBills_Clicked(ActionEvent event) {
-
+        showScene("BillList");
     }
 
     @FXML
@@ -252,6 +252,7 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
 
     @FXML
     void btnNavClients_Clicked(ActionEvent event) {
+        showScene("ClientList");
     }
 
     @FXML

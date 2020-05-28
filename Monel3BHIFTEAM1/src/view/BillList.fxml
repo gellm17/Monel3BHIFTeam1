@@ -158,7 +158,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="tableEvents" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tableClients" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <BorderPane.margin>
                               <Insets top="35.0" />
                            </BorderPane.margin>

@@ -460,12 +460,12 @@ tcDateProtocol.setCellFactory(column -> new TableCell<EventProtocol, LocalDate>(
 
     @FXML
     void btnNavActivities_Clicked(ActionEvent event) {
-
+        showScene("EventList");
     }
 
     @FXML
     void btnNavBills_Clicked(ActionEvent event) {
-
+        showScene("BillList");
     }
 
     @FXML

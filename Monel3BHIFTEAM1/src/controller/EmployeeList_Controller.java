@@ -268,9 +268,10 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
     void btnNavActivities_Clicked(ActionEvent event) {
         showScene("EventList");
     }
+
     @FXML
     void btnNavBills_Clicked(ActionEvent event) {
-
+        showScene("BillList");
     }
 
     @FXML
@@ -285,7 +286,7 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
 
     @FXML
     void btnNavEmployees_Clicked(ActionEvent event) {
-
+        showScene("EmployeeList");
     }
 
     @FXML
