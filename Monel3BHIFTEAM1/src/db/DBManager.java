@@ -504,7 +504,8 @@ public class DBManager {
     public static ArrayList<Bill> getAllBills(Client c) throws SQLException {
         ArrayList<Bill> bils = new ArrayList<Bill>();
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM rechnung WHERE id = " + c.getId());
+
+        ResultSet rs = stmt.executeQuery("SELECT * FROM rechnung WHERE klient = " + c.getId());
         HashMap<Integer, Client> clis = getClients();
         Bill b;
         while (rs.next()) {

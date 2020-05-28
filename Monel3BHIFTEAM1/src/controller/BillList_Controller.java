@@ -8,11 +8,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
 import model.Client;
 import model.Event;
 
@@ -127,8 +132,29 @@ public class BillList_Controller extends SceneLoader implements Initializable {
 }
 
     private void showReceipeForClient() throws IOException {
+        FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/BillsPerClientList.fxml"));
+        BorderPane root = fxml.load();
+        Scene scene = new Scene(root);
+        this.getPrimStage().setScene(scene);
+        Screen screen = Screen.getPrimary();
 
-        //TODO
+        //Maximized
+        Rectangle2D bounds = screen.getVisualBounds();
+        this.getPrimStage().setX(bounds.getMinX());
+        this.getPrimStage().setY(bounds.getMinY());
+        this.getPrimStage().setWidth(bounds.getWidth());
+        this.getPrimStage().setHeight(bounds.getHeight());
+        this.getPrimStage().show();
+
+
+
+        BillsPerClientList_Controller showController = fxml.getController();
+        //Pass whatever data you want. You can have multiple method calls here
+        showController.setClient((Client) this.selectedItem);
+
+
+        SceneLoader loader = showController;
+        loader.setPrimaryStage(this.getPrimStage());
     }
 
     @SuppressWarnings("unchecked")
@@ -213,7 +239,7 @@ public class BillList_Controller extends SceneLoader implements Initializable {
     }
 
     @FXML
-    void btnViewBills_Clicked(ActionEvent event) {
+    void btnViewBills_Clicked(ActionEvent event) throws IOException {
         showReceipeForClient();
     }
 
