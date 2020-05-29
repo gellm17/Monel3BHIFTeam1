@@ -126,8 +126,8 @@ import java.util.ResourceBundle;
 
 
 
-             tcDate.setCellValueFactory(new PropertyValueFactory<Bill, LocalDate>("firstName"));
-             tcUse.setCellValueFactory(new PropertyValueFactory<Bill, String>("lastName"));
+             tcDate.setCellValueFactory(new PropertyValueFactory<Bill, LocalDate>("dateOfIssue"));
+             tcUse.setCellValueFactory(new PropertyValueFactory<Bill, String>("use"));
 
 
              this.tableBills.getColumns().addAll(tcDate, tcUse);
@@ -138,7 +138,7 @@ import java.util.ResourceBundle;
              //Width
 
              tcDate.prefWidthProperty().bind(tableBills.widthProperty().divide(2)); // w * 1/2
-             tcUse.prefWidthProperty().bind(tableBills.widthProperty().divide(2));
+             tcUse.prefWidthProperty().bind(tableBills.widthProperty().divide(3));
 
 
         }
