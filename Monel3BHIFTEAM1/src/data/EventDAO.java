@@ -101,4 +101,16 @@ public class EventDAO {
     public void setEvents(ObservableList<Event> events) { this.events = events; }
 
     public void setEventProtocols(ObservableList<EventProtocol> eventProtocols) { this.eventProtocols = eventProtocols; }
+
+    public ObservableList<EventProtocol> getEventProtocolsByClient(Client client) {
+        Iterator<EventProtocol> it = eventProtocols.iterator();
+        ObservableList<EventProtocol> res = FXCollections.observableList(new ArrayList<EventProtocol>());
+        while (it.hasNext()){
+            EventProtocol current = it.next();
+            if (current.getClient().getId() == client.getId()){
+                res.add(current);
+            }
+        }
+        return res;
+    }
 }

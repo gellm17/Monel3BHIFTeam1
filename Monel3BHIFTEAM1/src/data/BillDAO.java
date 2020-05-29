@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Bill;
 import model.Bill;
+import model.Event;
 import model.EventProtocol;
 
 import java.util.ArrayList;
@@ -27,6 +28,19 @@ public class BillDAO {
             instance = new BillDAO();
         }
         return instance;
+    }
+
+    public boolean addBill(Bill b) {
+        if (b.getNr() == 0) {
+            try {
+                DBManager.open();
+                b.setNr(DBManager.insertBill(b));
+                DBManager.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return bills.add(b);
     }
 
 

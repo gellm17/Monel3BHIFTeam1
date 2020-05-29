@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -11,19 +12,22 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Bill {
 	private IntegerProperty nr;
 	private ObjectProperty<Client> client;
 	private ObjectProperty<LocalDate> dateOfIssue;		//time where you get the bill
 	private StringProperty use;							//purpose of use
-	private ArrayList<EventProtocol> eventProtocols;			//List of all eventProtocols
+	private ObservableList<EventProtocol> eventProtocols;			//List of all eventProtocols
 	
 	public Bill(int nr, Client client, LocalDate dateOfIssue, String use) {
 		this.nr = new SimpleIntegerProperty(this, "nr", nr);
 		this.client = new SimpleObjectProperty<Client>(this, "client", client);
 		this.dateOfIssue = new SimpleObjectProperty<LocalDate>(this, "dateOfIssue", dateOfIssue);
 		this.use = new SimpleStringProperty(this, "use", use);
+		this.eventProtocols = FXCollections.observableArrayList(new ArrayList<EventProtocol>());
 	}
 
 	public static Bill fromResults(ResultSet rs) throws SQLException {
@@ -71,10 +75,10 @@ public class Bill {
 		this.use.set(use);
 	}
 	
-	public ArrayList<EventProtocol> getEventProtocols() {
+	public ObservableList<EventProtocol> getEventProtocols() {
 		return this.eventProtocols;
 	}
-	public void setEventProtocols(ArrayList<EventProtocol> eventProtocols) {
+	public void setEventProtocols(ObservableList<EventProtocol> eventProtocols) {
 		this.eventProtocols = eventProtocols;
 	}
 	public boolean addEventProtocol(EventProtocol eventProtocol) {

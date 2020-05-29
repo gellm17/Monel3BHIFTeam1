@@ -3,6 +3,7 @@
 
 import app.SceneLoader;
 import data.BillDAO;
+import data.EventDAO;
 import data.PersonDAO;
 import db.DBManager;
 import javafx.collections.FXCollections;
@@ -10,13 +11,19 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Screen;
+import javafx.util.converter.LocalDateStringConverter;
 import model.Bill;
 import model.Client;
 
@@ -107,7 +114,29 @@ import java.util.ResourceBundle;
         }
 
         private void showPrintBill() throws IOException {
-             //TODO gleich wie bei Client List zu ADDEDITController mitgeben
+             FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/ViewBill.fxml"));
+             BorderPane root = fxml.load();
+             Scene scene = new Scene(root);
+             this.getPrimStage().setScene(scene);
+             Screen screen = Screen.getPrimary();
+
+             //Maximized
+             Rectangle2D bounds = screen.getVisualBounds();
+             this.getPrimStage().setX(bounds.getMinX());
+             this.getPrimStage().setY(bounds.getMinY());
+             this.getPrimStage().setWidth(bounds.getWidth());
+             this.getPrimStage().setHeight(bounds.getHeight());
+             this.getPrimStage().show();
+
+
+
+             ViewBill_Controller billController = fxml.getController();
+             //Pass whatever data you want. You can have multiple method calls here
+             billController.setBill(selectedBill); //TODO
+
+
+             SceneLoader loader = billController;
+             loader.setPrimaryStage(this.getPrimStage());
         }
 
         @SuppressWarnings("unchecked")
@@ -151,7 +180,9 @@ import java.util.ResourceBundle;
 
         @FXML
         void btnGenerateBill_Clicked(ActionEvent event) {
-
+             Bill generatedBill = new Bill(0, client, LocalDate.now(), "Monatsrechnung " + lbYearMonth.getText() + " für " + client.getFirstName() + " " + client.getLastName());            //TODO NOT sure if date of today or yearMonth
+             generatedBill.setEventProtocols(FXCollections.observableArrayList(EventDAO.getInstance().getEventProtocolsByClient(client)));
+             BillDAO.getInstance().addBill(generatedBill);
         }
 
         @FXML
@@ -161,17 +192,35 @@ import java.util.ResourceBundle;
 
         @FXML
         void btnNextMonth_Clicked(ActionEvent event) {
+             int currentMonth = Integer.parseInt(lbYearMonth.getText().split("/")[0]);
+             int currentYear = Integer.parseInt(lbYearMonth.getText().split("/")[1]);
 
+             if (currentMonth == 12){
+                  lbYearMonth.setText("01/" + (currentYear+1));
+             } else {
+                  lbYearMonth.setText(String.format("%02d", currentMonth + 1) + "/" + currentYear);
+             }
         }
 
         @FXML
         void btnPrevMonth_Clicked(ActionEvent event) {
+             int currentMonth = Integer.parseInt(lbYearMonth.getText().split("/")[0]);
+             int currentYear = Integer.parseInt(lbYearMonth.getText().split("/")[1]);
 
+             if (currentMonth == 1){
+                  lbYearMonth.setText("12/" + (currentYear-1));
+             } else {
+                  lbYearMonth.setText(String.format("%02d", currentMonth - 1) + "/" + currentYear);
+             }
         }
 
         @FXML
         void btnPrintBill_Clicked(ActionEvent event) {
-
+             try {
+                  showPrintBill();
+             } catch (IOException e){
+                  e.printStackTrace();
+             }
         }
 
         @FXML

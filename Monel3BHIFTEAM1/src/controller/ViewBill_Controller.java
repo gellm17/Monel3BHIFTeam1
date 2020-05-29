@@ -1,11 +1,22 @@
 package controller;
 
+import app.SceneLoader;
+import data.BillDAO;
+import db.DBManager;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import model.Bill;
+import model.Client;
 
-public class ViewBill_Controller {
+import java.io.IOException;
+
+public class ViewBill_Controller extends SceneLoader {
 
     @FXML
     private Label lbClientOnBill;
@@ -42,6 +53,18 @@ public class ViewBill_Controller {
 
     @FXML
     private Button btnBack;
+
+    private Bill bill;
+
+    public void setBill(Bill bill) {
+        this.bill = bill;
+        afterSet();
+        System.out.println("Rechnung: "+bill.getNr());
+    }
+
+    public void afterSet () {
+        //TODO
+    }
 
     @FXML
     void btnInfo_Clicked(ActionEvent event) {
