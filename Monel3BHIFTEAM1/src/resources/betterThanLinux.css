@@ -142,6 +142,9 @@
     -fx-font-size: 14;
 }
 
+.pageWhite {
+    -fx-background-color: white;
+}
 
 /* Accordion */
 
