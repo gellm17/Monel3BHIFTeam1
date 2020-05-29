@@ -34,6 +34,9 @@ public class ViewBill_Controller extends SceneLoader {
     private Label lbRideCosts;
 
     @FXML
+    private Label lbTotalCost;
+
+    @FXML
     private Button btnPrint;
 
     @FXML
