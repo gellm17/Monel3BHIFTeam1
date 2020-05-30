@@ -11,23 +11,49 @@ import java.util.Iterator;
 
 public class DBManager {
 
-    private static String sqlInsertPerson = "INSERT INTO person (personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-    private static String sqlInsertClient = "INSERT INTO person (Personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,esv,notfallkontakt1,notfallkontakt2,svnr,diagnose,allergien,sonstiges,beschaeftigung) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    private static String sqlInsertEmployee = "INSERT INTO person (personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,svnr,amt,verwendungsgruppe,gehaltsstufe,wochenstunden,iban,bic,vorrueckdatum,einstelldatum) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    private static String sqlInsertSponsor = "INSERT INTO person (personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,firmenname,firmentelefonnummer,firmenemail) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    private static String sqlInsertEvent = "INSERT INTO aktivitaet (datum,aktivitaetsbezeichnung,kategorie) VALUES (?,?,?)";
-    private static String sqlInsertEventprotocol = "INSERT INTO aktivitaetsprotokoll (aktivitaet,mitarbeiter,klient,rechnung,startzeit,endzeit,jahr_Monat,stundensatz,fahrtkosten) VALUES (?,?,?,?,?,?,?,?,?)";
-    private static String sqlInsertBill = "INSERT INTO rechnung (klient,ausstellungsdatum,verwendungszweck) VALUES (?,?,?)";
-    private static String sqlInsertDocument = "INSERT INTO dokument (besitzerIdPerson,besitzerIdAktivitaet,pfad,dokumentenart,besitzer) VALUES (?,?,?,?,?)";
+    private static String sqlInsertPerson           = "INSERT INTO person (personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    private static String sqlInsertClient           = "INSERT INTO person (personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,esv,notfallkontakt1,notfallkontakt2,svnr,diagnose,allergien,sonstiges,beschaeftigung) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static String sqlInsertEmployee         = "INSERT INTO person (personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,svnr,amt,verwendungsgruppe,gehaltsstufe,wochenstunden,iban,bic,vorrueckdatum,einstelldatum) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static String sqlInsertSponsor          = "INSERT INTO person (personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,firmenname,firmentelefonnummer,firmenemail) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static String sqlInsertEvent            = "INSERT INTO aktivitaet (datum,aktivitaetsbezeichnung,kategorie) VALUES (?,?,?)";
+    private static String sqlInsertEventprotocol    = "INSERT INTO aktivitaetsprotokoll (aktivitaet,mitarbeiter,klient,rechnung,startzeit,endzeit,jahr_Monat,stundensatz,fahrtkosten) VALUES (?,?,?,?,?,?,?,?,?)";
+    private static String sqlInsertBill             = "INSERT INTO rechnung (klient,ausstellungsdatum,verwendungszweck) VALUES (?,?,?)";
+    private static String sqlInsertDocument         = "INSERT INTO dokument (besitzerIdPerson,besitzerIdAktivitaet,pfad,dokumentenart,besitzer) VALUES (?,?,?,?,?)";
+    private static String sqlUpdatePerson           = "UPDATE person SET anrede = ?, titel = ?, vorname = ?, nachname = ?, strasse_hausnummer = ?, plz = ?, ort = ?, telefonnummer = ?, email = ?, geburtsdatum = ? WHERE id = ?";
+    private static String sqlUpdateClient           = "UPDATE person SET anrede = ?, titel = ?, vorname = ?, nachname = ?, strasse_hausnummer = ?, plz = ?, ort = ?, telefonnummer = ?, email = ?, geburtsdatum = ?, esv = ?, notfallkontakt2 = ?, svnr = ?, diagnose = ?, allergien = ?, sonstiges = ?, beschaeftigung = ? WHERE id = ?";
+    private static String sqlUpdateEmployee         = "UPDATE person SET anrede = ?, titel = ?, vorname = ?, nachname = ?, strasse_hausnummer = ?, plz = ?, ort = ?, telefonnummer = ?, email = ?, geburtsdatum = ?, svnr = ? , amt = ?, verwendungsgruppe = ?, gehaltsstufe = ?, wochenstunden = ?, iban = ?, bic = ?, vorrueckdatum = ?, einstelldatum = ? WHERE id = ?";
+    private static String sqlUpdateSponsor          = "UPDATE person SET anrede = ?, titel = ?, vorname = ?, nachname = ?, strasse_hausnummer = ?, plz = ?, ort = ?, telefonnummer = ?, email = ?, geburtsdatum = ?, firmenname = ?, firmentelefonnummer = ?, firmenemail = ? WHERE id = ?";
+    private static String sqlUpdateEvent            = "UPDATE aktivitaet SET datum = ?, aktivitaetsbezeichnung = ? WHERE id = ?";
+    private static String sqlUpdateEventprotocol    = "UPDATE aktivitaetsprotokoll SET mitarbeiter = ?, klient = ?, rechnung = ?, startzeit = ?, endzeit = ?, jahr_Monat = ?, stundensatz = ?, fahrtkosten = ? WHERE id = ?";
+    private static String sqlUpdateBill             = "UPDATE rechnung SET ausstellungsdatum = ?, erwendungszweck = ? WHERE id = ?";
+    private static String sqlUpdateDocument         = "UPDATE dokument SET besitzerIdPerson = ?, besitzerIdAktivitaet = ?, pfad = ?, dokumentenart = ?, besitzer = ? WHERE id = ?";
+    private static String sqlDeletePerson           = "UPDATE person SET geloescht = ? WHERE id = ?"; // for person, client, employee and sponsor
+    private static String sqlDeleteEvent            = "DELETE FROM aktivitaet WHERE id = ?";
+    private static String sqlDeleteEventprotocol    = "DELETE FROM aktivitaetsprotokoll WHERE id = ?";
+    private static String sqlDeleteBill             = "DELETE FROM rechnung WHERE id = ?";
+    private static String sqlDeleteDocument         = "DELETE FROM dokument WHERE id = ?";
 
-    private static PreparedStatement stmtInsertPerson = null;
-    private static PreparedStatement stmtInsertClient = null;
-    private static PreparedStatement stmtInsertEmployee = null;
-    private static PreparedStatement stmtInsertSponsor = null;
-    private static PreparedStatement stmtInsertEvent = null;
-    private static PreparedStatement stmtInsertEventprotocol = null;
-    private static PreparedStatement stmtInsertBill = null;
-    private static PreparedStatement stmtInsertDocument = null;
+    private static PreparedStatement stmtInsertPerson           = null;
+    private static PreparedStatement stmtInsertClient           = null;
+    private static PreparedStatement stmtInsertEmployee         = null;
+    private static PreparedStatement stmtInsertSponsor          = null;
+    private static PreparedStatement stmtInsertEvent            = null;
+    private static PreparedStatement stmtInsertEventprotocol    = null;
+    private static PreparedStatement stmtInsertBill             = null;
+    private static PreparedStatement stmtInsertDocument         = null;
+    private static PreparedStatement stmtUpdatePerson           = null;
+    private static PreparedStatement stmtUpdateClient           = null;
+    private static PreparedStatement stmtUpdateEmployee         = null;
+    private static PreparedStatement stmtUpdateSponsor          = null;
+    private static PreparedStatement stmtUpdateEvent            = null;
+    private static PreparedStatement stmtUpdateEventprotocol    = null;
+    private static PreparedStatement stmtUpdateBill             = null;
+    private static PreparedStatement stmtUpdateDocument         = null;
+    private static PreparedStatement stmtDeletePerson           = null;
+    private static PreparedStatement stmtDeleteEvent            = null;
+    private static PreparedStatement stmtDeleteEventprotocol    = null;
+    private static PreparedStatement stmtDeleteBill             = null;
+    private static PreparedStatement stmtDeleteDocument         = null;
 
     private static Connection conn = null;
 
@@ -71,7 +97,7 @@ public class DBManager {
             e.printStackTrace();
         }
         return newId;
-    }
+    } //TODO check non mandatory fields
 
     // inserts a Klient into the DB
     public static int insertClient(Client c) {
@@ -141,7 +167,7 @@ public class DBManager {
             e.printStackTrace();
         }
         return newId;
-    }
+    } //TODO check non mandatory fields
 
     // inserts an Employee into the DB
     public static int insertEmployee(Employee e) {
@@ -204,7 +230,7 @@ public class DBManager {
             ex.printStackTrace();
         }
         return newId;
-    }
+    } //TODO check non mandatory fields
 
     // inserts a Sponsor into the DB
     public static int insertSponsor(Sponsor s) {
@@ -237,7 +263,7 @@ public class DBManager {
             e.printStackTrace();
         }
         return newId;
-    }
+    } //TODO check non mandatory fields
 
     // inserts an Event into the DB
     public static int insertEvent(Event e) {
@@ -259,7 +285,7 @@ public class DBManager {
             ex.printStackTrace();
         }
         return newId;
-    }
+    } //TODO check non mandatory fields
 
     // inserts an Eventprotocol into the DB
     public static int insertEventprotocol(EventProtocol ep) {
@@ -303,7 +329,7 @@ public class DBManager {
             e.printStackTrace();
         }
         return newId;
-    }
+    } //TODO check non mandatory fields
 
     // inserts a Bill into the DB
     public static int insertBill(Bill b) {
@@ -325,7 +351,7 @@ public class DBManager {
             e.printStackTrace();
         }
         return newId;
-    }
+    } //TODO check non mandatory fields
 
     // inserts a Document into the DB
     public static int insertDocument(Document d) {
@@ -333,13 +359,10 @@ public class DBManager {
         try {
             if (d.getOwnerPerson() != null) {
                 stmtInsertDocument.setInt(1, d.getOwnerPerson().getId());
+                stmtInsertDocument.setNull(2, Types.NULL);
             } else {
                 stmtInsertDocument.setNull(1, Types.NULL);
-            }
-            if (d.getOwnerEvent() != null) {
                 stmtInsertDocument.setInt(2, d.getOwnerEvent().getId());
-            } else {
-                stmtInsertDocument.setNull(2, Types.NULL);
             }
             stmtInsertDocument.setString(3, d.getPath());
             stmtInsertDocument.setString(4, d.getDocumentType());
@@ -357,8 +380,314 @@ public class DBManager {
             e.printStackTrace();
         }
         return newId;
+    } //TODO check non mandatory fields
+
+    // updates the Data of the Person with the same id in the DB with the Data of this Person
+    public static void updatePerson(Person p) {
+        try {
+            stmtUpdatePerson.setString(1, p.getSalutation().toString());
+            if (p.getTitle() != null) {
+                stmtUpdatePerson.setString(2, p.getTitle());
+            } else {
+                stmtUpdatePerson.setNull(2, Types.NULL);
+            }
+            stmtUpdatePerson.setString(3, p.getFirstName());
+            stmtUpdatePerson.setString(4, p.getLastName());
+            stmtUpdatePerson.setString(5, p.getStreetAndNr());
+            stmtUpdatePerson.setInt(6, p.getZipCode());
+            stmtUpdatePerson.setString(7, p.getPlace());
+            stmtUpdatePerson.setString(8, p.getTelNr());
+            if (p.getEmail() != null) {
+                stmtUpdatePerson.setString(9, p.getEmail());
+            } else {
+                stmtUpdatePerson.setNull(9, Types.NULL);
+            }
+            if (p.getBirthDate() != null) {
+                stmtUpdatePerson.setDate(10, Date.valueOf(p.getBirthDate()));
+            } else {
+                stmtUpdatePerson.setNull(10, Types.NULL);
+            }
+            stmtUpdatePerson.setInt(11, p.getId());
+            stmtUpdatePerson.executeUpdate();
+            stmtUpdatePerson.clearParameters();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } //TODO check non mandatory fields
+
+    // updates the Data of the Client with the same id in the DB with the Data of this Client
+    public static void updateClient(Client c) {
+        try {
+            stmtUpdateClient.setString(1, c.getSalutation().toString());
+            if (c.getTitle() != null) {
+                stmtUpdateClient.setString(2, c.getTitle());
+            } else {
+                stmtUpdateClient.setNull(2, Types.NULL);
+            }
+            stmtUpdateClient.setString(3, c.getFirstName());
+            stmtUpdateClient.setString(4, c.getLastName());
+            stmtUpdateClient.setString(5, c.getStreetAndNr());
+            stmtUpdateClient.setInt(6, c.getZipCode());
+            stmtUpdateClient.setString(7, c.getPlace());
+            stmtUpdateClient.setString(8, c.getTelNr());
+            if(c.getEmail() != null) {
+                stmtUpdateClient.setString(9, c.getEmail());
+            } else {
+                stmtUpdateClient.setNull(9, Types.NULL);
+            }
+            if (c.getBirthDate() != null) {
+                stmtUpdateClient.setDate(10, Date.valueOf(c.getBirthDate()));
+            } else {
+                stmtUpdateClient.setNull(10, Types.NULL);
+            }
+            if (c.getEsv() != null) {
+                stmtUpdateClient.setInt(11, c.getEsv().getId());
+            } else {
+                stmtUpdateClient.setNull(11, Types.NULL);
+            }
+            if (c.getEmergencyContact2() != null) {
+                stmtUpdateClient.setInt(12, c.getEmergencyContact2().getId());
+            } else {
+                stmtUpdateClient.setNull(12, Types.NULL);
+            }
+            stmtUpdateClient.setLong(13, c.getSsnr());
+            stmtUpdateClient.setString(14, c.getDiagnose());
+            if (c.getAllergies() != null) {
+                stmtUpdateClient.setString(15, c.getAllergies());
+            } else {
+                stmtUpdateClient.setNull( 15, Types.NULL);
+            }
+            if (c.getOther() != null) {
+                stmtUpdateClient.setString(16, c.getOther());
+            } else {
+                stmtUpdateClient.setNull(16, Types.NULL);
+            }
+            if (c.getJob() != null) {
+                stmtUpdateClient.setString(17, c.getJob());
+            } else {
+                stmtUpdateClient.setNull(17, Types.NULL);
+            }
+            stmtUpdateClient.setInt(18, c.getId());
+            stmtUpdateClient.executeUpdate();
+            stmtUpdateClient.clearParameters();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } //TODO check non mandatory fields
+
+    // updates the Data of the Employee with the same id in the DB with the Data of this Employee
+    public static void updateEmployee(Employee e) {
+        try {
+            stmtUpdateEmployee.setString(1, e.getSalutation().toString());
+            if (e.getTitle() != null) {
+                stmtUpdateEmployee.setString(2, e.getTitle());
+            } else {
+                stmtUpdateEmployee.setNull(2, Types.NULL);
+            }
+            stmtUpdateEmployee.setString(3, e.getFirstName());
+            stmtUpdateEmployee.setString(4, e.getLastName());
+            stmtUpdateEmployee.setString(5, e.getStreetAndNr());
+            stmtUpdateEmployee.setInt(6, e.getZipCode());
+            stmtUpdateEmployee.setString(7, e.getPlace());
+            stmtUpdateEmployee.setString(8, e.getTelNr());
+            if (e.getEmail() != null) {
+                stmtUpdateEmployee.setString(9, e.getEmail());
+            } else {
+                stmtUpdateEmployee.setString(9, e.getEmail());
+            }
+            if (e.getBirthDate() != null) {
+                stmtUpdateEmployee.setDate(10, Date.valueOf(e.getBirthDate()));
+            } else {
+                stmtUpdateEmployee.setNull(10, Types.NULL);
+            }
+            stmtUpdateEmployee.setLong(11, e.getSsnr());
+            stmtUpdateEmployee.setInt(12, (e.isVolunteering() ? 1 : 0));
+            stmtUpdateEmployee.setString(13, e.getOccupationGroup().toString());
+            stmtUpdateEmployee.setString(14, e.getSalaryLevel().toString());
+            if (e.getHoursPerWeek() != 0) {
+                stmtUpdateEmployee.setInt(15, e.getHoursPerWeek());
+            } else {
+                stmtUpdateEmployee.setNull(15, Types.NULL);
+            }
+            stmtUpdateEmployee.setString(16, e.getIban());
+            stmtUpdateEmployee.setString(17, e.getBic());
+            if (e.getDateSalaryLevel() != null) {
+                stmtUpdateEmployee.setDate(18, Date.valueOf(e.getDateSalaryLevel()));
+            } else {
+                stmtUpdateEmployee.setNull(18, Types.NULL);
+            }
+            if (e.getDateOfEmployment() != null) {
+                stmtUpdateEmployee.setDate(19, Date.valueOf(e.getDateOfEmployment()));
+            } else {
+                stmtUpdateEmployee.setNull(19, Types.NULL);
+            }
+            stmtUpdateEmployee.setInt(20, e.getId());
+            stmtUpdateEmployee.executeUpdate();
+            stmtUpdateEmployee.clearParameters();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    } //TODO check non mandatory fields
+
+    // updates the Data of the Sponsor with the same id in the DB with the Data of this Sponsor
+    public static void updateSponsor(Sponsor s) {
+        try {
+            stmtUpdateSponsor.setString(1, s.getSalutation().toString());
+            stmtUpdateSponsor.setString(2, s.getTitle());
+            stmtUpdateSponsor.setString(3, s.getFirstName());
+            stmtUpdateSponsor.setString(4, s.getLastName());
+            stmtUpdateSponsor.setString(5, s.getStreetAndNr());
+            stmtUpdateSponsor.setInt(6, s.getZipCode());
+            stmtUpdateSponsor.setString(7, s.getPlace());
+            stmtUpdateSponsor.setString(8, s.getTelNr());
+            stmtUpdateSponsor.setString(9, s.getEmail());
+            stmtUpdateSponsor.setDate(10, Date.valueOf(s.getBirthDate()));
+            stmtUpdateSponsor.setString(11, s.getCompanyName());
+            stmtUpdateSponsor.setString(12, s.getCompanyTelNr());
+            stmtUpdateSponsor.setString(13, s.getCompanyEmail());
+            stmtUpdateSponsor.setInt(14, s.getId());
+            stmtUpdateSponsor.executeUpdate();
+            stmtUpdateSponsor.clearParameters();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } //TODO check non mandatory fields
+
+    // updates the Data of the Event with the same id in the DB with the Data of this Event
+    public static void updateEvent(Event e) {
+        try {
+            stmtUpdateEvent.setDate(1, Date.valueOf(e.getDate()));
+            stmtUpdateEvent.setString(2, e.getName());
+            stmtUpdateEvent.setInt(3, e.getId());
+            stmtUpdateEvent.executeUpdate();
+            stmtUpdateEvent.clearParameters();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    } //TODO check non mandatory fields
+
+    // updates the Data of the Eventprotocol with the same id in the DB with the Data of this Eventprotocol
+    public static void updateEventprotocol(EventProtocol ep) {
+        try {
+            if (ep.getEmployee() != null) {
+                stmtUpdateEventprotocol.setInt(1, ep.getEmployee().getId());
+            } else {
+                stmtUpdateEventprotocol.setNull(1, Types.NULL);
+            }
+            if (ep.getClient() != null) {
+                stmtUpdateEventprotocol.setInt(2, ep.getClient().getId());
+            } else {
+                stmtUpdateEventprotocol.setNull(2, Types.NULL);
+            }
+            if (ep.getBill() != null) {
+                stmtUpdateEventprotocol.setInt(3, ep.getBill().getNr());
+            } else {
+                stmtUpdateEventprotocol.setNull(3, Types.NULL);
+            }
+            stmtUpdateEventprotocol.setTime(4, Time.valueOf(ep.getStartTime()));
+            stmtUpdateEventprotocol.setTime(5, Time.valueOf(ep.getEndTime()));
+            stmtUpdateEventprotocol.setDate(6, Date.valueOf(ep.getYear_month()));
+            stmtUpdateEventprotocol.setDouble(7, ep.getHourlyRate()); // must be changed to decimal
+            stmtUpdateEventprotocol.setDouble(8, ep.getRideCosts()); // must be changed to decimal
+            stmtUpdateEventprotocol.setInt(9, ep.getId());
+            stmtUpdateEventprotocol.executeUpdate();
+            stmtUpdateEventprotocol.clearParameters();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } //TODO check non mandatory fields
+
+    // updates the Data of the Bill with the same id in the DB with the Data of this Bill
+    public static void updateBill(Bill b) {
+        try {
+            stmtUpdateBill.setDate(1, Date.valueOf(b.getDateOfIssue()));
+            stmtUpdateBill.setString(2, b.getUse());
+            stmtUpdateBill.setInt(3, b.getNr());
+            stmtUpdateBill.executeUpdate();
+            stmtUpdateBill.clearParameters();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } //TODO check non mandatory fields
+
+    // updates the Data of the Document with the same id in the DB with the Data of this Document
+    public static void updateDocument(Document d) {
+        try {
+            if (d.getOwnerPerson() != null) {
+                stmtUpdateDocument.setInt(1, d.getOwnerPerson().getId());
+                stmtUpdateDocument.setNull(2, Types.NULL);
+            } else {
+                stmtUpdateDocument.setNull(1, Types.NULL);
+                stmtUpdateDocument.setInt(2, d.getOwnerEvent().getId());
+            }
+            stmtUpdateDocument.setString(3, d.getPath());
+            stmtUpdateDocument.setString(4, d.getDocumentType());
+            stmtUpdateDocument.setString(5, d.getOwner().toString());
+            stmtUpdateDocument.setInt(6, d.getID());
+            stmtUpdateDocument.executeUpdate();
+            stmtUpdateDocument.clearParameters();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } //TODO check non mandatory fields
+
+    // updates the cell geloescht for the given Person (also Client, Employee and Sponsor) to 1 (with 1 it will be ignored bi the get methods)
+    public static void deletePerson(Person p) {
+        try {
+            stmtDeletePerson.setInt(1, 1);
+            stmtDeletePerson.setInt(2, p.getId());
+            stmtDeletePerson.executeUpdate();
+            stmtDeletePerson.clearParameters();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
+    // deletes the Event with the same id in the DB
+    public static void deleteEvent(Event e) {
+        try {
+            stmtDeleteEvent.setInt(1, e.getId());
+            stmtDeleteEvent.executeUpdate();
+            stmtDeleteEvent.clearParameters();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    // deletes the Eventprotocol with the same id in the DB
+    public static void deleteEventprotocol(EventProtocol ep) {
+        try {
+            stmtDeleteEventprotocol.setInt(1, ep.getId());
+            stmtDeleteEventprotocol.executeUpdate();
+            stmtDeleteEventprotocol.clearParameters();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // deletes the Bill with the same id in the DB
+    public static void deleteBill(Bill b) {
+        try {
+            stmtDeleteBill.setInt(1, b.getNr());
+            stmtDeleteBill.executeUpdate();
+            stmtDeleteBill.clearParameters();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // deletes the Document with the same id in the DB
+    public static void deleteDocument(Document d) {
+        try {
+            stmtDeleteDocument.setInt(1, d.getID());
+            stmtDeleteDocument.executeUpdate();
+            stmtDeleteDocument.clearParameters();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // creates a bill for the given Person in the given month
     public static Bill createBill(Client c, Date month) { return null; } //TODO
 
     // returns a HashMap of all Persons from the DB
@@ -550,14 +879,27 @@ public class DBManager {
     // creates the DB Connection and sends the PreparedStatements to the DB
     public static void open() throws NullPointerException, SQLException {
         conn = ConnectionFactory.getInstance().getConnection();
-        stmtInsertPerson = conn.prepareStatement(sqlInsertPerson, Statement.RETURN_GENERATED_KEYS);
-        stmtInsertClient = conn.prepareStatement(sqlInsertClient, Statement.RETURN_GENERATED_KEYS);
-        stmtInsertEmployee = conn.prepareStatement(sqlInsertEmployee, Statement.RETURN_GENERATED_KEYS);
-        stmtInsertSponsor = conn.prepareStatement(sqlInsertSponsor, Statement.RETURN_GENERATED_KEYS);
-        stmtInsertEvent = conn.prepareStatement(sqlInsertEvent, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertPerson        = conn.prepareStatement(sqlInsertPerson, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertClient        = conn.prepareStatement(sqlInsertClient, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertEmployee      = conn.prepareStatement(sqlInsertEmployee, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertSponsor       = conn.prepareStatement(sqlInsertSponsor, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertEvent         = conn.prepareStatement(sqlInsertEvent, Statement.RETURN_GENERATED_KEYS);
         stmtInsertEventprotocol = conn.prepareStatement(sqlInsertEventprotocol, Statement.RETURN_GENERATED_KEYS);
-        stmtInsertBill = conn.prepareStatement(sqlInsertBill, Statement.RETURN_GENERATED_KEYS);
-        stmtInsertDocument = conn.prepareStatement(sqlInsertDocument, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertBill          = conn.prepareStatement(sqlInsertBill, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertDocument      = conn.prepareStatement(sqlInsertDocument, Statement.RETURN_GENERATED_KEYS);
+        stmtUpdatePerson        = conn.prepareStatement(sqlUpdatePerson);
+        stmtUpdateClient        = conn.prepareStatement(sqlUpdateClient);
+        stmtUpdateEmployee      = conn.prepareStatement(sqlUpdateEmployee);
+        stmtUpdateSponsor       = conn.prepareStatement(sqlUpdateSponsor);
+        stmtUpdateEvent         = conn.prepareStatement(sqlUpdateEvent);
+        stmtUpdateEventprotocol = conn.prepareStatement(sqlUpdateEventprotocol);
+        stmtUpdateBill          = conn.prepareStatement(sqlUpdateBill);
+        stmtUpdateDocument      = conn.prepareStatement(sqlUpdateDocument);
+        stmtDeletePerson        = conn.prepareStatement(sqlDeletePerson);
+        stmtDeleteEvent         = conn.prepareStatement(sqlDeleteEvent);
+        stmtDeleteEventprotocol = conn.prepareStatement(sqlDeleteEventprotocol);
+        stmtDeleteBill          = conn.prepareStatement(sqlDeleteBill);
+        stmtDeleteDocument      = conn.prepareStatement(sqlDeleteDocument);
     }
 
     // closes the DB Connection and the PreparedStatements
@@ -593,6 +935,58 @@ public class DBManager {
         if (stmtInsertDocument != null) {
             stmtInsertDocument.close();
             stmtInsertDocument = null;
+        }
+        if (stmtUpdatePerson != null) {
+            stmtUpdatePerson.close();
+            stmtUpdatePerson = null;
+        }
+        if (stmtUpdateClient != null) {
+            stmtUpdateClient.close();
+            stmtUpdateClient = null;
+        }
+        if (stmtUpdateEmployee != null) {
+            stmtUpdateEmployee.close();
+            stmtUpdateEmployee = null;
+        }
+        if (stmtUpdateSponsor != null) {
+            stmtUpdateSponsor.close();
+            stmtUpdateSponsor = null;
+        }
+        if (stmtUpdateEvent != null) {
+            stmtUpdateEvent.close();
+            stmtUpdateEvent = null;
+        }
+        if (stmtUpdateEventprotocol != null) {
+            stmtUpdateEventprotocol.close();
+            stmtUpdateEventprotocol = null;
+        }
+        if (stmtUpdateBill != null) {
+            stmtUpdateBill.close();
+            stmtUpdateBill = null;
+        }
+        if (stmtUpdateDocument != null) {
+            stmtUpdateDocument.close();
+            stmtUpdateDocument = null;
+        }
+        if (stmtDeletePerson != null) {
+            stmtDeletePerson.close();
+            stmtDeletePerson = null;
+        }
+        if (stmtDeleteEvent != null) {
+            stmtDeleteEvent.close();
+            stmtDeleteEvent = null;
+        }
+        if (stmtDeleteEventprotocol != null) {
+            stmtDeleteEventprotocol.close();
+            stmtDeleteEventprotocol = null;
+        }
+        if (stmtDeleteBill != null) {
+            stmtDeleteBill.close();
+            stmtDeleteBill = null;
+        }
+        if (stmtDeleteDocument != null) {
+            stmtDeleteDocument.close();
+            stmtDeleteDocument = null;
         }
         if (conn != null) {
             ConnectionFactory.getInstance().close();
