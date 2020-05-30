@@ -30,6 +30,14 @@ public class Bill {
 		this.eventProtocols = FXCollections.observableArrayList(new ArrayList<EventProtocol>());
 	}
 
+	public Bill(Client client) {
+		this.nr = new SimpleIntegerProperty(this, "nr", 0);
+		this.client = new SimpleObjectProperty<Client>(this, "client", client);
+		this.dateOfIssue = new SimpleObjectProperty<LocalDate>(this, "dateOfIssue", null);
+		this.use = new SimpleStringProperty(this, "use", null);
+		this.eventProtocols = FXCollections.observableArrayList(new ArrayList<EventProtocol>());
+	}
+
 	public static Bill fromResults(ResultSet rs) throws SQLException {
 		return new Bill(rs.getInt("rechnungsnummmer"), null, LocalDate.parse(rs.getString("ausstellungsdatum")), rs.getString("verwendungszweck"));
 

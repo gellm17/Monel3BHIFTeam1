@@ -2,6 +2,7 @@ package db;
 
 import data.EventDAO;
 import data.PersonDAO;
+import javafx.collections.FXCollections;
 import model.*;
 
 import java.sql.*;
@@ -32,6 +33,7 @@ public class DBManager {
     private static String sqlDeleteEventprotocol    = "DELETE FROM aktivitaetsprotokoll WHERE id = ?";
     private static String sqlDeleteBill             = "DELETE FROM rechnung WHERE id = ?";
     private static String sqlDeleteDocument         = "DELETE FROM dokument WHERE id = ?";
+    private static String sqlSelectEventprotocol    = "SELECT * FROM aktivitaetsprotokoll WHERE klient = ?, jahr_Monat = ?, rechnung = ?";
 
     private static PreparedStatement stmtInsertPerson           = null;
     private static PreparedStatement stmtInsertClient           = null;
@@ -54,6 +56,7 @@ public class DBManager {
     private static PreparedStatement stmtDeleteEventprotocol    = null;
     private static PreparedStatement stmtDeleteBill             = null;
     private static PreparedStatement stmtDeleteDocument         = null;
+    private static PreparedStatement stmtSelectEventprotocol    = null;
 
     private static Connection conn = null;
 
@@ -687,8 +690,21 @@ public class DBManager {
         }
     }
 
-    // creates a bill for the given Person in the given month
-    public static Bill createBill(Client c, Date month) { return null; } //TODO
+    // creates a bill for the given Person in the given month and inserts it into the DB (it only uses Evenprotocols with no bill)
+    public static Bill createBill(Client c, String year_month) throws SQLException {
+        Bill res = new Bill(c);
+        EventProtocol ep = null;
+        ArrayList<EventProtocol> evps = getAllEventProtocols(c, year_month);
+        res.setNr(insertBill(res));
+        res.setEventProtocols(FXCollections.observableList(evps));
+        Iterator<EventProtocol> iter = evps.iterator();
+        while (iter.hasNext()) {
+            ep = iter.next();
+            ep.setBill(res);
+            updateEventprotocol(ep);
+        }
+        return res;
+    }
 
     // returns a HashMap of all Persons from the DB
     private static HashMap<Integer, Person> getPersons() throws SQLException {
@@ -778,7 +794,7 @@ public class DBManager {
         return evns;
     }
 
-    // returns a HashMap of all Eventprotokolls from the DB without Objects (event, employee, client)
+    // returns a HashMap of all Eventprotocols from the DB without Objects (event, employee, client)
     private static HashMap<Integer, EventProtocol> getEventprotocols() throws SQLException{
         HashMap<Integer, EventProtocol> evps = new HashMap<Integer, EventProtocol>();
         Statement stmt = conn.createStatement();
@@ -789,8 +805,8 @@ public class DBManager {
         return evps;
     }
 
-    // returns a ArrayList of all Eventprotokolls from the DB with Objects (event, employee, client)
-    public static ArrayList<EventProtocol> getAllEventProtokolls() throws SQLException {
+    // returns a ArrayList of all Eventprotocols from the DB with Objects (event, employee, client)
+    public static ArrayList<EventProtocol> getAllEventProtocols() throws SQLException {
         ArrayList<EventProtocol> evps = new ArrayList<EventProtocol>();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM aktivitaetsprotokoll");
@@ -815,6 +831,34 @@ public class DBManager {
             }
             evps.add(e);
         }
+        return evps;
+    }
+
+    // returns a ArrayList of all Eventprotocols of the given Client in the given month
+    public static ArrayList<EventProtocol> getAllEventProtocols(Client c, String year_month) throws SQLException {
+        ArrayList<EventProtocol> evps = new ArrayList<EventProtocol>();
+        stmtSelectEventprotocol.setInt(1, c.getId());
+        stmtSelectEventprotocol.setString(2, year_month);
+        stmtSelectEventprotocol.setNull(3, Types.INTEGER);
+        ResultSet rs = stmtSelectEventprotocol.executeQuery();
+        HashMap<Integer, Event> evns = getAllEvents();
+        HashMap<Integer, Client> clis = getClients();
+        HashMap<Integer, Employee> emps = getAllEmployees();
+        EventProtocol e;
+        while (rs.next()) {
+            e = EventProtocol.fromResults(rs);
+            if (rs.getInt("aktivitaet") != 0) {
+                e.setEvent(evns.get(rs.getInt("aktivitaet")));
+            }
+            if (rs.getInt("mitarbeiter") != 0) {
+                e.setEmployee(emps.get(rs.getInt("mitarbeiter")));
+            }
+            if (rs.getInt("klient") != 0) {
+                e.setClient(clis.get(rs.getInt("klient")));
+            }
+            evps.add(e);
+        }
+        stmtSelectEventprotocol.clearParameters();
         return evps;
     }
 
@@ -900,6 +944,7 @@ public class DBManager {
         stmtDeleteEventprotocol = conn.prepareStatement(sqlDeleteEventprotocol);
         stmtDeleteBill          = conn.prepareStatement(sqlDeleteBill);
         stmtDeleteDocument      = conn.prepareStatement(sqlDeleteDocument);
+        stmtSelectEventprotocol = conn.prepareStatement(sqlSelectEventprotocol);
     }
 
     // closes the DB Connection and the PreparedStatements
@@ -987,6 +1032,10 @@ public class DBManager {
         if (stmtDeleteDocument != null) {
             stmtDeleteDocument.close();
             stmtDeleteDocument = null;
+        }
+        if (stmtSelectEventprotocol != null) {
+            stmtSelectEventprotocol.close();
+            stmtSelectEventprotocol = null;
         }
         if (conn != null) {
             ConnectionFactory.getInstance().close();

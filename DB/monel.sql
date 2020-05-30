@@ -11,7 +11,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-
 -- Exportiere Datenbank Struktur fuer monel
 DROP DATABASE IF EXISTS `monel`;
 CREATE DATABASE IF NOT EXISTS `monel` /*!40100 DEFAULT CHARACTER SET utf8 */;
@@ -99,9 +98,9 @@ CREATE TABLE IF NOT EXISTS `aktivitaet` (
   `aktivitaetsbezeichnung` varchar(50) DEFAULT NULL,
   `kategorie` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle monel.aktivitaet: ~1 rows (ungefaehr)
+-- Exportiere Daten aus Tabelle monel.aktivitaet: ~2 rows (ungefaehr)
 DELETE FROM `aktivitaet`;
 /*!40000 ALTER TABLE `aktivitaet` DISABLE KEYS */;
 INSERT INTO `aktivitaet` (`id`, `datum`, `aktivitaetsbezeichnung`, `kategorie`) VALUES
@@ -119,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `aktivitaetsprotokoll` (
   `rechnung` int(11) DEFAULT NULL,
   `startzeit` time DEFAULT NULL,
   `endzeit` time DEFAULT NULL,
-  `jahr_Monat` date DEFAULT NULL COMMENT 'ist wichtig für die Rechnung',
+  `jahr_Monat` varchar(7) DEFAULT NULL COMMENT 'YYYY-MM',
   `stundensatz` decimal(4,2) DEFAULT NULL,
   `fahrtkosten` decimal(4,2) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -131,15 +130,15 @@ CREATE TABLE IF NOT EXISTS `aktivitaetsprotokoll` (
   CONSTRAINT `FKklient_aktivitaetsprotokoll` FOREIGN KEY (`klient`) REFERENCES `person` (`id`),
   CONSTRAINT `FKmitarbeiter` FOREIGN KEY (`mitarbeiter`) REFERENCES `person` (`id`),
   CONSTRAINT `FKrechnung` FOREIGN KEY (`rechnung`) REFERENCES `rechnung` (`rechnungsnummmer`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle monel.aktivitaetsprotokoll: ~3 rows (ungefaehr)
 DELETE FROM `aktivitaetsprotokoll`;
 /*!40000 ALTER TABLE `aktivitaetsprotokoll` DISABLE KEYS */;
 INSERT INTO `aktivitaetsprotokoll` (`id`, `aktivitaet`, `mitarbeiter`, `klient`, `rechnung`, `startzeit`, `endzeit`, `jahr_Monat`, `stundensatz`, `fahrtkosten`) VALUES
-	(1, 1, 4, 3, NULL, '16:30:00', '18:30:00', '2020-05-12', 12.25, 13.50),
-	(2, 2, 4, 3, NULL, '14:15:00', '18:00:00', '2020-05-24', 12.25, 13.50),
-	(3, 2, 4, 7, NULL, '14:15:00', '18:00:00', '2020-05-24', 12.25, 13.50);
+	(1, 1, 4, 3, NULL, '16:30:00', '18:30:00', '2020-05', 12.25, 13.50),
+	(2, 2, 4, 3, NULL, '14:15:00', '18:00:00', '2020-05', 12.25, 13.50),
+	(3, 2, 4, 7, NULL, '14:15:00', '18:00:00', '2020-05', 12.25, 13.50);
 /*!40000 ALTER TABLE `aktivitaetsprotokoll` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle monel.dokument
