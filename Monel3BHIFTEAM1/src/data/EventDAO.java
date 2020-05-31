@@ -102,12 +102,12 @@ public class EventDAO {
 
     public void setEventProtocols(ObservableList<EventProtocol> eventProtocols) { this.eventProtocols = eventProtocols; }
 
-    public ObservableList<EventProtocol> getEventProtocolsByClient(Client client) {
+    public ObservableList<EventProtocol> getEventProtocolsByClientMonth(Client client, String yearMonth) {
         Iterator<EventProtocol> it = eventProtocols.iterator();
         ObservableList<EventProtocol> res = FXCollections.observableList(new ArrayList<EventProtocol>());
         while (it.hasNext()){
             EventProtocol current = it.next();
-            if (current.getClient().getId() == client.getId()){
+            if (current.getClient().getId() == client.getId() && current.getYear_month().getMonthValue() == Integer.parseInt(yearMonth.split("/")[0]) && current.getYear_month().getYear() == Integer.parseInt(yearMonth.split("/")[1])){
                 res.add(current);
             }
         }

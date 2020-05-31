@@ -39,7 +39,7 @@ public class Bill {
 	}
 
 	public static Bill fromResults(ResultSet rs) throws SQLException {
-		return new Bill(rs.getInt("rechnungsnummmer"), null, LocalDate.parse(rs.getString("ausstellungsdatum")), rs.getString("verwendungszweck"));
+		return new Bill(rs.getInt("rechnungsnummer"), null, LocalDate.parse(rs.getString("ausstellungsdatum")), rs.getString("verwendungszweck"));
 
 	}
 

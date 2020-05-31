@@ -4,7 +4,6 @@
 import app.SceneLoader;
 import data.BillDAO;
 import data.EventDAO;
-import data.PersonDAO;
 import db.DBManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -23,14 +21,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
-import javafx.util.converter.LocalDateStringConverter;
 import model.Bill;
 import model.Client;
 
 import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
    public class BillsPerClientList_Controller extends SceneLoader {
 
@@ -181,7 +176,7 @@ import java.util.ResourceBundle;
         @FXML
         void btnGenerateBill_Clicked(ActionEvent event) {
              Bill generatedBill = new Bill(0, client, LocalDate.now(), "Monatsrechnung " + lbYearMonth.getText() + " für " + client.getFirstName() + " " + client.getLastName());            //TODO NOT sure if date of today or yearMonth
-             generatedBill.setEventProtocols(FXCollections.observableArrayList(EventDAO.getInstance().getEventProtocolsByClient(client)));
+             generatedBill.setEventProtocols(FXCollections.observableArrayList(EventDAO.getInstance().getEventProtocolsByClientMonth(client, lbYearMonth.getText())));
              BillDAO.getInstance().addBill(generatedBill);
         }
 

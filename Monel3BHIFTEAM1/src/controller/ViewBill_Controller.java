@@ -13,8 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import model.Bill;
 import model.Client;
+import model.Event;
+import model.EventProtocol;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 public class ViewBill_Controller extends SceneLoader {
 
@@ -62,7 +65,25 @@ public class ViewBill_Controller extends SceneLoader {
     public void setBill(Bill bill) {
         this.bill = bill;
         afterSet();
-        System.out.println("Rechnung: "+bill.getNr());
+        System.out.println("Rechnung: " + bill.getNr());
+        lbClient.setText(bill.getClient().getFirstName() + " " + bill.getClient().getLastName());
+        lbClientOnBill.setText(bill.getClient().getFirstName() + " " + bill.getClient().getLastName());
+        if (bill.getEventProtocols().size() != 0) {
+            lbMonth.setText(bill.getEventProtocols().iterator().next().getYear_month().getMonthValue() + "/" + bill.getEventProtocols().iterator().next().getYear_month().getYear());
+        }
+        lbMonthOnBill.setText(lbMonth.getText());
+        Iterator<EventProtocol> it = bill.getEventProtocols().iterator();
+        double wholeRideCosts = 0;
+        while (it.hasNext()){
+            EventProtocol current = it.next();
+            if (current.getEvent().getIsGroup()){
+                lbGroupEvents.setText(lbGroupEvents.getText() + current.getEvent().getName() + " " + current.getEmployee().getFirstName() + " " + current.getEmployee().getLastName() + " " + current.getRideCosts() + " €\n");
+            } else {
+                lbSingleEvents.setText(lbSingleEvents.getText() + current.getEvent().getName() + " " + current.getEmployee().getFirstName() + " " + current.getEmployee().getLastName() + " " + current.getRideCosts() + " €\n");
+            }
+            wholeRideCosts += current.getRideCosts();
+        }
+        lbRideCosts.setText(wholeRideCosts + " €");
     }
 
     public void afterSet () {
