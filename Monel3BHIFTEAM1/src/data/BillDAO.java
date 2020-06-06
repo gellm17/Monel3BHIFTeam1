@@ -8,6 +8,7 @@ import model.Bill;
 import model.Event;
 import model.EventProtocol;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -33,9 +34,7 @@ public class BillDAO {
     public boolean addBill(Bill b) {
         if (b.getNr() == 0) {
             try {
-                DBManager.open();
                 b.setNr(DBManager.insertBill(b));
-                DBManager.close();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -43,6 +42,10 @@ public class BillDAO {
         return bills.add(b);
     }
 
+    public boolean deleteBill(Bill b) throws SQLException {
+        DBManager.deleteBill(b);
+        return bills.remove(b);
+    }
 
     public void setBills(ObservableList<Bill> bills) {
         this.bills = bills;

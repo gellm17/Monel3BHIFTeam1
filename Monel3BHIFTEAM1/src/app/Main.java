@@ -8,10 +8,13 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        DBManager.open();
         FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/ClientList.fxml"));
         primaryStage.setMaximized(true);
         primaryStage.setTitle("Monel Pro");
@@ -24,7 +27,10 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-
+    @Override
+    public void stop() {
+        DBManager.close();
+    }
     public static void main(String[] args) {
         launch(args);
     }

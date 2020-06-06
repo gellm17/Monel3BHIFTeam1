@@ -36,7 +36,6 @@ public class PersonDAO {
         if(p instanceof Client) {
             Client c = (Client)p;
             try {
-                DBManager.open();
                 if (c.getEsv() != null) {
                     if (c.getEsv().getId() == 0) {
                         c.getEsv().setId(DBManager.insertPerson(c.getEsv()));
@@ -53,7 +52,6 @@ public class PersonDAO {
                 if (p.getId() == 0) {
                     c.setId(DBManager.insertClient(c));
                 }
-                DBManager.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -62,9 +60,7 @@ public class PersonDAO {
             Employee emp = (Employee) p;
             if (emp.getId() == 0) {
                 try {
-                    DBManager.open();
                     emp.setId(DBManager.insertEmployee(emp));
-                    DBManager.close();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -74,7 +70,6 @@ public class PersonDAO {
             Sponsor sp = (Sponsor) p;
             if (sp.getId() == 0) {
                 try {
-                    DBManager.open();
                     sp.setId(DBManager.insertSponsor(sp));
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -85,8 +80,9 @@ public class PersonDAO {
         return success;
     }
 
-    public boolean deletePerson(Person p) {
+    public boolean deletePerson(Person p) throws SQLException {
         boolean success = false;
+        DBManager.deletePerson(p);
         if(p instanceof Client) {
             Client c = (Client)p;
             success = clients.remove(c);

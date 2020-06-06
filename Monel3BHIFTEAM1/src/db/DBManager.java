@@ -61,633 +61,549 @@ public class DBManager {
     private static Connection conn = null;
 
     // inserts a Person into the DB
-    public static int insertPerson(Person p) {
+    public static int insertPerson(Person p) throws SQLException {
         int newId = -1;
-        try {
-            stmtInsertPerson.setString(1, "SONSTIGES");
-            stmtInsertPerson.setString(2, p.getSalutation().toString());
-            if (p.getTitle() != null) {
-                stmtInsertPerson.setString(3, p.getTitle());
-            } else {
-                stmtInsertPerson.setNull(3, Types.NULL);
-            }
-            stmtInsertPerson.setString(4, p.getFirstName());
-            stmtInsertPerson.setString(5, p.getLastName());
-            stmtInsertPerson.setString(6, p.getStreetAndNr());
-            stmtInsertPerson.setInt(7, p.getZipCode());
-            stmtInsertPerson.setString(8, p.getPlace());
-            stmtInsertPerson.setString(9, p.getTelNr());
-            if (p.getEmail() != null) {
-                stmtInsertPerson.setString(10, p.getEmail());
-            } else {
-                stmtInsertPerson.setNull(10, Types.NULL);
-            }
-            if (p.getBirthDate() != null) {
-                stmtInsertPerson.setDate(11, Date.valueOf(p.getBirthDate()));
-            } else {
-                stmtInsertPerson.setNull(11, Types.NULL);
-            }
-            boolean added = (stmtInsertPerson.executeUpdate() == 1);
-            ResultSet rs = stmtInsertPerson.getGeneratedKeys();
-            if(rs != null && rs.next()) {
-                newId = rs.getInt(1);
-            }
-            stmtInsertPerson.clearParameters();
-            if (!added) {
-                newId = -1;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        stmtInsertPerson.setString(1, "SONSTIGES");
+        stmtInsertPerson.setString(2, p.getSalutation().toString());
+        if (p.getTitle() != null) {
+            stmtInsertPerson.setString(3, p.getTitle());
+        } else {
+            stmtInsertPerson.setNull(3, Types.NULL);
+        }
+        stmtInsertPerson.setString(4, p.getFirstName());
+        stmtInsertPerson.setString(5, p.getLastName());
+        stmtInsertPerson.setString(6, p.getStreetAndNr());
+        stmtInsertPerson.setInt(7, p.getZipCode());
+        stmtInsertPerson.setString(8, p.getPlace());
+        stmtInsertPerson.setString(9, p.getTelNr());
+        if (p.getEmail() != null) {
+            stmtInsertPerson.setString(10, p.getEmail());
+        } else {
+            stmtInsertPerson.setNull(10, Types.NULL);
+        }
+        if (p.getBirthDate() != null) {
+            stmtInsertPerson.setDate(11, Date.valueOf(p.getBirthDate()));
+        } else {
+            stmtInsertPerson.setNull(11, Types.NULL);
+        }
+        boolean added = (stmtInsertPerson.executeUpdate() == 1);
+        ResultSet rs = stmtInsertPerson.getGeneratedKeys();
+        if(rs != null && rs.next()) {
+            newId = rs.getInt(1);
+        }
+        stmtInsertPerson.clearParameters();
+        if (!added) {
+            newId = -1;
         }
         return newId;
     } //TODO check non mandatory fields
 
     // inserts a Klient into the DB
-    public static int insertClient(Client c) {
+    public static int insertClient(Client c) throws SQLException {
         int newId = -1;
-        try {
-            stmtInsertClient.setString(1, "KLIENT");
-            stmtInsertClient.setString(2, c.getSalutation().toString());
-            if (c.getTitle() != null) {
-                stmtInsertClient.setString(3, c.getTitle());
-            } else {
-                stmtInsertClient.setNull(3, Types.NULL);
-            }
-            stmtInsertClient.setString(4, c.getFirstName());
-            stmtInsertClient.setString(5, c.getLastName());
-            stmtInsertClient.setString(6, c.getStreetAndNr());
-            stmtInsertClient.setInt(7, c.getZipCode());
-            stmtInsertClient.setString(8, c.getPlace());
-            stmtInsertClient.setString(9, c.getTelNr());
-            if(c.getEmail() != null) {
-                stmtInsertClient.setString(10, c.getEmail());
-            } else {
-                stmtInsertClient.setNull(10, Types.NULL);
-            }
-            if (c.getBirthDate() != null) {
-                stmtInsertClient.setDate(11, Date.valueOf(c.getBirthDate()));
-            } else {
-                stmtInsertClient.setNull(11, Types.NULL);
-            }
-            if (c.getEsv() != null) {
-                stmtInsertClient.setInt(12, c.getEsv().getId());
-            } else {
-                stmtInsertClient.setNull(12, Types.NULL);
-            }
-            stmtInsertClient.setInt(13, c.getEmergencyContact1().getId());
-            if (c.getEmergencyContact2() != null) {
-                stmtInsertClient.setInt(14, c.getEmergencyContact2().getId());
-            } else {
-                stmtInsertClient.setNull(14, Types.NULL);
-            }
-            stmtInsertClient.setLong(15, c.getSsnr());
-            stmtInsertClient.setString(16, c.getDiagnose());
-            if (c.getAllergies() != null) {
-                stmtInsertClient.setString(17, c.getAllergies());
-            } else {
-                stmtInsertClient.setNull( 17, Types.NULL);
-            }
-            if (c.getOther() != null) {
-                stmtInsertClient.setString(18, c.getOther());
-            } else {
-                stmtInsertClient.setNull(18, Types.NULL);
-            }
-            if (c.getJob() != null) {
-                stmtInsertClient.setString(19, c.getJob());
-            } else {
-                stmtInsertClient.setNull(19, Types.NULL);
-            }
-            boolean added = (stmtInsertClient.executeUpdate() == 1);
-            ResultSet rs = stmtInsertClient.getGeneratedKeys();
-            if(rs != null && rs.next()) {
-                newId = rs.getInt(1);
-            }
-            stmtInsertClient.clearParameters();
-            if (!added) {
-                newId = -1;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        stmtInsertClient.setString(1, "KLIENT");
+        stmtInsertClient.setString(2, c.getSalutation().toString());
+        if (c.getTitle() != null) {
+            stmtInsertClient.setString(3, c.getTitle());
+        } else {
+            stmtInsertClient.setNull(3, Types.NULL);
+        }
+        stmtInsertClient.setString(4, c.getFirstName());
+        stmtInsertClient.setString(5, c.getLastName());
+        stmtInsertClient.setString(6, c.getStreetAndNr());
+        stmtInsertClient.setInt(7, c.getZipCode());
+        stmtInsertClient.setString(8, c.getPlace());
+        stmtInsertClient.setString(9, c.getTelNr());
+        if(c.getEmail() != null) {
+            stmtInsertClient.setString(10, c.getEmail());
+        } else {
+            stmtInsertClient.setNull(10, Types.NULL);
+        }
+        if (c.getBirthDate() != null) {
+            stmtInsertClient.setDate(11, Date.valueOf(c.getBirthDate()));
+        } else {
+            stmtInsertClient.setNull(11, Types.NULL);
+        }
+        if (c.getEsv() != null) {
+            stmtInsertClient.setInt(12, c.getEsv().getId());
+        } else {
+            stmtInsertClient.setNull(12, Types.NULL);
+        }
+        stmtInsertClient.setInt(13, c.getEmergencyContact1().getId());
+        if (c.getEmergencyContact2() != null) {
+            stmtInsertClient.setInt(14, c.getEmergencyContact2().getId());
+        } else {
+            stmtInsertClient.setNull(14, Types.NULL);
+        }
+        stmtInsertClient.setLong(15, c.getSsnr());
+        stmtInsertClient.setString(16, c.getDiagnose());
+        if (c.getAllergies() != null) {
+            stmtInsertClient.setString(17, c.getAllergies());
+        } else {
+            stmtInsertClient.setNull( 17, Types.NULL);
+        }
+        if (c.getOther() != null) {
+            stmtInsertClient.setString(18, c.getOther());
+        } else {
+            stmtInsertClient.setNull(18, Types.NULL);
+        }
+        if (c.getJob() != null) {
+            stmtInsertClient.setString(19, c.getJob());
+        } else {
+            stmtInsertClient.setNull(19, Types.NULL);
+        }
+        boolean added = (stmtInsertClient.executeUpdate() == 1);
+        ResultSet rs = stmtInsertClient.getGeneratedKeys();
+        if(rs != null && rs.next()) {
+            newId = rs.getInt(1);
+        }
+        stmtInsertClient.clearParameters();
+        if (!added) {
+            newId = -1;
         }
         return newId;
     } //TODO check non mandatory fields
 
     // inserts an Employee into the DB
-    public static int insertEmployee(Employee e) {
+    public static int insertEmployee(Employee e) throws SQLException {
         int newId = -1;
-        try {
-            stmtInsertEmployee.setString(1, "MITARBEITER");
-            stmtInsertEmployee.setString(2, e.getSalutation().toString());
-            if (e.getTitle() != null) {
-                stmtInsertEmployee.setString(3, e.getTitle());
-            } else {
-                stmtInsertEmployee.setNull(3, Types.NULL);
-            }
-            stmtInsertEmployee.setString(4, e.getFirstName());
-            stmtInsertEmployee.setString(5, e.getLastName());
-            stmtInsertEmployee.setString(6, e.getStreetAndNr());
-            stmtInsertEmployee.setInt(7, e.getZipCode());
-            stmtInsertEmployee.setString(8, e.getPlace());
-            stmtInsertEmployee.setString(9, e.getTelNr());
-            if (e.getEmail() != null) {
-                stmtInsertEmployee.setString(10, e.getEmail());
-            } else {
-                stmtInsertEmployee.setString(10, e.getEmail());
-            }
-            if (e.getBirthDate() != null) {
-                stmtInsertEmployee.setDate(11, Date.valueOf(e.getBirthDate()));
-            } else {
-                stmtInsertEmployee.setNull(11, Types.NULL);
-            }
-            stmtInsertEmployee.setLong(12, e.getSsnr());
-            stmtInsertEmployee.setInt(13, (e.isVolunteering() ? 1 : 0));
-            stmtInsertEmployee.setString(14, e.getOccupationGroup().toString());
-            stmtInsertEmployee.setString(15, e.getSalaryLevel().toString());
-            if (e.getHoursPerWeek() != 0) {
-                stmtInsertEmployee.setInt(16, e.getHoursPerWeek());
-            } else {
-                stmtInsertEmployee.setNull(16, Types.NULL);
-            }
-            stmtInsertEmployee.setString(17, e.getIban());
-            stmtInsertEmployee.setString(18, e.getBic());
-            if (e.getDateSalaryLevel() != null) {
-                stmtInsertEmployee.setDate(19, Date.valueOf(e.getDateSalaryLevel()));
-            } else {
-                stmtInsertEmployee.setNull(19, Types.NULL);
-            }
-            if (e.getDateOfEmployment() != null) {
-                stmtInsertEmployee.setDate(20, Date.valueOf(e.getDateOfEmployment()));
-            } else {
-                stmtInsertEmployee.setNull(20, Types.NULL);
-            }
-            boolean added = (stmtInsertEmployee.executeUpdate() == 1);
-            ResultSet rs = stmtInsertEmployee.getGeneratedKeys();
-            if(rs != null && rs.next()) {
-                newId = rs.getInt(1);
-            }
-            stmtInsertEmployee.clearParameters();
-            if (!added) {
-                newId = -1;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        stmtInsertEmployee.setString(1, "MITARBEITER");
+        stmtInsertEmployee.setString(2, e.getSalutation().toString());
+        if (e.getTitle() != null) {
+            stmtInsertEmployee.setString(3, e.getTitle());
+        } else {
+            stmtInsertEmployee.setNull(3, Types.NULL);
+        }
+        stmtInsertEmployee.setString(4, e.getFirstName());
+        stmtInsertEmployee.setString(5, e.getLastName());
+        stmtInsertEmployee.setString(6, e.getStreetAndNr());
+        stmtInsertEmployee.setInt(7, e.getZipCode());
+        stmtInsertEmployee.setString(8, e.getPlace());
+        stmtInsertEmployee.setString(9, e.getTelNr());
+        if (e.getEmail() != null) {
+            stmtInsertEmployee.setString(10, e.getEmail());
+        } else {
+            stmtInsertEmployee.setString(10, e.getEmail());
+        }
+        if (e.getBirthDate() != null) {
+            stmtInsertEmployee.setDate(11, Date.valueOf(e.getBirthDate()));
+        } else {
+            stmtInsertEmployee.setNull(11, Types.NULL);
+        }
+        stmtInsertEmployee.setLong(12, e.getSsnr());
+        stmtInsertEmployee.setInt(13, (e.isVolunteering() ? 1 : 0));
+        stmtInsertEmployee.setString(14, e.getOccupationGroup().toString());
+        stmtInsertEmployee.setString(15, e.getSalaryLevel().toString());
+        if (e.getHoursPerWeek() != 0) {
+            stmtInsertEmployee.setInt(16, e.getHoursPerWeek());
+        } else {
+            stmtInsertEmployee.setNull(16, Types.NULL);
+        }
+        stmtInsertEmployee.setString(17, e.getIban());
+        stmtInsertEmployee.setString(18, e.getBic());
+        if (e.getDateSalaryLevel() != null) {
+            stmtInsertEmployee.setDate(19, Date.valueOf(e.getDateSalaryLevel()));
+        } else {
+            stmtInsertEmployee.setNull(19, Types.NULL);
+        }
+        if (e.getDateOfEmployment() != null) {
+            stmtInsertEmployee.setDate(20, Date.valueOf(e.getDateOfEmployment()));
+        } else {
+            stmtInsertEmployee.setNull(20, Types.NULL);
+        }
+        boolean added = (stmtInsertEmployee.executeUpdate() == 1);
+        ResultSet rs = stmtInsertEmployee.getGeneratedKeys();
+        if(rs != null && rs.next()) {
+            newId = rs.getInt(1);
+        }
+        stmtInsertEmployee.clearParameters();
+        if (!added) {
+            newId = -1;
         }
         return newId;
     } //TODO check non mandatory fields
 
     // inserts a Sponsor into the DB
-    public static int insertSponsor(Sponsor s) {
+    public static int insertSponsor(Sponsor s) throws SQLException {
         int newId = -1;
-        try {
-            stmtInsertSponsor.setString(1, "SPONSOR");
-            stmtInsertSponsor.setString(2, s.getSalutation().toString());
-            stmtInsertSponsor.setString(3, s.getTitle());
-            stmtInsertSponsor.setString(4, s.getFirstName());
-            stmtInsertSponsor.setString(5, s.getLastName());
-            stmtInsertSponsor.setString(6, s.getStreetAndNr());
-            stmtInsertSponsor.setInt(7, s.getZipCode());
-            stmtInsertSponsor.setString(8, s.getPlace());
-            stmtInsertSponsor.setString(9, s.getTelNr());
-            stmtInsertSponsor.setString(10, s.getEmail());
-            stmtInsertSponsor.setDate(11, Date.valueOf(s.getBirthDate()));
-            stmtInsertSponsor.setString(12, s.getCompanyName());
-            stmtInsertSponsor.setString(13, s.getCompanyTelNr());
-            stmtInsertSponsor.setString(14, s.getCompanyEmail());
-            boolean added = (stmtInsertSponsor.executeUpdate() == 1);
-            ResultSet rs = stmtInsertSponsor.getGeneratedKeys();
-            if(rs != null && rs.next()) {
-                newId = rs.getInt(1);
-            }
-            stmtInsertSponsor.clearParameters();
-            if (!added) {
-                newId = -1;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        stmtInsertSponsor.setString(1, "SPONSOR");
+        stmtInsertSponsor.setString(2, s.getSalutation().toString());
+        stmtInsertSponsor.setString(3, s.getTitle());
+        stmtInsertSponsor.setString(4, s.getFirstName());
+        stmtInsertSponsor.setString(5, s.getLastName());
+        stmtInsertSponsor.setString(6, s.getStreetAndNr());
+        stmtInsertSponsor.setInt(7, s.getZipCode());
+        stmtInsertSponsor.setString(8, s.getPlace());
+        stmtInsertSponsor.setString(9, s.getTelNr());
+        stmtInsertSponsor.setString(10, s.getEmail());
+        stmtInsertSponsor.setDate(11, Date.valueOf(s.getBirthDate()));
+        stmtInsertSponsor.setString(12, s.getCompanyName());
+        stmtInsertSponsor.setString(13, s.getCompanyTelNr());
+        stmtInsertSponsor.setString(14, s.getCompanyEmail());
+        boolean added = (stmtInsertSponsor.executeUpdate() == 1);
+        ResultSet rs = stmtInsertSponsor.getGeneratedKeys();
+        if(rs != null && rs.next()) {
+            newId = rs.getInt(1);
+        }
+        stmtInsertSponsor.clearParameters();
+        if (!added) {
+            newId = -1;
         }
         return newId;
     } //TODO check non mandatory fields
 
     // inserts an Event into the DB
-    public static int insertEvent(Event e) {
+    public static int insertEvent(Event e) throws SQLException {
         int newId = -1;
-        try {
-            stmtInsertEvent.setDate(1, Date.valueOf(e.getDate()));
-            stmtInsertEvent.setString(2, e.getName());
-            stmtInsertEvent.setInt(3, (e.getIsGroup() ? 1 : 0));
-            boolean added = (stmtInsertEvent.executeUpdate() == 1);
-            ResultSet rs = stmtInsertEvent.getGeneratedKeys();
-            if(rs != null && rs.next()) {
-                newId = rs.getInt(1);
-            }
-            stmtInsertEvent.clearParameters();
-            if (!added) {
-                newId = -1;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        stmtInsertEvent.setDate(1, Date.valueOf(e.getDate()));
+        stmtInsertEvent.setString(2, e.getName());
+        stmtInsertEvent.setInt(3, (e.getIsGroup() ? 1 : 0));
+        boolean added = (stmtInsertEvent.executeUpdate() == 1);
+        ResultSet rs = stmtInsertEvent.getGeneratedKeys();
+        if(rs != null && rs.next()) {
+            newId = rs.getInt(1);
+        }
+        stmtInsertEvent.clearParameters();
+        if (!added) {
+            newId = -1;
         }
         return newId;
     } //TODO check non mandatory fields
 
     // inserts an Eventprotocol into the DB
-    public static int insertEventprotocol(EventProtocol ep) {
+    public static int insertEventprotocol(EventProtocol ep) throws SQLException {
         int newId = -1;
-        try {
-            if (ep.getEvent() != null) {
-                stmtInsertEventprotocol.setInt(1, ep.getEvent().getId());
-            } else {
-                stmtInsertEventprotocol.setNull(1, Types.NULL);
-            }
-            if (ep.getEmployee() != null) {
-                stmtInsertEventprotocol.setInt(2, ep.getEmployee().getId());
-            } else {
-                stmtInsertEventprotocol.setNull(2, Types.NULL);
-            }
-            if (ep.getClient() != null) {
-                stmtInsertEventprotocol.setInt(3, ep.getClient().getId());
-            } else {
-                stmtInsertEventprotocol.setNull(3, Types.NULL);
-            }
-            if (ep.getBill() != null) {
-                stmtInsertEventprotocol.setInt(4, ep.getBill().getNr());
-            } else {
-                stmtInsertEventprotocol.setNull(4, Types.NULL);
-            }
-            stmtInsertEventprotocol.setTime(5, Time.valueOf(ep.getStartTime()));
-            stmtInsertEventprotocol.setTime(6, Time.valueOf(ep.getEndTime()));
-            stmtInsertEventprotocol.setDate(7, Date.valueOf(ep.getYear_month()));
-            stmtInsertEventprotocol.setDouble(8, ep.getHourlyRate()); // must be changed to decimal
-            stmtInsertEventprotocol.setDouble(9, ep.getRideCosts()); // must be changed to decimal
-            boolean added = (stmtInsertEventprotocol.executeUpdate() == 1);
-            ResultSet rs = stmtInsertEventprotocol.getGeneratedKeys();
-            if(rs != null && rs.next()) {
-                newId = rs.getInt(1);
-            }
-            stmtInsertEventprotocol.clearParameters();
-            if (!added) {
-                newId = -1;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (ep.getEvent() != null) {
+            stmtInsertEventprotocol.setInt(1, ep.getEvent().getId());
+        } else {
+            stmtInsertEventprotocol.setNull(1, Types.NULL);
+        }
+        if (ep.getEmployee() != null) {
+            stmtInsertEventprotocol.setInt(2, ep.getEmployee().getId());
+        } else {
+            stmtInsertEventprotocol.setNull(2, Types.NULL);
+        }
+        if (ep.getClient() != null) {
+            stmtInsertEventprotocol.setInt(3, ep.getClient().getId());
+        } else {
+            stmtInsertEventprotocol.setNull(3, Types.NULL);
+        }
+        if (ep.getBill() != null) {
+            stmtInsertEventprotocol.setInt(4, ep.getBill().getNr());
+        } else {
+            stmtInsertEventprotocol.setNull(4, Types.NULL);
+        }
+        stmtInsertEventprotocol.setTime(5, Time.valueOf(ep.getStartTime()));
+        stmtInsertEventprotocol.setTime(6, Time.valueOf(ep.getEndTime()));
+        stmtInsertEventprotocol.setDate(7, Date.valueOf(ep.getYear_month()));
+        stmtInsertEventprotocol.setDouble(8, ep.getHourlyRate()); // must be changed to decimal
+        stmtInsertEventprotocol.setDouble(9, ep.getRideCosts()); // must be changed to decimal
+        boolean added = (stmtInsertEventprotocol.executeUpdate() == 1);
+        ResultSet rs = stmtInsertEventprotocol.getGeneratedKeys();
+        if(rs != null && rs.next()) {
+            newId = rs.getInt(1);
+        }
+        stmtInsertEventprotocol.clearParameters();
+        if (!added) {
+            newId = -1;
         }
         return newId;
     } //TODO check non mandatory fields
 
     // inserts a Bill into the DB
-    public static int insertBill(Bill b) {
+    public static int insertBill(Bill b) throws SQLException {
         int newId = -1;
-        try {
-            stmtInsertBill.setInt(1, b.getClient().getId());
-            stmtInsertBill.setDate(2, Date.valueOf(b.getDateOfIssue()));
-            stmtInsertBill.setString(3, b.getUse());
-            boolean added = (stmtInsertBill.executeUpdate() == 1);
-            ResultSet rs = stmtInsertBill.getGeneratedKeys();
-            if(rs != null && rs.next()) {
-                newId = rs.getInt(1);
-            }
-            stmtInsertBill.clearParameters();
-            if (!added) {
-                newId = -1;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        stmtInsertBill.setInt(1, b.getClient().getId());
+        stmtInsertBill.setDate(2, Date.valueOf(b.getDateOfIssue()));
+        stmtInsertBill.setString(3, b.getUse());
+        boolean added = (stmtInsertBill.executeUpdate() == 1);
+        ResultSet rs = stmtInsertBill.getGeneratedKeys();
+        if(rs != null && rs.next()) {
+            newId = rs.getInt(1);
+        }
+        stmtInsertBill.clearParameters();
+        if (!added) {
+            newId = -1;
         }
         return newId;
     } //TODO check non mandatory fields
 
     // inserts a Document into the DB
-    public static int insertDocument(Document d) {
+    public static int insertDocument(Document d) throws SQLException {
         int newId = -1;
-        try {
-            if (d.getOwnerPerson() != null) {
-                stmtInsertDocument.setInt(1, d.getOwnerPerson().getId());
-                stmtInsertDocument.setNull(2, Types.NULL);
-            } else {
-                stmtInsertDocument.setNull(1, Types.NULL);
-                stmtInsertDocument.setInt(2, d.getOwnerEvent().getId());
-            }
-            stmtInsertDocument.setString(3, d.getPath());
-            stmtInsertDocument.setString(4, d.getDocumentType());
-            stmtInsertDocument.setString(5, d.getOwner().toString());
-            boolean added = (stmtInsertDocument.executeUpdate() == 1);
-            ResultSet rs = stmtInsertDocument.getGeneratedKeys();
-            if(rs != null && rs.next()) {
-                newId = rs.getInt(1);
-            }
-            stmtInsertDocument.clearParameters();
-            if (!added) {
-                newId = -1;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (d.getOwnerPerson() != null) {
+            stmtInsertDocument.setInt(1, d.getOwnerPerson().getId());
+            stmtInsertDocument.setNull(2, Types.NULL);
+        } else {
+            stmtInsertDocument.setNull(1, Types.NULL);
+            stmtInsertDocument.setInt(2, d.getOwnerEvent().getId());
+        }
+        stmtInsertDocument.setString(3, d.getPath());
+        stmtInsertDocument.setString(4, d.getDocumentType());
+        stmtInsertDocument.setString(5, d.getOwner().toString());
+        boolean added = (stmtInsertDocument.executeUpdate() == 1);
+        ResultSet rs = stmtInsertDocument.getGeneratedKeys();
+        if(rs != null && rs.next()) {
+            newId = rs.getInt(1);
+        }
+        stmtInsertDocument.clearParameters();
+        if (!added) {
+            newId = -1;
         }
         return newId;
     } //TODO check non mandatory fields
 
     // updates the Data of the Person with the same id in the DB with the Data of this Person
-    public static void updatePerson(Person p) {
-        try {
-            stmtUpdatePerson.setString(1, p.getSalutation().toString());
-            if (p.getTitle() != null) {
-                stmtUpdatePerson.setString(2, p.getTitle());
-            } else {
-                stmtUpdatePerson.setNull(2, Types.NULL);
-            }
-            stmtUpdatePerson.setString(3, p.getFirstName());
-            stmtUpdatePerson.setString(4, p.getLastName());
-            stmtUpdatePerson.setString(5, p.getStreetAndNr());
-            stmtUpdatePerson.setInt(6, p.getZipCode());
-            stmtUpdatePerson.setString(7, p.getPlace());
-            stmtUpdatePerson.setString(8, p.getTelNr());
-            if (p.getEmail() != null) {
-                stmtUpdatePerson.setString(9, p.getEmail());
-            } else {
-                stmtUpdatePerson.setNull(9, Types.NULL);
-            }
-            if (p.getBirthDate() != null) {
-                stmtUpdatePerson.setDate(10, Date.valueOf(p.getBirthDate()));
-            } else {
-                stmtUpdatePerson.setNull(10, Types.NULL);
-            }
-            stmtUpdatePerson.setInt(11, p.getId());
-            stmtUpdatePerson.executeUpdate();
-            stmtUpdatePerson.clearParameters();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public static void updatePerson(Person p) throws SQLException {
+        stmtUpdatePerson.setString(1, p.getSalutation().toString());
+        if (p.getTitle() != null) {
+            stmtUpdatePerson.setString(2, p.getTitle());
+        } else {
+            stmtUpdatePerson.setNull(2, Types.NULL);
         }
+        stmtUpdatePerson.setString(3, p.getFirstName());
+        stmtUpdatePerson.setString(4, p.getLastName());
+        stmtUpdatePerson.setString(5, p.getStreetAndNr());
+        stmtUpdatePerson.setInt(6, p.getZipCode());
+        stmtUpdatePerson.setString(7, p.getPlace());
+        stmtUpdatePerson.setString(8, p.getTelNr());
+        if (p.getEmail() != null) {
+            stmtUpdatePerson.setString(9, p.getEmail());
+        } else {
+            stmtUpdatePerson.setNull(9, Types.NULL);
+        }
+        if (p.getBirthDate() != null) {
+            stmtUpdatePerson.setDate(10, Date.valueOf(p.getBirthDate()));
+        } else {
+            stmtUpdatePerson.setNull(10, Types.NULL);
+        }
+        stmtUpdatePerson.setInt(11, p.getId());
+        stmtUpdatePerson.executeUpdate();
+        stmtUpdatePerson.clearParameters();
     } //TODO check non mandatory fields
 
     // updates the Data of the Client with the same id in the DB with the Data of this Client
-    public static void updateClient(Client c) {
-        try {
-            stmtUpdateClient.setString(1, c.getSalutation().toString());
-            if (c.getTitle() != null) {
-                stmtUpdateClient.setString(2, c.getTitle());
-            } else {
-                stmtUpdateClient.setNull(2, Types.NULL);
-            }
-            stmtUpdateClient.setString(3, c.getFirstName());
-            stmtUpdateClient.setString(4, c.getLastName());
-            stmtUpdateClient.setString(5, c.getStreetAndNr());
-            stmtUpdateClient.setInt(6, c.getZipCode());
-            stmtUpdateClient.setString(7, c.getPlace());
-            stmtUpdateClient.setString(8, c.getTelNr());
-            if(c.getEmail() != null) {
-                stmtUpdateClient.setString(9, c.getEmail());
-            } else {
-                stmtUpdateClient.setNull(9, Types.NULL);
-            }
-            if (c.getBirthDate() != null) {
-                stmtUpdateClient.setDate(10, Date.valueOf(c.getBirthDate()));
-            } else {
-                stmtUpdateClient.setNull(10, Types.NULL);
-            }
-            if (c.getEsv() != null) {
-                stmtUpdateClient.setInt(11, c.getEsv().getId());
-            } else {
-                stmtUpdateClient.setNull(11, Types.NULL);
-            }
-            if (c.getEmergencyContact2() != null) {
-                stmtUpdateClient.setInt(12, c.getEmergencyContact2().getId());
-            } else {
-                stmtUpdateClient.setNull(12, Types.NULL);
-            }
-            stmtUpdateClient.setLong(13, c.getSsnr());
-            stmtUpdateClient.setString(14, c.getDiagnose());
-            if (c.getAllergies() != null) {
-                stmtUpdateClient.setString(15, c.getAllergies());
-            } else {
-                stmtUpdateClient.setNull( 15, Types.NULL);
-            }
-            if (c.getOther() != null) {
-                stmtUpdateClient.setString(16, c.getOther());
-            } else {
-                stmtUpdateClient.setNull(16, Types.NULL);
-            }
-            if (c.getJob() != null) {
-                stmtUpdateClient.setString(17, c.getJob());
-            } else {
-                stmtUpdateClient.setNull(17, Types.NULL);
-            }
-            stmtUpdateClient.setInt(18, c.getId());
-            stmtUpdateClient.executeUpdate();
-            stmtUpdateClient.clearParameters();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public static void updateClient(Client c) throws SQLException {
+        stmtUpdateClient.setString(1, c.getSalutation().toString());
+        if (c.getTitle() != null) {
+            stmtUpdateClient.setString(2, c.getTitle());
+        } else {
+            stmtUpdateClient.setNull(2, Types.NULL);
         }
+        stmtUpdateClient.setString(3, c.getFirstName());
+        stmtUpdateClient.setString(4, c.getLastName());
+        stmtUpdateClient.setString(5, c.getStreetAndNr());
+        stmtUpdateClient.setInt(6, c.getZipCode());
+        stmtUpdateClient.setString(7, c.getPlace());
+        stmtUpdateClient.setString(8, c.getTelNr());
+        if(c.getEmail() != null) {
+            stmtUpdateClient.setString(9, c.getEmail());
+        } else {
+            stmtUpdateClient.setNull(9, Types.NULL);
+        }
+        if (c.getBirthDate() != null) {
+            stmtUpdateClient.setDate(10, Date.valueOf(c.getBirthDate()));
+        } else {
+            stmtUpdateClient.setNull(10, Types.NULL);
+        }
+        if (c.getEsv() != null) {
+            stmtUpdateClient.setInt(11, c.getEsv().getId());
+        } else {
+            stmtUpdateClient.setNull(11, Types.NULL);
+        }
+        if (c.getEmergencyContact2() != null) {
+            stmtUpdateClient.setInt(12, c.getEmergencyContact2().getId());
+        } else {
+            stmtUpdateClient.setNull(12, Types.NULL);
+        }
+        stmtUpdateClient.setLong(13, c.getSsnr());
+        stmtUpdateClient.setString(14, c.getDiagnose());
+        if (c.getAllergies() != null) {
+            stmtUpdateClient.setString(15, c.getAllergies());
+        } else {
+            stmtUpdateClient.setNull( 15, Types.NULL);
+        }
+        if (c.getOther() != null) {
+            stmtUpdateClient.setString(16, c.getOther());
+        } else {
+            stmtUpdateClient.setNull(16, Types.NULL);
+        }
+        if (c.getJob() != null) {
+            stmtUpdateClient.setString(17, c.getJob());
+        } else {
+            stmtUpdateClient.setNull(17, Types.NULL);
+        }
+        stmtUpdateClient.setInt(18, c.getId());
+        stmtUpdateClient.executeUpdate();
+        stmtUpdateClient.clearParameters();
     } //TODO check non mandatory fields
 
     // updates the Data of the Employee with the same id in the DB with the Data of this Employee
-    public static void updateEmployee(Employee e) {
-        try {
-            stmtUpdateEmployee.setString(1, e.getSalutation().toString());
-            if (e.getTitle() != null) {
-                stmtUpdateEmployee.setString(2, e.getTitle());
-            } else {
-                stmtUpdateEmployee.setNull(2, Types.NULL);
-            }
-            stmtUpdateEmployee.setString(3, e.getFirstName());
-            stmtUpdateEmployee.setString(4, e.getLastName());
-            stmtUpdateEmployee.setString(5, e.getStreetAndNr());
-            stmtUpdateEmployee.setInt(6, e.getZipCode());
-            stmtUpdateEmployee.setString(7, e.getPlace());
-            stmtUpdateEmployee.setString(8, e.getTelNr());
-            if (e.getEmail() != null) {
-                stmtUpdateEmployee.setString(9, e.getEmail());
-            } else {
-                stmtUpdateEmployee.setString(9, e.getEmail());
-            }
-            if (e.getBirthDate() != null) {
-                stmtUpdateEmployee.setDate(10, Date.valueOf(e.getBirthDate()));
-            } else {
-                stmtUpdateEmployee.setNull(10, Types.NULL);
-            }
-            stmtUpdateEmployee.setLong(11, e.getSsnr());
-            stmtUpdateEmployee.setInt(12, (e.isVolunteering() ? 1 : 0));
-            stmtUpdateEmployee.setString(13, e.getOccupationGroup().toString());
-            stmtUpdateEmployee.setString(14, e.getSalaryLevel().toString());
-            if (e.getHoursPerWeek() != 0) {
-                stmtUpdateEmployee.setInt(15, e.getHoursPerWeek());
-            } else {
-                stmtUpdateEmployee.setNull(15, Types.NULL);
-            }
-            stmtUpdateEmployee.setString(16, e.getIban());
-            stmtUpdateEmployee.setString(17, e.getBic());
-            if (e.getDateSalaryLevel() != null) {
-                stmtUpdateEmployee.setDate(18, Date.valueOf(e.getDateSalaryLevel()));
-            } else {
-                stmtUpdateEmployee.setNull(18, Types.NULL);
-            }
-            if (e.getDateOfEmployment() != null) {
-                stmtUpdateEmployee.setDate(19, Date.valueOf(e.getDateOfEmployment()));
-            } else {
-                stmtUpdateEmployee.setNull(19, Types.NULL);
-            }
-            stmtUpdateEmployee.setInt(20, e.getId());
-            stmtUpdateEmployee.executeUpdate();
-            stmtUpdateEmployee.clearParameters();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+    public static void updateEmployee(Employee e) throws SQLException {
+        stmtUpdateEmployee.setString(1, e.getSalutation().toString());
+        if (e.getTitle() != null) {
+            stmtUpdateEmployee.setString(2, e.getTitle());
+        } else {
+            stmtUpdateEmployee.setNull(2, Types.NULL);
         }
+        stmtUpdateEmployee.setString(3, e.getFirstName());
+        stmtUpdateEmployee.setString(4, e.getLastName());
+        stmtUpdateEmployee.setString(5, e.getStreetAndNr());
+        stmtUpdateEmployee.setInt(6, e.getZipCode());
+        stmtUpdateEmployee.setString(7, e.getPlace());
+        stmtUpdateEmployee.setString(8, e.getTelNr());
+        if (e.getEmail() != null) {
+            stmtUpdateEmployee.setString(9, e.getEmail());
+        } else {
+            stmtUpdateEmployee.setString(9, e.getEmail());
+        }
+        if (e.getBirthDate() != null) {
+            stmtUpdateEmployee.setDate(10, Date.valueOf(e.getBirthDate()));
+        } else {
+            stmtUpdateEmployee.setNull(10, Types.NULL);
+        }
+        stmtUpdateEmployee.setLong(11, e.getSsnr());
+        stmtUpdateEmployee.setInt(12, (e.isVolunteering() ? 1 : 0));
+        stmtUpdateEmployee.setString(13, e.getOccupationGroup().toString());
+        stmtUpdateEmployee.setString(14, e.getSalaryLevel().toString());
+        if (e.getHoursPerWeek() != 0) {
+            stmtUpdateEmployee.setInt(15, e.getHoursPerWeek());
+        } else {
+            stmtUpdateEmployee.setNull(15, Types.NULL);
+        }
+        stmtUpdateEmployee.setString(16, e.getIban());
+        stmtUpdateEmployee.setString(17, e.getBic());
+        if (e.getDateSalaryLevel() != null) {
+            stmtUpdateEmployee.setDate(18, Date.valueOf(e.getDateSalaryLevel()));
+        } else {
+            stmtUpdateEmployee.setNull(18, Types.NULL);
+        }
+        if (e.getDateOfEmployment() != null) {
+            stmtUpdateEmployee.setDate(19, Date.valueOf(e.getDateOfEmployment()));
+        } else {
+            stmtUpdateEmployee.setNull(19, Types.NULL);
+        }
+        stmtUpdateEmployee.setInt(20, e.getId());
+        stmtUpdateEmployee.executeUpdate();
+        stmtUpdateEmployee.clearParameters();
     } //TODO check non mandatory fields
 
     // updates the Data of the Sponsor with the same id in the DB with the Data of this Sponsor
-    public static void updateSponsor(Sponsor s) {
-        try {
-            stmtUpdateSponsor.setString(1, s.getSalutation().toString());
-            stmtUpdateSponsor.setString(2, s.getTitle());
-            stmtUpdateSponsor.setString(3, s.getFirstName());
-            stmtUpdateSponsor.setString(4, s.getLastName());
-            stmtUpdateSponsor.setString(5, s.getStreetAndNr());
-            stmtUpdateSponsor.setInt(6, s.getZipCode());
-            stmtUpdateSponsor.setString(7, s.getPlace());
-            stmtUpdateSponsor.setString(8, s.getTelNr());
-            stmtUpdateSponsor.setString(9, s.getEmail());
-            stmtUpdateSponsor.setDate(10, Date.valueOf(s.getBirthDate()));
-            stmtUpdateSponsor.setString(11, s.getCompanyName());
-            stmtUpdateSponsor.setString(12, s.getCompanyTelNr());
-            stmtUpdateSponsor.setString(13, s.getCompanyEmail());
-            stmtUpdateSponsor.setInt(14, s.getId());
-            stmtUpdateSponsor.executeUpdate();
-            stmtUpdateSponsor.clearParameters();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public static void updateSponsor(Sponsor s) throws SQLException {
+        stmtUpdateSponsor.setString(1, s.getSalutation().toString());
+        stmtUpdateSponsor.setString(2, s.getTitle());
+        stmtUpdateSponsor.setString(3, s.getFirstName());
+        stmtUpdateSponsor.setString(4, s.getLastName());
+        stmtUpdateSponsor.setString(5, s.getStreetAndNr());
+        stmtUpdateSponsor.setInt(6, s.getZipCode());
+        stmtUpdateSponsor.setString(7, s.getPlace());
+        stmtUpdateSponsor.setString(8, s.getTelNr());
+        stmtUpdateSponsor.setString(9, s.getEmail());
+        stmtUpdateSponsor.setDate(10, Date.valueOf(s.getBirthDate()));
+        stmtUpdateSponsor.setString(11, s.getCompanyName());
+        stmtUpdateSponsor.setString(12, s.getCompanyTelNr());
+        stmtUpdateSponsor.setString(13, s.getCompanyEmail());
+        stmtUpdateSponsor.setInt(14, s.getId());
+        stmtUpdateSponsor.executeUpdate();
+        stmtUpdateSponsor.clearParameters();
     } //TODO check non mandatory fields
 
     // updates the Data of the Event with the same id in the DB with the Data of this Event
-    public static void updateEvent(Event e) {
-        try {
-            stmtUpdateEvent.setDate(1, Date.valueOf(e.getDate()));
-            stmtUpdateEvent.setString(2, e.getName());
-            stmtUpdateEvent.setInt(3, e.getId());
-            stmtUpdateEvent.executeUpdate();
-            stmtUpdateEvent.clearParameters();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+    public static void updateEvent(Event e) throws SQLException {
+        stmtUpdateEvent.setDate(1, Date.valueOf(e.getDate()));
+        stmtUpdateEvent.setString(2, e.getName());
+        stmtUpdateEvent.setInt(3, e.getId());
+        stmtUpdateEvent.executeUpdate();
+        stmtUpdateEvent.clearParameters();
     } //TODO check non mandatory fields
 
     // updates the Data of the Eventprotocol with the same id in the DB with the Data of this Eventprotocol
-    public static void updateEventprotocol(EventProtocol ep) {
-        try {
-            if (ep.getEmployee() != null) {
-                stmtUpdateEventprotocol.setInt(1, ep.getEmployee().getId());
-            } else {
-                stmtUpdateEventprotocol.setNull(1, Types.NULL);
-            }
-            if (ep.getClient() != null) {
-                stmtUpdateEventprotocol.setInt(2, ep.getClient().getId());
-            } else {
-                stmtUpdateEventprotocol.setNull(2, Types.NULL);
-            }
-            if (ep.getBill() != null) {
-                stmtUpdateEventprotocol.setInt(3, ep.getBill().getNr());
-            } else {
-                stmtUpdateEventprotocol.setNull(3, Types.NULL);
-            }
-            stmtUpdateEventprotocol.setTime(4, Time.valueOf(ep.getStartTime()));
-            stmtUpdateEventprotocol.setTime(5, Time.valueOf(ep.getEndTime()));
-            stmtUpdateEventprotocol.setDate(6, Date.valueOf(ep.getYear_month()));
-            stmtUpdateEventprotocol.setDouble(7, ep.getHourlyRate()); // must be changed to decimal
-            stmtUpdateEventprotocol.setDouble(8, ep.getRideCosts()); // must be changed to decimal
-            stmtUpdateEventprotocol.setInt(9, ep.getId());
-            stmtUpdateEventprotocol.executeUpdate();
-            stmtUpdateEventprotocol.clearParameters();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public static void updateEventprotocol(EventProtocol ep) throws SQLException {
+        if (ep.getEmployee() != null) {
+            stmtUpdateEventprotocol.setInt(1, ep.getEmployee().getId());
+        } else {
+            stmtUpdateEventprotocol.setNull(1, Types.NULL);
         }
+        if (ep.getClient() != null) {
+            stmtUpdateEventprotocol.setInt(2, ep.getClient().getId());
+        } else {
+            stmtUpdateEventprotocol.setNull(2, Types.NULL);
+        }
+        if (ep.getBill() != null) {
+            stmtUpdateEventprotocol.setInt(3, ep.getBill().getNr());
+        } else {
+            stmtUpdateEventprotocol.setNull(3, Types.NULL);
+        }
+        stmtUpdateEventprotocol.setTime(4, Time.valueOf(ep.getStartTime()));
+        stmtUpdateEventprotocol.setTime(5, Time.valueOf(ep.getEndTime()));
+        stmtUpdateEventprotocol.setDate(6, Date.valueOf(ep.getYear_month()));
+        stmtUpdateEventprotocol.setDouble(7, ep.getHourlyRate()); // must be changed to decimal
+        stmtUpdateEventprotocol.setDouble(8, ep.getRideCosts()); // must be changed to decimal
+        stmtUpdateEventprotocol.setInt(9, ep.getId());
+        stmtUpdateEventprotocol.executeUpdate();
+        stmtUpdateEventprotocol.clearParameters();
     } //TODO check non mandatory fields
 
     // updates the Data of the Bill with the same id in the DB with the Data of this Bill
-    public static void updateBill(Bill b) {
-        try {
-            stmtUpdateBill.setDate(1, Date.valueOf(b.getDateOfIssue()));
-            stmtUpdateBill.setString(2, b.getUse());
-            stmtUpdateBill.setInt(3, b.getNr());
-            stmtUpdateBill.executeUpdate();
-            stmtUpdateBill.clearParameters();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public static void updateBill(Bill b) throws SQLException {
+        stmtUpdateBill.setDate(1, Date.valueOf(b.getDateOfIssue()));
+        stmtUpdateBill.setString(2, b.getUse());
+        stmtUpdateBill.setInt(3, b.getNr());
+        stmtUpdateBill.executeUpdate();
+        stmtUpdateBill.clearParameters();
     } //TODO check non mandatory fields
 
     // updates the Data of the Document with the same id in the DB with the Data of this Document
-    public static void updateDocument(Document d) {
-        try {
-            if (d.getOwnerPerson() != null) {
-                stmtUpdateDocument.setInt(1, d.getOwnerPerson().getId());
-                stmtUpdateDocument.setNull(2, Types.NULL);
-            } else {
-                stmtUpdateDocument.setNull(1, Types.NULL);
-                stmtUpdateDocument.setInt(2, d.getOwnerEvent().getId());
-            }
-            stmtUpdateDocument.setString(3, d.getPath());
-            stmtUpdateDocument.setString(4, d.getDocumentType());
-            stmtUpdateDocument.setString(5, d.getOwner().toString());
-            stmtUpdateDocument.setInt(6, d.getID());
-            stmtUpdateDocument.executeUpdate();
-            stmtUpdateDocument.clearParameters();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    public static void updateDocument(Document d) throws SQLException {
+        if (d.getOwnerPerson() != null) {
+            stmtUpdateDocument.setInt(1, d.getOwnerPerson().getId());
+            stmtUpdateDocument.setNull(2, Types.NULL);
+        } else {
+            stmtUpdateDocument.setNull(1, Types.NULL);
+            stmtUpdateDocument.setInt(2, d.getOwnerEvent().getId());
         }
+        stmtUpdateDocument.setString(3, d.getPath());
+        stmtUpdateDocument.setString(4, d.getDocumentType());
+        stmtUpdateDocument.setString(5, d.getOwner().toString());
+        stmtUpdateDocument.setInt(6, d.getID());
+        stmtUpdateDocument.executeUpdate();
+        stmtUpdateDocument.clearParameters();
     } //TODO check non mandatory fields
 
     // updates the cell geloescht for the given Person (also Client, Employee and Sponsor) to 1 (with 1 it will be ignored bi the get methods)
-    public static void deletePerson(Person p) {
-        try {
+    public static void deletePerson(Person p) throws SQLException {
             stmtDeletePerson.setInt(1, 1);
             stmtDeletePerson.setInt(2, p.getId());
             stmtDeletePerson.executeUpdate();
             stmtDeletePerson.clearParameters();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     // deletes the Event with the same id in the DB
-    public static void deleteEvent(Event e) {
-        try {
-            stmtDeleteEvent.setInt(1, e.getId());
-            stmtDeleteEvent.executeUpdate();
-            stmtDeleteEvent.clearParameters();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+    public static void deleteEvent(Event e) throws SQLException {
+        stmtDeleteEvent.setInt(1, e.getId());
+        stmtDeleteEvent.executeUpdate();
+        stmtDeleteEvent.clearParameters();
     }
 
     // deletes the Eventprotocol with the same id in the DB
-    public static void deleteEventprotocol(EventProtocol ep) {
-        try {
-            stmtDeleteEventprotocol.setInt(1, ep.getId());
-            stmtDeleteEventprotocol.executeUpdate();
-            stmtDeleteEventprotocol.clearParameters();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public static void deleteEventprotocol(EventProtocol ep) throws SQLException {
+        stmtDeleteEventprotocol.setInt(1, ep.getId());
+        stmtDeleteEventprotocol.executeUpdate();
+        stmtDeleteEventprotocol.clearParameters();
     }
 
     // deletes the Bill with the same id in the DB
-    public static void deleteBill(Bill b) {
-        try {
-            stmtDeleteBill.setInt(1, b.getNr());
-            stmtDeleteBill.executeUpdate();
-            stmtDeleteBill.clearParameters();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public static void deleteBill(Bill b) throws SQLException {
+        stmtDeleteBill.setInt(1, b.getNr());
+        stmtDeleteBill.executeUpdate();
+        stmtDeleteBill.clearParameters();
     }
 
     // deletes the Document with the same id in the DB
-    public static void deleteDocument(Document d) {
-        try {
-            stmtDeleteDocument.setInt(1, d.getID());
-            stmtDeleteDocument.executeUpdate();
-            stmtDeleteDocument.clearParameters();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public static void deleteDocument(Document d) throws SQLException {
+        stmtDeleteDocument.setInt(1, d.getID());
+        stmtDeleteDocument.executeUpdate();
+        stmtDeleteDocument.clearParameters();
     }
 
     // creates a bill for the given Person in the given month and inserts it into the DB (it only uses Evenprotocols with no bill)
@@ -948,98 +864,102 @@ public class DBManager {
     }
 
     // closes the DB Connection and the PreparedStatements
-    public static void close() throws NullPointerException, SQLException {
-        if (stmtInsertPerson != null) {
-            stmtInsertPerson.close();
-            stmtInsertPerson = null;
-        }
-        if (stmtInsertClient != null) {
-            stmtInsertClient.close();
-            stmtInsertClient = null;
-        }
-        if (stmtInsertEmployee != null) {
-            stmtInsertEmployee.close();
-            stmtInsertEmployee = null;
-        }
-        if (stmtInsertSponsor != null) {
-            stmtInsertSponsor.close();
-            stmtInsertSponsor = null;
-        }
-        if (stmtInsertEvent != null) {
-            stmtInsertEvent.close();
-            stmtInsertEvent = null;
-        }
-        if (stmtInsertEventprotocol != null) {
-            stmtInsertEventprotocol.close();
-            stmtInsertEventprotocol = null;
-        }
-        if (stmtInsertBill != null) {
-            stmtInsertBill.close();
-            stmtInsertBill = null;
-        }
-        if (stmtInsertDocument != null) {
-            stmtInsertDocument.close();
-            stmtInsertDocument = null;
-        }
-        if (stmtUpdatePerson != null) {
-            stmtUpdatePerson.close();
-            stmtUpdatePerson = null;
-        }
-        if (stmtUpdateClient != null) {
-            stmtUpdateClient.close();
-            stmtUpdateClient = null;
-        }
-        if (stmtUpdateEmployee != null) {
-            stmtUpdateEmployee.close();
-            stmtUpdateEmployee = null;
-        }
-        if (stmtUpdateSponsor != null) {
-            stmtUpdateSponsor.close();
-            stmtUpdateSponsor = null;
-        }
-        if (stmtUpdateEvent != null) {
-            stmtUpdateEvent.close();
-            stmtUpdateEvent = null;
-        }
-        if (stmtUpdateEventprotocol != null) {
-            stmtUpdateEventprotocol.close();
-            stmtUpdateEventprotocol = null;
-        }
-        if (stmtUpdateBill != null) {
-            stmtUpdateBill.close();
-            stmtUpdateBill = null;
-        }
-        if (stmtUpdateDocument != null) {
-            stmtUpdateDocument.close();
-            stmtUpdateDocument = null;
-        }
-        if (stmtDeletePerson != null) {
-            stmtDeletePerson.close();
-            stmtDeletePerson = null;
-        }
-        if (stmtDeleteEvent != null) {
-            stmtDeleteEvent.close();
-            stmtDeleteEvent = null;
-        }
-        if (stmtDeleteEventprotocol != null) {
-            stmtDeleteEventprotocol.close();
-            stmtDeleteEventprotocol = null;
-        }
-        if (stmtDeleteBill != null) {
-            stmtDeleteBill.close();
-            stmtDeleteBill = null;
-        }
-        if (stmtDeleteDocument != null) {
-            stmtDeleteDocument.close();
-            stmtDeleteDocument = null;
-        }
-        if (stmtSelectEventprotocol != null) {
-            stmtSelectEventprotocol.close();
-            stmtSelectEventprotocol = null;
-        }
-        if (conn != null) {
-            ConnectionFactory.getInstance().close();
-            conn.close();
+    public static void close() throws NullPointerException {
+        try {
+            if (stmtInsertPerson != null) {
+                stmtInsertPerson.close();
+                stmtInsertPerson = null;
+            }
+            if (stmtInsertClient != null) {
+                stmtInsertClient.close();
+                stmtInsertClient = null;
+            }
+            if (stmtInsertEmployee != null) {
+                stmtInsertEmployee.close();
+                stmtInsertEmployee = null;
+            }
+            if (stmtInsertSponsor != null) {
+                stmtInsertSponsor.close();
+                stmtInsertSponsor = null;
+            }
+            if (stmtInsertEvent != null) {
+                stmtInsertEvent.close();
+                stmtInsertEvent = null;
+            }
+            if (stmtInsertEventprotocol != null) {
+                stmtInsertEventprotocol.close();
+                stmtInsertEventprotocol = null;
+            }
+            if (stmtInsertBill != null) {
+                stmtInsertBill.close();
+                stmtInsertBill = null;
+            }
+            if (stmtInsertDocument != null) {
+                stmtInsertDocument.close();
+                stmtInsertDocument = null;
+            }
+            if (stmtUpdatePerson != null) {
+                stmtUpdatePerson.close();
+                stmtUpdatePerson = null;
+            }
+            if (stmtUpdateClient != null) {
+                stmtUpdateClient.close();
+                stmtUpdateClient = null;
+            }
+            if (stmtUpdateEmployee != null) {
+                stmtUpdateEmployee.close();
+                stmtUpdateEmployee = null;
+            }
+            if (stmtUpdateSponsor != null) {
+                stmtUpdateSponsor.close();
+                stmtUpdateSponsor = null;
+            }
+            if (stmtUpdateEvent != null) {
+                stmtUpdateEvent.close();
+                stmtUpdateEvent = null;
+            }
+            if (stmtUpdateEventprotocol != null) {
+                stmtUpdateEventprotocol.close();
+                stmtUpdateEventprotocol = null;
+            }
+            if (stmtUpdateBill != null) {
+                stmtUpdateBill.close();
+                stmtUpdateBill = null;
+            }
+            if (stmtUpdateDocument != null) {
+                stmtUpdateDocument.close();
+                stmtUpdateDocument = null;
+            }
+            if (stmtDeletePerson != null) {
+                stmtDeletePerson.close();
+                stmtDeletePerson = null;
+            }
+            if (stmtDeleteEvent != null) {
+                stmtDeleteEvent.close();
+                stmtDeleteEvent = null;
+            }
+            if (stmtDeleteEventprotocol != null) {
+                stmtDeleteEventprotocol.close();
+                stmtDeleteEventprotocol = null;
+            }
+            if (stmtDeleteBill != null) {
+                stmtDeleteBill.close();
+                stmtDeleteBill = null;
+            }
+            if (stmtDeleteDocument != null) {
+                stmtDeleteDocument.close();
+                stmtDeleteDocument = null;
+            }
+            if (stmtSelectEventprotocol != null) {
+                stmtSelectEventprotocol.close();
+                stmtSelectEventprotocol = null;
+            }
+            if (conn != null) {
+                ConnectionFactory.getInstance().close();
+                conn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

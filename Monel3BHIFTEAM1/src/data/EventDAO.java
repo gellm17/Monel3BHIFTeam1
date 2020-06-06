@@ -37,9 +37,7 @@ public class EventDAO {
     public boolean addEvent(Event e) {
         if (e.getId() == 0) {
             try {
-                DBManager.open();
                 e.setId(DBManager.insertEvent(e));
-                DBManager.close();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -49,9 +47,7 @@ public class EventDAO {
     public boolean addEventProtcol(EventProtocol ep) {
         if (ep.getId() == 0) {
             try {
-                DBManager.open();
                 ep.setId(DBManager.insertEventprotocol(ep));
-                DBManager.open();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -59,10 +55,12 @@ public class EventDAO {
         return eventProtocols.add(ep);
     }
 
-    public boolean deleteEvent(Event e) {
+    public boolean deleteEvent(Event e) throws SQLException {
+        DBManager.deleteEvent(e);
         return events.remove(e);
     }
-    public boolean deleteEventProtcol(EventProtocol ep) {
+    public boolean deleteEventProtcol(EventProtocol ep) throws SQLException {
+        DBManager.deleteEventprotocol(ep);
         return eventProtocols.remove(ep);
     }
 
