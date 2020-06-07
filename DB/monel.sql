@@ -131,25 +131,25 @@ CREATE TABLE `person` (
 --
 
 INSERT INTO `person` (`id`, `esv`, `notfallkontakt1`, `notfallkontakt2`, `personentyp`, `anrede`, `titel`, `vorname`, `nachname`, `strasse_hausnummer`, `plz`, `ort`, `telefonnummer`, `email`, `geburtsdatum`, `svnr`, `diagnose`, `allergien`, `sonstiges`, `beschaeftigung`, `amt`, `verwendungsgruppe`, `gehaltsstufe`, `wochenstunden`, `iban`, `bic`, `vorrueckdatum`, `einstelldatum`, `firmenname`, `firmentelefonnummer`, `firmenemail`, `geloescht`) VALUES
-(1, NULL, NULL, NULL, 'SONSTIGES', 'Sonstige', 'Mag.', 'esvTest', 'esvTest', 'Südtiroler Straße 1', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, NULL, NULL, NULL, 'SONSTIGES', 'Herr', 'Mag.', 'notfallTest', 'notfall1Test', 'Südtiroler Straße 2', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 1, 2, NULL, 'KLIENT', 'Herr', 'Mag.', 'klient1Test', 'klient1Test', 'Südtiroler Straße 3', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, 'Alter', 'Nussalergie', 'test', 'in Rente', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, NULL, NULL, NULL, 'MITARBEITER', 'Frau', 'Mag.', 'mitarbeiterTest', 'mitarbeiterTest', 'Südtiroler Straße 4', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, NULL, NULL, NULL, NULL, 1, 'VG1', 'GS8', 40, 'AT123456789012345678', 'ABCDEFGH', '2020-06-10', '2016-01-01', NULL, NULL, NULL, NULL),
-(5, NULL, NULL, NULL, 'SPONSOR', 'Frau', 'Mag.', 'FirmaTest', 'FirmaTest', 'Südtiroler Straße 5', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'TEST GmbH.', '01234567890', 'test@test.at', NULL),
-(6, NULL, NULL, NULL, 'SONSTIGES', 'Sonstige', 'Mag.', 'notfall2Test', 'notfall2Test', 'Südtiroler Straße 6', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(7, NULL, 2, 6, 'KLIENT', 'Herr', 'Mag.', 'klient2Test', 'klient2Test', 'Südtiroler Straße 7', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, 'Alter', 'Heuschnupfen', 'test', 'in Rente', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+	(1, NULL, NULL, NULL, 'SONSTIGES', 'Sonstige', 'Mag.', 'esvTest', 'esvTest', 'Südtiroler Straße 1', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(2, NULL, NULL, NULL, 'SONSTIGES', 'Herr', 'Mag.', 'notfallTest', 'notfall1Test', 'Südtiroler Straße 2', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(3, 1, 2, NULL, 'KLIENT', 'Herr', 'Mag.', 'klient1Test', 'klient1Test', 'Südtiroler Straße 3', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, 'Alter', 'Nussalergie', 'test', 'in Rente', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(4, NULL, NULL, NULL, 'MITARBEITER', 'Frau', 'Mag.', 'mitarbeiterTest', 'mitarbeiterTest', 'Südtiroler Straße 4', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, NULL, NULL, NULL, NULL, 1, 'VG1', 'GS8', 40, 'AT123456789012345678', 'ABCDEFGH', '2020-06-10', '2016-01-01', NULL, NULL, NULL, NULL),
+	(5, NULL, NULL, NULL, 'SPONSOR', 'Frau', 'Mag.', 'FirmaTest', 'FirmaTest', 'Südtiroler Straße 5', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'TEST GmbH.', '01234567890', 'test@test.at', NULL),
+	(6, NULL, NULL, NULL, 'SONSTIGES', 'Sonstige', 'Mag.', 'notfall2Test', 'notfall2Test', 'Südtiroler Straße 6', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(7, NULL, 2, 6, 'KLIENT', 'Herr', 'Mag.', 'klient2Test', 'klient2Test', 'Südtiroler Straße 7', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, 'Alter', 'Heuschnupfen', 'test', 'in Rente', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+/*!40000 ALTER TABLE `person` ENABLE KEYS */;
 
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `rechnung`
---
-
-CREATE TABLE `rechnung` (
-  `rechnungsnummer` int(11) NOT NULL,
+-- Exportiere Struktur von Tabelle monel.rechnung
+DROP TABLE IF EXISTS `rechnung`;
+CREATE TABLE IF NOT EXISTS `rechnung` (
+  `rechnungsnummer` int(11) NOT NULL AUTO_INCREMENT,
   `klient` int(11) NOT NULL,
   `ausstellungsdatum` date DEFAULT NULL,
-  `verwendungszweck` varchar(50) DEFAULT NULL
+  `verwendungszweck` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`rechnungsnummer`),
+  KEY `FKklient_rechnung` (`klient`),
+  CONSTRAINT `FKklient_rechnung` FOREIGN KEY (`klient`) REFERENCES `person` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
