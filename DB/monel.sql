@@ -76,11 +76,11 @@ INSERT INTO `person` (`id`, `esv`, `notfallkontakt1`, `notfallkontakt2`, `person
 -- Exportiere Struktur von Tabelle monel.rechnung
 DROP TABLE IF EXISTS `rechnung`;
 CREATE TABLE IF NOT EXISTS `rechnung` (
-  `rechnungsnummmer` int(11) NOT NULL AUTO_INCREMENT,
+  `rechnungsnummer` int(11) NOT NULL AUTO_INCREMENT,
   `klient` int(11) NOT NULL,
   `ausstellungsdatum` date DEFAULT NULL,
   `verwendungszweck` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`rechnungsnummmer`),
+  PRIMARY KEY (`rechnungsnummer`),
   KEY `FKklient_rechnung` (`klient`),
   CONSTRAINT `FKklient_rechnung` FOREIGN KEY (`klient`) REFERENCES `person` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
