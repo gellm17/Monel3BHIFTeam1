@@ -12,7 +12,7 @@ public class EventProtocol {
     private IntegerProperty id;
     private ObjectProperty<LocalTime> startTime;
     private ObjectProperty<LocalTime> endTime;
-    private ObjectProperty<LocalDate> year_month;
+    private StringProperty year_month;
     private DoubleProperty hourlyRate;
     private ObjectProperty<Employee> employee;
     private ObjectProperty<Client> client;
@@ -20,11 +20,11 @@ public class EventProtocol {
     private ObjectProperty<Bill> bill;
     private DoubleProperty rideCosts;
 
-    public EventProtocol(Integer id, LocalTime startTime, LocalTime endTime, LocalDate year_month, Double hourlyRate, Employee employee, Client client, Event event, Bill bill, Double rideCosts) {
+    public EventProtocol(Integer id, LocalTime startTime, LocalTime endTime, String year_month, Double hourlyRate, Employee employee, Client client, Event event, Bill bill, Double rideCosts) {
         this.id = new SimpleIntegerProperty(this, "id", 0);
         this.startTime = new SimpleObjectProperty<LocalTime>(this, "startTime", startTime);
         this.endTime = new SimpleObjectProperty<LocalTime>(this, "endTIme", endTime);
-        this.year_month = new SimpleObjectProperty<LocalDate>(this, "year_month", year_month);
+        this.year_month = new SimpleStringProperty(this, "year_month", year_month);
         this.hourlyRate = new SimpleDoubleProperty(this, "hourlyRate", hourlyRate);
         this.employee = new SimpleObjectProperty<Employee>(this, "employee", employee);
         this.client = new SimpleObjectProperty<Client>(this, "client", client);
@@ -33,11 +33,11 @@ public class EventProtocol {
         this.rideCosts = new SimpleDoubleProperty(this, "rideCosts", rideCosts);
     }
 
-    public EventProtocol(Integer id, LocalTime startTime, LocalTime endTime, LocalDate year_month, Double hourlyRate, Employee employee, Client client, Event event, Double rideCosts) {
+    public EventProtocol(Integer id, LocalTime startTime, LocalTime endTime, String year_month, Double hourlyRate, Employee employee, Client client, Event event, Double rideCosts) {
         this.id = new SimpleIntegerProperty(this, "id", 0);
         this.startTime = new SimpleObjectProperty<LocalTime>(this, "startTime", startTime);
         this.endTime = new SimpleObjectProperty<LocalTime>(this, "endTIme", endTime);
-        this.year_month = new SimpleObjectProperty<LocalDate>(this, "year_month", year_month);
+        this.year_month = new SimpleStringProperty(this, "year_month", year_month);
         this.hourlyRate = new SimpleDoubleProperty(this, "hourlyRate", hourlyRate);
         this.employee = new SimpleObjectProperty<Employee>(this, "employee", employee);
         this.client = new SimpleObjectProperty<Client>(this, "client", client);
@@ -49,7 +49,7 @@ public class EventProtocol {
         this.id = new SimpleIntegerProperty(this, "id");
         this.startTime = new SimpleObjectProperty<LocalTime>(this, "startTime");
         this.endTime = new SimpleObjectProperty<LocalTime>(this, "endTIme");
-        this.year_month = new SimpleObjectProperty<LocalDate>(this, "year_month");
+        this.year_month = new SimpleStringProperty(this, "year_month");
         this.hourlyRate = new SimpleDoubleProperty(this, "hourlyRate");
         this.employee = new SimpleObjectProperty<Employee>(this, "employee");
         this.client = new SimpleObjectProperty<Client>(this, "client");
@@ -59,7 +59,7 @@ public class EventProtocol {
     }
 
     public static EventProtocol fromResults(ResultSet rs) throws SQLException { //mandatory startTime, endTime and year_month
-        return new EventProtocol(rs.getInt("id"), LocalTime.parse(rs.getString("startzeit")), LocalTime.parse(rs.getString("endzeit")), LocalDate.parse(rs.getString("jahr_Monat")), rs.getDouble("stundensatz"), null, null, null, null, rs.getDouble("fahrtkosten"));
+        return new EventProtocol(rs.getInt("id"), LocalTime.parse(rs.getString("startzeit")), LocalTime.parse(rs.getString("endzeit")), rs.getString("jahr_Monat"), rs.getDouble("stundensatz"), null, null, null, null, rs.getDouble("fahrtkosten"));
     }
 
     public int getId() {
@@ -96,15 +96,15 @@ public class EventProtocol {
         this.endTime.set(endTime);
     }
 
-    public LocalDate getYear_month() {
+    public String getYear_month() {
         return year_month.get();
     }
 
-    public ObjectProperty<LocalDate> year_monthProperty() {
+    public StringProperty year_monthProperty() {
         return year_month;
     }
 
-    public void setYear_month(LocalDate year_month) {
+    public void setYear_month(String year_month) {
         this.year_month.set(year_month);
     }
 

@@ -210,7 +210,7 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
     }
 
     @FXML
-    void btnDeleteClient_Clicked(ActionEvent event) {
+    void btnDeleteClient_Clicked(ActionEvent event) throws SQLException {
         PersonDAO.getInstance().deletePerson((Person)selectedItem);
     }
 

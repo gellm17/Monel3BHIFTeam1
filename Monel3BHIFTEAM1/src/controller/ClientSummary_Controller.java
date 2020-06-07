@@ -19,6 +19,7 @@ import model.Salutation;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ClientSummary_Controller extends SceneLoader implements Initializable {
@@ -166,7 +167,7 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
 
 
     @FXML
-    void btnDeleteClient_Clicked(ActionEvent event) {
+    void btnDeleteClient_Clicked(ActionEvent event) throws SQLException {
         PersonDAO.getInstance().deletePerson((Person)editableClient);
     }
 

@@ -24,6 +24,7 @@ import org.mariadb.jdbc.internal.protocol.Protocol;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -182,7 +183,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
     }
 
     @FXML
-    void btnAddProtocol_Clicked(ActionEvent event) {
+    void btnAddProtocol_Clicked(ActionEvent event) throws SQLException {
         wantToAddAPerson = true;
         btnOkEvent_Clicked(event);
     }
@@ -193,7 +194,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
     }
 
     @FXML
-    void btnDeleteProtocol_Clicked(ActionEvent event) {
+    void btnDeleteProtocol_Clicked(ActionEvent event) throws SQLException {
         EventDAO.getInstance().deleteEventProtcol(selectedItem);
         tableProtocols.setItems(EventDAO.getInstance().getEventProtocolsByEvent(editableEvent));
         //tableProtocols.getItems().setAll(EventDAO.getInstance().getEventProtocolByEvent(editableEvent));
@@ -235,7 +236,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
     }
 
     @FXML
-    void btnOkEvent_Clicked(ActionEvent event) {
+    void btnOkEvent_Clicked(ActionEvent event) throws SQLException {
         errorCounter = 0;
         Event thisEvent = new Event();
         try {

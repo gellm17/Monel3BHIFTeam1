@@ -24,6 +24,7 @@ import model.EventProtocol;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -112,7 +113,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
     }
 
     @FXML
-    void btnOkEvent_Clicked(ActionEvent event) {
+    void btnOkEvent_Clicked(ActionEvent event) throws SQLException {
         EventProtocol eventProtocolToAdd = new EventProtocol();
         errorCounter = 0;
 
@@ -140,7 +141,12 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
             eventProtocolToAdd.setRideCosts(Double.parseDouble(tfRideCostsEvent.getText()));
         }
 
-        eventProtocolToAdd.setYear_month(assignedEvent.getDate());
+        if (assignedEvent.getDate().getMonthValue() < 10) {
+            eventProtocolToAdd.setYear_month(assignedEvent.getDate().getYear() + "-0" + assignedEvent.getDate().getMonthValue());
+        } else {
+            eventProtocolToAdd.setYear_month(assignedEvent.getDate().getYear() + "-" + assignedEvent.getDate().getMonthValue());
+        }
+
         eventProtocolToAdd.setEvent(assignedEvent);
 
         if (editableEventProtocol != null){

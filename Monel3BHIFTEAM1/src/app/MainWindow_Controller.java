@@ -19,6 +19,7 @@ import model.Person;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 
@@ -282,7 +283,7 @@ public class MainWindow_Controller extends SceneLoader implements Initializable 
     }
 
     @FXML
-    void btnDeleteClient_Clicked(ActionEvent event) {
+    void btnDeleteClient_Clicked(ActionEvent event) throws SQLException {
         PersonDAO.getInstance().deletePerson((Person)selectedItem);
     }
 

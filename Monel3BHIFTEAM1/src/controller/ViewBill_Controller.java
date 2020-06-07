@@ -69,7 +69,7 @@ public class ViewBill_Controller extends SceneLoader {
         lbClient.setText(bill.getClient().getFirstName() + " " + bill.getClient().getLastName());
         lbClientOnBill.setText(bill.getClient().getFirstName() + " " + bill.getClient().getLastName());
         if (bill.getEventProtocols().size() != 0) {
-            lbMonth.setText(bill.getEventProtocols().iterator().next().getYear_month().getMonthValue() + "/" + bill.getEventProtocols().iterator().next().getYear_month().getYear());
+            lbMonth.setText(bill.getEventProtocols().iterator().next().getYear_month());
         }
         lbMonthOnBill.setText(lbMonth.getText());
         Iterator<EventProtocol> it = bill.getEventProtocols().iterator();

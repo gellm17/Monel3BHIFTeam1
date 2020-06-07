@@ -11,6 +11,7 @@ import javafx.util.converter.LocalDateStringConverter;
 import model.*;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -225,7 +226,7 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
     }
 
     @FXML
-    void btnOkEmployee_Clicked(ActionEvent event) {
+    void btnOkEmployee_Clicked(ActionEvent event) throws SQLException {
         Employee employeeToAdd = new Employee();
         basicErrorCounter = 0;
         addressErrorCounter = 0;

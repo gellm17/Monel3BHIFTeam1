@@ -20,6 +20,7 @@ import org.w3c.dom.Text;
 
 import javax.swing.event.ChangeEvent;
 import java.net.URL;
+import java.sql.SQLException;
 import java.sql.SQLInvalidAuthorizationSpecException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -364,7 +365,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     }
 
     @FXML
-    void btnOkClient_Clicked(ActionEvent event) {
+    void btnOkClient_Clicked(ActionEvent event) throws SQLException {
         Client clientToAdd = new Client();
         basicErrorCounter = 0;
         addressErrorCounter = 0;

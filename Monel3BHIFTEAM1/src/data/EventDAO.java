@@ -105,7 +105,7 @@ public class EventDAO {
         ObservableList<EventProtocol> res = FXCollections.observableList(new ArrayList<EventProtocol>());
         while (it.hasNext()){
             EventProtocol current = it.next();
-            if (current.getClient().getId() == client.getId() && current.getYear_month().getMonthValue() == Integer.parseInt(yearMonth.split("/")[0]) && current.getYear_month().getYear() == Integer.parseInt(yearMonth.split("/")[1])){
+            if (current.getClient().getId() == client.getId() && Integer.parseInt(current.getYear_month().split("/")[0]) == Integer.parseInt(yearMonth.split("/")[0]) && Integer.parseInt(current.getYear_month().split("/")[1]) == Integer.parseInt(yearMonth.split("/")[1])){
                 res.add(current);
             }
         }

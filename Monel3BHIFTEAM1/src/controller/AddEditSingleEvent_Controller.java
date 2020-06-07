@@ -18,6 +18,7 @@ import javafx.util.converter.LocalTimeStringConverter;
 import model.*;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.time.LocalTime;
 import java.util.Locale;
@@ -112,7 +113,7 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
         }
 
         @FXML
-        void btnOkEvent_Clicked(ActionEvent event) {
+        void btnOkEvent_Clicked(ActionEvent event) throws SQLException {
             Event eventToAdd = new Event();
             EventProtocol eventProtocolToAdd = new EventProtocol();
             errorCounter = 0;
@@ -120,7 +121,7 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
             try {
                 LocalDateStringConverter ldsc = new LocalDateStringConverter();
                 eventToAdd.setDate(ldsc.fromString(dpDateEvent.getEditor().getText()));
-                eventProtocolToAdd.setYear_month(ldsc.fromString(dpDateEvent.getEditor().getText()));
+                eventProtocolToAdd.setYear_month(ldsc.fromString(dpDateEvent.getEditor().getText()).toString());
                 dpDateEvent.setStyle(null);
             } catch (Exception e) {
                 dpDateEvent.setStyle("-FX-Border-Color: red");

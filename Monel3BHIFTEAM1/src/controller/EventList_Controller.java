@@ -23,9 +23,11 @@ import javafx.stage.Screen;
 import model.*;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.ResourceBundle;
 
 public class EventList_Controller extends SceneLoader implements Initializable {
@@ -122,7 +124,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
     @FXML
     private TableColumn<EventProtocol, LocalTime> tcEnd;
     @FXML
-    private TableColumn<EventProtocol, LocalDate> tcDateProtocol;
+    private TableColumn<EventProtocol, String> tcDateProtocol;
     @FXML
     private TableColumn<EventProtocol, Double> tcRideCosts;
     @FXML
@@ -294,7 +296,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
         tcBezeichnung = new TableColumn<Event, String>("Bezeichnung");
         tcKategorie = new TableColumn<Event, Boolean>("Kategorie");
 
-        tcDateProtocol = new TableColumn<EventProtocol, LocalDate>("Datum");
+        tcDateProtocol = new TableColumn<EventProtocol, String>("Datum");
         tcEvent = new TableColumn<EventProtocol, Event>("Aktivität");
         tcClient = new TableColumn<EventProtocol, Client>("Klient");
         tcEmployee = new TableColumn<EventProtocol, Employee>("Mitarbeiter");
@@ -316,7 +318,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
         tcKategorie.setCellValueFactory(new PropertyValueFactory<Event, Boolean>("isGroup"));
 
 
-        tcDateProtocol.setCellValueFactory(new PropertyValueFactory<EventProtocol, LocalDate>("year_month"));
+        tcDateProtocol.setCellValueFactory(new PropertyValueFactory<EventProtocol, String>("year_month"));
         tcEvent.setCellValueFactory(new PropertyValueFactory<EventProtocol, Event>("event"));
         tcClient.setCellValueFactory(new PropertyValueFactory<EventProtocol, Client>("client"));
         tcEmployee.setCellValueFactory(new PropertyValueFactory<EventProtocol, Employee>("employee"));
@@ -369,14 +371,15 @@ public class EventList_Controller extends SceneLoader implements Initializable {
         tcKategorie.prefWidthProperty().bind(tableEvents.widthProperty().divide(3)); // w * 1/4
 
         //EventProtocol
-tcDateProtocol.setCellFactory(column -> new TableCell<EventProtocol, LocalDate>() {
+    tcDateProtocol.setCellFactory(column -> new TableCell<EventProtocol, String>() {
             @Override
-            protected void updateItem(LocalDate date, boolean empty) {
+            protected void updateItem(String date, boolean empty) {
                 super.updateItem(date, empty);
                 if (empty) {
                     setText("");
                 } else {
-                    setText(formatter.format(date));
+                    setText(date);
+
                 }
             }
         });
@@ -439,7 +442,7 @@ tcDateProtocol.setCellFactory(column -> new TableCell<EventProtocol, LocalDate>(
     }
 
     @FXML
-    void btnDeleteEvent_Clicked(ActionEvent event) {
+    void btnDeleteEvent_Clicked(ActionEvent event) throws SQLException {
         EventDAO.getInstance().deleteEvent(selectedItem);
     }
 

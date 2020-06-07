@@ -219,7 +219,7 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
     }
 
     @FXML
-    void btnDeleteEmployee_Clicked(ActionEvent event) {
+    void btnDeleteEmployee_Clicked(ActionEvent event) throws SQLException {
             PersonDAO.getInstance().deletePerson((Person)selectedItem);
     }
 
