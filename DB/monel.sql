@@ -136,9 +136,9 @@ CREATE TABLE IF NOT EXISTS `aktivitaetsprotokoll` (
 DELETE FROM `aktivitaetsprotokoll`;
 /*!40000 ALTER TABLE `aktivitaetsprotokoll` DISABLE KEYS */;
 INSERT INTO `aktivitaetsprotokoll` (`id`, `aktivitaet`, `mitarbeiter`, `klient`, `rechnung`, `startzeit`, `endzeit`, `jahr_Monat`, `stundensatz`, `fahrtkosten`) VALUES
-	(1, 1, 4, 3, NULL, '16:30:00', '18:30:00', '2020-05', 12.25, 13.50),
-	(2, 2, 4, 3, NULL, '14:15:00', '18:00:00', '2020-05', 12.25, 13.50),
-	(3, 2, 4, 7, NULL, '14:15:00', '18:00:00', '2020-05', 12.25, 13.50);
+	(1, 1, 4, 3, NULL, '16:30:00', '18:30:00', '05/2020', 12.25, 13.50),
+	(2, 2, 4, 3, NULL, '14:15:00', '18:00:00', '05/2020', 12.25, 13.50),
+	(3, 2, 4, 7, NULL, '14:15:00', '18:00:00', '05/2020', 12.25, 13.50);
 /*!40000 ALTER TABLE `aktivitaetsprotokoll` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle monel.dokument
