@@ -134,9 +134,7 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            DBManager.open();
             PersonDAO.getInstance().setEmployees(FXCollections.observableArrayList(DBManager.getAllEmployees().values()));
-            DBManager.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

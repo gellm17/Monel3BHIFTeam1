@@ -143,12 +143,10 @@ public class EventList_Controller extends SceneLoader implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            DBManager.open();
             EventDAO.getInstance().setEvents(FXCollections.observableArrayList(DBManager.getAllEvents().values()));
             EventDAO.getInstance().setEventProtocols(FXCollections.observableArrayList(DBManager.getAllEventProtocols()));
             PersonDAO.getInstance().setEmployees(FXCollections.observableArrayList(DBManager.getAllEmployees().values()));
             PersonDAO.getInstance().setClients(FXCollections.observableArrayList(DBManager.getAllClients()));
-            DBManager.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

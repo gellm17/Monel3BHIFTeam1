@@ -147,9 +147,7 @@ public class SponsorList_Controller extends SceneLoader implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            DBManager.open();
             PersonDAO.getInstance().setSponsor(FXCollections.observableArrayList(DBManager.getAllSponsors().values()));
-            DBManager.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

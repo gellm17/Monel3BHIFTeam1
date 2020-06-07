@@ -70,10 +70,7 @@ import java.time.LocalDate;
 
         public void afterSet () {
              try {
-
-                  DBManager.open();
                   BillDAO.getInstance().setBills(FXCollections.observableArrayList(DBManager.getAllBills(client)));
-                  DBManager.close();
              } catch (Exception e) {
                   e.printStackTrace();
              }

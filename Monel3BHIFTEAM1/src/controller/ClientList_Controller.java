@@ -124,9 +124,7 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            DBManager.open();
             PersonDAO.getInstance().setClients(FXCollections.observableArrayList(DBManager.getAllClients()));
-            DBManager.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
