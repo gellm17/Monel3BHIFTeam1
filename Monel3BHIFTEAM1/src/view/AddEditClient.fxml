@@ -1141,7 +1141,7 @@
                            <content>
                               <VBox>
                                  <children>
-                                    <Label text="Telefonnummer">
+                                    <Label text="Telefonnummer (Pflichtfeld)">
                                        <font>
                                           <Font name="Gill Sans MT" size="16.0" />
                                        </font>
