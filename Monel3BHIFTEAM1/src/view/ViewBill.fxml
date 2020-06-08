@@ -233,7 +233,7 @@
             </Label>
          </center>
          <left>
-            <Button fx:id="btnBack" mnemonicParsing="false" prefHeight="65.0" prefWidth="65.0" BorderPane.alignment="CENTER">
+            <Button fx:id="btnBack" mnemonicParsing="false" onAction="#btnBack_Clicked" prefHeight="65.0" prefWidth="65.0" BorderPane.alignment="CENTER">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>

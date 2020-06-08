@@ -207,6 +207,11 @@ import java.time.LocalDate;
         }
 
         @FXML
+        void btnBack_Clicked(ActionEvent event) {
+          showScene("BillList");
+        }
+
+        @FXML
         void btnPrintBill_Clicked(ActionEvent event) {
              try {
                   showPrintBill();

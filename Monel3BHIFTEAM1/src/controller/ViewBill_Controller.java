@@ -97,6 +97,11 @@ public class ViewBill_Controller extends SceneLoader {
     }
 
     @FXML
+    void btnBack_Clicked(ActionEvent event) {
+        showScene("BillList");
+    }
+
+    @FXML
     void btnInfo_Clicked(ActionEvent event) {
 
     }
