@@ -1,6 +1,7 @@
 package controller;
 
 import app.SceneLoader;
+import data.EventDAO;
 import data.PersonDAO;
 import db.DBManager;
 import javafx.collections.FXCollections;
@@ -93,6 +94,8 @@ public class BillList_Controller extends SceneLoader implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
      try {
+         EventDAO.getInstance().setEvents(FXCollections.observableArrayList(DBManager.getAllEvents().values()));
+         EventDAO.getInstance().setEventProtocols(FXCollections.observableArrayList(DBManager.getAllEventProtocols()));
         PersonDAO.getInstance().setClients(FXCollections.observableArrayList(DBManager.getAllClients()));
     } catch (Exception e) {
         e.printStackTrace();

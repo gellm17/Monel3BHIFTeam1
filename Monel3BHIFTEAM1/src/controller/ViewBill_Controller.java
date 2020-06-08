@@ -16,6 +16,8 @@ import model.Event;
 import model.EventProtocol;
 
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.Iterator;
 
 public class ViewBill_Controller extends SceneLoader {
@@ -73,16 +75,21 @@ public class ViewBill_Controller extends SceneLoader {
         lbMonthOnBill.setText(lbMonth.getText());
         Iterator<EventProtocol> it = bill.getEventProtocols().iterator();
         double wholeRideCosts = 0;
+        double assistanceCostsGroup = 0;
+        double assistanceCostsSingle = 0;
         while (it.hasNext()){
             EventProtocol current = it.next();
             if (current.getEvent().getIsGroup()){
-                lbGroupEvents.setText(lbGroupEvents.getText() + current.getEvent().getName() + " " + current.getEmployee().getFirstName() + " " + current.getEmployee().getLastName() + " " + current.getRideCosts() + " €\n");
+                assistanceCostsGroup += Duration.between(current.getStartTime(), current.getEndTime()).toHours() * current.getHourlyRate();
             } else {
-                lbSingleEvents.setText(lbSingleEvents.getText() + current.getEvent().getName() + " " + current.getEmployee().getFirstName() + " " + current.getEmployee().getLastName() + " " + current.getRideCosts() + " €\n");
+                assistanceCostsSingle += Duration.between(current.getStartTime(), current.getEndTime()).toHours() * current.getHourlyRate();
             }
             wholeRideCosts += current.getRideCosts();
         }
+        lbSingleEvents.setText(assistanceCostsSingle + " €\n");
+        lbGroupEvents.setText(assistanceCostsGroup +  " €\n");
         lbRideCosts.setText(wholeRideCosts + " €");
+        lbTotalCost.setText((assistanceCostsGroup + assistanceCostsSingle) + " €\n");
     }
 
     public void afterSet () {
