@@ -294,7 +294,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
         tcBezeichnung = new TableColumn<Event, String>("Bezeichnung");
         tcKategorie = new TableColumn<Event, Boolean>("Kategorie");
 
-        tcDateProtocol = new TableColumn<EventProtocol, String>("Datum");
+        tcDateProtocol = new TableColumn<EventProtocol, String>("Monat/Jahr");
         tcEvent = new TableColumn<EventProtocol, Event>("Aktivität");
         tcClient = new TableColumn<EventProtocol, Client>("Klient");
         tcEmployee = new TableColumn<EventProtocol, Employee>("Mitarbeiter");

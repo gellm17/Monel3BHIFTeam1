@@ -80,6 +80,18 @@ public class EventDAO {
         return res;
     }
 
+    public ObservableList<EventProtocol> getEventProtocolsByBill(Bill bill) {
+        Iterator<EventProtocol> it = eventProtocols.iterator();
+        ObservableList<EventProtocol> res = FXCollections.observableList(new ArrayList<EventProtocol>());
+        while (it.hasNext()){
+            EventProtocol current = it.next();
+            if (current.getBill().getNr() == bill.getNr()){
+                res.add(current);
+            }
+        }
+        return res;
+    }
+
     public ObservableList<EventProtocol> getEventProtocolsByEvent(Event event){
         Iterator<EventProtocol> it = eventProtocols.iterator();
         ObservableList<EventProtocol> res = FXCollections.observableList(new ArrayList<EventProtocol>());

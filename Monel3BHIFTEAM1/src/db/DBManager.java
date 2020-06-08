@@ -325,7 +325,7 @@ public class DBManager {
         }
         stmtInsertEventprotocol.setTime(5, Time.valueOf(ep.getStartTime()));
         stmtInsertEventprotocol.setTime(6, Time.valueOf(ep.getEndTime()));
-        stmtInsertEventprotocol.setDate(7, Date.valueOf(ep.getYear_month()));
+        stmtInsertEventprotocol.setString(7, ep.getYear_month());
         stmtInsertEventprotocol.setDouble(8, ep.getHourlyRate()); // must be changed to decimal
         stmtInsertEventprotocol.setDouble(9, ep.getRideCosts()); // must be changed to decimal
         boolean added = (stmtInsertEventprotocol.executeUpdate() == 1);

@@ -2,6 +2,7 @@ package controller;
 
 import app.SceneLoader;
 import data.BillDAO;
+import data.EventDAO;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -65,7 +66,7 @@ public class ViewBill_Controller extends SceneLoader {
 
     public void setBill(Bill bill) {
         this.bill = bill;
-        afterSet();
+        bill.setEventProtocols(EventDAO.getInstance().getEventProtocolsByBill(bill));
         System.out.println("Rechnung: " + bill.getNr());
         lbClient.setText(bill.getClient().getFirstName() + " " + bill.getClient().getLastName());
         lbClientOnBill.setText(bill.getClient().getFirstName() + " " + bill.getClient().getLastName());
@@ -89,11 +90,7 @@ public class ViewBill_Controller extends SceneLoader {
         lbSingleEvents.setText(assistanceCostsSingle + " €\n");
         lbGroupEvents.setText(assistanceCostsGroup +  " €\n");
         lbRideCosts.setText(wholeRideCosts + " €");
-        lbTotalCost.setText((assistanceCostsGroup + assistanceCostsSingle) + " €\n");
-    }
-
-    public void afterSet () {
-        //TODO
+        lbTotalCost.setText((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts) + " €\n");
     }
 
     @FXML

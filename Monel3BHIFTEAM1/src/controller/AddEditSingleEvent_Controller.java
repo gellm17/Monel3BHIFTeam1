@@ -20,6 +20,7 @@ import model.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -120,8 +121,14 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
 
             try {
                 LocalDateStringConverter ldsc = new LocalDateStringConverter();
-                eventToAdd.setDate(ldsc.fromString(dpDateEvent.getEditor().getText()));
-                eventProtocolToAdd.setYear_month(ldsc.fromString(dpDateEvent.getEditor().getText()).toString());
+                LocalDate date = ldsc.fromString(dpDateEvent.getEditor().getText());
+                eventToAdd.setDate(date);
+                if (date.getMonthValue() < 10){
+                    eventProtocolToAdd.setYear_month("0" + date.getMonthValue() + "/" + date.getYear());
+                } else {
+                    eventProtocolToAdd.setYear_month(date.getMonthValue() + "/" + date.getYear());
+                }
+
                 dpDateEvent.setStyle(null);
             } catch (Exception e) {
                 dpDateEvent.setStyle("-FX-Border-Color: red");

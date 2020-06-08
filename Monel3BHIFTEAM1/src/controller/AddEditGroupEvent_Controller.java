@@ -116,8 +116,8 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
 
-        //EventProtocol
-        tcDateProtocol.setCellFactory(column -> new TableCell<EventProtocol, LocalDate>() {
+        /*//EventProtocol
+        tcDateProtocol.setCellFactory(column -> new TableCell<EventProtocol, String>() {
             @Override
             protected void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
@@ -127,7 +127,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
                     setText(formatter.format(date));
                 }
             }
-        });
+        });*/
         tcHourlyRate.setCellFactory(column -> new TableCell<EventProtocol, Double>() {
             @Override
             protected void updateItem(Double value, boolean empty) {

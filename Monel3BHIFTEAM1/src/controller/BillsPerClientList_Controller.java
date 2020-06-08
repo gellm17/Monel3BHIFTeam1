@@ -23,6 +23,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import model.Bill;
 import model.Client;
+import model.EventProtocol;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -167,13 +168,22 @@ import java.time.LocalDate;
         public void setClient(Client client) {
             this.client = client;
             afterSet();
-             System.out.println("Hallo"+client.getId());
         }
 
         @FXML
         void btnGenerateBill_Clicked(ActionEvent event) {
              Bill generatedBill = new Bill(0, client, LocalDate.now(), "Monatsrechnung " + lbYearMonth.getText() + " für " + client.getFirstName() + " " + client.getLastName());            //TODO NOT sure if date of today or yearMonth
              generatedBill.setEventProtocols(FXCollections.observableArrayList(EventDAO.getInstance().getEventProtocolsByClientMonth(client, lbYearMonth.getText())));
+             for (EventProtocol ep : generatedBill.getEventProtocols()) {
+                  ep.setBill(generatedBill);
+                  try {
+                       DBManager.updateEventprotocol(ep);
+                  }catch(Exception e){
+                       e.printStackTrace();
+                  }
+
+             }
+
              BillDAO.getInstance().addBill(generatedBill);
         }
 
