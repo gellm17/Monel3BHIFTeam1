@@ -396,7 +396,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         clientToAdd.setPrivacy(new Privacy(new ArrayList<Boolean>(){{add(cbPrivacy1Client.isSelected()); add(cbPrivacy2Client.isSelected()); add(cbPrivacy3Client.isSelected()); add(cbPrivacy4Client.isSelected());}}));
 
         if (!cbSelfDetermined.isSelected()){
-            Person esv = new Person();
+            Person esv = new Person(editableClient.getEsv().getId());
             setAllPersonFieldsMandatory(esv, tfTitleEsv, tfFirstnameEsv, tfLastnameEsv, tfSsnrEsv, tfStreetEsv, tfHousenumberEsv, tfZipEsv, tfPlaceEsv, tfTelNrEsv, tfEmailEsv, dpBirthdateEsv, comboSalutationEsv, tPaneEsv, tPaneEsv, tPaneEsv, true);
             clientToAdd.setEsv(esv);
         }
@@ -406,7 +406,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         clientToAdd.setEmergencyContact1(ec1);
         
         if (cbContact2.isSelected()){
-            Person ec2 = new Person();
+            Person ec2 = new Person(editableClient.getEmergencyContact2().getId());
             setAllPersonFields(ec2, tfTitleContact2, tfFirstnameContact2, tfLastnameContact2, tfSsnrContact2, tfStreetContact2, tfHousenumberContact2, tfZipContact2, tfPlaceContact2, tfTelNrContact2, tfEmailContact2, dpBirthdateContact2, comboSalutationContact2, tPaneEsv, tPaneEsv, tPaneEsv);
             clientToAdd.setEmergencyContact2(ec2);
         }
@@ -466,12 +466,13 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
         if (editableClient != null){
             clientToAdd.setId(editableClient.getId());
+            clientToAdd.getEmergencyContact1().setId(editableClient.getEmergencyContact1().getId());
         }
 
 
         if(!errors.contains(true) && PersonDAO.getInstance().addPerson(clientToAdd)) {
-            if (editableClient != null) { PersonDAO.getInstance().deletePerson(editableClient);
-            }
+            /*if (editableClient != null) { PersonDAO.getInstance().deletePerson(editableClient);
+            }*/
             super.showScene("ClientList");
         }
 

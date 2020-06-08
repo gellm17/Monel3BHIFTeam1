@@ -39,18 +39,27 @@ public class PersonDAO {
                 if (c.getEsv() != null) {
                     if (c.getEsv().getId() == 0) {
                         c.getEsv().setId(DBManager.insertPerson(c.getEsv()));
+                    } else {
+                        DBManager.updatePerson(c.getEsv());
                     }
                 }
                 if (c.getEmergencyContact1().getId() == 0) {
                     c.getEmergencyContact1().setId(DBManager.insertPerson(c.getEmergencyContact1()));
+                } else {
+                    DBManager.updatePerson(c.getEmergencyContact1());
                 }
                 if (c.getEmergencyContact2() != null) {
                     if (c.getEmergencyContact2().getId() == 0) {
                         c.getEmergencyContact2().setId(DBManager.insertPerson(c.getEmergencyContact2()));
+                    } else {
+                        DBManager.updatePerson(c.getEmergencyContact2());
                     }
                 }
                 if (p.getId() == 0) {
                     c.setId(DBManager.insertClient(c));
+                } else {
+                    clients.remove(c);
+                    DBManager.updateClient(c);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -58,22 +67,27 @@ public class PersonDAO {
             success = clients.add(c);
         } else if (p instanceof Employee){
             Employee emp = (Employee) p;
-            if (emp.getId() == 0) {
-                try {
-                    emp.setId(DBManager.insertEmployee(emp));
-                } catch (Exception e) {
-                    e.printStackTrace();
+            try {
+                if (emp.getId() == 0) {
+                        emp.setId(DBManager.insertEmployee(emp));
+
+                } else {
+                    DBManager.updateEmployee(emp);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             success = employees.add(emp);
         } else if (p instanceof Sponsor){
             Sponsor sp = (Sponsor) p;
-            if (sp.getId() == 0) {
-                try {
+            try {
+                if (sp.getId() == 0) {
                     sp.setId(DBManager.insertSponsor(sp));
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } else {
+                    DBManager.updateSponsor(sp);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             success = sponsor.add(sp);
         }

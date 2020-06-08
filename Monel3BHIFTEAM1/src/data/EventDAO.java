@@ -35,22 +35,26 @@ public class EventDAO {
     }
 
     public boolean addEvent(Event e) {
-        if (e.getId() == 0) {
-            try {
+        try {
+            if (e.getId() == 0) {
                 e.setId(DBManager.insertEvent(e));
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } else {
+                DBManager.updateEvent(e);
             }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return events.add(e);
     }
     public boolean addEventProtcol(EventProtocol ep) {
-        if (ep.getId() == 0) {
-            try {
+        try {
+            if (ep.getId() == 0) {
                 ep.setId(DBManager.insertEventprotocol(ep));
-            } catch (Exception e) {
-                e.printStackTrace();
+            } else {
+                DBManager.updateEventprotocol(ep);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return eventProtocols.add(ep);
     }
