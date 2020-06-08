@@ -60,7 +60,12 @@ public class DBManager {
 
     private static Connection conn = null;
 
-    // inserts a Person into the DB
+    /** inserts a Person into the DB
+     *
+     * @param p
+     * @return
+     * @throws SQLException
+     */
     public static int insertPerson(Person p) throws SQLException {
         int newId = -1;
         stmtInsertPerson.setString(1, "SONSTIGES");
@@ -98,7 +103,12 @@ public class DBManager {
         return newId;
     } //TODO check non mandatory fields
 
-    // inserts a Klient into the DB
+    /** inserts a Klient into the DB
+     *
+     * @param c
+     * @return
+     * @throws SQLException
+     */
     public static int insertClient(Client c) throws SQLException {
         int newId = -1;
         stmtInsertClient.setString(1, "KLIENT");
@@ -164,7 +174,12 @@ public class DBManager {
         return newId;
     } //TODO check non mandatory fields
 
-    // inserts an Employee into the DB
+    /** inserts an Employee into the DB
+     *
+     * @param e
+     * @return
+     * @throws SQLException
+     */
     public static int insertEmployee(Employee e) throws SQLException {
         int newId = -1;
         stmtInsertEmployee.setString(1, "MITARBEITER");
@@ -223,7 +238,12 @@ public class DBManager {
         return newId;
     } //TODO check non mandatory fields
 
-    // inserts a Sponsor into the DB
+    /** inserts a Sponsor into the DB
+     *
+     * @param s
+     * @return
+     * @throws SQLException
+     */
     public static int insertSponsor(Sponsor s) throws SQLException {
         int newId = -1;
         stmtInsertSponsor.setString(1, "SPONSOR");
@@ -252,7 +272,12 @@ public class DBManager {
         return newId;
     } //TODO check non mandatory fields
 
-    // inserts an Event into the DB
+    /** inserts an Event into the DB
+     *
+     * @param e
+     * @return
+     * @throws SQLException
+     */
     public static int insertEvent(Event e) throws SQLException {
         int newId = -1;
         stmtInsertEvent.setDate(1, Date.valueOf(e.getDate()));
@@ -270,7 +295,12 @@ public class DBManager {
         return newId;
     } //TODO check non mandatory fields
 
-    // inserts an Eventprotocol into the DB
+    /** inserts an Eventprotocol into the DB
+     *
+     * @param ep
+     * @return
+     * @throws SQLException
+     */
     public static int insertEventprotocol(EventProtocol ep) throws SQLException {
         int newId = -1;
         if (ep.getEvent() != null) {
@@ -310,7 +340,12 @@ public class DBManager {
         return newId;
     } //TODO check non mandatory fields
 
-    // inserts a Bill into the DB
+    /** inserts a Bill into the DB
+     *
+     * @param b
+     * @return
+     * @throws SQLException
+     */
     public static int insertBill(Bill b) throws SQLException {
         int newId = -1;
         stmtInsertBill.setInt(1, b.getClient().getId());
@@ -328,7 +363,12 @@ public class DBManager {
         return newId;
     } //TODO check non mandatory fields
 
-    // inserts a Document into the DB
+    /** inserts a Document into the DB
+     *
+     * @param d
+     * @return
+     * @throws SQLException
+     */
     public static int insertDocument(Document d) throws SQLException {
         int newId = -1;
         if (d.getOwnerPerson() != null) {
@@ -353,7 +393,11 @@ public class DBManager {
         return newId;
     } //TODO check non mandatory fields
 
-    // updates the Data of the Person with the same id in the DB with the Data of this Person
+    /** updates the Data of the Person with the same id in the DB with the Data of this Person
+     *
+     * @param p
+     * @throws SQLException
+     */
     public static void updatePerson(Person p) throws SQLException {
         stmtUpdatePerson.setString(1, p.getSalutation().toString());
         if (p.getTitle() != null) {
@@ -382,7 +426,11 @@ public class DBManager {
         stmtUpdatePerson.clearParameters();
     } //TODO check non mandatory fields
 
-    // updates the Data of the Client with the same id in the DB with the Data of this Client
+    /** updates the Data of the Client with the same id in the DB with the Data of this Client
+     *
+     * @param c
+     * @throws SQLException
+     */
     public static void updateClient(Client c) throws SQLException {
         stmtUpdateClient.setString(1, c.getSalutation().toString());
         if (c.getTitle() != null) {
@@ -438,7 +486,11 @@ public class DBManager {
         stmtUpdateClient.clearParameters();
     } //TODO check non mandatory fields
 
-    // updates the Data of the Employee with the same id in the DB with the Data of this Employee
+    /** updates the Data of the Employee with the same id in the DB with the Data of this Employee
+     *
+     * @param e
+     * @throws SQLException
+     */
     public static void updateEmployee(Employee e) throws SQLException {
         stmtUpdateEmployee.setString(1, e.getSalutation().toString());
         if (e.getTitle() != null) {
@@ -488,7 +540,11 @@ public class DBManager {
         stmtUpdateEmployee.clearParameters();
     } //TODO check non mandatory fields
 
-    // updates the Data of the Sponsor with the same id in the DB with the Data of this Sponsor
+    /** updates the Data of the Sponsor with the same id in the DB with the Data of this Sponsor
+     *
+     * @param s
+     * @throws SQLException
+     */
     public static void updateSponsor(Sponsor s) throws SQLException {
         stmtUpdateSponsor.setString(1, s.getSalutation().toString());
         stmtUpdateSponsor.setString(2, s.getTitle());
@@ -508,7 +564,11 @@ public class DBManager {
         stmtUpdateSponsor.clearParameters();
     } //TODO check non mandatory fields
 
-    // updates the Data of the Event with the same id in the DB with the Data of this Event
+    /** updates the Data of the Event with the same id in the DB with the Data of this Event
+     *
+     * @param e
+     * @throws SQLException
+     */
     public static void updateEvent(Event e) throws SQLException {
         stmtUpdateEvent.setDate(1, Date.valueOf(e.getDate()));
         stmtUpdateEvent.setString(2, e.getName());
@@ -517,7 +577,11 @@ public class DBManager {
         stmtUpdateEvent.clearParameters();
     } //TODO check non mandatory fields
 
-    // updates the Data of the Eventprotocol with the same id in the DB with the Data of this Eventprotocol
+    /** updates the Data of the Eventprotocol with the same id in the DB with the Data of this Eventprotocol
+     *
+     * @param ep
+     * @throws SQLException
+     */
     public static void updateEventprotocol(EventProtocol ep) throws SQLException {
         if (ep.getEmployee() != null) {
             stmtUpdateEventprotocol.setInt(1, ep.getEmployee().getId());
@@ -544,7 +608,11 @@ public class DBManager {
         stmtUpdateEventprotocol.clearParameters();
     } //TODO check non mandatory fields
 
-    // updates the Data of the Bill with the same id in the DB with the Data of this Bill
+    /** updates the Data of the Bill with the same id in the DB with the Data of this Bill
+     *
+     * @param b
+     * @throws SQLException
+     */
     public static void updateBill(Bill b) throws SQLException {
         stmtUpdateBill.setDate(1, Date.valueOf(b.getDateOfIssue()));
         stmtUpdateBill.setString(2, b.getUse());
@@ -553,7 +621,11 @@ public class DBManager {
         stmtUpdateBill.clearParameters();
     } //TODO check non mandatory fields
 
-    // updates the Data of the Document with the same id in the DB with the Data of this Document
+    /** updates the Data of the Document with the same id in the DB with the Data of this Document
+     *
+     * @param d
+     * @throws SQLException
+     */
     public static void updateDocument(Document d) throws SQLException {
         if (d.getOwnerPerson() != null) {
             stmtUpdateDocument.setInt(1, d.getOwnerPerson().getId());
@@ -570,7 +642,11 @@ public class DBManager {
         stmtUpdateDocument.clearParameters();
     } //TODO check non mandatory fields
 
-    // updates the cell geloescht for the given Person (also Client, Employee and Sponsor) to 1 (with 1 it will be ignored bi the get methods)
+    /** updates the cell geloescht for the given Person (also Client, Employee and Sponsor) to 1 (with 1 it will be ignored bi the get methods)
+     *
+     * @param p
+     * @throws SQLException
+     */
     public static void deletePerson(Person p) throws SQLException {
             stmtDeletePerson.setInt(1, 1);
             stmtDeletePerson.setInt(2, p.getId());
@@ -578,35 +654,57 @@ public class DBManager {
             stmtDeletePerson.clearParameters();
     }
 
-    // deletes the Event with the same id in the DB
+    /** deletes the Event with the same id in the DB
+     *
+     * @param e
+     * @throws SQLException
+     */
     public static void deleteEvent(Event e) throws SQLException {
         stmtDeleteEvent.setInt(1, e.getId());
         stmtDeleteEvent.executeUpdate();
         stmtDeleteEvent.clearParameters();
     }
 
-    // deletes the Eventprotocol with the same id in the DB
+    /** deletes the Eventprotocol with the same id in the DB
+     *
+     * @param ep
+     * @throws SQLException
+     */
     public static void deleteEventprotocol(EventProtocol ep) throws SQLException {
         stmtDeleteEventprotocol.setInt(1, ep.getId());
         stmtDeleteEventprotocol.executeUpdate();
         stmtDeleteEventprotocol.clearParameters();
     }
 
-    // deletes the Bill with the same id in the DB
+    /** deletes the Bill with the same id in the DB
+     *
+     * @param b
+     * @throws SQLException
+     */
     public static void deleteBill(Bill b) throws SQLException {
         stmtDeleteBill.setInt(1, b.getNr());
         stmtDeleteBill.executeUpdate();
         stmtDeleteBill.clearParameters();
     }
 
-    // deletes the Document with the same id in the DB
+    /** deletes the Document with the same id in the DB
+     *
+     * @param d
+     * @throws SQLException
+     */
     public static void deleteDocument(Document d) throws SQLException {
         stmtDeleteDocument.setInt(1, d.getID());
         stmtDeleteDocument.executeUpdate();
         stmtDeleteDocument.clearParameters();
     }
 
-    // creates a bill for the given Person in the given month and inserts it into the DB (it only uses Evenprotocols with no bill)
+    /** creates a bill for the given Person in the given month and inserts it into the DB (it only uses Evenprotocols with no bill)
+     *
+     * @param c
+     * @param year_month
+     * @return
+     * @throws SQLException
+     */
     public static Bill createBill(Client c, String year_month) throws SQLException {
         Bill res = new Bill(c);
         EventProtocol ep = null;
@@ -622,7 +720,11 @@ public class DBManager {
         return res;
     }
 
-    // returns a HashMap of all Persons from the DB
+    /** returns a HashMap of all Persons from the DB
+     *
+     * @return
+     * @throws SQLException
+     */
     private static HashMap<Integer, Person> getPersons() throws SQLException {
         HashMap<Integer,Person> pers = new HashMap<Integer, Person>();
         Statement stmt = conn.createStatement();
@@ -635,7 +737,11 @@ public class DBManager {
         return pers;
     }
 
-    // returns an HashMap of all Clients from the DB without Objects (esv, emergencycontact1, emergencycontact2)
+    /** returns an HashMap of all Clients from the DB without Objects (esv, emergencycontact1, emergencycontact2)
+     *
+     * @return
+     * @throws SQLException
+     */
     private static HashMap<Integer, Client> getClients() throws SQLException {
         HashMap<Integer, Client> clis = new HashMap<Integer, Client>();
         Statement stmt = conn.createStatement();
@@ -648,7 +754,11 @@ public class DBManager {
         return clis;
     }
 
-    // returns an ArrayList of all Clients from the DB with Objects (esv, emergencycontact1, emergencycontact2)
+    /** returns an ArrayList of all Clients from the DB with Objects (esv, emergencycontact1, emergencycontact2)
+     *
+     * @return
+     * @throws SQLException
+     */
     public static ArrayList<Client> getAllClients() throws SQLException {
         ArrayList<Client> clis = new ArrayList<Client>();
         Statement stmt = conn.createStatement();
@@ -673,7 +783,11 @@ public class DBManager {
         return clis;
     }
 
-    // returns an HashMap of all Emplayees from the DB
+    /** returns an HashMap of all Emplayees from the DB
+     *
+     * @return
+     * @throws SQLException
+     */
     public static HashMap<Integer, Employee> getAllEmployees() throws SQLException {
         HashMap<Integer, Employee> emps = new HashMap<Integer, Employee>();
         Statement stmt = conn.createStatement();
@@ -686,7 +800,11 @@ public class DBManager {
         return emps;
     }
 
-    // returns an HashMap of all Sponsor from the DB
+    /** returns an HashMap of all Sponsor from the DB
+     *
+     * @return
+     * @throws SQLException
+     */
     public static HashMap<Integer, Sponsor> getAllSponsors() throws SQLException {
         HashMap<Integer, Sponsor> spns = new HashMap<Integer, Sponsor>();
         Statement stmt = conn.createStatement();
@@ -699,7 +817,11 @@ public class DBManager {
         return spns;
     }
 
-    // returns a HashMap of all Events from the DB
+    /** returns a HashMap of all Events from the DB
+     *
+     * @return
+     * @throws SQLException
+     */
     public static HashMap<Integer, Event> getAllEvents() throws SQLException {
         HashMap<Integer, Event> evns = new HashMap<Integer, Event>();
         Statement stmt = conn.createStatement();
@@ -710,7 +832,11 @@ public class DBManager {
         return evns;
     }
 
-    // returns a HashMap of all Eventprotocols from the DB without Objects (event, employee, client)
+    /** returns a HashMap of all Eventprotocols from the DB without Objects (event, employee, client)
+     *
+     * @return
+     * @throws SQLException
+     */
     private static HashMap<Integer, EventProtocol> getEventprotocols() throws SQLException{
         HashMap<Integer, EventProtocol> evps = new HashMap<Integer, EventProtocol>();
         Statement stmt = conn.createStatement();
@@ -721,7 +847,11 @@ public class DBManager {
         return evps;
     }
 
-    // returns a ArrayList of all Eventprotocols from the DB with Objects (event, employee, client)
+    /** returns a ArrayList of all Eventprotocols from the DB with Objects (event, employee, client)
+     *
+     * @return
+     * @throws SQLException
+     */
     public static ArrayList<EventProtocol> getAllEventProtocols() throws SQLException {
         ArrayList<EventProtocol> evps = new ArrayList<EventProtocol>();
         Statement stmt = conn.createStatement();
@@ -750,7 +880,13 @@ public class DBManager {
         return evps;
     }
 
-    // returns a ArrayList of all Eventprotocols of the given Client in the given month
+    /** returns a ArrayList of all Eventprotocols of the given Client in the given month
+     *
+     * @param c
+     * @param year_month
+     * @return
+     * @throws SQLException
+     */
     public static ArrayList<EventProtocol> getAllEventProtocols(Client c, String year_month) throws SQLException {
         ArrayList<EventProtocol> evps = new ArrayList<EventProtocol>();
         stmtSelectEventprotocol.setInt(1, c.getId());
@@ -778,7 +914,11 @@ public class DBManager {
         return evps;
     }
 
-    // returns a HashMap of all Bills from the DB without Objects (client)
+    /** returns a HashMap of all Bills from the DB without Objects (client)
+     *
+     * @return
+     * @throws SQLException
+     */
     private static HashMap<Integer, Bill> getBills() throws SQLException {
         HashMap<Integer, Bill> bils = new HashMap<Integer, Bill>();
         Statement stmt = conn.createStatement();
@@ -789,7 +929,12 @@ public class DBManager {
         return bils;
     }
 
-    // returns an ArrayList of all Bills from a Client from the DB
+    /** returns an ArrayList of all Bills from a Client from the DB
+     *
+     * @param c
+     * @return
+     * @throws SQLException
+     */
     public static ArrayList<Bill> getAllBills(Client c) throws SQLException {
         ArrayList<Bill> bils = new ArrayList<Bill>();
         Statement stmt = conn.createStatement();
@@ -807,7 +952,11 @@ public class DBManager {
         return bils;
     }
 
-    // returns an ArrayList of all Documents from the DB with Objects (ownerPerson or ownerEvent)
+    /** returns an ArrayList of all Documents from the DB with Objects (ownerPerson or ownerEvent)
+     *
+     * @return
+     * @throws SQLException
+     */
     public static ArrayList<Document> getAllDocuments() throws SQLException {
         ArrayList<Document> docs = new ArrayList<Document>();
         Statement stmt = conn.createStatement();
@@ -836,7 +985,11 @@ public class DBManager {
         return docs;
     }
 
-    // creates the DB Connection and sends the PreparedStatements to the DB
+    /** creates the DB Connection and sends the PreparedStatements to the DB
+     *
+     * @throws NullPointerException
+     * @throws SQLException
+     */
     public static void open() throws NullPointerException, SQLException {
         conn = ConnectionFactory.getInstance().getConnection();
         stmtInsertPerson        = conn.prepareStatement(sqlInsertPerson, Statement.RETURN_GENERATED_KEYS);
@@ -863,7 +1016,10 @@ public class DBManager {
         stmtSelectEventprotocol = conn.prepareStatement(sqlSelectEventprotocol);
     }
 
-    // closes the DB Connection and the PreparedStatements
+    /** closes the DB Connection and the PreparedStatements
+     * 
+     * @throws NullPointerException
+     */
     public static void close() throws NullPointerException {
         try {
             if (stmtInsertPerson != null) {
