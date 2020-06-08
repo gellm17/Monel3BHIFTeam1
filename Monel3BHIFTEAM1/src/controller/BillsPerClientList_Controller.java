@@ -135,7 +135,7 @@ import java.time.LocalDate;
         public void CreateColumns() {
              //Picture
              tcDate = new TableColumn<Bill, LocalDate>("Austellungsdatum");
-             tcUse = new TableColumn<Bill, String>("use");
+             tcUse = new TableColumn<Bill, String>("Verwendungszweck");
 
 
              //Weitere Table Options
