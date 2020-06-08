@@ -69,7 +69,7 @@
 }
 
 .circular {
-    -fx-background-radius: 100%;
+    -fx-background-radius: 30%;
 }
 
 .roundTopRight {

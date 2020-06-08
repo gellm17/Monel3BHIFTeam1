@@ -694,6 +694,9 @@
                   <String fx:value="transparentButton" />
                   <String fx:value="circular" />
                </styleClass>
+               <padding>
+                  <Insets left="-5.0" />
+               </padding>
             </Button>
          </left>
       </BorderPane>
