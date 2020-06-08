@@ -51,6 +51,8 @@ public class PersonDAO {
                 }
                 if (p.getId() == 0) {
                     c.setId(DBManager.insertClient(c));
+                } else {
+                    DBManager.updateClient(c);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -58,22 +60,27 @@ public class PersonDAO {
             success = clients.add(c);
         } else if (p instanceof Employee){
             Employee emp = (Employee) p;
-            if (emp.getId() == 0) {
-                try {
-                    emp.setId(DBManager.insertEmployee(emp));
-                } catch (Exception e) {
-                    e.printStackTrace();
+            try {
+                if (emp.getId() == 0) {
+                        emp.setId(DBManager.insertEmployee(emp));
+
+                } else {
+                    DBManager.updateEmployee(emp);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             success = employees.add(emp);
         } else if (p instanceof Sponsor){
             Sponsor sp = (Sponsor) p;
-            if (sp.getId() == 0) {
-                try {
+            try {
+                if (sp.getId() == 0) {
                     sp.setId(DBManager.insertSponsor(sp));
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } else {
+                    DBManager.updateSponsor(sp);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             success = sponsor.add(sp);
         }
