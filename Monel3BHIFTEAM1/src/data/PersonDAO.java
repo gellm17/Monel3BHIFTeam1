@@ -39,19 +39,26 @@ public class PersonDAO {
                 if (c.getEsv() != null) {
                     if (c.getEsv().getId() == 0) {
                         c.getEsv().setId(DBManager.insertPerson(c.getEsv()));
+                    } else {
+                        DBManager.updatePerson(c.getEsv());
                     }
                 }
                 if (c.getEmergencyContact1().getId() == 0) {
                     c.getEmergencyContact1().setId(DBManager.insertPerson(c.getEmergencyContact1()));
+                } else {
+                    DBManager.updatePerson(c.getEmergencyContact1());
                 }
                 if (c.getEmergencyContact2() != null) {
                     if (c.getEmergencyContact2().getId() == 0) {
                         c.getEmergencyContact2().setId(DBManager.insertPerson(c.getEmergencyContact2()));
+                    } else {
+                        DBManager.updatePerson(c.getEmergencyContact2());
                     }
                 }
                 if (p.getId() == 0) {
                     c.setId(DBManager.insertClient(c));
                 } else {
+                    clients.remove(c);
                     DBManager.updateClient(c);
                 }
             } catch (Exception e) {

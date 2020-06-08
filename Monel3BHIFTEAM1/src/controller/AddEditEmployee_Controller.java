@@ -390,8 +390,8 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
         }
 
         if(!errors.contains(true) && PersonDAO.getInstance().addPerson(employeeToAdd)) {
-            if (editableEmployee != null) { PersonDAO.getInstance().deletePerson(editableEmployee);
-            }
+            /*if (editableEmployee != null) { PersonDAO.getInstance().deletePerson(editableEmployee);
+            }*/
             super.showScene("EmployeeList");
         }
     }

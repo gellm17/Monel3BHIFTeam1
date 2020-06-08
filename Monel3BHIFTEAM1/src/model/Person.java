@@ -50,9 +50,17 @@ public class Person {
 
     public Person(int id) {
         this.id = new SimpleIntegerProperty(this, "id", id);
+        this.salutation = new SimpleObjectProperty<Salutation>(this, "salutation", Salutation.Herr);
+        this.firstName = new SimpleStringProperty(this, "firstName", "");
+        this.lastName = new SimpleStringProperty(this, "lastName", "");
+        this.streetAndNr = new SimpleStringProperty(this, "streetAndNr", "");
+        this.zipCode = new SimpleIntegerProperty(this, "zipCode");
+        this.place = new SimpleStringProperty(this, "place", "");
+        this.birthDate = new SimpleObjectProperty<LocalDate>(this, "birthDate", LocalDate.now());
+        this.title = new SimpleStringProperty(this, "title", "");
+        this.telNr = new SimpleStringProperty(this, "telNr", "");
+        this.email = new SimpleStringProperty(this, "email", "");
     }
-
-
 
     public Person(Salutation salutation, String firstName, String lastName, String street, String houseNumber, int zipCode, String place, LocalDate birthDate) {
         this.id = new SimpleIntegerProperty(this, "id", 0);
