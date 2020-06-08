@@ -60,18 +60,23 @@ CREATE TABLE IF NOT EXISTS `person` (
   CONSTRAINT `FKnotfallkontakt2` FOREIGN KEY (`notfallkontakt2`) REFERENCES `person` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle monel.person: ~7 rows (ungefaehr)
+-- Exportiere Daten aus Tabelle monel.person: ~8 rows (ungefaehr)
 DELETE FROM `person`;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
 INSERT INTO `person` (`id`, `esv`, `notfallkontakt1`, `notfallkontakt2`, `personentyp`, `anrede`, `titel`, `vorname`, `nachname`, `strasse_hausnummer`, `plz`, `ort`, `telefonnummer`, `email`, `geburtsdatum`, `svnr`, `diagnose`, `allergien`, `sonstiges`, `beschaeftigung`, `amt`, `verwendungsgruppe`, `gehaltsstufe`, `wochenstunden`, `iban`, `bic`, `vorrueckdatum`, `einstelldatum`, `firmenname`, `firmentelefonnummer`, `firmenemail`, `geloescht`) VALUES
-	(1, NULL, NULL, NULL, 'SONSTIGES', 'Sonstige', 'Mag.', 'esvTest', 'esvTest', 'Südtiroler Straße 1', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(2, NULL, NULL, NULL, 'SONSTIGES', 'Herr', 'Mag.', 'notfallTest', 'notfall1Test', 'Südtiroler Straße 2', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(3, 1, 2, NULL, 'KLIENT', 'Herr', 'Mag.', 'klient1Test', 'klient1Test', 'Südtiroler Straße 3', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, 'Alter', 'Nussalergie', 'test', 'in Rente', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(4, NULL, NULL, NULL, 'MITARBEITER', 'Frau', 'Mag.', 'mitarbeiterTest', 'mitarbeiterTest', 'Südtiroler Straße 4', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, NULL, NULL, NULL, NULL, 1, 'VG1', 'GS8', 40, 'AT123456789012345678', 'ABCDEFGH', '2020-06-10', '2016-01-01', NULL, NULL, NULL, NULL),
-	(5, NULL, NULL, NULL, 'SPONSOR', 'Frau', 'Mag.', 'FirmaTest', 'FirmaTest', 'Südtiroler Straße 5', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'TEST GmbH.', '01234567890', 'test@test.at', NULL),
-	(6, NULL, NULL, NULL, 'SONSTIGES', 'Sonstige', 'Mag.', 'notfall2Test', 'notfall2Test', 'Südtiroler Straße 6', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(7, NULL, 2, 6, 'KLIENT', 'Herr', 'Mag.', 'klient2Test', 'klient2Test', 'Südtiroler Straße 7', 1234, 'Sillian', '01234567890', 'test@test.at', '2000-01-01', 1234567890, 'Alter', 'Heuschnupfen', 'test', 'in Rente', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+	(1, NULL, NULL, NULL, 'SONSTIGES', 'Sonstige', 'Mag.', 'Oli', 'Dübler', 'Pogöriacherstraße 97', 9500, 'Villach', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(2, NULL, NULL, NULL, 'SONSTIGES', 'Frau', 'Mag.', 'Inge', 'Kaufmann', 'Bismarckstraße 6', 9800, 'Spittal an der Drau', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(3, 1, 2, NULL, 'KLIENT', 'Herr', 'Mag.', 'Hugo', 'Hinteregger', 'Litzelhofenstraße 45', 9800, 'Spittal an der Drau', '01234567890', 'test@test.at', '2000-01-01', 1234567890, 'Alter', 'Nussalergie', 'test', 'in Rente', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(4, NULL, NULL, NULL, 'MITARBEITER', 'Herr', 'Mag.', 'Mike', 'Gell', 'Südtiroler Straße 4', 5582, 'St. Michael im Lungau', '01234567890', 'test@test.at', '2000-01-01', 1234567890, NULL, NULL, NULL, NULL, 1, 'VG1', 'GS8', 40, 'AT123456789012345678', 'ABCDEFGH', '2022-06-08', '2020-06-08', NULL, NULL, NULL, NULL),
+	(5, NULL, NULL, NULL, 'SPONSOR', 'Herr', 'Mag.', 'Uwe', 'Inter', 'Aussichtsstraße 4', 9524, 'St. Magdalen', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'INT GmbH.', '01234567890', 'INT@INT.at', NULL),
+	(6, NULL, NULL, NULL, 'SONSTIGES', 'Sonstige', 'Mag.', 'Hons', 'Petutschnig', 'Haberweg 14', 9580, 'Drobollach am Faaker See', '01234567890', 'test@test.at', '2000-01-01', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(7, NULL, 2, 6, 'KLIENT', 'Herr', 'Mag.', 'Gernot', 'Kulis', 'Dorfstraße 56', 9584, 'Finkenstein am Faaker See ', '01234567890', 'test@test.at', '2000-01-01', 1234567890, 'Alter', 'Heuschnupfen', 'test', 'in Rente', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
+
+-- Exportiere Daten aus Tabelle monel.dokument: ~0 rows (ungefaehr)
+DELETE FROM `dokument`;
+/*!40000 ALTER TABLE `dokument` DISABLE KEYS */;
+/*!40000 ALTER TABLE `dokument` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle monel.rechnung
 DROP TABLE IF EXISTS `rechnung`;
@@ -156,11 +161,6 @@ CREATE TABLE IF NOT EXISTS `dokument` (
   CONSTRAINT `FKbesitzerEvent` FOREIGN KEY (`besitzerIdAktivitaet`) REFERENCES `aktivitaetsprotokoll` (`id`),
   CONSTRAINT `FKbesitzerPerson` FOREIGN KEY (`besitzerIdPerson`) REFERENCES `person` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Exportiere Daten aus Tabelle monel.dokument: ~0 rows (ungefaehr)
-DELETE FROM `dokument`;
-/*!40000 ALTER TABLE `dokument` DISABLE KEYS */;
-/*!40000 ALTER TABLE `dokument` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
