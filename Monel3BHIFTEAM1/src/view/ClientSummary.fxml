@@ -26,7 +26,7 @@
          <top>
             <ImageView fx:id="imgClient" fitHeight="250.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                <image>
-                  <Image url="@../resources/icon_Photo_HQ_white.png" />
+                  <Image url="@../resources/icon_emptyUser.png" />
                </image>
             </ImageView>
          </top>
@@ -42,7 +42,7 @@
                         </ImageView>
                      </graphic>
                      <HBox.margin>
-                        <Insets right="10.0" />
+                        <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
                   <Button fx:id="btnEditClient" mnemonicParsing="false" onAction="#btnEditClient_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
@@ -53,6 +53,18 @@
                            </image>
                         </ImageView>
                      </graphic>
+                  </Button>
+                  <Button fx:id="btnBack" mnemonicParsing="false" onAction="#btnBack_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/icon_Back.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
                   </Button>
                </children>
             </HBox>

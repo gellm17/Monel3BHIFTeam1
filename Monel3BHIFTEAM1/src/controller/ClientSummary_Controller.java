@@ -108,6 +108,10 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
     @FXML
     private Tab tabPrivacy;
 
+
+    @FXML
+    private Button btnBack;
+
     private Client editableClient = null;
 
     private boolean personType = false;
@@ -169,6 +173,7 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
     @FXML
     void btnDeleteClient_Clicked(ActionEvent event) throws SQLException {
         PersonDAO.getInstance().deletePerson((Person)editableClient);
+        showScene("ClientList");
     }
 
     @FXML
@@ -234,6 +239,12 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
     private void showPerson(Person person) throws IOException {
         this.personType = true;
        setEditableClient(new Client(person.getId(), person.getSalutation(), person.getTitle(), person.getFirstName(), person.getLastName(), person.getStreetAndNr(), person.getZipCode(), person.getPlace(), person.getTelNr(), person.getEmail(),  person.getBirthDate(),  -1, null, null, null, null, null, null, null, null));
+    }
+
+
+    @FXML
+    void btnBack_Clicked(ActionEvent event) {
+        showScene("ClientList");
     }
 
     @Override
