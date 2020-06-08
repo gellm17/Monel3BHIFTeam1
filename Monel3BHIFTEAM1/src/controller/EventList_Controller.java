@@ -344,7 +344,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
                 if (empty) {
                     setText("");
                 } else {
-                    setText(formatter.format(date));
+                    setText(date.format(formatter));
                 }
             }
         });
@@ -376,8 +376,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
                 if (empty) {
                     setText("");
                 } else {
-                    setText(date);
-
+                    setText(date.format(String.valueOf(formatter)));
                 }
             }
         });
