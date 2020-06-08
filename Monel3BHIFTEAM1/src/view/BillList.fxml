@@ -80,6 +80,76 @@
    <center>
       <TabPane nodeOrientation="RIGHT_TO_LEFT" tabMinWidth="60.0" BorderPane.alignment="CENTER">
          <tabs>
+            <Tab closable="false" styleClass="backgroundTab" text="pro Klient">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="tableClients" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets top="35.0" />
+                           </BorderPane.margin>
+                        </TableView>
+                     </center>
+                     <top>
+                        <BorderPane nodeOrientation="LEFT_TO_RIGHT" styleClass="background" BorderPane.alignment="CENTER">
+                           <center>
+                              <TextField fx:id="tfSearchClient" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" promptText="Suche Klienten" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                           </center>
+                           <right>
+                              <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
+                                 <BorderPane.margin>
+                                    <Insets />
+                                 </BorderPane.margin>
+                                 <children>
+                                    <Button disable="true" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="44.0">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="40.0" />
+                                       </HBox.margin>
+                                       <graphic>
+                                          <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/icon_Such_black.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <styleClass>
+                                          <String fx:value="toolButton" />
+                                          <String fx:value="searchButton" />
+                                       </styleClass>
+                                    </Button>
+                                    <Button fx:id="btnViewBills" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnViewBills_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="100.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/nav_icons/icon_Bills_wf.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <tooltip>
+                                          <Tooltip text="Bearbeiten" />
+                                       </tooltip>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </right>
+                        </BorderPane>
+                     </top>
+                     <padding>
+                        <Insets bottom="30.0" left="30.0" top="35.0" />
+                     </padding>
+                  </BorderPane>
+               </content>
+            </Tab>
             <Tab closable="false" text="???">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
@@ -153,76 +223,6 @@
                   <String fx:value="backgroundTab" />
                   <String fx:value="borderBackgroundTab" />
                </styleClass>
-            </Tab>
-            <Tab closable="false" styleClass="backgroundTab" text="pro Klient">
-               <content>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
-                     <center>
-                        <TableView fx:id="tableClients" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets top="35.0" />
-                           </BorderPane.margin>
-                        </TableView>
-                     </center>
-                     <top>
-                        <BorderPane nodeOrientation="LEFT_TO_RIGHT" styleClass="background" BorderPane.alignment="CENTER">
-                           <center>
-                              <TextField fx:id="tfSearchClient" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" promptText="Suche Klienten" BorderPane.alignment="CENTER">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </TextField>
-                           </center>
-                           <right>
-                              <HBox alignment="CENTER_LEFT" nodeOrientation="LEFT_TO_RIGHT" BorderPane.alignment="CENTER">
-                                 <BorderPane.margin>
-                                    <Insets />
-                                 </BorderPane.margin>
-                                 <children>
-                                    <Button disable="true" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="44.0">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <HBox.margin>
-                                          <Insets right="40.0" />
-                                       </HBox.margin>
-                                       <graphic>
-                                          <ImageView fitHeight="50.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/icon_Such_black.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                       <styleClass>
-                                          <String fx:value="toolButton" />
-                                          <String fx:value="searchButton" />
-                                       </styleClass>
-                                    </Button>
-                                    <Button fx:id="btnViewBills" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnViewBills_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <graphic>
-                                          <ImageView fitHeight="100.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../resources/nav_icons/icon_Bills_wf.png" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                       <tooltip>
-                                          <Tooltip text="Bearbeiten" />
-                                       </tooltip>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                           </right>
-                        </BorderPane>
-                     </top>
-                     <padding>
-                        <Insets bottom="30.0" left="30.0" top="35.0" />
-                     </padding>
-                  </BorderPane>
-               </content>
             </Tab>
          </tabs>
          <BorderPane.margin>
