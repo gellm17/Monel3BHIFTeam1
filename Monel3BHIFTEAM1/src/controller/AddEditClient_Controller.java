@@ -404,10 +404,13 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         Person ec1 = new Person();
         setAllPersonFieldsMandatory(ec1, tfTitleContact1, tfFirstnameContact1, tfLastnameContact1, tfSsnrContact1, tfStreetContact1, tfHousenumberContact1, tfZipContact1, tfPlaceContact1, tfTelNrContact1, tfEmailContact1, dpBirthdateContact1, comboSalutationContact1, tPaneEsv, tPaneEsv, tPaneEsv, true);
         clientToAdd.setEmergencyContact1(ec1);
+        
+        if (cbContact2.isSelected()){
+            Person ec2 = new Person();
+            setAllPersonFields(ec2, tfTitleContact2, tfFirstnameContact2, tfLastnameContact2, tfSsnrContact2, tfStreetContact2, tfHousenumberContact2, tfZipContact2, tfPlaceContact2, tfTelNrContact2, tfEmailContact2, dpBirthdateContact2, comboSalutationContact2, tPaneEsv, tPaneEsv, tPaneEsv);
+            clientToAdd.setEmergencyContact2(ec2);
+        }
 
-        Person ec2 = new Person();
-        setAllPersonFields(ec2, tfTitleContact2, tfFirstnameContact2, tfLastnameContact2, tfSsnrContact2, tfStreetContact2, tfHousenumberContact2, tfZipContact2, tfPlaceContact2, tfTelNrContact2, tfEmailContact2, dpBirthdateContact2, comboSalutationContact2, tPaneEsv, tPaneEsv, tPaneEsv);
-        clientToAdd.setEmergencyContact2(ec2);
 
         if (!tfCheck(tfSsnrClient, "^[1-9][0-9]{9}$", tPaneBasicData, basicErrorCounter)) {
             try {
@@ -782,7 +785,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         this.cbContact2.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                vboxContact2.setDisable(newValue);
+                vboxContact2.setDisable(!newValue);
             }
         });
     }
