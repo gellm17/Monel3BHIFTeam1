@@ -314,10 +314,22 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
             if (editableClient.getEsv() != null) {
                 loadPersonProperties(editableClient.getEsv(), tfTitleEsv, tfFirstnameEsv, tfLastnameEsv, tfStreetEsv, tfHousenumberEsv, tfZipEsv, tfPlaceEsv, tfTelNrEsv, tfEmailEsv, dpBirthdateEsv, comboSalutationEsv);
+                cbSelfDetermined.setSelected(false);
+                vboxEsv.setDisable(false);
+            } else {
+                cbSelfDetermined.setSelected(true);
+                vboxEsv.setDisable(true);
             }
+
             loadPersonProperties(editableClient.getEmergencyContact1(), tfTitleContact1, tfFirstnameContact1, tfLastnameContact1, tfStreetContact1, tfHousenumberContact1, tfZipContact1, tfPlaceContact1, tfTelNrContact1, tfEmailContact1, dpBirthdateContact1, comboSalutationContact1);
+
             if (editableClient.getEmergencyContact2() != null) {
                 loadPersonProperties(editableClient.getEmergencyContact2(), tfTitleContact2, tfFirstnameContact2, tfLastnameContact2, tfStreetContact2, tfHousenumberContact2, tfZipContact2, tfPlaceContact2, tfTelNrContact2, tfEmailContact2, dpBirthdateContact2, comboSalutationContact2);
+                cbContact2.setSelected(true);
+                vboxContact2.setDisable(false);
+            } else {
+                cbContact2.setSelected(false);
+                vboxContact2.setDisable(true);
             }
 
             //INFO
@@ -479,7 +491,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     }
 
     private void setAllPersonFields(Person p, TextField tfTitle, TextField tfFirstname, TextField tfLastname, TextField tfSsnr, TextField tfStreet, TextField tfHousenumber, TextField tfZip, TextField tfPlace, TextField tfTelNr, TextField tfEmail, DatePicker dpBirthdate, ComboBox<Salutation> comboSalutation, TitledPane tpBasic, TitledPane tpAddress, TitledPane tpContact) {
-
+        p.setSalutation(comboSalutation.getSelectionModel().getSelectedItem());
         if (!tfCheck(tfTitle, "^(\\D+)?$", tpBasic, esvErrorCounter)) {
             p.setTitle(tfTitle.getText());
         } else {
@@ -487,7 +499,6 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             esvErrorCounter++;
         }
         if (!(p instanceof Client)) {
-            comboSalutation.getSelectionModel().getSelectedItem();
             if (!tfCheck(tfFirstname, "^(\\D+)?$", tpBasic, esvErrorCounter)) {
                 p.setFirstName(tfFirstname.getText());
             } else {
@@ -555,6 +566,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     }
 
     private void setAllPersonFieldsMandatory(Person p, TextField tfTitle, TextField tfFirstname, TextField tfLastname, TextField tfSsnr, TextField tfStreet, TextField tfHousenumber, TextField tfZip, TextField tfPlace, TextField tfTelNr, TextField tfEmail, DatePicker dpBirthdate, ComboBox<Salutation> comboSalutation, TitledPane tpBasic, TitledPane tpAddress, TitledPane tpContact, boolean esv) {
+        p.setSalutation(comboSalutation.getSelectionModel().getSelectedItem());
         if (!esv){
             if (!tfCheck(tfTitle, "^(\\D+)?$", tpBasic, basicErrorCounter)) {
                 p.setTitle(tfTitle.getText());
@@ -562,7 +574,6 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
                 errors.add(true);
             }
             if (!(p instanceof Client)) {
-                comboSalutation.getSelectionModel().getSelectedItem();
                 if (!tfCheck(tfFirstname, "^\\D+$", tpBasic, basicErrorCounter)) {
                     p.setFirstName(tfFirstname.getText());
                 } else {
