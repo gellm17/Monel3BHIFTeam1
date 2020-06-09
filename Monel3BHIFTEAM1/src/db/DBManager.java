@@ -33,7 +33,7 @@ public class DBManager {
     private static String sqlDeleteEventprotocol    = "DELETE FROM aktivitaetsprotokoll WHERE id = ?";
     private static String sqlDeleteBill             = "DELETE FROM rechnung WHERE id = ?";
     private static String sqlDeleteDocument         = "DELETE FROM dokument WHERE id = ?";
-    private static String sqlSelectEventprotocol    = "SELECT * FROM aktivitaetsprotokoll WHERE klient = ?, jahr_Monat = ?, rechnung = ?";
+    private static String sqlSelectEventprotocol    = "SELECT * FROM aktivitaetsprotokoll WHERE klient = ? AND jahr_Monat = ?";
 
     private static PreparedStatement stmtInsertPerson           = null;
     private static PreparedStatement stmtInsertClient           = null;
@@ -349,7 +349,11 @@ public class DBManager {
     public static int insertBill(Bill b) throws SQLException {
         int newId = -1;
         stmtInsertBill.setInt(1, b.getClient().getId());
-        stmtInsertBill.setDate(2, Date.valueOf(b.getDateOfIssue()));
+        if (b.getDateOfIssue() != null) {
+            stmtInsertBill.setDate(2, Date.valueOf(b.getDateOfIssue()));
+        } else {
+            stmtInsertBill.setNull(2, Types.DATE);
+        }
         stmtInsertBill.setString(3, b.getUse());
         boolean added = (stmtInsertBill.executeUpdate() == 1);
         ResultSet rs = stmtInsertBill.getGeneratedKeys();
@@ -896,7 +900,6 @@ public class DBManager {
         ArrayList<EventProtocol> evps = new ArrayList<EventProtocol>();
         stmtSelectEventprotocol.setInt(1, c.getId());
         stmtSelectEventprotocol.setString(2, year_month);
-        stmtSelectEventprotocol.setNull(3, Types.INTEGER);
         ResultSet rs = stmtSelectEventprotocol.executeQuery();
         HashMap<Integer, Event> evns = getAllEvents();
         HashMap<Integer, Client> clis = getClients();
