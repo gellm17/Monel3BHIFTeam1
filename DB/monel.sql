@@ -73,10 +73,7 @@ INSERT INTO `person` (`id`, `esv`, `notfallkontakt1`, `notfallkontakt2`, `person
 	(7, NULL, 2, 6, 'KLIENT', 'Herr', 'Mag.', 'Gernot', 'Kulis', 'Dorfstraße 56', 9584, 'Finkenstein am Faaker See ', '01234567890', 'test@test.at', '2000-01-01', 1234567890, 'Alter', 'Heuschnupfen', 'test', 'in Rente', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 
--- Exportiere Daten aus Tabelle monel.dokument: ~0 rows (ungefaehr)
-DELETE FROM `dokument`;
-/*!40000 ALTER TABLE `dokument` DISABLE KEYS */;
-/*!40000 ALTER TABLE `dokument` ENABLE KEYS */;
+
 
 -- Exportiere Struktur von Tabelle monel.rechnung
 DROP TABLE IF EXISTS `rechnung`;
@@ -161,6 +158,11 @@ CREATE TABLE IF NOT EXISTS `dokument` (
   CONSTRAINT `FKbesitzerEvent` FOREIGN KEY (`besitzerIdAktivitaet`) REFERENCES `aktivitaetsprotokoll` (`id`),
   CONSTRAINT `FKbesitzerPerson` FOREIGN KEY (`besitzerIdPerson`) REFERENCES `person` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Exportiere Daten aus Tabelle monel.dokument: ~0 rows (ungefaehr)
+DELETE FROM `dokument`;
+/*!40000 ALTER TABLE `dokument` DISABLE KEYS */;
+/*!40000 ALTER TABLE `dokument` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
