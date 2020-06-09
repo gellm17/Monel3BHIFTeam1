@@ -174,15 +174,16 @@ import java.time.LocalDate;
         void btnGenerateBill_Clicked(ActionEvent event) {
              Bill generatedBill = new Bill(0, client, LocalDate.now(), "Monatsrechnung " + lbYearMonth.getText() + " für " + client.getFirstName() + " " + client.getLastName());            //TODO NOT sure if date of today or yearMonth
              generatedBill.setEventProtocols(FXCollections.observableArrayList(EventDAO.getInstance().getEventProtocolsByClientMonth(client, lbYearMonth.getText())));
-             for (EventProtocol ep : generatedBill.getEventProtocols()) {
+             /*for (EventProtocol ep : generatedBill.getEventProtocols()) {
                   ep.setBill(generatedBill);
                   try {
-                       DBManager.updateEventprotocol(ep);
+                       //TODO
+                       //DBManager.updateEventprotocol(ep);
                   }catch(Exception e){
                        e.printStackTrace();
                   }
 
-             }
+             }*/
 
              BillDAO.getInstance().addBill(generatedBill);
         }

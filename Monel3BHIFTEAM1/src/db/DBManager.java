@@ -600,7 +600,7 @@ public class DBManager {
         }
         stmtUpdateEventprotocol.setTime(4, Time.valueOf(ep.getStartTime()));
         stmtUpdateEventprotocol.setTime(5, Time.valueOf(ep.getEndTime()));
-        stmtUpdateEventprotocol.setDate(6, Date.valueOf(ep.getYear_month()));
+        stmtUpdateEventprotocol.setString(6, ep.getYear_month());
         stmtUpdateEventprotocol.setDouble(7, ep.getHourlyRate()); // must be changed to decimal
         stmtUpdateEventprotocol.setDouble(8, ep.getRideCosts()); // must be changed to decimal
         stmtUpdateEventprotocol.setInt(9, ep.getId());
