@@ -369,7 +369,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
         tcKategorie.prefWidthProperty().bind(tableEvents.widthProperty().divide(3)); // w * 1/4
 
         //EventProtocol
-    tcDateProtocol.setCellFactory(column -> new TableCell<EventProtocol, String>() {
+    /*tcDateProtocol.setCellFactory(column -> new TableCell<EventProtocol, String>() {
             @Override
             protected void updateItem(String date, boolean empty) {
                 super.updateItem(date, empty);
@@ -379,7 +379,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
                     setText(date.format(String.valueOf(formatter)));
                 }
             }
-        });
+        });*/
         tcHourlyRate.setCellFactory(column -> new TableCell<EventProtocol, Double>() {
             @Override
             protected void updateItem(Double value, boolean empty) {

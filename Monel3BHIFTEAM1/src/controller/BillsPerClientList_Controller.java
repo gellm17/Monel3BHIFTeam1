@@ -178,6 +178,7 @@ import java.time.LocalDate;
                   generatedBill.setEventProtocols(FXCollections.observableArrayList(EventDAO.getInstance().getEventProtocolsByClientMonth(client, lbYearMonth.getText())));
                   generatedBill.setDateOfIssue(LocalDate.now());
                   generatedBill.setUse("Monatsrechnung " + lbYearMonth.getText() + " für " + client.getFirstName() + " " + client.getLastName());
+                  DBManager.updateBill(generatedBill);
              } catch (Exception e){
                   e.printStackTrace();
              }
