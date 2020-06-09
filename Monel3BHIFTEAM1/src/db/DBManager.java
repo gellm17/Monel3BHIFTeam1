@@ -710,13 +710,17 @@ public class DBManager {
         EventProtocol ep = null;
         ArrayList<EventProtocol> evps = getAllEventProtocols(c, year_month);
         res.setNr(insertBill(res));
+        for (EventProtocol e: evps) {
+            e.setBill(res);
+            updateEventprotocol(e);
+        }
         res.setEventProtocols(FXCollections.observableList(evps));
-        Iterator<EventProtocol> iter = evps.iterator();
+        /*Iterator<EventProtocol> iter = evps.iterator();
         while (iter.hasNext()) {
             ep = iter.next();
             ep.setBill(res);
             updateEventprotocol(ep);
-        }
+        }*/
         return res;
     }
 
