@@ -179,7 +179,7 @@
                               </ScrollPane>
                            </content>
                         </Tab>
-                        <Tab fx:id="tabInfos" closable="false" styleClass="summaryTab" text="Informationen">
+                        <Tab fx:id="tabInfo" closable="false" styleClass="summaryTab" text="Informationen">
                            <content>
                               <ScrollPane fitToWidth="true">
                                  <content>
@@ -262,7 +262,7 @@
                               </ScrollPane>
                            </content>
                         </Tab>
-                        <Tab fx:id="tabSecurity" closable="false" styleClass="summaryTab" text="Datenschutz">
+                        <Tab fx:id="tabPrivacy" closable="false" styleClass="summaryTab" text="Datenschutz">
                           <content>
                               <ScrollPane fitToWidth="true">
                                  <content>

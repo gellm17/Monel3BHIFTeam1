@@ -34,6 +34,9 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
     private Button btnEditClient;
 
     @FXML
+    private Tab tabBasicData;
+
+    @FXML
     private Label lbNameClient;
 
     @FXML
@@ -55,10 +58,7 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
     private Label lbEmailClient;
 
     @FXML
-    private Label lbIbanClient;
-
-    @FXML
-    private Label lbBicClient;
+    private Tab tabInfo;
 
     @FXML
     private Label lbDiagnosisClient;
@@ -73,6 +73,9 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
     private Label lbOtherClient;
 
     @FXML
+    private Tab tabPrivacy;
+
+    @FXML
     private CheckBox cbPrivacy1Client;
 
     @FXML
@@ -85,32 +88,80 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
     private CheckBox cbPrivacy2Client;
 
     @FXML
-    private Button btnShowEsv;
-
-    @FXML
-    private Button btnShowContact1;
-
-    @FXML
-    private Button btnShowContact2;
+    private Tab tabEsv;
 
     @FXML
     private Label lbNameEsv;
 
     @FXML
+    private Label lbBirthdateEsv;
+
+    @FXML
+    private Label lbStreetEsv;
+
+    @FXML
+    private Label lbPlaceEsv;
+
+    @FXML
+    private Label lbPhoneEsv;
+
+    @FXML
+    private Label lbEmailEsv;
+
+    @FXML
+    private Tab tabContact1;
+
+    @FXML
     private Label lbNameContact1;
+
+    @FXML
+    private Label lbBirthdateContact1;
+
+    @FXML
+    private Label lbStreetContact1;
+
+    @FXML
+    private Label lbPlaceContact1;
+
+    @FXML
+    private Label lbPhoneContact1;
+
+    @FXML
+    private Label lbEmailContact1;
+
+    @FXML
+    private Tab tabContact2;
 
     @FXML
     private Label lbNameContact2;
 
     @FXML
-    private Tab tabInfo;
+    private Label lbBirthdateContact2;
 
     @FXML
-    private Tab tabPrivacy;
+    private Label lbStreetContact2;
 
+    @FXML
+    private Label lbPlaceContact2;
+
+    @FXML
+    private Label lbPhoneContact2;
+
+    @FXML
+    private Label lbEmailContact2;
+
+    @FXML
+    private Button btnInfo;
+
+    @FXML
+    private Button btnSettings;
+
+    @FXML
+    private Label lbTitle;
 
     @FXML
     private Button btnBack;
+
 
     private Client editableClient = null;
 
@@ -207,7 +258,7 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
         }
     }
 
-    @FXML
+    /*@FXML
     void btnShowContact1_Clicked(ActionEvent event) throws IOException {
         try {
             showPerson(editableClient.getEmergencyContact1());
@@ -233,7 +284,7 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 
     private void showPerson(Person person) throws IOException {
@@ -245,6 +296,16 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
     @FXML
     void btnBack_Clicked(ActionEvent event) {
         showScene("ClientList");
+    }
+
+    @FXML
+    void btnInfo_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnSettings_Clicked(ActionEvent event) {
+
     }
 
     @Override
