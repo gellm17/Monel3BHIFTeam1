@@ -176,6 +176,8 @@ import java.time.LocalDate;
              try {
                   generatedBill = DBManager.createBill(client, lbYearMonth.getText());    //new Bill(0, client, LocalDate.now(), "Monatsrechnung " + lbYearMonth.getText() + " für " + client.getFirstName() + " " + client.getLastName());            //TODO NOT sure if date of today or yearMonth
                   generatedBill.setEventProtocols(FXCollections.observableArrayList(EventDAO.getInstance().getEventProtocolsByClientMonth(client, lbYearMonth.getText())));
+                  generatedBill.setDateOfIssue(LocalDate.now());
+                  generatedBill.setUse("Monatsrechnung " + lbYearMonth.getText() + " für " + client.getFirstName() + " " + client.getLastName());
              } catch (Exception e){
                   e.printStackTrace();
              }
