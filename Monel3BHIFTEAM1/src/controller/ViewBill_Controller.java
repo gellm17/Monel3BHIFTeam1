@@ -66,7 +66,7 @@ public class ViewBill_Controller extends SceneLoader {
 
     public void setBill(Bill bill) {
         this.bill = bill;
-        bill.setEventProtocols(EventDAO.getInstance().getEventProtocolsByBill(bill));
+        //bill.setEventProtocols(EventDAO.getInstance().getEventProtocolsByBill(bill));
         System.out.println("Rechnung: " + bill.getNr());
         lbClient.setText(bill.getClient().getFirstName() + " " + bill.getClient().getLastName());
         lbClientOnBill.setText(bill.getClient().getFirstName() + " " + bill.getClient().getLastName());
