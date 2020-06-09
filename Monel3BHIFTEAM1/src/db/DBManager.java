@@ -33,7 +33,7 @@ public class DBManager {
     private static String sqlDeleteEventprotocol    = "DELETE FROM aktivitaetsprotokoll WHERE id = ?";
     private static String sqlDeleteBill             = "DELETE FROM rechnung WHERE id = ?";
     private static String sqlDeleteDocument         = "DELETE FROM dokument WHERE id = ?";
-    private static String sqlSelectEventprotocol    = "SELECT * FROM aktivitaetsprotokoll WHERE klient = ? AND jahr_Monat = ?";
+    private static String sqlSelectEventprotocol    = "SELECT * FROM aktivitaetsprotokoll WHERE klient = ? AND jahr_Monat like ?";
 
     private static PreparedStatement stmtInsertPerson           = null;
     private static PreparedStatement stmtInsertClient           = null;
@@ -719,7 +719,6 @@ public class DBManager {
             updateEventprotocol(e);
         }
         res.setEventProtocols(FXCollections.observableList(evps));
-        insertBill(res);
         /*Iterator<EventProtocol> iter = evps.iterator();
         while (iter.hasNext()) {
             ep = iter.next();
@@ -946,15 +945,16 @@ public class DBManager {
     public static ArrayList<Bill> getAllBills(Client c) throws SQLException {
         ArrayList<Bill> bils = new ArrayList<Bill>();
         Statement stmt = conn.createStatement();
-
         ResultSet rs = stmt.executeQuery("SELECT * FROM rechnung WHERE klient = " + c.getId());
         HashMap<Integer, Client> clis = getClients();
+        ArrayList<EventProtocol> evps = getAllEventProtocols(c, "%%");
         Bill b;
         while (rs.next()) {
             b = Bill.fromResults(rs);
             if (rs.getInt("klient") != 0) {
                 b.setClient(clis.get(rs.getInt("klient")));
             }
+            b.setEventProtocols(FXCollections.observableList(evps));
             bils.add(b);
         }
         return bils;
