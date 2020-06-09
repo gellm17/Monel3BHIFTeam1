@@ -715,6 +715,7 @@ public class DBManager {
             updateEventprotocol(e);
         }
         res.setEventProtocols(FXCollections.observableList(evps));
+        insertBill(res);
         /*Iterator<EventProtocol> iter = evps.iterator();
         while (iter.hasNext()) {
             ep = iter.next();
