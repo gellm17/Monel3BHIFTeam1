@@ -65,6 +65,9 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
         private TextField tfRideCostsEvent;
 
         @FXML
+        private ComboBox comboTaxes;
+
+        @FXML
         private Label lbMessage;
 
         @FXML

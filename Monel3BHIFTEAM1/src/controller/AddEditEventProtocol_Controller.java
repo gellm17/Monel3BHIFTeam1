@@ -68,6 +68,9 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
     private TextField tfRideCostsEvent;
 
     @FXML
+    private ComboBox comboTaxes;
+
+    @FXML
     private Label lbMessage;
 
     @FXML
