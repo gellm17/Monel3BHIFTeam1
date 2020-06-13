@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /*#bill {
+            background-image: url("backg.png");
+            background-repeat: no-repeat;
+            position: relative;
+            width: 652px;
+            height: 920px;
+        }*/
+
+        /*img {
+            display: block;
+            width: auto;
+            height: auto;
+        }*/
+
+        #text {
+            width: 652px;
+            height: 920px;           
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 2em;
+        }
+
+        #betraege {
+            /*margin-right: 3em*/
+        }
+
+        #briefkopf {
+            margin-top: 1.2em;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .final {
+            border-top: 1px solid black;
+            padding-top: 0.7em;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        .underline {
+            border-bottom: 1px solid rgb(230, 230, 230);
+            padding-bottom: 1em;
+            margin-bottom: 1em;
+            width: 100%;
+        }
+
+        #rechnung {
+            position: absolute;
+            bottom: 30px;
+            right: 200px;
+        }
+
+        #rechnung td {
+            padding-bottom: 1em;
+        }
+
+        /*table, th, td, tr {
+            border: 1px solid gray;
+        }*/
+    </style>
+</head>
+<body>
+    <!--<div id="bill">
+        <img src="backg.png" style="visibility: hidden;" />
+    </div>-->
+
+    <div id="text">
+        <div id="datum" class="underline">
+            <h4>Rechnung Monel</h4>
+            <table>
+                <tr>
+                    <td>Rechnungsdatum:</td>
+                    <td id="rechnungsdatum">07.07.2200</td>
+                </tr>
+                <tr>
+                    <td>Ausstellungsdatum:</td>
+                    <td id="ausstellungsdatum">07.07.2200</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="briefkopf" class="underline">
+            <table>
+                <tr>
+                    <td id="anrede">Herr Dr.</td>
+                </tr>
+                <tr>
+                    <td id="name">Max Mustermann</td>
+                </tr>
+                <tr>
+                    <td id="strasse">Bauhausstraße 11</td>
+                </tr>
+                <tr>
+                    <td id="ort">9370 Villachersee</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="briefkopf" class="underline">
+            <table>
+                <tr>
+                    <td>Rechnungsnummer:</td>
+                    <td id="rechnungsNr" class="right">A233</td>
+                </tr>
+                <tr>
+                    <td>UID-Nummer:</td>
+                    <td id="uidNr" class="right">AEB123456789</td>
+                </tr>
+            </table>
+        </div>
+    
+        <div id="betraege">
+            <table style="float: right;">
+                <tr>
+                    <th>Beträge</th>
+                </tr>
+                <tr>
+                    <td>Einzel:</td>
+                    <td id="einzel" class="right">70,-</td>
+                </tr>
+                <tr>
+                    <td>Gruppen:</td>
+                    <td id="gruppen" class="right">80,-</td>
+                </tr>
+                <tr>
+                    <td>Fahrtkosten:</td>
+                    <td id="fahrtkosten" class="right">20,-</td>
+                </tr>
+                <tr>
+                    <td class="final">Gesamt:</td>
+                    <td id="gesamtpreis" class="right final">170,-</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="rechnung">
+            <table>
+                <tr>
+                    <td id="firma">Monel AG</td>
+                </tr>
+                <tr>
+                    <td id="iban">AT0012345689</td>
+                </tr>
+                <tr>
+                    <td id="bic">AUABBWCDE</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
