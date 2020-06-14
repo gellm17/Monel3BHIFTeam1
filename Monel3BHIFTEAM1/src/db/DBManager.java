@@ -26,7 +26,7 @@ public class DBManager {
     private static String sqlUpdateSponsor          = "UPDATE person SET anrede = ?, titel = ?, vorname = ?, nachname = ?, strasse_hausnummer = ?, plz = ?, ort = ?, telefonnummer = ?, email = ?, geburtsdatum = ?, firmenname = ?, firmentelefonnummer = ?, firmenemail = ? WHERE id = ?";
     private static String sqlUpdateEvent            = "UPDATE aktivitaet SET datum = ?, aktivitaetsbezeichnung = ? WHERE id = ?";
     private static String sqlUpdateEventprotocol    = "UPDATE aktivitaetsprotokoll SET mitarbeiter = ?, klient = ?, rechnung = ?, startzeit = ?, endzeit = ?, jahr_Monat = ?, stundensatz = ?, fahrtkosten = ? WHERE id = ?";
-    private static String sqlUpdateBill             = "UPDATE rechnung SET ausstellungsdatum = ?, erwendungszweck = ? WHERE id = ?";
+    private static String sqlUpdateBill             = "UPDATE rechnung SET ausstellungsdatum = ?, verwendungszweck = ? WHERE rechnungsnummer = ?";
     private static String sqlUpdateDocument         = "UPDATE dokument SET besitzerIdPerson = ?, besitzerIdAktivitaet = ?, pfad = ?, dokumentenart = ?, besitzer = ? WHERE id = ?";
     private static String sqlDeletePerson           = "UPDATE person SET geloescht = ? WHERE id = ?"; // for person, client, employee and sponsor
     private static String sqlDeleteEvent            = "DELETE FROM aktivitaet WHERE id = ?";
