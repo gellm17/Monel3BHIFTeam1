@@ -130,7 +130,7 @@
          <center>
             <VBox alignment="BOTTOM_LEFT">
                <children>
-                  <Button fx:id="btnPrint" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="toolButton" text="Drucken">
+                  <Button fx:id="btnPrint" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnPrint_Clicked" styleClass="toolButton" text="Drucken">
                      <font>
                         <Font size="18.0" />
                      </font>
