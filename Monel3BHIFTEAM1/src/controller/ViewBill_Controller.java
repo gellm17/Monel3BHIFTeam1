@@ -300,7 +300,7 @@ public class ViewBill_Controller extends SceneLoader {
                 "</html>";
 
 
-        File file = new File(bill.getDateOfIssue().toString() +' '+bill.getClient().getLastName() + "_" + bill.getClient().getFirstName() + ".pdf");
+        File file = new File(bill.getDateOfIssue().toString() +' '+bill.getClient().getLastName() + "_" + bill.getClient().getFirstName() + ".html");
         try {
             Files.write(file.toPath(), html.getBytes());
             Desktop.getDesktop().browse(file.toURI());
