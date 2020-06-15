@@ -150,6 +150,10 @@
     -fx-background-color:transparent;
 }
 
+.table-view .column-header .label {
+    -fx-alignment: center-left;
+}
+
 /* Accordion */
 
 /*.titled-pane > .title 
