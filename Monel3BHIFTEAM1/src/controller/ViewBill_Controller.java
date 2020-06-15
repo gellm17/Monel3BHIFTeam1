@@ -195,12 +195,12 @@ public class ViewBill_Controller extends SceneLoader {
                 "\n" +
                 "        #rechnung {\n" +
                 "            position: absolute;\n" +
-                "            bottom: 30px;\n" +
-                "            right: 200px;\n" +
+                "            bottom: 45px;\n" +
+                "            right: 300px;\n" +
                 "        }\n" +
                 "\n" +
                 "        #rechnung td {\n" +
-                "            padding-bottom: 1em;\n" +
+                "            padding-bottom: 0.8em;\n" +
                 "        }\n" +
                 "\n" +
                 "        /*table, th, td, tr {\n" +
@@ -253,7 +253,7 @@ public class ViewBill_Controller extends SceneLoader {
                 "                </tr>\n" +
                 "                <tr>\n" +
                 "                    <td>UID-Nummer:</td>\n" +
-                "                    <td id=\"uidNr\" class=\"right\">AEB123456789</td>\n" +
+                "                    <td id=\"uidNr\" class=\"right\">ATU 75050926</td>\n" +
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +
@@ -288,10 +288,10 @@ public class ViewBill_Controller extends SceneLoader {
                 "                    <td id=\"firma\">Monel AG</td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
-                "                    <td id=\"iban\">AT0012345689</td>\n" +
+                "                    <td id=\"iban\">AT09 3946 4000 0015 0490</td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
-                "                    <td id=\"bic\">AUABBWCDE</td>\n" +
+                "                    <td id=\"bic\">AUATBWCDE</td>\n" +
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +
