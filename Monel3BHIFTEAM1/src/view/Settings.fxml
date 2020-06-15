@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ColorPicker?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="600.0" prefWidth="900.0" styleClass="background" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Settings_Controller">
+   <center>
+      <TabPane nodeOrientation="LEFT_TO_RIGHT" styleClass="settingsTabPane" tabMinWidth="100.0">
+         <tabs>
+            <Tab fx:id="tabCommon" closable="false" text="Allgemein">
+               <content>
+                  <BorderPane>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <right>
+                        <VBox alignment="TOP_CENTER" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label text="Stundensätze">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <ListView>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
+                              </ListView>
+                              <BorderPane>
+                                 <left>
+                                    <HBox BorderPane.alignment="CENTER">
+                                       <children>
+                                          <TextField prefWidth="100.0" promptText="neu">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </TextField>
+                                          <Button fx:id="btnAddHourlyRate" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnAddHourlyRate_Clicked" styleClass="toolButton">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <graphic>
+                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../resources/icon_Add.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                 </left>
+                                 <right>
+                                    <Button fx:id="btnDeleteHourlyRate" disable="true" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnDeleteHourlyRate_Clicked" styleClass="toolButton" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/icon_Del.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </right>
+                              </BorderPane>
+                           </children>
+                           <BorderPane.margin>
+                              <Insets bottom="20.0" left="20.0" />
+                           </BorderPane.margin>
+                        </VBox>
+                     </right>
+                     <center>
+                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label layoutX="10.0" layoutY="170.0" text="Schrift">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <HBox prefHeight="0.0">
+                                 <children>
+                                    <VBox prefHeight="200.0">
+                                       <children>
+                                          <Label text="Schriftart">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox prefWidth="300.0">
+                                             <VBox.margin>
+                                                <Insets right="10.0" />
+                                             </VBox.margin>
+                                          </ComboBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="200.0">
+                                       <children>
+                                          <Label text="Größe">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox prefWidth="100.0">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </ComboBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="30.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <Label layoutX="10.0" layoutY="70.0" text="Farben">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <GridPane>
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="150.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Akzent">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <ColorPicker fx:id="colorAccent" GridPane.columnIndex="1" />
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </VBox>
+                     </center>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tabCompanyData" closable="false" text="Firmendaten">
+               <content>
+                  <BorderPane>
+                     <center>
+                        <ScrollPane fitToWidth="true" BorderPane.alignment="CENTER">
+                           <BorderPane.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </BorderPane.margin>
+                           <content>
+                              <VBox>
+                                 <children>
+                                    <Label text="Firmenname">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfNameCompany" maxWidth="400.0" promptText="Monel GmbH">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label layoutX="10.0" layoutY="10.0" text="UID-Nummer">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfUidCompany" layoutX="10.0" layoutY="30.0" maxWidth="400.0" promptText="ATU 75050926">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <Label layoutX="10.0" layoutY="10.0" text="IBAN">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfIbanCompany" layoutX="10.0" layoutY="27.0" maxWidth="400.0" promptText="AT09 3946 4000 0015 0490">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label layoutX="10.0" layoutY="10.0" text="BIC">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfBicCompany" layoutX="10.0" layoutY="27.0" maxWidth="250.0" promptText="BKAUATWW">
+                                       <VBox.margin>
+                                          <Insets bottom="50.0" />
+                                       </VBox.margin>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <HBox prefHeight="0.0">
+                                       <children>
+                                          <VBox prefHeight="200.0">
+                                             <children>
+                                                <Label text="Straße">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="tfStreetCompany" prefWidth="400.0" promptText="Villacher Straße">
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                          </VBox>
+                                          <VBox prefHeight="200.0">
+                                             <children>
+                                                <Label text="Nr.">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="tfHousenumberCompany" maxWidth="-Infinity" prefWidth="50.0" promptText="95">
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="0.0">
+                                       <children>
+                                          <VBox prefHeight="200.0">
+                                             <children>
+                                                <Label text="PLZ">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="tfZipCompany" maxWidth="-Infinity" prefWidth="100.0" promptText="9800">
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                          </VBox>
+                                          <VBox prefHeight="200.0">
+                                             <children>
+                                                <Label text="Ort">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="tfPlaceCompany" prefWidth="400.0" promptText="Spittal Drau">
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </TextField>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </center>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tabTables" closable="false" text="Tabellen">
+               <content>
+                  <BorderPane>
+                     <center>
+                        <TabPane nodeOrientation="LEFT_TO_RIGHT" tabMinWidth="100.0">
+                           <tabs>
+                              <Tab fx:id="tabColumnsClients" closable="false" text="Klienten">
+                                 <content>
+                                    <BorderPane>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                       <left>
+                                          <BorderPane BorderPane.alignment="CENTER">
+                                             <center>
+                                                <ListView fx:id="lvAvailableColumnsClients" />
+                                             </center>
+                                             <top>
+                                                <Label text="Spalten" BorderPane.alignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </top>
+                                          </BorderPane>
+                                       </left>
+                                       <center>
+                                          <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Button fx:id="btnAddColumnClients" mnemonicParsing="false" onAction="#btnAddColumnClients_Clicked" prefHeight="40.0" prefWidth="200.0" styleClass="toolButton" text="Hinzufügen &gt;">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                                <Button fx:id="btnRemoveColumnClients" disable="true" layoutX="85.0" layoutY="183.0" mnemonicParsing="false" onAction="#btnRemoveColumnClients_Clicked" prefHeight="40.0" prefWidth="200.0" styleClass="toolButton" text="&lt; Entfernen">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="30.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                                <Button fx:id="btnMoveColumnClientsUp" disable="true" layoutX="85.0" layoutY="203.0" mnemonicParsing="false" onAction="#btnMoveColumnClientsUp_Clicked" prefHeight="40.0" prefWidth="150.0" styleClass="toolButton" text="nach oben">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                                <Button fx:id="btnMoveColumnClientsDown" disable="true" layoutX="85.0" layoutY="223.0" mnemonicParsing="false" onAction="#btnMoveColumnClientsDown_Clicked" prefHeight="40.0" prefWidth="150.0" styleClass="toolButton" text="nach unten">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </VBox>
+                                       </center>
+                                       <right>
+                                          <BorderPane>
+                                             <center>
+                                                <ListView fx:id="lvSelectedColumnsClients" />
+                                             </center>
+                                             <top>
+                                                <Label text="in Tabelle" BorderPane.alignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </top>
+                                          </BorderPane>
+                                       </right>
+                                    </BorderPane>
+                                 </content>
+                                 <styleClass>
+                                    <String fx:value="backgroundTab" />
+                                    <String fx:value="borderBackgroundTab" />
+                                 </styleClass>
+                              </Tab>
+                              <Tab fx:id="tabColumnsEmployees" closable="false" styleClass="backgroundTab" text="Mitarbeiter">
+                                 <content>
+                                    <BorderPane>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                       <left>
+                                          <BorderPane BorderPane.alignment="CENTER">
+                                             <center>
+                                                <ListView fx:id="lvAvailableColumnsEmployees" />
+                                             </center>
+                                             <top>
+                                                <Label text="Spalten" BorderPane.alignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </top>
+                                          </BorderPane>
+                                       </left>
+                                       <center>
+                                          <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Button fx:id="btnAddColumnEmployees" mnemonicParsing="false" onAction="#btnAddColumnEmployees_Clicked" prefHeight="40.0" prefWidth="200.0" styleClass="toolButton" text="Hinzufügen &gt;">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                                <Button fx:id="btnRemoveColumnEmployees" disable="true" layoutX="85.0" layoutY="183.0" mnemonicParsing="false" onAction="#btnRemoveColumnEmployees_Clicked" prefHeight="40.0" prefWidth="200.0" styleClass="toolButton" text="&lt; Entfernen">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="30.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                                <Button fx:id="btnMoveColumnEmployeesUp" disable="true" layoutX="85.0" layoutY="203.0" mnemonicParsing="false" onAction="#btnMoveColumnEmployeesUp_Clicked" prefHeight="40.0" prefWidth="150.0" styleClass="toolButton" text="nach oben">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                                <Button fx:id="btnMoveColumnEmployeesDown" disable="true" layoutX="85.0" layoutY="223.0" mnemonicParsing="false" onAction="#btnMoveColumnEmployeesDown_Clicked" prefHeight="40.0" prefWidth="150.0" styleClass="toolButton" text="nach unten">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </VBox>
+                                       </center>
+                                       <right>
+                                          <BorderPane>
+                                             <center>
+                                                <ListView fx:id="lvSelectedColumnsEmployees" />
+                                             </center>
+                                             <top>
+                                                <Label text="in Tabelle" BorderPane.alignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </top>
+                                          </BorderPane>
+                                       </right>
+                                    </BorderPane>
+                                 </content>
+                              </Tab>
+                              <Tab fx:id="tabColumnsSponsors" closable="false" styleClass="backgroundTab" text="Sponsoren">
+                                 <content>
+                                    <BorderPane>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                       <left>
+                                          <BorderPane BorderPane.alignment="CENTER">
+                                             <center>
+                                                <ListView fx:id="lvAvailableColumnsSponsors" />
+                                             </center>
+                                             <top>
+                                                <Label text="Spalten" BorderPane.alignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </top>
+                                          </BorderPane>
+                                       </left>
+                                       <center>
+                                          <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Button fx:id="btnAddColumnSponsors" mnemonicParsing="false" onAction="#btnAddColumnSponsors_Clicked" prefHeight="40.0" prefWidth="200.0" styleClass="toolButton" text="Hinzufügen &gt;">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                                <Button fx:id="btnRemoveColumnSponsors" disable="true" layoutX="85.0" layoutY="183.0" mnemonicParsing="false" onAction="#btnRemoveColumnSponsors_Clicked" prefHeight="40.0" prefWidth="200.0" styleClass="toolButton" text="&lt; Entfernen">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="30.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                                <Button fx:id="btnMoveColumnSponsorsUp" disable="true" layoutX="85.0" layoutY="203.0" mnemonicParsing="false" onAction="#btnMoveColumnSponsorsUp_Clicked" prefHeight="40.0" prefWidth="150.0" styleClass="toolButton" text="nach oben">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                                <Button fx:id="btnMoveColumnSponsorsDown" disable="true" layoutX="85.0" layoutY="223.0" mnemonicParsing="false" onAction="#btnMoveColumnSponsorsDown_Clicked" prefHeight="40.0" prefWidth="150.0" styleClass="toolButton" text="nach unten">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </VBox>
+                                       </center>
+                                       <right>
+                                          <BorderPane>
+                                             <center>
+                                                <ListView fx:id="lvSelectedColumnsSponsors" />
+                                             </center>
+                                             <top>
+                                                <Label text="in Tabelle" BorderPane.alignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </top>
+                                          </BorderPane>
+                                       </right>
+                                    </BorderPane>
+                                 </content>
+                              </Tab>
+                              <Tab fx:id="tabColumnsActivities" closable="false" styleClass="backgroundTab" text="Aktivitäten">
+                                 <content>
+                                    <BorderPane>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                       <left>
+                                          <BorderPane BorderPane.alignment="CENTER">
+                                             <center>
+                                                <ListView fx:id="lvAvailableColumnsEvents" />
+                                             </center>
+                                             <top>
+                                                <Label text="Spalten" BorderPane.alignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </top>
+                                          </BorderPane>
+                                       </left>
+                                       <center>
+                                          <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Button fx:id="btnAddColumnEvents" mnemonicParsing="false" onAction="#btnAddColumnEvents_Clicked" prefHeight="40.0" prefWidth="200.0" styleClass="toolButton" text="Hinzufügen &gt;">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                                <Button fx:id="btnRemoveColumnEvents" disable="true" layoutX="85.0" layoutY="183.0" mnemonicParsing="false" onAction="#btnRemoveColumnEvents_Clicked" prefHeight="40.0" prefWidth="200.0" styleClass="toolButton" text="&lt; Entfernen">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="30.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                                <Button fx:id="btnMoveColumnEventsUp" disable="true" layoutX="85.0" layoutY="203.0" mnemonicParsing="false" onAction="#btnMoveColumnEventsUp_Clicked" prefHeight="40.0" prefWidth="150.0" styleClass="toolButton" text="nach oben">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                                <Button fx:id="btnMoveColumnEventsUp" disable="true" layoutX="85.0" layoutY="223.0" mnemonicParsing="false" onAction="#btnMoveColumnEventsUp_Clicked" prefHeight="40.0" prefWidth="150.0" styleClass="toolButton" text="nach unten">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </VBox>
+                                       </center>
+                                       <right>
+                                          <BorderPane>
+                                             <center>
+                                                <ListView fx:id="lvSelectedColumnsEvents" />
+                                             </center>
+                                             <top>
+                                                <Label text="in Tabelle" BorderPane.alignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </top>
+                                          </BorderPane>
+                                       </right>
+                                    </BorderPane>
+                                 </content>
+                              </Tab>
+                              <Tab fx:id="tabColumnsProtocols" closable="false" styleClass="backgroundTab" text="Protokolle">
+                                 <content>
+                                    <BorderPane>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                       <left>
+                                          <BorderPane BorderPane.alignment="CENTER">
+                                             <center>
+                                                <ListView fx:id="lvAvailableColumnsProtocols" />
+                                             </center>
+                                             <top>
+                                                <Label text="Spalten" BorderPane.alignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </top>
+                                          </BorderPane>
+                                       </left>
+                                       <center>
+                                          <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Button fx:id="btnAddColumnProtocols" mnemonicParsing="false" onAction="#btnAddColumnClients_Clicked" prefHeight="40.0" prefWidth="200.0" styleClass="toolButton" text="Hinzufügen &gt;">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                                <Button fx:id="btnRemoveColumnProtocols" disable="true" layoutX="85.0" layoutY="183.0" mnemonicParsing="false" onAction="#btnRemoveColumnClients_Clicked" prefHeight="40.0" prefWidth="200.0" styleClass="toolButton" text="&lt; Entfernen">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="30.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                                <Button fx:id="btnMoveColumnProtocolsUp" disable="true" layoutX="85.0" layoutY="203.0" mnemonicParsing="false" onAction="#btnMoveColumnProtocolsUp_Clicked" prefHeight="40.0" prefWidth="150.0" styleClass="toolButton" text="nach oben">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </Button>
+                                                <Button fx:id="btnMoveColumnProtocolsDown" disable="true" layoutX="85.0" layoutY="223.0" mnemonicParsing="false" onAction="#btnMoveColumnProtocolsDown_Clicked" prefHeight="40.0" prefWidth="150.0" styleClass="toolButton" text="nach unten">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </VBox>
+                                       </center>
+                                       <right>
+                                          <BorderPane>
+                                             <center>
+                                                <ListView fx:id="lvSelectedColumnsProtocols" />
+                                             </center>
+                                             <top>
+                                                <Label text="in Tabelle" BorderPane.alignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Label>
+                                             </top>
+                                          </BorderPane>
+                                       </right>
+                                    </BorderPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                     </center>
+                  </BorderPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT">
+         <children>
+            <Label fx:id="lbMessage" textFill="RED">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Label>
+            <Button fx:id="btnCancel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnCancel_Clicked" prefHeight="40.0" prefWidth="100.0" styleClass="cancelButton" text="Abbrechen">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnSaveSettings" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnSaveSettings_Clicked" prefHeight="40.0" prefWidth="100.0" styleClass="okButton" text="Speichern">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+         </padding>
+      </HBox>
+   </bottom>
+</BorderPane>

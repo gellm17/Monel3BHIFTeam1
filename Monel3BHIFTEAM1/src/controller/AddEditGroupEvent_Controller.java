@@ -20,7 +20,6 @@ import model.Client;
 import model.Employee;
 import model.Event;
 import model.EventProtocol;
-import org.mariadb.jdbc.internal.protocol.Protocol;
 
 import java.io.IOException;
 import java.net.URL;
