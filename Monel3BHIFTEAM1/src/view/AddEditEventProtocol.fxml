@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -196,8 +197,11 @@
                         </HBox>
                         <HBox GridPane.columnIndex="1">
                            <children>
-                              <ToggleButton fx:id="tglBtnHourlyRateBrutto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" selected="true" text="Brutto" />
-                              <ToggleButton fx:id="tglBtnHourlyRateNetto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" text="Netto">
+                              <ToggleButton fx:id="tglBtnHourlyRateBrutto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#tglBtnHourlyRateBrutto_onAction" prefWidth="60.0" selected="true" text="Brutto">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="groupToggleButton1" />
+                                 </toggleGroup></ToggleButton>
+                              <ToggleButton fx:id="tglBtnHourlyRateNetto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#tglBtnHourlyRateNetto_onAction" prefWidth="60.0" text="Netto" toggleGroup="$groupToggleButton1">
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin>
@@ -246,8 +250,11 @@
                         </HBox>
                         <HBox GridPane.columnIndex="1">
                            <children>
-                              <ToggleButton fx:id="tglBtnRideCostBrutto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" selected="true" text="Brutto" />
-                              <ToggleButton fx:id="tglBtnRideCostNetto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" text="Netto">
+                              <ToggleButton fx:id="tglBtnRideCostBrutto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#tglBtnRideCostBrutto_onAction" prefWidth="60.0" selected="true" text="Brutto">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="groupToggleButton2" />
+                                 </toggleGroup></ToggleButton>
+                              <ToggleButton fx:id="tglBtnRideCostNetto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#tglBtnRideCostNetto_onAction" prefWidth="60.0" text="Netto" toggleGroup="$groupToggleButton2">
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin>
@@ -296,8 +303,11 @@
                         </HBox>
                         <HBox GridPane.columnIndex="1">
                            <children>
-                              <ToggleButton fx:id="tglBtnOtherCostsBrutto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" selected="true" text="Brutto" />
-                              <ToggleButton fx:id="tglBtnOtherCostsNetto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" text="Netto">
+                              <ToggleButton fx:id="tglBtnOtherCostsBrutto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#tglBtnOtherCostsBrutto_onAction" prefWidth="60.0" selected="true" text="Brutto">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="groupToggleButton3" />
+                                 </toggleGroup></ToggleButton>
+                              <ToggleButton fx:id="tglBtnOtherCostsNetto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#tglBtnOtherCostsNetto_onAction" prefWidth="60.0" text="Netto" toggleGroup="$groupToggleButton3">
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin>

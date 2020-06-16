@@ -131,7 +131,7 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
                 comboEmployeeEvent.getSelectionModel().select(editableEventProtocol.getEmployee());
                 tfStartEvent.setText(""+editableEventProtocol.getStartTime());
                 tfEndEvent.setText(""+editableEventProtocol.getEndTime());
-                tfHourlyRateEvent.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getHourlyRate())); // TODO
+                //TODO tfHourlyRateEvent.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getHourlyRate())); // TODO
                 tfRideCosts.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getRideCosts()));
             }
         }
@@ -190,9 +190,10 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
                 }
             }
 
-            if (!tfCheck(tfHourlyRateEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){  // TODO
+            //TODO
+            /*if (!tfCheck(tfHourlyRateEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){  // TODO
                 eventProtocolToAdd.setHourlyRate(Double.parseDouble(tfHourlyRateEvent.getText()));
-            }
+            }*/
 
             if (!tfCheck(tfRideCosts, "^\\d{1,8}([\\.,]\\d{2})?$")){
                 eventProtocolToAdd.setRideCosts(Double.parseDouble(tfRideCosts.getText()));
@@ -249,6 +250,46 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
             }
             return error;
         }
+
+        private void tglBtnChange(ToggleButton currentTglBtn, ToggleButton pendantTglBtn){
+            if (currentTglBtn.isPressed()){
+                pendantTglBtn.setSelected(true);
+                currentTglBtn.setSelected(false);
+            } else {
+                pendantTglBtn.setSelected(false);
+                currentTglBtn.setSelected(true);
+            }
+        }
+
+    @FXML
+    void tglBtnHourlyRateBrutto_onAction(ActionEvent event) {
+        tglBtnChange(tglBtnHourlyRateBrutto, tglBtnHourlyRateNetto);
+    }
+
+    @FXML
+    void tglBtnHourlyRateNetto_onAction(ActionEvent event) {
+        tglBtnChange(tglBtnHourlyRateNetto, tglBtnHourlyRateBrutto);
+    }
+
+    @FXML
+    void tglBtnOtherCostsBrutto_onAction(ActionEvent event) {
+        tglBtnChange(tglBtnOtherCostsBrutto, tglBtnOtherCostsNetto);
+    }
+
+    @FXML
+    void tglBtnOtherCostsNetto_onAction(ActionEvent event) {
+        tglBtnChange(tglBtnOtherCostsNetto, tglBtnOtherCostsBrutto);
+    }
+
+    @FXML
+    void tglBtnRideCostBrutto_onAction(ActionEvent event) {
+        tglBtnChange(tglBtnRideCostBrutto, tglBtnRideCostNetto);
+    }
+
+    @FXML
+    void tglBtnRideCostNetto_onAction(ActionEvent event) {
+        tglBtnChange(tglBtnRideCostNetto, tglBtnRideCostBrutto);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
