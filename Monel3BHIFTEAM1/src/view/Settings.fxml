@@ -23,7 +23,7 @@
 
 <BorderPane prefHeight="600.0" prefWidth="900.0" styleClass="background" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Settings_Controller">
    <center>
-      <TabPane nodeOrientation="LEFT_TO_RIGHT" styleClass="settingsTabPane" tabMinWidth="100.0">
+      <TabPane nodeOrientation="LEFT_TO_RIGHT" styleClass="settingsTabPane" tabMinHeight="30.0" tabMinWidth="100.0">
          <tabs>
             <Tab fx:id="tabCommon" closable="false" text="Allgemein">
                <content>
@@ -39,7 +39,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <ListView>
+                              <ListView fx:id="lvHourlyRates">
                                  <VBox.margin>
                                     <Insets bottom="20.0" />
                                  </VBox.margin>
@@ -112,7 +112,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox prefWidth="300.0">
+                                          <ComboBox fx:id="comboFont" prefWidth="300.0">
                                              <VBox.margin>
                                                 <Insets right="10.0" />
                                              </VBox.margin>
@@ -129,7 +129,7 @@
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <ComboBox prefWidth="100.0">
+                                          <ComboBox fx:id="comboFontSize" prefWidth="100.0">
                                              <VBox.margin>
                                                 <Insets />
                                              </VBox.margin>

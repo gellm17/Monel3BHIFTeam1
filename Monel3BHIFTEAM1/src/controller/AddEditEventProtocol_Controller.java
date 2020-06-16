@@ -9,11 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
@@ -44,10 +40,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
     private Label lbTitle;
 
     @FXML
-    private DatePicker dpDateEvent;
-
-    @FXML
-    private TextField tfNameEvent;
+    private TextArea taDescription;
 
     @FXML
     private ComboBox<Client> comboClientEvent;
@@ -62,13 +55,40 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
     private TextField tfEndEvent;
 
     @FXML
-    private TextField tfHourlyRateEvent;
+    private ComboBox<?> comboHourlyRate;
+
+    @FXML
+    private ToggleButton tglBtnHourlyRateBrutto;
+
+    @FXML
+    private ToggleButton tglBtnHourlyRateNetto;
+
+    @FXML
+    private ComboBox<?> comboTaxesHourlyRate;
 
     @FXML
     private TextField tfRideCostsEvent;
 
     @FXML
-    private ComboBox comboTaxes;
+    private ToggleButton tglBtnRideCostBrutto;
+
+    @FXML
+    private ToggleButton tglBtnRideCostNetto;
+
+    @FXML
+    private ComboBox<?> comboTaxesRideCost;
+
+    @FXML
+    private TextField tfOtherCosts;
+
+    @FXML
+    private ToggleButton tglBtnOtherCostsBrutto;
+
+    @FXML
+    private ToggleButton tglBtnOtherCostsNetto;
+
+    @FXML
+    private ComboBox<?> comboTaxesOtherCosts;
 
     @FXML
     private Label lbMessage;
@@ -78,6 +98,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
 
     @FXML
     private Button btnOkEvent;
+
 
     private EventProtocol editableEventProtocol = null;
     private Event assignedEvent = null;
@@ -100,7 +121,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
         if (editableEventProtocol != null) {
             tfStartEvent.setText(""+editableEventProtocol.getStartTime());
             tfEndEvent.setText(""+editableEventProtocol.getEndTime());
-            tfHourlyRateEvent.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getHourlyRate()));
+            tfHourlyRateEvent.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getHourlyRate())); // TODO
             tfRideCostsEvent.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getRideCosts()));
         }
     }
@@ -136,7 +157,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
             }
         }
 
-        if (!tfCheck(tfHourlyRateEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){
+        if (!tfCheck(tfHourlyRateEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){  // TODO
             eventProtocolToAdd.setHourlyRate(Double.parseDouble(tfHourlyRateEvent.getText()));
         }
 

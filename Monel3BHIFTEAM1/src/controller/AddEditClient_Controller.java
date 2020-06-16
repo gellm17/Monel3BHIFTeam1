@@ -163,6 +163,9 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     private Tab tabEmergencyContact1;
 
     @FXML
+    private CheckBox cbContact1isEsv;
+
+    @FXML
     private ComboBox<Salutation> comboSalutationContact1;
 
     @FXML

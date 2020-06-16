@@ -63,6 +63,9 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
     private Button btnEditProtocol;
 
     @FXML
+    private TextArea taDescription;
+
+    @FXML
     private Label lbMessage;
 
     private EventProtocol selectedItem;

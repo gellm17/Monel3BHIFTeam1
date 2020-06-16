@@ -7,11 +7,16 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -100,7 +105,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="tfNameEvent" prefWidth="700.0">
+                        <TextField fx:id="tfNameEvent" prefWidth="700.0" promptText="z.B. Wandertag">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -112,57 +117,31 @@
                   <Insets bottom="40.0" />
                </VBox.margin>
             </HBox>
-            <Label text="Klient">
-               <font>
-                  <Font size="14.0" />
-               </font>
+            <HBox>
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
-            </Label>
-            <ComboBox fx:id="comboClientEvent" prefWidth="500.0">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </ComboBox>
-            <Label layoutX="30.0" layoutY="95.0" text="Mitarbeiter">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </Label>
-            <ComboBox fx:id="comboEmployeeEvent" layoutX="30.0" layoutY="120.0" prefWidth="500.0">
-               <VBox.margin>
-                  <Insets bottom="40.0" />
-               </VBox.margin>
-            </ComboBox>
-            <HBox layoutX="30.0" layoutY="30.0">
                <children>
                   <VBox>
                      <children>
-                        <Label text="Startzeit">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
+                        <Label alignment="BOTTOM_LEFT" text="Beschreibung">
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin>
-                        </Label>
-                        <TextField fx:id="tfStartEvent" prefWidth="60.0" promptText="08:00">
                            <font>
                               <Font size="14.0" />
                            </font>
-                        </TextField>
+                        </Label>
+                        <TextArea fx:id="taDescription" maxHeight="1.7976931348623157E308" maxWidth="300.0" prefHeight="99999.0">
+                           <VBox.margin>
+                              <Insets right="30.0" />
+                           </VBox.margin>
+                        </TextArea>
                      </children>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
                   </VBox>
-                  <VBox maxWidth="1.7976931348623157E308">
+                  <VBox>
                      <children>
-                        <Label text="Endzeit">
+                        <Label text="Klient">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -170,83 +149,211 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="tfEndEvent" prefWidth="60.0" promptText="10:00">
+                        <ComboBox fx:id="comboClientEvent" prefWidth="500.0">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </ComboBox>
+                        <Label text="Mitarbeiter">
                            <font>
                               <Font size="14.0" />
                            </font>
-                        </TextField>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <ComboBox fx:id="comboEmployeeEvent" prefWidth="500.0">
+                           <VBox.margin>
+                              <Insets bottom="40.0" />
+                           </VBox.margin>
+                        </ComboBox>
+                        <HBox>
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <Label text="Startzeit">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="tfStartEvent" prefWidth="60.0" promptText="08:00">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox maxWidth="1.7976931348623157E308">
+                                 <children>
+                                    <Label text="Endzeit">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="tfEndEvent" prefWidth="60.0" promptText="10:00">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <Label text="Stundensatz">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <GridPane>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" prefWidth="300.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <ComboBox fx:id="comboHourlyRate" prefWidth="150.0">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </ComboBox>
+                                 </children>
+                              </HBox>
+                              <HBox GridPane.columnIndex="1">
+                                 <children>
+                                    <ToggleButton fx:id="tglBtnHourlyRateBrutto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" selected="true" text="Brutto" />
+                                    <ToggleButton fx:id="tglBtnHourlyRateNetto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" text="Netto">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </ToggleButton>
+                                    <ComboBox fx:id="comboTaxesHourlyRate" prefWidth="100.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                        <Label text="Fahrtkosten">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <GridPane>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <HBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <TextField fx:id="tfRideCosts" maxWidth="-Infinity" prefWidth="60.0" promptText="20.50">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label text="€">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox GridPane.columnIndex="1">
+                                 <children>
+                                    <ToggleButton fx:id="tglBtnRideCostBrutto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" selected="true" text="Brutto" />
+                                    <ToggleButton fx:id="tglBtnRideCostNetto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" text="Netto">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </ToggleButton>
+                                    <ComboBox fx:id="comboTaxesRideCost" prefWidth="100.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
+                        <Label layoutX="10.0" layoutY="300.0" text="sonstige Kosten">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <GridPane layoutX="10.0" layoutY="325.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <HBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <TextField fx:id="tfOtherCosts" maxWidth="-Infinity" prefWidth="60.0" promptText="12.00">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextField>
+                                    <Label text="€">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                              <HBox GridPane.columnIndex="1">
+                                 <children>
+                                    <ToggleButton fx:id="tglBtnOtherCostsBrutto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" selected="true" text="Brutto" />
+                                    <ToggleButton fx:id="tglBtnOtherCostsNetto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefWidth="60.0" text="Netto">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </ToggleButton>
+                                    <ComboBox fx:id="comboTaxesOtherCosts" prefWidth="100.0" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </GridPane>
                      </children>
                   </VBox>
                </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
             </HBox>
-            <Label text="Stundensatz">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </Label>
-            <HBox alignment="CENTER_LEFT">
-               <children>
-                  <TextField fx:id="tfHourlyRateEvent" maxWidth="-Infinity" prefWidth="60.0" promptText="3.10">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
-                  <Label text="€">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </HBox>
-            <Label layoutX="30.0" layoutY="287.0" text="Fahrtkosten">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </Label>
-            <HBox alignment="CENTER_LEFT" layoutX="30.0" layoutY="307.0">
-               <children>
-                  <TextField fx:id="tfRideCostsEvent" maxWidth="-Infinity" prefWidth="60.0" promptText="20.50">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
-                  <Label text="€">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="5.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </HBox>
-            <Label layoutX="30.0" layoutY="415.0" text="Steuersatz">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="5.0" />
-               </VBox.margin>
-            </Label>
-            <ComboBox fx:id="comboTaxes" layoutX="30.0" layoutY="215.0" prefWidth="150.0" />
          </children>
          <BorderPane.margin>
             <Insets />

@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
@@ -15,10 +16,19 @@ public class Settings_Controller {
     private Tab tabCommon;
 
     @FXML
+    private ListView<?> lvHourlyRates;
+
+    @FXML
     private Button btnAddHourlyRate;
 
     @FXML
     private Button btnDeleteHourlyRate;
+
+    @FXML
+    private ComboBox<?> comboFont;
+
+    @FXML
+    private ComboBox<?> comboFontSize;
 
     @FXML
     private ColorPicker colorAccent;

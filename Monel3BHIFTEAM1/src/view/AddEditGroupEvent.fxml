@@ -7,6 +7,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -114,62 +115,85 @@
             </HBox>
             <BorderPane>
                <center>
-                  <TableView fx:id="tableProtocols" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="999999.0">
-                     <BorderPane.margin>
-                        <Insets top="15.0" />
-                     </BorderPane.margin>
-                  </TableView>
+                  <BorderPane BorderPane.alignment="CENTER">
+                     <center>
+                        <TableView fx:id="tableProtocols" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="999999.0">
+                           <BorderPane.margin>
+                              <Insets top="15.0" />
+                           </BorderPane.margin>
+                        </TableView>
+                     </center>
+                     <top>
+                        <BorderPane>
+                           <right>
+                              <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Button fx:id="btnAddProtocol" mnemonicParsing="false" onAction="#btnAddProtocol_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                                       <graphic>
+                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/icon_AddK.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="btnDeleteProtocol" layoutX="1148.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnDeleteProtocol_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                                       <graphic>
+                                          <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/icon_Del.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="btnEditProtocol" layoutX="1158.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnEditProtocol_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
+                                       <graphic>
+                                          <ImageView fitHeight="150.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../resources/icon_Edit.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </right>
+                           <left>
+                              <Label text="Teilnahmen" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                           </left>
+                        </BorderPane>
+                     </top>
+                  </BorderPane>
                </center>
-               <top>
-                  <BorderPane>
-                     <right>
-                        <HBox alignment="CENTER_RIGHT" BorderPane.alignment="CENTER">
-                           <children>
-                              <Button fx:id="btnAddProtocol" mnemonicParsing="false" onAction="#btnAddProtocol_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
-                                 <graphic>
-                                    <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../resources/icon_AddK.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <HBox.margin>
-                                    <Insets right="10.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button fx:id="btnDeleteProtocol" layoutX="1148.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnDeleteProtocol_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
-                                 <graphic>
-                                    <ImageView fitHeight="150.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../resources/icon_Del.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                                 <HBox.margin>
-                                    <Insets right="10.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button fx:id="btnEditProtocol" layoutX="1158.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnEditProtocol_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
-                                 <graphic>
-                                    <ImageView fitHeight="150.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../resources/icon_Edit.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </Button>
-                           </children>
-                        </HBox>
-                     </right>
-                     <left>
-                        <Label text="Teilnehmer" BorderPane.alignment="CENTER">
+               <left>
+                  <VBox BorderPane.alignment="CENTER">
+                     <children>
+                        <Label alignment="BOTTOM_LEFT" minHeight="54.0" prefHeight="54.0" text="Beschreibung">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
                            <font>
-                              <Font size="24.0" />
+                              <Font size="14.0" />
                            </font>
                         </Label>
-                     </left>
-                  </BorderPane>
-               </top>
+                        <TextArea fx:id="taDescription" maxHeight="1.7976931348623157E308" maxWidth="300.0" prefHeight="99999.0">
+                           <VBox.margin>
+                              <Insets right="30.0" />
+                           </VBox.margin>
+                        </TextArea>
+                     </children>
+                  </VBox>
+               </left>
             </BorderPane>
          </children>
          <BorderPane.margin>

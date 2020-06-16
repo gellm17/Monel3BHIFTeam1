@@ -28,53 +28,83 @@ import java.util.ResourceBundle;
 public class AddEditSingleEvent_Controller extends SceneLoader implements Initializable {
 
 
-        @FXML
-        private Button btnInfo;
+    @FXML
+    private Button btnInfo;
 
-        @FXML
-        private Button btnSettings;
+    @FXML
+    private Button btnSettings;
 
-        @FXML
-        private ImageView imageLogo;
+    @FXML
+    private ImageView imageLogo;
 
-        @FXML
-        private Label lbTitle;
+    @FXML
+    private Label lbTitle;
 
-        @FXML
-        private DatePicker dpDateEvent;
+    @FXML
+    private DatePicker dpDateEvent;
 
-        @FXML
-        private TextField tfNameEvent;
+    @FXML
+    private TextField tfNameEvent;
 
-        @FXML
-        private ComboBox<Client> comboClientEvent;
+    @FXML
+    private TextArea taDescription;
 
-        @FXML
-        private ComboBox<Employee> comboEmployeeEvent;
+    @FXML
+    private ComboBox<Client> comboClientEvent;
 
-        @FXML
-        private TextField tfStartEvent;
+    @FXML
+    private ComboBox<Employee> comboEmployeeEvent;
 
-        @FXML
-        private TextField tfEndEvent;
+    @FXML
+    private TextField tfStartEvent;
 
-        @FXML
-        private TextField tfHourlyRateEvent;
+    @FXML
+    private TextField tfEndEvent;
 
-        @FXML
-        private TextField tfRideCostsEvent;
+    @FXML
+    private ComboBox<?> comboHourlyRate;
 
-        @FXML
-        private ComboBox comboTaxes;
+    @FXML
+    private ToggleButton tglBtnHourlyRateBrutto;
 
-        @FXML
-        private Label lbMessage;
+    @FXML
+    private ToggleButton tglBtnHourlyRateNetto;
 
-        @FXML
-        private Button btnCancelEvent;
+    @FXML
+    private ComboBox<?> comboTaxesHourlyRate;
 
-        @FXML
-        private Button btnOkEvent;
+    @FXML
+    private TextField tfRideCosts;
+
+    @FXML
+    private ToggleButton tglBtnRideCostBrutto;
+
+    @FXML
+    private ToggleButton tglBtnRideCostNetto;
+
+    @FXML
+    private ComboBox<?> comboTaxesRideCost;
+
+    @FXML
+    private TextField tfOtherCosts;
+
+    @FXML
+    private ToggleButton tglBtnOtherCostsBrutto;
+
+    @FXML
+    private ToggleButton tglBtnOtherCostsNetto;
+
+    @FXML
+    private ComboBox<?> comboTaxesOtherCosts;
+
+    @FXML
+    private Label lbMessage;
+
+    @FXML
+    private Button btnCancelEvent;
+
+    @FXML
+    private Button btnOkEvent;
 
         private Event editableEvent = null;
         private EventProtocol editableEventProtocol = null;
@@ -101,8 +131,8 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
                 comboEmployeeEvent.getSelectionModel().select(editableEventProtocol.getEmployee());
                 tfStartEvent.setText(""+editableEventProtocol.getStartTime());
                 tfEndEvent.setText(""+editableEventProtocol.getEndTime());
-                tfHourlyRateEvent.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getHourlyRate()));
-                tfRideCostsEvent.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getRideCosts()));
+                tfHourlyRateEvent.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getHourlyRate())); // TODO
+                tfRideCosts.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getRideCosts()));
             }
         }
 
@@ -160,12 +190,12 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
                 }
             }
 
-            if (!tfCheck(tfHourlyRateEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){
+            if (!tfCheck(tfHourlyRateEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){  // TODO
                 eventProtocolToAdd.setHourlyRate(Double.parseDouble(tfHourlyRateEvent.getText()));
             }
 
-            if (!tfCheck(tfRideCostsEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){
-                eventProtocolToAdd.setRideCosts(Double.parseDouble(tfRideCostsEvent.getText()));
+            if (!tfCheck(tfRideCosts, "^\\d{1,8}([\\.,]\\d{2})?$")){
+                eventProtocolToAdd.setRideCosts(Double.parseDouble(tfRideCosts.getText()));
             }
 
             eventProtocolToAdd.setEvent(eventToAdd);
