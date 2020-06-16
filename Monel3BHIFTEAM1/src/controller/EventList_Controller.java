@@ -152,9 +152,6 @@ public class EventList_Controller extends SceneLoader implements Initializable {
         }
 
 
-
-
-
         // 5. Add sorted (and filtered) data to the table.
         tableProtocols.setItems(iniSearchEventProtocol());
 

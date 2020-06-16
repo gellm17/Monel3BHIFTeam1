@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -26,9 +27,11 @@ import model.Client;
 import model.EventProtocol;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
-   public class BillsPerClientList_Controller extends SceneLoader {
+   public class BillsPerClientList_Controller extends SceneLoader implements Initializable {
 
         @FXML
         private Button btnPrevMonth;
@@ -97,9 +100,6 @@ import java.time.LocalDate;
                   if (newSelection != null) {
                        selectedBill = newSelection;
                        System.out.println(selectedBill);
-
-
-
                   }
              });
 
@@ -245,4 +245,16 @@ import java.time.LocalDate;
 
         }
 
-    }
+        @Override
+        public void initialize(URL url, ResourceBundle resourceBundle) {
+             LocalDate actualDate = LocalDate.now();
+             int currentMonth = actualDate.getMonthValue();
+             int currentYear = actualDate.getYear();
+
+             if (currentMonth < 10) {
+                  lbYearMonth.setText("0"+currentMonth+"/"+currentYear);
+             } else {
+                  lbYearMonth.setText(currentMonth+"/"+currentYear);
+             }
+        }
+   }
