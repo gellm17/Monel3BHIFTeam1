@@ -36,7 +36,7 @@
                            <children>
                               <Label text="Stundensätze">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
                               <ListView fx:id="lvHourlyRates">

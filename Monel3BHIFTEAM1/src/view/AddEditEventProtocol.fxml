@@ -90,7 +90,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="taDescription" maxHeight="1.7976931348623157E308" maxWidth="300.0" prefHeight="99999.0">
+                  <TextArea fx:id="taDescription" maxHeight="1.7976931348623157E308" maxWidth="300.0" prefHeight="99999.0" wrapText="true">
                      <VBox.margin>
                         <Insets right="30.0" />
                      </VBox.margin>
