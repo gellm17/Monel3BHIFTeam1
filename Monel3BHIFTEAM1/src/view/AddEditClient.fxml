@@ -1205,7 +1205,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextArea fx:id="taDiagnoseClient" prefHeight="200.0" prefWidth="200.0">
+                                    <TextArea fx:id="taDiagnoseClient" prefHeight="200.0" prefWidth="200.0" wrapText="true">
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
@@ -1234,7 +1234,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextArea fx:id="taAllergiesClient" prefHeight="200.0" prefWidth="200.0">
+                                    <TextArea fx:id="taAllergiesClient" prefHeight="200.0" prefWidth="200.0" wrapText="true">
                                        <VBox.margin>
                                           <Insets bottom="10.0" />
                                        </VBox.margin>
@@ -1247,7 +1247,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextArea fx:id="taOtherClient" prefHeight="200.0" prefWidth="200.0" />
+                                    <TextArea fx:id="taOtherClient" prefHeight="200.0" prefWidth="200.0" wrapText="true" />
                                  </children>
                                  <padding>
                                     <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />

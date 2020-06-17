@@ -17,7 +17,7 @@ public class Sponsor extends Person {
         super(id, salutation, title, firstName, lastName, adress, zipCode, place, telNr, email, birthDate);
         this.companyName = new SimpleStringProperty(this, "companyName", companyName);
         this.companyTelNr = new SimpleStringProperty(this, "companyTelNr", companyTelNr);
-        this.companyEmail = new SimpleStringProperty(this, "companyEmail", companyTelNr);
+        this.companyEmail = new SimpleStringProperty(this, "companyEmail", companyEmail);
     }
 
     public Sponsor(Salutation salutation, String firstName, String lastName) {
