@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="847.0" prefWidth="1232.0" styleClass="background" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddEditSponsor_Controller">
+   <top>
+      <BorderPane maxHeight="-Infinity" prefHeight="90.0" styleClass="programHeader" BorderPane.alignment="CENTER">
+         <right>
+            <ButtonBar buttonMinWidth="50.0" maxHeight="65.0" BorderPane.alignment="CENTER">
+              <buttons>
+                  <Button fx:id="btnInfo" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnInfo_Clicked" prefHeight="65.0" prefWidth="65.0">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/icon_Info.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="transparentButton" />
+                        <String fx:value="circular" />
+                     </styleClass>
+                  </Button>
+                  <Button fx:id="btnSettings" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnSettings_Clicked" prefHeight="65.0" prefWidth="65.0">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/icon_Einst.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <styleClass>
+                        <String fx:value="transparentButton" />
+                        <String fx:value="circular" />
+                     </styleClass>
+                  </Button>
+              </buttons>
+            </ButtonBar>
+         </right>
+         <left>
+            <ImageView fx:id="imageLogo" fitHeight="80.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../resources/logo_Monel.png" />
+               </image>
+            </ImageView>
+         </left>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="20.0" top="5.0" />
+         </padding>
+         <center>
+            <Label fx:id="lbTitle" text="Sponsor" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="Gill Sans MT" size="36.0" />
+               </font>
+            </Label>
+         </center>
+      </BorderPane>
+   </top>
+   <center>
+      <VBox styleClass="background">
+         <children>
+            <Accordion fx:id="accordionEmployees" maxHeight="1.7976931348623157E308">
+              <panes>
+                <TitledPane fx:id="tPaneBasicData" text="Stammdaten">
+                  <content>
+                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+                           <content>
+                              <VBox>
+                                 <children>
+                                    <Label layoutX="30.0" layoutY="67.0" text="Anrede">
+                                       <font>
+                                          <Font name="Gill Sans MT" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <ComboBox fx:id="comboSalutationSponsor" prefWidth="150.0">
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </ComboBox>
+                                    <Label text="Titel">
+                                       <font>
+                                          <Font name="Gill Sans MT" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="tfTitleSponsor" maxWidth="-Infinity" prefWidth="400.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <Label text="Vorname (Pflichtfeld)">
+                                       <font>
+                                          <Font name="Gill Sans MT" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="tfFirstnameSponsor" maxWidth="700.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <Label text="Nachname (Pflichtfeld)">
+                                       <font>
+                                          <Font name="Gill Sans MT" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="tfLastnameSponsor" maxWidth="700.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="40.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <Label text="Geburtsdatum">
+                                       <font>
+                                          <Font name="Gill Sans MT" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <DatePicker fx:id="dpBirthdateSponsor">
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
+                                    </DatePicker>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                  </content>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                </TitledPane>
+                <TitledPane fx:id="tPaneAddress" text="Adresse">
+                  <content>
+                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+                           <content>
+                              <VBox>
+                                 <children>
+                                    <HBox prefHeight="0.0">
+                                       <children>
+                                          <VBox prefHeight="200.0">
+                                             <children>
+                                                <Label text="Straße (Pflichtfeld)">
+                                                   <font>
+                                                      <Font name="Gill Sans MT" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <TextField fx:id="tfStreetSponsor" prefWidth="400.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </VBox.margin>
+                                                </TextField>
+                                             </children>
+                                          </VBox>
+                                          <VBox prefHeight="200.0">
+                                             <children>
+                                                <Label text="Nr.">
+                                                   <font>
+                                                      <Font name="Gill Sans MT" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <TextField fx:id="tfHousenumberSponsor" maxWidth="-Infinity" prefWidth="50.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </TextField>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="0.0">
+                                       <children>
+                                          <VBox prefHeight="200.0">
+                                             <children>
+                                                <Label text="PLZ (Pflichtfeld)">
+                                                   <font>
+                                                      <Font name="Gill Sans MT" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <TextField fx:id="tfZipSponsor" maxWidth="-Infinity" prefWidth="100.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" right="10.0" />
+                                                   </VBox.margin>
+                                                </TextField>
+                                             </children>
+                                          </VBox>
+                                          <VBox prefHeight="200.0">
+                                             <children>
+                                                <Label text="Ort (Pflichtfeld)">
+                                                   <font>
+                                                      <Font name="Gill Sans MT" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <TextField fx:id="tfPlaceSponsor" prefWidth="400.0">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" />
+                                                   </VBox.margin>
+                                                </TextField>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                  </content>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                </TitledPane>
+                  <TitledPane fx:id="tPaneContact" text="Kontakt">
+                    <content>
+                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+                           <content>
+                              <VBox>
+                                 <children>
+                                    <Label text="Telefonnummer">
+                                       <font>
+                                          <Font name="Gill Sans MT" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="tfTelNrSponsor" maxWidth="300.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <Label text="Email">
+                                       <font>
+                                          <Font name="Gill Sans MT" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="tfEmailSponsor" maxWidth="600.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
+                                 </padding>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                    </content>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TitledPane>
+                  <TitledPane fx:id="tPaneInformation" layoutX="10.0" layoutY="130.0" text="Firmendaten">
+                     <content>
+                        <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
+                           <content>
+                              <VBox>
+                                 <padding>
+                                    <Insets bottom="35.0" left="35.0" right="35.0" top="35.0" />
+                                 </padding>
+                                 <children>
+                                    <HBox>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <Label layoutX="45.0" layoutY="173.0" text="Firmenname">
+                                       <font>
+                                          <Font name="Gill Sans MT" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="tfNameCompany" layoutX="45.0" layoutY="197.0" maxWidth="-Infinity" prefWidth="700.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="40.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <Label text="Telefonnummer Firma">
+                                       <font>
+                                          <Font name="Gill Sans MT" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="tfTelNrCompany" maxWidth="300.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </TextField>
+                                    <Label text="Email Firma">
+                                       <font>
+                                          <Font name="Gill Sans MT" size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <TextField fx:id="tfEmailCopany" maxWidth="600.0">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                           </content>
+                        </ScrollPane>
+                     </content>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TitledPane>
+              </panes>
+            </Accordion>
+         </children>
+      </VBox>
+   </center>
+   <left>
+      <BorderPane styleClass="background" BorderPane.alignment="CENTER">
+         <top>
+            <VBox BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fx:id="imgSponsor" fitHeight="400.0" fitWidth="280.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/icon_Photo_HQ_white.png" />
+                     </image>
+                  </ImageView>
+                  <BorderPane>
+                     <right>
+                        <Button fx:id="btnDeleteImageSponsor" disable="true" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#btnDeleteImageSponsor_Clicked" prefHeight="50.0" prefWidth="50.0" styleClass="toolButton" BorderPane.alignment="CENTER">
+                           <graphic>
+                              <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/icon_X.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                     </right>
+                     <left>
+                        <Button fx:id="btnSelectImageSponsor" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#btnSelectImageSponsor_Clicked" prefHeight="50.0" prefWidth="50.0" styleClass="toolButton" BorderPane.alignment="CENTER">
+                           <graphic>
+                              <ImageView fitHeight="150.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/icon_Folder_white.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                     </left>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </BorderPane>
+               </children>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" left="20.0" top="20.0" />
+               </BorderPane.margin>
+            </VBox>
+         </top>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="100.0" top="10.0" />
+         </padding>
+      </BorderPane>
+   </left>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" styleClass="background" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lbMessage" textFill="RED">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Label>
+          <Button fx:id="btnCancelSponsor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnCancelSponsor_Clicked" prefHeight="50.0" prefWidth="130.0" styleClass="cancelButton" text="Abbrechen">
+               <font>
+                  <Font size="20.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnOkSponsor" defaultButton="true" mnemonicParsing="false" onAction="#btnOkSponsor_Clicked" prefHeight="50.0" prefWidth="130.0" styleClass="okButton" text="Fertig">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </HBox>
+   </bottom>
+</BorderPane>

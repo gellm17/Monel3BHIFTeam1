@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -33,7 +34,10 @@
                      <styleClass>
                         <String fx:value="transparentButton" />
                         <String fx:value="circular" />
-                     </styleClass></Button>
+                     </styleClass>
+                     <tooltip>
+                        <Tooltip text="Info" />
+                     </tooltip></Button>
                   <Button fx:id="btnSettings" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnSettings_Clicked" prefHeight="65.0" prefWidth="65.0">
                      <graphic>
                         <ImageView fitHeight="150.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
@@ -45,7 +49,10 @@
                      <styleClass>
                         <String fx:value="transparentButton" />
                         <String fx:value="circular" />
-                     </styleClass></Button>
+                     </styleClass>
+                     <tooltip>
+                        <Tooltip text="Einstellungen" />
+                     </tooltip></Button>
               </buttons>
             </ButtonBar>
          </right>
@@ -60,7 +67,7 @@
             <Insets bottom="5.0" left="5.0" right="20.0" top="5.0" />
          </padding>
          <center>
-            <Label fx:id="lbTitle" text="Monel Pro" textFill="WHITE" BorderPane.alignment="CENTER">
+            <Label fx:id="lbTitle" text="Klienten" textFill="WHITE" BorderPane.alignment="CENTER">
                <font>
                   <Font name="Gill Sans MT" size="36.0" />
                </font>
@@ -80,7 +87,7 @@
          <top>
             <BorderPane styleClass="background" BorderPane.alignment="CENTER">
                <center>
-                  <TextField fx:id="tfSearchClients" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" BorderPane.alignment="CENTER">
+                  <TextField fx:id="tfSearchClients" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="769.0" promptText="Suche nach Klienten" BorderPane.alignment="CENTER">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -125,6 +132,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Klient hinzufügen" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="btnDeleteClient" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnDeleteClient_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
                            <font>
@@ -140,6 +150,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Löschen" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="btnEditClient" maxHeight="44.0" maxWidth="44.0" mnemonicParsing="false" onAction="#btnEditClient_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
                            <font>
@@ -152,6 +165,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Bearbeiten" />
+                           </tooltip>
                         </Button>
                      </children>
                   </HBox>
