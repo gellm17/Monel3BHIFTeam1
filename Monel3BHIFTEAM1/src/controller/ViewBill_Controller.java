@@ -20,9 +20,12 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.NumberFormat;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
+import java.util.Locale;
 
 public class ViewBill_Controller extends SceneLoader {
 
@@ -126,39 +129,48 @@ public class ViewBill_Controller extends SceneLoader {
             }
             wholeRideCosts += current.getRideCosts();
         }
+
+        DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/MM/uuuu");
+        Locale locale = Locale.GERMANY;
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
+
         String html = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
                 "<head>\n" +
+                "<link href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap\" rel=\"stylesheet\">" +
                 "    <meta charset=\"UTF-8\">\n" +
                 "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
                 "    <title>Document</title>\n" +
                 "\n" +
                 "    <style>\n" +
                 "        body {\n" +
-                "            font-family: 'Courier New', Courier, monospace;\n" +
+                "            font-family: 'Roboto', sans-serif;" +
+                "               margin: 0;" +
+                "               padding: 0;" +
                 "        }\n" +
                 "\n" +
-                "        /*#bill {\n" +
-                "            background-image: url(\"backg.png\");\n" +
+                "        #bill {\n" +
                 "            background-repeat: no-repeat;\n" +
                 "            position: relative;\n" +
-                "            width: 652px;\n" +
-                "            height: 920px;\n" +
-                "        }*/\n" +
+                "            width: 1000px;\n" +
+                "            height: auto;\n" +
+                "              margin-left: -95px" +
+
+                "        }\n" +
                 "\n" +
-                "        /*img {\n" +
+                "        img {\n" +
                 "            display: block;\n" +
                 "            width: auto;\n" +
                 "            height: auto;\n" +
-                "        }*/\n" +
+                "        }\n" +
                 "\n" +
                 "        #text {\n" +
-                "            width: 652px;\n" +
+                "            width: 900px;\n" +
                 "            height: 920px;           \n" +
                 "            position: absolute;\n" +
                 "            top: 0;\n" +
                 "            left: 0;\n" +
-                "            margin: 2em;\n" +
+                "            margin: 6em;\n" +
                 "        }\n" +
                 "\n" +
                 "        #betraege {\n" +
@@ -176,6 +188,31 @@ public class ViewBill_Controller extends SceneLoader {
                 "        .right {\n" +
                 "            text-align: right;\n" +
                 "        }\n" +
+                "       #datum {" +
+                "           text-align: right;" +
+                "}" +
+                "#customers {\n" +
+                "  font-family: \"Trebuchet MS\", Arial, Helvetica, sans-serif;\n" +
+                "  border-collapse: collapse;\n" +
+                "  width: 100%;\n" +
+                "}\n" +
+                "\n" +
+                "#customers td, #customers th {\n" +
+                "" +
+                "  padding: 8px;\n" +
+                "}\n" +
+                "\n" +
+                "#customers tr:nth-child(even){background-color: #f2f2f2;}\n" +
+                "\n" +
+                "#customers tr:hover {background-color: #ddd;}\n" +
+                "\n" +
+                "#customers th {\n" +
+                "  padding-top: 12px;\n" +
+                "  padding-bottom: 12px;\n" +
+                "  text-align: left;\n" +
+                "  background-color: #FF0000;\n" +
+                "  color: white;\n" +
+                "}" +
                 "\n" +
                 "        .final {\n" +
                 "            border-top: 1px solid black;\n" +
@@ -195,35 +232,40 @@ public class ViewBill_Controller extends SceneLoader {
                 "\n" +
                 "        #rechnung {\n" +
                 "            position: absolute;\n" +
-                "            bottom: 45px;\n" +
-                "            right: 300px;\n" +
+                "            bottom: -280px;\n" +
+                "            margin-left: 280px;\n" +
                 "        }\n" +
-                "\n" +
-                "        #rechnung td {\n" +
-                "            padding-bottom: 0.8em;\n" +
-                "        }\n" +
+                "\n"+
                 "\n" +
                 "        /*table, th, td, tr {\n" +
                 "            border: 1px solid gray;\n" +
                 "        }*/\n" +
+                "       #billimg {" +
+                "           margin-top:150px;" +
+                "           width:1205px;" +
+                "}" +
+                "@page {" +
+                "   margin: 0;" +
+                "   padding:0" +
+                "}" +
+
                 "    </style>\n" +
                 "</head>\n" +
                 "<body>\n" +
-                "    <!--<div id=\"bill\">\n" +
-                "        <img src=\"backg.png\" style=\"visibility: hidden;\" />\n" +
-                "    </div>-->\n" +
                 "\n" +
                 "    <div id=\"text\">\n" +
+
+                "           <img src=\"./src/resources/logo_Monel_invoice.png\" style=\"margin-left:250px\">" +
                 "        <div id=\"datum\" class=\"underline\">\n" +
                 "            <h4>Rechnung Monel</h4>\n" +
-                "            <table>\n" +
+                "            <table style=\" float: right;\">\n" +
                 "                <tr>\n" +
                 "                    <td>Rechnungsdatum:</td>\n" +
-                "                    <td id=\"rechnungsdatum\">07.07.2200</td>\n" +
+                "                    <td id=\"rechnungsdatum\">" + bill.getDateOfIssue().format(formatters) + "</td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
                 "                    <td>Ausstellungsdatum:</td>\n" +
-                "                    <td id=\"ausstellungsdatum\">07.07.2200</td>\n" +
+                "                    <td id=\"ausstellungsdatum\">" + LocalDate.now().format(formatters) + "</td>\n" +
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +
@@ -259,39 +301,50 @@ public class ViewBill_Controller extends SceneLoader {
                 "        </div>\n" +
                 "    \n" +
                 "        <div id=\"betraege\">\n" +
-                "            <table style=\"float: right;\">\n" +
+                "            <table id=\"customers\">\n" +
                 "                <tr>\n" +
+                "                      <th>Kategorie</th>" +
                 "                    <th>Beträge</th>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
                 "                    <td>Einzel:</td>\n" +
-                "                    <td id=\"einzel\" class=\"right\">" + assistanceCostsSingle + " €\n" + "</td>\n" +
+                "                    <td id=\"einzel\" class=\"right\">" +numberFormat.format(Math.round((assistanceCostsSingle)*100.0)/100.0) + "</td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
                 "                    <td>Gruppen:</td>\n" +
-                "                    <td id=\"gruppen\" class=\"right\">" + assistanceCostsGroup + " €\n" + "</td>\n" +
+                "                    <td id=\"gruppen\" class=\"right\">" +numberFormat.format(Math.round((assistanceCostsGroup)*100.0)/100.0) +"</td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
                 "                    <td>Fahrtkosten:</td>\n" +
-                "                    <td id=\"fahrtkosten\" class=\"right\">" + wholeRideCosts + "</td>\n" +
+                "                    <td id=\"fahrtkosten\" class=\"right\">" + numberFormat.format(Math.round((wholeRideCosts)*100.0)/100.0) + "</td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
-                "                    <td class=\"final\">Gesamt:</td>\n" +
-                "                    <td id=\"gesamtpreis\" class=\"right final\">" + (assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts) + " €\n" + "</td>\n" +
+                "                    <td class=\"final\">Nettobetrag:</td>\n" +
+                "                    <td id=\"gesamtpreis\" class=\"right final\">" + numberFormat.format(Math.round((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*100.0)/100.0) + "</td>\n" +
+                "                </tr>\n" +
+                "       <tr>\n" +
+                "            <td class=\"final\">Umsatzsteuer 20%:</td>\n" +
+                "                    <td id=\"gesamtpreis\" class=\"right final\">" +  numberFormat.format(Math.round(((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*0.2) * 100.0) / 100.0) +  "</td>\n" +
+                "                </tr>\n" +
+                "<tr>\n" +
+        "                    <td class=\"final\">Rechnungsbetrag:</td>\n" +
+                "                    <td id=\"gesamtpreis\" class=\"right final\">" + numberFormat.format(Math.round(((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*1.2) * 100.0) / 100.0) + "</td>\n" +
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +
-                "\n" +
+                "\n" + "    <div id=\"bill\">\n" +
+                "        <img src=\"./src/resources/RechnungZahlschein-1.png\" id=\"billimg\" />\n" +
+                "    </div>\n" +
                 "        <div id=\"rechnung\">\n" +
-                "            <table>\n" +
+                "            <table style=\"letter-spacing: 7.5px\">\n" +
                 "                <tr>\n" +
-                "                    <td id=\"firma\">Monel AG</td>\n" +
+                "                  <td style=\"padding-bottom:25px\" id=\"firma\">Monel AG</td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
-                "                    <td id=\"iban\">AT09 3946 4000 0015 0490</td>\n" +
+                "                    <td style=\"padding-bottom:25px; min-width:500px\" id=\"iban\">AT09 3946 4000 0015 0490</td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
-                "                    <td id=\"bic\">AUATBWCDE</td>\n" +
+                "                    <td id=\"bic\">AUATBWCDE</td><td style=\"padding-left:228px; #\">" + numberFormat.format(Math.round(((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*1.2) * 100.0) / 100.0).replace(" €", "").replace(",", "") +"</td>\n" +
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +
