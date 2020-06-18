@@ -2,15 +2,14 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import model.Settings;
 
-public class Settings_Controller {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class Settings_Controller implements Initializable {
 
     @FXML
     private Tab tabCommon;
@@ -174,6 +173,9 @@ public class Settings_Controller {
     @FXML
     private Button btnSaveSettings;
 
+    private int companyCounter = 0;
+    private int commonCounter = 0;
+
     @FXML
     void btnAddColumnClients_Clicked(ActionEvent event) {
 
@@ -276,7 +278,60 @@ public class Settings_Controller {
 
     @FXML
     void btnSaveSettings_Clicked(ActionEvent event) {
-
+        companyCounter = 0;
+        commonCounter = 0;
+        tfCheck(tfIbanCompany, "^[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?$", tabCompanyData, null, companyCounter);
+        tfCheck(tfBicCompany, "^[a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?$", tabCompanyData, null, companyCounter);
+        tfCheck(tfUidCompany, "^ATU(\\s)?[0-9]{8}$", tabCompanyData, null, companyCounter);
+        tfCheck(tfHousenumberCompany, "(([0-9]+)([^0-9]*))?$", tabCompanyData, null, companyCounter);
+        tfCheck(tfStreetCompany, "^\\D+$", tabCompanyData, null, companyCounter);
+        tfCheck(tfZipCompany, "^[1-9][0-9]{3}$", tabCompanyData, null, companyCounter);
+        tfCheck(tfPlaceCompany, "^\\D+$", tabCompanyData, null, companyCounter);
     }
 
+    private boolean tfCheck(TextField tf, String regex, Tab mainTab, Tab subTab, int counter){
+        boolean success = false;
+        if (!tf.getText().matches(regex)) {
+            success = false;
+            switch (mainTab.getId()) {
+                case "tabCompanyData":
+                    companyCounter++;
+                    break;
+                case "tabCommon":
+                    commonCounter++;
+                    break;
+            }
+            tf.setStyle("-FX-Border-Color: red");
+            if (subTab != null){
+                subTab.getGraphic().setStyle("-fx-text-fill: red;");
+            }
+            mainTab.getGraphic().setStyle("-fx-text-fill: red;");
+            lbMessage.setText("Es gibt Fehler!");
+        } else {
+            success = true;
+            tf.setStyle(null);
+            if (counter == 0){
+                if (subTab != null){
+                    subTab.getGraphic().setStyle(null);
+                }
+                mainTab.getGraphic().setStyle(null);
+            }
+        }
+        return success;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        tfNameCompany.setText(Settings.getCompanyName());
+        tfUidCompany.setText(Settings.getUid_Number());
+        tfIbanCompany.setText(Settings.getIban());
+        tfBicCompany.setText(Settings.getBic());
+        tfStreetCompany.setText(Settings.getStreet());
+        tfHousenumberCompany.setText(""+Settings.getNr());
+        tfZipCompany.setText(""+Settings.getPlz());
+        tfPlaceCompany.setText(Settings.getLocation());
+
+        tabCompanyData.setText("");
+        tabCompanyData.setGraphic(new Label("Firmendaten"));
+    }
 }

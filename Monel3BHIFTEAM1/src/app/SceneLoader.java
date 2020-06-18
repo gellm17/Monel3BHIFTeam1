@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
@@ -34,6 +35,26 @@ public abstract class SceneLoader {
             e.printStackTrace();
         }
 
+    }
+
+    public void openSettings(){
+        try {
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/Settings.fxml"));
+            BorderPane root = fxml.load();
+            Stage stage = new Stage();
+            stage.setTitle("Einstellungen");
+            stage.setScene(new Scene(root));
+            Screen screen = Screen.getPrimary();
+            Rectangle2D bounds = screen.getVisualBounds();
+            stage.setX(bounds.getMinX());
+            stage.setY(bounds.getMinY());
+            stage.setWidth(bounds.getWidth());
+            stage.setHeight(bounds.getHeight());
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Stage getPrimStage() {

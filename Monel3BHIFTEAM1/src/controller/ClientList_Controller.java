@@ -274,8 +274,8 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
     }
 
     @FXML
-    void btnSettings_Clicked(ActionEvent event) {
-
+    void btnClientSettings_Clicked(ActionEvent event) {
+        openSettings();
     }
 
     private void startAddEdit() throws IOException {

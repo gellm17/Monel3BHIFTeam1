@@ -41,7 +41,7 @@ public class Settings implements Initializable {
     private static StringProperty street = new SimpleStringProperty(new Settings(), "street", "Villacher Straße");
     private static IntegerProperty nr = new SimpleIntegerProperty(new Settings(), "nr", 95);
     private static IntegerProperty plz = new SimpleIntegerProperty(new Settings(), "plz", 9800);
-    private static StringProperty location = new SimpleStringProperty(new Settings(), "location", "");
+    private static StringProperty location = new SimpleStringProperty(new Settings(), "location", "Spittal/Drau");
 
     public Settings() {
 

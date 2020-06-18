@@ -735,10 +735,9 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
 
     }
 
-
     @FXML
-    void btnSettings_Clicked(ActionEvent event) {
-
+    void btnSettingsClient_Clicked(ActionEvent event) {
+        openSettings();
     }
 
     private boolean tfCheck(TextField tf, String regex, TitledPane tp, int counter){
