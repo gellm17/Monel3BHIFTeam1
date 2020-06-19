@@ -604,7 +604,7 @@
                                                       <Insets bottom="10.0" />
                                                    </VBox.margin>
                                                 </Button>
-                                                <Button fx:id="btnMoveColumnEventsUp" disable="true" layoutX="85.0" layoutY="223.0" mnemonicParsing="false" onAction="#btnMoveColumnEventsUp_Clicked" prefHeight="40.0" prefWidth="150.0" styleClass="toolButton" text="nach unten">
+                                                <Button fx:id="btnMoveColumnEventsDown" disable="true" layoutX="85.0" layoutY="223.0" mnemonicParsing="false" onAction="#btnMoveColumnEventsDown_Clicked" prefHeight="40.0" prefWidth="150.0" styleClass="toolButton" text="nach unten">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -652,7 +652,7 @@
                                        <center>
                                           <VBox alignment="CENTER" BorderPane.alignment="CENTER">
                                              <children>
-                                                <Button fx:id="btnAddColumnProtocols" mnemonicParsing="false" onAction="#btnAddColumnClients_Clicked" prefHeight="40.0" prefWidth="200.0" styleClass="toolButton" text="Hinzufügen &gt;">
+                                                <Button fx:id="btnAddColumnProtocols" mnemonicParsing="false" onAction="#btnAddColumnProtocols_Clicked" prefHeight="40.0" prefWidth="200.0" styleClass="toolButton" text="Hinzufügen &gt;">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -660,7 +660,7 @@
                                                       <Insets bottom="10.0" />
                                                    </VBox.margin>
                                                 </Button>
-                                                <Button fx:id="btnRemoveColumnProtocols" disable="true" layoutX="85.0" layoutY="183.0" mnemonicParsing="false" onAction="#btnRemoveColumnClients_Clicked" prefHeight="40.0" prefWidth="200.0" styleClass="toolButton" text="&lt; Entfernen">
+                                                <Button fx:id="btnRemoveColumnProtocols" disable="true" layoutX="85.0" layoutY="183.0" mnemonicParsing="false" onAction="#btnRemoveColumnProtocols_Clicked" prefHeight="40.0" prefWidth="200.0" styleClass="toolButton" text="&lt; Entfernen">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>

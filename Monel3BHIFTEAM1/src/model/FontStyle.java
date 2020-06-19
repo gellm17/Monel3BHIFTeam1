@@ -1,6 +1,7 @@
 package model;
 
 public enum FontStyle {
+    STANDARD,
     Arial,
     Myriad,
     Futura,

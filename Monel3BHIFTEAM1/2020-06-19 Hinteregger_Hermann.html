@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;               margin: 0;               padding: 0;        }
+
+        #bill {
+            background-repeat: no-repeat;
+            position: relative;
+            width: 1000px;
+            height: auto;
+              margin-left: -95px        }
+
+        img {
+            display: block;
+            width: auto;
+            height: auto;
+        }
+
+        #text {
+            width: 900px;
+            height: 920px;           
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 6em;
+        }
+
+        #betraege {
+            /*margin-right: 3em*/
+        }
+
+        #briefkopf {
+            margin-top: 1.2em;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        .right {
+            text-align: right;
+        }
+       #datum {           text-align: right;}#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #FF0000;
+  color: white;
+}
+        .final {
+            border-top: 1px solid black;
+            padding-top: 0.7em;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        .underline {
+            border-bottom: 1px solid rgb(230, 230, 230);
+            padding-bottom: 1em;
+            margin-bottom: 1em;
+            width: 100%;
+        }
+
+        #rechnung {
+            position: absolute;
+            bottom: -280px;
+            margin-left: 280px;
+        }
+
+
+        /*table, th, td, tr {
+            border: 1px solid gray;
+        }*/
+       #billimg {           margin-top:150px;           width:1205px;}@page {   margin: 0;   padding:0}    </style>
+</head>
+<body>
+
+    <div id="text">
+           <img src="./src/resources/logo_Monel_invoice.png" style="margin-left:250px">        <div id="datum" class="underline">
+            <h4>Rechnung Monel</h4>
+            <table style=" float: right;">
+                <tr>
+                    <td>Rechnungsdatum:</td>
+                    <td id="rechnungsdatum">19/06/2020</td>
+                </tr>
+                <tr>
+                    <td>Ausstellungsdatum:</td>
+                    <td id="ausstellungsdatum">19/06/2020</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="briefkopf" class="underline">
+            <table>
+                <tr>
+                    <td id="anrede">Herr Mag. </td>
+                </tr>
+                <tr>
+                    <td id="name">Hermann Hinteregger </td>
+                </tr>
+                <tr>
+                    <td id="strasse">Litzelhofenstraße 45</td>
+                </tr>
+                <tr>
+                    <td id="ort">Spittal an der Drau</td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="briefkopf" class="underline">
+            <table>
+                <tr>
+                    <td>Rechnungsnummer:</td>
+                    <td id="rechnungsNr" class="right">7</td>
+                </tr>
+                <tr>
+                    <td>UID-Nummer:</td>
+                    <td id="uidNr" class="right">ATU 75050926</td>
+                </tr>
+            </table>
+        </div>
+    
+        <div id="betraege">
+            <table id="customers">
+                <tr>
+                      <th>Kategorie</th>                    <th>Beträge</th>
+                </tr>
+                <tr>
+                    <td>Einzel:</td>
+                    <td id="einzel" class="right">24,50 €</td>
+                </tr>
+                <tr>
+                    <td>Gruppen:</td>
+                    <td id="gruppen" class="right">36,75 €</td>
+                </tr>
+                <tr>
+                    <td>Fahrtkosten:</td>
+                    <td id="fahrtkosten" class="right">27,00 €</td>
+                </tr>
+                <tr>
+                    <td class="final">Nettobetrag:</td>
+                    <td id="gesamtpreis" class="right final">88,25 €</td>
+                </tr>
+       <tr>
+            <td class="final">Umsatzsteuer 20%:</td>
+                    <td id="gesamtpreis" class="right final">17,65 €</td>
+                </tr>
+<tr>
+                    <td class="final">Rechnungsbetrag:</td>
+                    <td id="gesamtpreis" class="right final">105,90 €</td>
+                </tr>
+            </table>
+        </div>
+
+    <div id="bill">
+        <img src="./src/resources/RechnungZahlschein-1.png" id="billimg" />
+    </div>
+        <div id="rechnung">
+            <table style="letter-spacing: 7.5px">
+                <tr>
+                  <td style="padding-bottom:25px" id="firma">Monel GmbH</td>
+                </tr>
+                <tr>
+                    <td style="padding-bottom:25px; min-width:500px" id="iban">AT09 3946 4000 0015 0490</td>
+                </tr>
+                <tr>
+                    <td id="bic">BKAUATWU</td><td style="padding-left:228px; #">10590 €</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

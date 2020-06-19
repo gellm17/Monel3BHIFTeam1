@@ -1,12 +1,22 @@
 package controller;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import model.FontStyle;
 import model.Settings;
 
+import java.awt.*;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class Settings_Controller implements Initializable {
@@ -24,7 +34,7 @@ public class Settings_Controller implements Initializable {
     private Button btnDeleteHourlyRate;
 
     @FXML
-    private ComboBox<?> comboFont;
+    private ComboBox<FontStyle> comboFont;
 
     @FXML
     private ComboBox<?> comboFontSize;
@@ -66,7 +76,7 @@ public class Settings_Controller implements Initializable {
     private Tab tabColumnsClients;
 
     @FXML
-    private ListView<?> lvAvailableColumnsClients;
+    private ListView<String> lvAvailableColumnsClients;
 
     @FXML
     private Button btnAddColumnClients;
@@ -81,13 +91,13 @@ public class Settings_Controller implements Initializable {
     private Button btnMoveColumnClientsDown;
 
     @FXML
-    private ListView<?> lvSelectedColumnsClients;
+    private ListView<String> lvSelectedColumnsClients;
 
     @FXML
     private Tab tabColumnsEmployees;
 
     @FXML
-    private ListView<?> lvAvailableColumnsEmployees;
+    private ListView<String> lvAvailableColumnsEmployees;
 
     @FXML
     private Button btnAddColumnEmployees;
@@ -102,13 +112,13 @@ public class Settings_Controller implements Initializable {
     private Button btnMoveColumnEmployeesDown;
 
     @FXML
-    private ListView<?> lvSelectedColumnsEmployees;
+    private ListView<String> lvSelectedColumnsEmployees;
 
     @FXML
     private Tab tabColumnsSponsors;
 
     @FXML
-    private ListView<?> lvAvailableColumnsSponsors;
+    private ListView<String> lvAvailableColumnsSponsors;
 
     @FXML
     private Button btnAddColumnSponsors;
@@ -123,13 +133,13 @@ public class Settings_Controller implements Initializable {
     private Button btnMoveColumnSponsorsDown;
 
     @FXML
-    private ListView<?> lvSelectedColumnsSponsors;
+    private ListView<String> lvSelectedColumnsSponsors;
 
     @FXML
     private Tab tabColumnsActivities;
 
     @FXML
-    private ListView<?> lvAvailableColumnsEvents;
+    private ListView<String> lvAvailableColumnsEvents;
 
     @FXML
     private Button btnAddColumnEvents;
@@ -141,13 +151,16 @@ public class Settings_Controller implements Initializable {
     private Button btnMoveColumnEventsUp;
 
     @FXML
-    private ListView<?> lvSelectedColumnsEvents;
+    private Button btnMoveColumnEventsDown;
+
+    @FXML
+    private ListView<String> lvSelectedColumnsEvents;
 
     @FXML
     private Tab tabColumnsProtocols;
 
     @FXML
-    private ListView<?> lvAvailableColumnsProtocols;
+    private ListView<String> lvAvailableColumnsProtocols;
 
     @FXML
     private Button btnAddColumnProtocols;
@@ -162,7 +175,7 @@ public class Settings_Controller implements Initializable {
     private Button btnMoveColumnProtocolsDown;
 
     @FXML
-    private ListView<?> lvSelectedColumnsProtocols;
+    private ListView<String> lvSelectedColumnsProtocols;
 
     @FXML
     private Label lbMessage;
@@ -176,34 +189,42 @@ public class Settings_Controller implements Initializable {
     private int companyCounter = 0;
     private int commonCounter = 0;
 
+    private Object selectedItem;
+    private int posOfSelectedItem;
+
     @FXML
     void btnAddColumnClients_Clicked(ActionEvent event) {
-
+        Settings.klientColumnLoadIn((String) selectedItem);
     }
 
     @FXML
     void btnAddColumnEmployees_Clicked(ActionEvent event) {
-
+        Settings.employeeColumnLoadIn((String) selectedItem);
     }
 
     @FXML
     void btnAddColumnEvents_Clicked(ActionEvent event) {
-
+        Settings.activityColumnLoadIn((String) selectedItem);
     }
 
     @FXML
     void btnAddColumnSponsors_Clicked(ActionEvent event) {
+        Settings.sponsorColumnLoadIn((String) selectedItem);
+    }
 
+    @FXML
+    void btnAddColumnProtocols_Clicked(ActionEvent event){
+        Settings.protocolColumnLoadIn((String) selectedItem);
     }
 
     @FXML
     void btnAddHourlyRate_Clicked(ActionEvent event) {
-
     }
 
     @FXML
     void btnCancel_Clicked(ActionEvent event) {
-
+        Stage stage = (Stage) btnSaveSettings.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -214,66 +235,87 @@ public class Settings_Controller implements Initializable {
     @FXML
     void btnMoveColumnClientsDown_Clicked(ActionEvent event) {
 
+        Settings.klientColumnMoveDown((String) selectedItem);
+        lvSelectedColumnsClients.getSelectionModel().select(posOfSelectedItem + 1);
     }
 
     @FXML
     void btnMoveColumnClientsUp_Clicked(ActionEvent event) {
-
+        Settings.klientColumnMoveUp((String) selectedItem);
+        lvSelectedColumnsClients.getSelectionModel().select(posOfSelectedItem - 1);
     }
 
     @FXML
     void btnMoveColumnEmployeesDown_Clicked(ActionEvent event) {
-
+        Settings.employeeColumnMoveDown((String) selectedItem);
+        lvSelectedColumnsEmployees.getSelectionModel().select(posOfSelectedItem + 1);
     }
 
     @FXML
     void btnMoveColumnEmployeesUp_Clicked(ActionEvent event) {
-
+        Settings.employeeColumnMoveUp((String) selectedItem);
+        lvSelectedColumnsEmployees.getSelectionModel().select(posOfSelectedItem - 1);
     }
 
     @FXML
     void btnMoveColumnEventsUp_Clicked(ActionEvent event) {
+        Settings.activityColumnMoveUp((String) selectedItem);
+        lvSelectedColumnsEvents.getSelectionModel().select(posOfSelectedItem + 1);
+    }
 
+    @FXML
+    void btnMoveColumnEventsDown_Clicked(ActionEvent event) {
+        Settings.activityColumnMoveDown((String) selectedItem);
+        lvSelectedColumnsEvents.getSelectionModel().select(posOfSelectedItem - 1);
     }
 
     @FXML
     void btnMoveColumnProtocolsDown_Clicked(ActionEvent event) {
-
+        Settings.protocolColumnMoveDown((String) selectedItem);
+        lvSelectedColumnsProtocols.getSelectionModel().select(posOfSelectedItem + 1);
     }
 
     @FXML
     void btnMoveColumnProtocolsUp_Clicked(ActionEvent event) {
-
+        Settings.protocolColumnMoveUp((String) selectedItem);
+        lvSelectedColumnsProtocols.getSelectionModel().select(posOfSelectedItem - 1);
     }
 
     @FXML
     void btnMoveColumnSponsorsDown_Clicked(ActionEvent event) {
-
+        Settings.sponsorColumnMoveDown((String) selectedItem);
+        lvSelectedColumnsSponsors.getSelectionModel().select(posOfSelectedItem + 1);
     }
 
     @FXML
     void btnMoveColumnSponsorsUp_Clicked(ActionEvent event) {
-
+        Settings.sponsorColumnMoveUp((String) selectedItem);
+        lvSelectedColumnsSponsors.getSelectionModel().select(posOfSelectedItem - 1);
     }
 
     @FXML
     void btnRemoveColumnClients_Clicked(ActionEvent event) {
-
+        Settings.klientColumnLoadOut((String) selectedItem);
     }
 
     @FXML
     void btnRemoveColumnEmployees_Clicked(ActionEvent event) {
-
+        Settings.employeeColumnLoadOut((String) selectedItem);
     }
 
     @FXML
     void btnRemoveColumnEvents_Clicked(ActionEvent event) {
-
+        Settings.activityColumnLoadOut((String) selectedItem);
     }
 
     @FXML
     void btnRemoveColumnSponsors_Clicked(ActionEvent event) {
+        Settings.sponsorColumnLoadOut((String) selectedItem);
+    }
 
+    @FXML
+    void btnRemoveColumnProtocols_Clicked(ActionEvent event) {
+        Settings.protocolColumnLoadOut((String) selectedItem);
     }
 
     @FXML
@@ -287,6 +329,19 @@ public class Settings_Controller implements Initializable {
         tfCheck(tfStreetCompany, "^\\D+$", tabCompanyData, null, companyCounter);
         tfCheck(tfZipCompany, "^[1-9][0-9]{3}$", tabCompanyData, null, companyCounter);
         tfCheck(tfPlaceCompany, "^\\D+$", tabCompanyData, null, companyCounter);
+
+        if (companyCounter == 0 && commonCounter == 0){
+            Settings.setCompanyName(tfNameCompany.getText());
+            Settings.setIban(tfIbanCompany.getText());
+            Settings.setBic(tfBicCompany.getText());
+            Settings.setUid_Number(tfUidCompany.getText());
+            Settings.setStreet(tfStreetCompany.getText());
+            Settings.setNr(Integer.parseInt(tfHousenumberCompany.getText()));
+            Settings.setPlz(Integer.parseInt(tfZipCompany.getText()));
+            Settings.setLocation(tfPlaceCompany.getText());
+            Stage stage = (Stage) btnSaveSettings.getScene().getWindow();
+            stage.close();
+        }
     }
 
     private boolean tfCheck(TextField tf, String regex, Tab mainTab, Tab subTab, int counter){
@@ -322,6 +377,7 @@ public class Settings_Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //COMPANY DATA
         tfNameCompany.setText(Settings.getCompanyName());
         tfUidCompany.setText(Settings.getUid_Number());
         tfIbanCompany.setText(Settings.getIban());
@@ -333,5 +389,56 @@ public class Settings_Controller implements Initializable {
 
         tabCompanyData.setText("");
         tabCompanyData.setGraphic(new Label("Firmendaten"));
+
+        //COMMON DATA
+        comboFont.setItems(FXCollections.observableArrayList(Arrays.asList(FontStyle.values())));
+        comboFont.getSelectionModel().select(FontStyle.STANDARD);
+
+        colorAccent.setValue(Color.RED);
+
+        //TABLES
+        lvAvailableColumnsClients.setItems(Settings.getKlientColumns());
+        lvAvailableColumnsEmployees.setItems(Settings.getEmployeeColumns());
+        lvAvailableColumnsEvents.setItems(Settings.getActivityColumns());
+        lvAvailableColumnsProtocols.setItems(Settings.getProtocolColumns());
+        lvAvailableColumnsSponsors.setItems(Settings.getSponsorColumns());
+
+        lvSelectedColumnsClients.setItems(Settings.getKlientColumnsLoaded());
+        lvSelectedColumnsEmployees.setItems(Settings.getEmployeeColumnsLoaded());
+        lvSelectedColumnsEvents.setItems(Settings.getActivityColumnsLoaded());
+        lvSelectedColumnsProtocols.setItems(Settings.getProtocolColumnsLoaded());
+        lvSelectedColumnsSponsors.setItems(Settings.getSponsorColumnsLoaded());
+
+        setSelectionEvent(lvAvailableColumnsClients, lvSelectedColumnsClients, btnAddColumnClients, btnRemoveColumnClients, btnMoveColumnClientsUp, btnMoveColumnClientsDown);
+        setSelectionEvent(lvAvailableColumnsEmployees, lvSelectedColumnsEmployees, btnAddColumnEmployees, btnRemoveColumnEmployees, btnMoveColumnEmployeesUp, btnMoveColumnEmployeesDown);
+        setSelectionEvent(lvAvailableColumnsSponsors, lvSelectedColumnsSponsors, btnAddColumnSponsors, btnRemoveColumnSponsors, btnMoveColumnSponsorsUp, btnMoveColumnSponsorsDown);
+        setSelectionEvent(lvAvailableColumnsProtocols, lvSelectedColumnsProtocols, btnAddColumnProtocols, btnRemoveColumnProtocols, btnMoveColumnProtocolsUp, btnMoveColumnProtocolsDown);
+        setSelectionEvent(lvAvailableColumnsEvents, lvSelectedColumnsEvents, btnAddColumnEvents, btnRemoveColumnEvents, btnMoveColumnEventsUp, btnMoveColumnEventsDown);
+    }
+
+    private void setSelectionEvent(ListView lvAvailable, ListView lvSelected, Button btnAdd, Button btnRemove, Button btnUp, Button btnDown){
+        lvAvailable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                btnAdd.setDisable(false);
+                btnRemove.setDisable(true);
+                btnUp.setDisable(true);
+                btnDown.setDisable(true);
+                selectedItem = newSelection;
+                posOfSelectedItem = lvAvailable.getSelectionModel().getSelectedIndex();
+                lvSelected.getSelectionModel().clearSelection();
+            }
+        });
+
+        lvSelected.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                btnAdd.setDisable(true);
+                btnRemove.setDisable(false);
+                btnUp.setDisable(false);
+                btnDown.setDisable(false);
+                selectedItem = newSelection;
+                posOfSelectedItem = lvSelected.getSelectionModel().getSelectedIndex();
+                lvAvailable.getSelectionModel().clearSelection();
+            }
+        });
     }
 }

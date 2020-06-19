@@ -11,10 +11,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import model.Bill;
-import model.Client;
+import model.*;
 import model.Event;
-import model.EventProtocol;
 
 import java.awt.*;
 import java.io.File;
@@ -295,7 +293,7 @@ public class ViewBill_Controller extends SceneLoader {
                 "                </tr>\n" +
                 "                <tr>\n" +
                 "                    <td>UID-Nummer:</td>\n" +
-                "                    <td id=\"uidNr\" class=\"right\">ATU 75050926</td>\n" +
+                "                    <td id=\"uidNr\" class=\"right\">" + Settings.getUid_Number() + "</td>\n" +
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +
@@ -338,13 +336,13 @@ public class ViewBill_Controller extends SceneLoader {
                 "        <div id=\"rechnung\">\n" +
                 "            <table style=\"letter-spacing: 7.5px\">\n" +
                 "                <tr>\n" +
-                "                  <td style=\"padding-bottom:25px\" id=\"firma\">Monel AG</td>\n" +
+                "                  <td style=\"padding-bottom:25px\" id=\"firma\">" + Settings.getCompanyName() + "</td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
-                "                    <td style=\"padding-bottom:25px; min-width:500px\" id=\"iban\">AT09 3946 4000 0015 0490</td>\n" +
+                "                    <td style=\"padding-bottom:25px; min-width:500px\" id=\"iban\">" + Settings.getIban() + "</td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
-                "                    <td id=\"bic\">AUATBWCDE</td><td style=\"padding-left:228px; #\">" + numberFormat.format(Math.round(((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*1.2) * 100.0) / 100.0).replace(" €", "").replace(",", "") +"</td>\n" +
+                "                    <td id=\"bic\">" + Settings.getBic() + "</td><td style=\"padding-left:228px; #\">" + numberFormat.format(Math.round(((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*1.2) * 100.0) / 100.0).replace(" €", "").replace(",", "") +"</td>\n" +
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +

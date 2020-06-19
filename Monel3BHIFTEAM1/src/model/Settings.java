@@ -1,5 +1,6 @@
 package model;
 
+import data.EventDAO;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.property.*;
@@ -43,12 +44,9 @@ public class Settings implements Initializable {
     private static IntegerProperty plz = new SimpleIntegerProperty(new Settings(), "plz", 9800);
     private static StringProperty location = new SimpleStringProperty(new Settings(), "location", "Spittal/Drau");
 
-    public Settings() {
+    private static Settings instance = new Settings();
 
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    private Settings() {
         if (klientColumns.isEmpty()) {
             klientColumns.addAll("Kundennummer", "Anrede", "Titel", "Vorname", "Nachname", "Straße/Nr", "PLZ", "Ort", "Telefonnummer", "E-Mail", "Geburtsdatum", "SVNR", "Diagnose", "Allergien", "Sonstiges", "Beschäftigung");
             employeeColumns.addAll("Mitarbeiter", "Anrede", "Titel", "Vorname", "Nachname", "Straße/Nr", "PLZ", "Ort", "Telefonnummer", "E-Mail", "Geburtsdatum", "SVNR", "Ehrenamt", "Verwengungsgruppe", "Gehaltsstuffe", "Stunden pro Wochen", "Vorrückdatum", "IBAN", "BIC", "Einstellungsdatum");
@@ -58,6 +56,18 @@ public class Settings implements Initializable {
         }
     }
 
+    /*public static Settings getInstance() {
+        if (instance == null) {
+            instance = new Settings();
+        }
+        return instance;
+    }*/
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
+
     public static ObservableList<String> getKlientColumns() {
         return klientColumns;
     }
@@ -65,6 +75,7 @@ public class Settings implements Initializable {
     public static void setKlientColumns(ObservableList<String> klientColumns) {
         Settings.klientColumns = klientColumns;
     }
+
 
     public static ObservableList<String> getKlientColumnsLoaded() {
         return klientColumnsLoaded;
