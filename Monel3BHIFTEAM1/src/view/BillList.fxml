@@ -212,7 +212,7 @@
                               </ImageView>
                            </graphic>
                            <tooltip>
-                              <Tooltip text="Bearbeiten" />
+                              <Tooltip text="Rechnungen des Klienten anzeigen" />
                            </tooltip>
                         </Button>
                      </children>

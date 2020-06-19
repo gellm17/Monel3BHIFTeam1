@@ -11,6 +11,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -36,6 +37,9 @@
                         <String fx:value="transparentButton" />
                         <String fx:value="circular" />
                      </styleClass>
+                     <tooltip>
+                        <Tooltip text="Info" />
+                     </tooltip>
                   </Button>
                   <Button fx:id="btnSettings" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnSettings_Clicked" prefHeight="65.0" prefWidth="65.0">
                      <graphic>
@@ -49,6 +53,9 @@
                         <String fx:value="transparentButton" />
                         <String fx:value="circular" />
                      </styleClass>
+                     <tooltip>
+                        <Tooltip text="Einstellungen" />
+                     </tooltip>
                   </Button>
               </buttons>
             </ButtonBar>
@@ -414,7 +421,10 @@
                                     <Image url="@../resources/icon_X.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Foto entfernen" />
+                           </tooltip></Button>
                      </right>
                      <left>
                         <Button fx:id="btnSelectImageSponsor" maxHeight="50.0" maxWidth="50.0" mnemonicParsing="false" onAction="#btnSelectImageSponsor_Clicked" prefHeight="50.0" prefWidth="50.0" styleClass="toolButton" BorderPane.alignment="CENTER">
@@ -424,7 +434,10 @@
                                     <Image url="@../resources/icon_Folder_white.png" />
                                  </image>
                               </ImageView>
-                           </graphic></Button>
+                           </graphic>
+                           <tooltip>
+                              <Tooltip text="Foto auswählen" />
+                           </tooltip></Button>
                      </left>
                      <VBox.margin>
                         <Insets top="15.0" />

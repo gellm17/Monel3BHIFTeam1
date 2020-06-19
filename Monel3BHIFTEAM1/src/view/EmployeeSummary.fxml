@@ -10,6 +10,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -48,6 +49,9 @@
                            <HBox.margin>
                               <Insets right="10.0" />
                            </HBox.margin>
+                           <tooltip>
+                              <Tooltip text="Löschen" />
+                           </tooltip>
                         </Button>
                         <Button fx:id="btnEditEmployee" mnemonicParsing="false" onAction="#btnEditEmployee_Clicked" prefHeight="44.0" prefWidth="44.0" styleClass="toolButton">
                            <graphic>
@@ -57,6 +61,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <tooltip>
+                              <Tooltip text="Bearbeiten" />
+                           </tooltip>
                         </Button>
                      </children>
                   </HBox>
@@ -392,6 +399,9 @@
                         <String fx:value="transparentButton" />
                         <String fx:value="circular" />
                      </styleClass>
+                     <tooltip>
+                        <Tooltip text="Info" />
+                     </tooltip>
                   </Button>
                   <Button fx:id="btnSettings" alignment="CENTER" contentDisplay="GRAPHIC_ONLY" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#btnSettings_Clicked" prefHeight="65.0" prefWidth="65.0">
                      <graphic>
@@ -405,6 +415,9 @@
                         <String fx:value="transparentButton" />
                         <String fx:value="circular" />
                      </styleClass>
+                     <tooltip>
+                        <Tooltip text="Einstellungen" />
+                     </tooltip>
                   </Button>
                </buttons>
             </ButtonBar>
@@ -435,6 +448,9 @@
                <padding>
                   <Insets left="-5.0" />
                </padding>
+               <tooltip>
+                  <Tooltip text="Zurück" />
+               </tooltip>
             </Button>
          </left>
       </BorderPane>

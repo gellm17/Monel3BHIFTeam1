@@ -78,7 +78,7 @@
                                     </ImageView>
                                  </graphic>
                                  <tooltip>
-                                    <Tooltip text="Druckvorschau öffnen" />
+                                    <Tooltip text="Rechnung ansehen" />
                                  </tooltip>
                               </Button>
                            </children>
