@@ -46,10 +46,10 @@ public abstract class SceneLoader {
             stage.setScene(new Scene(root));
             Screen screen = Screen.getPrimary();
             Rectangle2D bounds = screen.getVisualBounds();
-            stage.setX(bounds.getMinX());
+            /*stage.setX(bounds.getMinX());
             stage.setY(bounds.getMinY());
             stage.setWidth(bounds.getWidth());
-            stage.setHeight(bounds.getHeight());
+            stage.setHeight(bounds.getHeight());*/
             stage.show();
         }
         catch (IOException e) {

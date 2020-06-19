@@ -160,6 +160,9 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
     private TextField tfEmailEsv;
 
     @FXML
+    private VBox vboxContact1;
+
+    @FXML
     private Tab tabEmergencyContact1;
 
     @FXML
@@ -792,13 +795,20 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
         comboSalutationContact2.getSelectionModel().select(0);
         comboSalutationEsv.getSelectionModel().select(0);
 
-
+        vboxContact2.setDisable(true);
         this.accordionClients.setExpandedPane(this.tPaneBasicData);
 
         this.cbSelfDetermined.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                 vboxEsv.setDisable(newValue);
+            }
+        });
+
+        this.cbContact1isEsv.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                vboxContact1.setDisable(newValue);
             }
         });
 
