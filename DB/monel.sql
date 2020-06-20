@@ -73,8 +73,6 @@ INSERT INTO `person` (`id`, `esv`, `notfallkontakt1`, `notfallkontakt2`, `person
 	(7, NULL, 2, 6, 'KLIENT', 'Herr', 'Mag.', 'Gernot', 'Kulis', 'Dorfstraße 56', 9584, 'Finkenstein am Faaker See ', '01234567890', 'test@test.at', '2000-01-01', 1234567890, 'Alter', 'Heuschnupfen', 'test', 'in Rente', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 
-
-
 -- Exportiere Struktur von Tabelle monel.rechnung
 DROP TABLE IF EXISTS `rechnung`;
 CREATE TABLE IF NOT EXISTS `rechnung` (
@@ -85,9 +83,9 @@ CREATE TABLE IF NOT EXISTS `rechnung` (
   PRIMARY KEY (`rechnungsnummer`),
   KEY `FKklient_rechnung` (`klient`),
   CONSTRAINT `FKklient_rechnung` FOREIGN KEY (`klient`) REFERENCES `person` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle monel.rechnung: ~0 rows (ungefaehr)
+-- Exportiere Daten aus Tabelle monel.rechnung: ~1 rows (ungefaehr)
 DELETE FROM `rechnung`;
 /*!40000 ALTER TABLE `rechnung` DISABLE KEYS */;
 /*!40000 ALTER TABLE `rechnung` ENABLE KEYS */;
@@ -99,15 +97,16 @@ CREATE TABLE IF NOT EXISTS `aktivitaet` (
   `datum` date DEFAULT NULL,
   `aktivitaetsbezeichnung` varchar(50) DEFAULT NULL,
   `kategorie` tinyint(1) DEFAULT NULL,
+  `notiz` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- Exportiere Daten aus Tabelle monel.aktivitaet: ~2 rows (ungefaehr)
+-- Exportiere Daten aus Tabelle monel.aktivitaet: ~3 rows (ungefaehr)
 DELETE FROM `aktivitaet`;
 /*!40000 ALTER TABLE `aktivitaet` DISABLE KEYS */;
-INSERT INTO `aktivitaet` (`id`, `datum`, `aktivitaetsbezeichnung`, `kategorie`) VALUES
-	(1, '2020-05-12', 'Einzelaktivität', 0),
-	(2, '2020-05-24', 'Gruppenaktivität', 1);
+INSERT INTO `aktivitaet` (`id`, `datum`, `aktivitaetsbezeichnung`, `kategorie`, `notiz`) VALUES
+	(1, '2020-05-12', 'Schwimmen', 0, 'test'),
+	(2, '2020-05-24', 'Essengehen', 1, 'test');
 /*!40000 ALTER TABLE `aktivitaet` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle monel.aktivitaetsprotokoll
@@ -123,6 +122,7 @@ CREATE TABLE IF NOT EXISTS `aktivitaetsprotokoll` (
   `jahr_Monat` varchar(7) DEFAULT NULL COMMENT 'YYYY-MM',
   `stundensatz` decimal(4,2) DEFAULT NULL,
   `fahrtkosten` decimal(4,2) DEFAULT NULL,
+  `notiz` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKaktivitaet` (`aktivitaet`),
   KEY `FKrechnung` (`rechnung`),
@@ -132,15 +132,15 @@ CREATE TABLE IF NOT EXISTS `aktivitaetsprotokoll` (
   CONSTRAINT `FKklient_aktivitaetsprotokoll` FOREIGN KEY (`klient`) REFERENCES `person` (`id`),
   CONSTRAINT `FKmitarbeiter` FOREIGN KEY (`mitarbeiter`) REFERENCES `person` (`id`),
   CONSTRAINT `FKrechnung` FOREIGN KEY (`rechnung`) REFERENCES `rechnung` (`rechnungsnummer`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- Exportiere Daten aus Tabelle monel.aktivitaetsprotokoll: ~3 rows (ungefaehr)
 DELETE FROM `aktivitaetsprotokoll`;
 /*!40000 ALTER TABLE `aktivitaetsprotokoll` DISABLE KEYS */;
-INSERT INTO `aktivitaetsprotokoll` (`id`, `aktivitaet`, `mitarbeiter`, `klient`, `rechnung`, `startzeit`, `endzeit`, `jahr_Monat`, `stundensatz`, `fahrtkosten`) VALUES
-	(1, 1, 4, 3, NULL, '16:30:00', '18:30:00', '05/2020', 12.25, 13.50),
-	(2, 2, 4, 3, NULL, '14:15:00', '18:00:00', '05/2020', 12.25, 13.50),
-	(3, 2, 4, 7, NULL, '14:15:00', '18:00:00', '05/2020', 12.25, 13.50);
+INSERT INTO `aktivitaetsprotokoll` (`id`, `aktivitaet`, `mitarbeiter`, `klient`, `rechnung`, `startzeit`, `endzeit`, `jahr_Monat`, `stundensatz`, `fahrtkosten`, `notiz`) VALUES
+	(1, 1, 4, 3, NULL, '16:30:00', '18:30:00', '05/2020', 12.25, 13.50, 'test'),
+	(2, 2, 4, 3, NULL, '14:15:00', '18:00:00', '05/2020', 12.25, 13.50, 'test'),
+	(3, 2, 4, 7, NULL, '14:15:00', '18:00:00', '05/2020', 12.25, 13.50, 'test');
 /*!40000 ALTER TABLE `aktivitaetsprotokoll` ENABLE KEYS */;
 
 -- Exportiere Struktur von Tabelle monel.dokument
