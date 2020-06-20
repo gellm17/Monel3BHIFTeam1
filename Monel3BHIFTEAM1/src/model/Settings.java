@@ -1,5 +1,6 @@
 package model;
 
+import data.BillDAO;
 import data.EventDAO;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -15,39 +16,39 @@ import java.util.*;
 public class Settings implements Initializable, Serializable {
     private final static String FILENAME = "Settings.lmaa";
 
-    private transient static ObservableList<String> klientColumns = FXCollections.observableList(new ArrayList<String>());
-    private static ObservableList<String> klientColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
+    private static Settings instance = null;
 
-    private static ObservableList<String> employeeColumns = FXCollections.observableList(new ArrayList<String>());
-    private static ObservableList<String> employeeColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
+    private transient ObservableList<String> klientColumns = FXCollections.observableList(new ArrayList<String>());
+    private ObservableList<String> klientColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
 
-    private static ObservableList<String> sponsorColumns = FXCollections.observableList(new ArrayList<String>());
-    private static ObservableList<String> sponsorColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
+    private ObservableList<String> employeeColumns = FXCollections.observableList(new ArrayList<String>());
+    private ObservableList<String> employeeColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
 
-    private static ObservableList<String> activityColumns = FXCollections.observableList(new ArrayList<String>());
-    private static ObservableList<String> activityColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
+    private ObservableList<String> sponsorColumns = FXCollections.observableList(new ArrayList<String>());
+    private ObservableList<String> sponsorColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
 
-    private static ObservableList<String> protocolColumns = FXCollections.observableList(new ArrayList<String>());
-    private static ObservableList<String> protocolColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
+    private ObservableList<String> activityColumns = FXCollections.observableList(new ArrayList<String>());
+    private ObservableList<String> activityColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
 
-    private static ObservableList<Integer> size = FXCollections.observableList(new ArrayList<Integer>());
+    private ObservableList<String> protocolColumns = FXCollections.observableList(new ArrayList<String>());
+    private ObservableList<String> protocolColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
 
-    private static ObservableList<Double> hourlyRates = FXCollections.observableList(new ArrayList<Double>());
+    private ObservableList<Integer> size = FXCollections.observableList(new ArrayList<Integer>());
 
-    private static Color color = Color.orange;
-    private static FontStyle font = FontStyle.Arial;
-    private static int selectedSize = 18;
-    private static double selectedHourlyRate = 3.20;
-    private static StringProperty companyName = new SimpleStringProperty(new Settings(), "companyName", "Monel GmbH");
-    private static StringProperty uid_Number = new SimpleStringProperty(new Settings(), "uid_Number", "ATU 75050926");
-    private static StringProperty iban = new SimpleStringProperty(new Settings(), "iban", "AT09 3946 4000 0015 0490");
-    private static StringProperty bic = new SimpleStringProperty(new Settings(), "bic", "BKAUATWW");
-    private static StringProperty street = new SimpleStringProperty(new Settings(), "street", "Villacher Straße");
-    private static IntegerProperty nr = new SimpleIntegerProperty(new Settings(), "nr", 95);
-    private static IntegerProperty plz = new SimpleIntegerProperty(new Settings(), "plz", 9800);
-    private static StringProperty location = new SimpleStringProperty(new Settings(), "location", "Spittal/Drau");
+    private ObservableList<Double> hourlyRates = FXCollections.observableList(new ArrayList<Double>());
 
-    private static Settings instance = new Settings();
+    private Color color = Color.orange;
+    private FontStyle font = FontStyle.Arial;
+    private int selectedSize = 18;
+    private double selectedHourlyRate = 3.20;
+    private StringProperty companyName = new SimpleStringProperty(this, "companyName", "Monel GmbH");
+    private StringProperty uid_Number = new SimpleStringProperty(this, "uid_Number", "ATU 75050926");
+    private StringProperty iban = new SimpleStringProperty(this, "iban", "AT09 3946 4000 0015 0490");
+    private StringProperty bic = new SimpleStringProperty(this, "bic", "BKAUATWW");
+    private StringProperty street = new SimpleStringProperty(this, "street", "Villacher Straße");
+    private IntegerProperty nr = new SimpleIntegerProperty(this, "nr", 95);
+    private IntegerProperty plz = new SimpleIntegerProperty(this, "plz", 9800);
+    private StringProperty location = new SimpleStringProperty(this, "location", "Spittal/Drau");
 
     private Settings() {
         if (klientColumns.isEmpty()) {
@@ -59,245 +60,246 @@ public class Settings implements Initializable, Serializable {
         }
     }
 
-    /*public static Settings getInstance() {
+    public static Settings getInstance() {
         if (instance == null) {
             instance = new Settings();
         }
         return instance;
-    }*/
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
-    public static ObservableList<String> getKlientColumns() {
+    public ObservableList<String> getKlientColumns() {
         return klientColumns;
     }
 
-    public static void setKlientColumns(ObservableList<String> klientColumns) {
-        Settings.klientColumns = klientColumns;
+    public void setKlientColumns(ObservableList<String> klientColumns) {
+        this.klientColumns = klientColumns;
     }
 
 
-    public static ObservableList<String> getKlientColumnsLoaded() {
+    public ObservableList<String> getKlientColumnsLoaded() {
         return klientColumnsLoaded;
     }
 
-    public static void setKlientColumnsLoaded(ObservableList<String> klientColumnsLoaded) {
-        Settings.klientColumnsLoaded = klientColumnsLoaded;
+    public void setKlientColumnsLoaded(ObservableList<String> klientColumnsLoaded) {
+        this.klientColumnsLoaded = klientColumnsLoaded;
     }
 
-    public static ObservableList<String> getEmployeeColumns() {
+    public ObservableList<String> getEmployeeColumns() {
         return employeeColumns;
     }
 
-    public static void setEmployeeColumns(ObservableList<String> employeeColumns) {
-        Settings.employeeColumns = employeeColumns;
+    public void setEmployeeColumns(ObservableList<String> employeeColumns) {
+        this.employeeColumns = employeeColumns;
     }
 
-    public static ObservableList<String> getEmployeeColumnsLoaded() {
+    public ObservableList<String> getEmployeeColumnsLoaded() {
         return employeeColumnsLoaded;
     }
 
-    public static void setEmployeeColumnsLoaded(ObservableList<String> employeeColumnsLoaded) {
-        Settings.employeeColumnsLoaded = employeeColumnsLoaded;
+    public void setEmployeeColumnsLoaded(ObservableList<String> employeeColumnsLoaded) {
+        this.employeeColumnsLoaded = employeeColumnsLoaded;
     }
 
-    public static ObservableList<String> getSponsorColumns() {
+    public ObservableList<String> getSponsorColumns() {
         return sponsorColumns;
     }
 
-    public static void setSponsorColumns(ObservableList<String> sponsorColumns) {
-        Settings.sponsorColumns = sponsorColumns;
+    public void setSponsorColumns(ObservableList<String> sponsorColumns) {
+        this.sponsorColumns = sponsorColumns;
     }
 
-    public static ObservableList<String> getSponsorColumnsLoaded() {
+    public ObservableList<String> getSponsorColumnsLoaded() {
         return sponsorColumnsLoaded;
     }
 
-    public static void setSponsorColumnsLoaded(ObservableList<String> sponsorColumnsLoaded) {
-        Settings.sponsorColumnsLoaded = sponsorColumnsLoaded;
+    public void setSponsorColumnsLoaded(ObservableList<String> sponsorColumnsLoaded) {
+        this.sponsorColumnsLoaded = sponsorColumnsLoaded;
     }
 
-    public static ObservableList<String> getActivityColumns() {
+    public ObservableList<String> getActivityColumns() {
         return activityColumns;
     }
 
-    public static void setActivityColumns(ObservableList<String> activityColumns) {
-        Settings.activityColumns = activityColumns;
+    public void setActivityColumns(ObservableList<String> activityColumns) {
+        this.activityColumns = activityColumns;
     }
 
-    public static ObservableList<String> getActivityColumnsLoaded() {
+    public ObservableList<String> getActivityColumnsLoaded() {
         return activityColumnsLoaded;
     }
 
-    public static void setActivityColumnsLoaded(ObservableList<String> activityColumnsLoaded) {
-        Settings.activityColumnsLoaded = activityColumnsLoaded;
+    public void setActivityColumnsLoaded(ObservableList<String> activityColumnsLoaded) {
+        this.activityColumnsLoaded = activityColumnsLoaded;
     }
 
-    public static ObservableList<String> getProtocolColumns() {
+    public ObservableList<String> getProtocolColumns() {
         return protocolColumns;
     }
 
-    public static void setProtocolColumns(ObservableList<String> protocolColumns) {
-        Settings.protocolColumns = protocolColumns;
+    public void setProtocolColumns(ObservableList<String> protocolColumns) {
+        this.protocolColumns = protocolColumns;
     }
 
-    public static ObservableList<String> getProtocolColumnsLoaded() {
+    public ObservableList<String> getProtocolColumnsLoaded() {
         return protocolColumnsLoaded;
     }
 
-    public static void setProtocolColumnsLoaded(ObservableList<String> protocolColumnsLoaded) {
-        Settings.protocolColumnsLoaded = protocolColumnsLoaded;
+    public void setProtocolColumnsLoaded(ObservableList<String> protocolColumnsLoaded) {
+        this.protocolColumnsLoaded = protocolColumnsLoaded;
     }
 
-    public static ObservableList<Integer> getSize() {
+    public ObservableList<Integer> getSize() {
         return size;
     }
 
-    public static void setSize(ObservableList<Integer> size) {
-        Settings.size = size;
+    public void setSize(ObservableList<Integer> size) {
+        this.size = size;
     }
 
-    public static ObservableList<Double> getHourlyRates() {
+    public ObservableList<Double> getHourlyRates() {
         return hourlyRates;
     }
 
-    public static void setHourlyRates(ObservableList<Double> hourlyRates) {
-        Settings.hourlyRates = hourlyRates;
+    public void setHourlyRates(ObservableList<Double> hourlyRates) {
+        this.hourlyRates = hourlyRates;
     }
 
-    public static Color getColor() {
+    public Color getColor() {
         return color;
     }
 
-    public static void setColor(Color color) {
-        Settings.color = color;
+    public void setColor(Color color) {
+        this.color = color;
     }
 
-    public static FontStyle getFont() {
+    public FontStyle getFont() {
         return font;
     }
 
-    public static void setFont(FontStyle font) {
-        Settings.font = font;
+    public void setFont(FontStyle font) {
+        this.font = font;
     }
 
-    public static int getSelectedSize() {
+    public int getSelectedSize() {
         return selectedSize;
     }
 
-    public static void setSelectedSize(int selectedSize) {
-        Settings.selectedSize = selectedSize;
+    public void setSelectedSize(int selectedSize) {
+        this.selectedSize = selectedSize;
     }
 
-    public static double getSelectedHourlyRate() {
+    public double getSelectedHourlyRate() {
         return selectedHourlyRate;
     }
 
-    public static void setSelectedHourlyRate(double selectedHourlyRate) {
-        Settings.selectedHourlyRate = selectedHourlyRate;
+    public void setSelectedHourlyRate(double selectedHourlyRate) {
+        this.selectedHourlyRate = selectedHourlyRate;
     }
 
-    public static String getCompanyName() {
+    public String getCompanyName() {
         return companyName.get();
     }
 
-    public static StringProperty companyNameProperty() {
+    public StringProperty companyNameProperty() {
         return companyName;
     }
 
-    public static void setCompanyName(String companyName) {
-        Settings.companyName.set(companyName);
+    public void setCompanyName(String companyName) {
+        this.companyName.set(companyName);
     }
 
-    public static String getUid_Number() {
+    public String getUid_Number() {
         return uid_Number.get();
     }
 
-    public static StringProperty uid_NumberProperty() {
+    public StringProperty uid_NumberProperty() {
         return uid_Number;
     }
 
-    public static void setUid_Number(String uid_Number) {
-        Settings.uid_Number.set(uid_Number);
+    public void setUid_Number(String uid_Number) {
+        this.uid_Number.set(uid_Number);
     }
 
-    public static String getIban() {
+    public String getIban() {
         return iban.get();
     }
 
-    public static StringProperty ibanProperty() {
+    public StringProperty ibanProperty() {
         return iban;
     }
 
-    public static void setIban(String iban) {
-        Settings.iban.set(iban);
+    public void setIban(String iban) {
+        this.iban.set(iban);
     }
 
-    public static String getBic() {
+    public String getBic() {
         return bic.get();
     }
 
-    public static StringProperty bicProperty() {
+    public StringProperty bicProperty() {
         return bic;
     }
 
-    public static void setBic(String bic) {
-        Settings.bic.set(bic);
+    public void setBic(String bic) {
+        this.bic.set(bic);
     }
 
-    public static String getStreet() {
+    public String getStreet() {
         return street.get();
     }
 
-    public static StringProperty streetProperty() {
+    public StringProperty streetProperty() {
         return street;
     }
 
-    public static void setStreet(String street) {
-        Settings.street.set(street);
+    public void setStreet(String street) {
+        this.street.set(street);
     }
 
-    public static int getNr() {
+    public int getNr() {
         return nr.get();
     }
 
-    public static IntegerProperty nrProperty() {
+    public IntegerProperty nrProperty() {
         return nr;
     }
 
-    public static void setNr(int nr) {
-        Settings.nr.set(nr);
+    public void setNr(int nr) {
+        this.nr.set(nr);
     }
 
-    public static int getPlz() {
+    public int getPlz() {
         return plz.get();
     }
 
-    public static IntegerProperty plzProperty() {
+    public IntegerProperty plzProperty() {
         return plz;
     }
 
-    public static void setPlz(int plz) {
-        Settings.plz.set(plz);
+    public void setPlz(int plz) {
+        this.plz.set(plz);
     }
 
-    public static String getLocation() {
+    public String getLocation() {
         return location.get();
     }
 
-    public static StringProperty locationProperty() {
+    public StringProperty locationProperty() {
         return location;
     }
 
-    public static void setLocation(String location) {
-        Settings.location.set(location);
+    public void setLocation(String location) {
+        this.location.set(location);
     }
 
     //adds the column in the loaded on and removes form the other Array
-    public static boolean klientColumnLoadIn(String c) {
+    public boolean klientColumnLoadIn(String c) {
         boolean ret = false;
         ret = klientColumns.remove(c);
         if (ret){
@@ -307,7 +309,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //adds the column in the loaded on and removes form the other Array
-    public static boolean employeeColumnLoadIn(String c) {
+    public boolean employeeColumnLoadIn(String c) {
         boolean ret = false;
         ret = employeeColumns.remove(c);
         if (ret){
@@ -317,7 +319,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //adds the column in the loaded on and removes form the other Array
-    public static boolean sponsorColumnLoadIn(String c) {
+    public boolean sponsorColumnLoadIn(String c) {
         boolean ret = false;
         ret = sponsorColumns.remove(c);
         if (ret){
@@ -327,7 +329,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //adds the column in the loaded on and removes form the other Array
-    public static boolean activityColumnLoadIn(String c) {
+    public boolean activityColumnLoadIn(String c) {
         boolean ret = false;
         ret = activityColumns.remove(c);
         if (ret){
@@ -337,7 +339,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //adds the column in the loaded on and removes form the other Array
-    public static boolean protocolColumnLoadIn(String c) {
+    public boolean protocolColumnLoadIn(String c) {
         boolean ret = false;
         ret = protocolColumns.remove(c);
         if (ret){
@@ -347,7 +349,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //adds the column in the loaded on and removes form the other Array
-    public static boolean klientColumnLoadOut(String c) {
+    public boolean klientColumnLoadOut(String c) {
         boolean ret = false;
         ret = klientColumnsLoaded.remove(c);
         if (ret){
@@ -357,7 +359,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //adds the column in the loaded on and removes form the other Array
-    public static boolean employeeColumnLoadOut(String c) {
+    public boolean employeeColumnLoadOut(String c) {
         boolean ret = false;
         ret = employeeColumnsLoaded.remove(c);
         if (ret){
@@ -367,7 +369,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //adds the column in the loaded on and removes form the other Array
-    public static boolean sponsorColumnLoadOut(String c) {
+    public boolean sponsorColumnLoadOut(String c) {
         boolean ret = false;
         ret = sponsorColumnsLoaded.remove(c);
         if (ret){
@@ -377,7 +379,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //adds the column in the loaded on and removes form the other Array
-    public static boolean activityColumnLoadOut(String c) {
+    public boolean activityColumnLoadOut(String c) {
         boolean ret = false;
         ret = activityColumnsLoaded.remove(c);
         if (ret){
@@ -387,7 +389,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //adds the column in the loaded on and removes form the other Array
-    public static boolean protocolColumnLoadOut(String c) {
+    public boolean protocolColumnLoadOut(String c) {
         boolean ret = false;
         ret = protocolColumnsLoaded.remove(c);
         if (ret){
@@ -397,7 +399,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //moves a column in the loadedArray up
-    public static boolean klientColumnMoveUp(String c) {
+    public boolean klientColumnMoveUp(String c) {
         boolean ret = false;
         String change;
         int index = klientColumnsLoaded.indexOf(c);
@@ -411,7 +413,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //moves a column in the loadedArray up
-    public static boolean employeeColumnMoveUp(String c) {
+    public  boolean employeeColumnMoveUp(String c) {
         boolean ret = false;
         String change;
         int index = employeeColumnsLoaded.indexOf(c);
@@ -425,7 +427,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //moves a column in the loadedArray up
-    public static boolean sponsorColumnMoveUp(String c) {
+    public boolean sponsorColumnMoveUp(String c) {
         boolean ret = false;
         String change;
         int index = sponsorColumnsLoaded.indexOf(c);
@@ -439,7 +441,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //moves a column in the loadedArray up
-    public static boolean activityColumnMoveUp(String c) {
+    public boolean activityColumnMoveUp(String c) {
         boolean ret = false;
         String change;
         int index = activityColumnsLoaded.indexOf(c);
@@ -453,7 +455,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //moves a column in the loadedArray up
-    public static boolean protocolColumnMoveUp(String c) {
+    public boolean protocolColumnMoveUp(String c) {
         boolean ret = false;
         String change;
         int index = protocolColumnsLoaded.indexOf(c);
@@ -467,7 +469,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //moves a column in the loadedArray down
-    public static boolean klientColumnMoveDown(String c) {
+    public boolean klientColumnMoveDown(String c) {
         boolean ret = false;
         String change;
         int index = klientColumnsLoaded.indexOf(c);
@@ -482,7 +484,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //moves a column in the loadedArray down
-    public static boolean employeeColumnMoveDown(String c) {
+    public boolean employeeColumnMoveDown(String c) {
         boolean ret = false;
         String change;
         int index = employeeColumnsLoaded.indexOf(c);
@@ -497,7 +499,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //moves a column in the loadedArray down
-    public static boolean sponsorColumnMoveDown(String c) {
+    public boolean sponsorColumnMoveDown(String c) {
         boolean ret = false;
         String change;
         int index = sponsorColumnsLoaded.indexOf(c);
@@ -512,7 +514,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //moves a column in the loadedArray down
-    public static boolean activityColumnMoveDown(String c) {
+    public boolean activityColumnMoveDown(String c) {
         boolean ret = false;
         String change;
         int index = activityColumnsLoaded.indexOf(c);
@@ -527,7 +529,7 @@ public class Settings implements Initializable, Serializable {
     }
 
     //moves a column in the loadedArray down
-    public static boolean protocolColumnMoveDown(String c) {
+    public boolean protocolColumnMoveDown(String c) {
         boolean ret = false;
         String change;
         int index = protocolColumnsLoaded.indexOf(c);
@@ -541,7 +543,7 @@ public class Settings implements Initializable, Serializable {
         return ret;
     }
 
-    public static void getData() {
+    public void getData() {
         try {
             FileInputStream is = new FileInputStream(FILENAME);
             ObjectInputStream ois = new ObjectInputStream(is);
@@ -555,7 +557,7 @@ public class Settings implements Initializable, Serializable {
         }
     }
 
-    public static void saveData() {
+    public void saveData() {
         try {
             FileOutputStream os = new FileOutputStream(FILENAME);
             ObjectOutputStream oos = new ObjectOutputStream(os);
