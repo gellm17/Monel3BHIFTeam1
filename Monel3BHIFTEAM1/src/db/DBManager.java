@@ -16,16 +16,16 @@ public class DBManager {
     private static String sqlInsertClient           = "INSERT INTO person (personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,esv,notfallkontakt1,notfallkontakt2,svnr,diagnose,allergien,sonstiges,beschaeftigung) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private static String sqlInsertEmployee         = "INSERT INTO person (personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,svnr,amt,verwendungsgruppe,gehaltsstufe,wochenstunden,iban,bic,vorrueckdatum,einstelldatum) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private static String sqlInsertSponsor          = "INSERT INTO person (personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,firmenname,firmentelefonnummer,firmenemail) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-    private static String sqlInsertEvent            = "INSERT INTO aktivitaet (datum,aktivitaetsbezeichnung,kategorie) VALUES (?,?,?)";
-    private static String sqlInsertEventprotocol    = "INSERT INTO aktivitaetsprotokoll (aktivitaet,mitarbeiter,klient,rechnung,startzeit,endzeit,jahr_Monat,stundensatz,fahrtkosten) VALUES (?,?,?,?,?,?,?,?,?)";
+    private static String sqlInsertEvent            = "INSERT INTO aktivitaet (datum,aktivitaetsbezeichnung,kategorie,notiz) VALUES (?,?,?,?)";
+    private static String sqlInsertEventprotocol    = "INSERT INTO aktivitaetsprotokoll (aktivitaet,mitarbeiter,klient,rechnung,startzeit,endzeit,jahr_Monat,stundensatz,fahrtkosten,notiz) VALUES (?,?,?,?,?,?,?,?,?,?)";
     private static String sqlInsertBill             = "INSERT INTO rechnung (klient,ausstellungsdatum,verwendungszweck) VALUES (?,?,?)";
     private static String sqlInsertDocument         = "INSERT INTO dokument (besitzerIdPerson,besitzerIdAktivitaet,pfad,dokumentenart,besitzer) VALUES (?,?,?,?,?)";
     private static String sqlUpdatePerson           = "UPDATE person SET anrede = ?, titel = ?, vorname = ?, nachname = ?, strasse_hausnummer = ?, plz = ?, ort = ?, telefonnummer = ?, email = ?, geburtsdatum = ? WHERE id = ?";
     private static String sqlUpdateClient           = "UPDATE person SET anrede = ?, titel = ?, vorname = ?, nachname = ?, strasse_hausnummer = ?, plz = ?, ort = ?, telefonnummer = ?, email = ?, geburtsdatum = ?, esv = ?, notfallkontakt2 = ?, svnr = ?, diagnose = ?, allergien = ?, sonstiges = ?, beschaeftigung = ? WHERE id = ?";
     private static String sqlUpdateEmployee         = "UPDATE person SET anrede = ?, titel = ?, vorname = ?, nachname = ?, strasse_hausnummer = ?, plz = ?, ort = ?, telefonnummer = ?, email = ?, geburtsdatum = ?, svnr = ? , amt = ?, verwendungsgruppe = ?, gehaltsstufe = ?, wochenstunden = ?, iban = ?, bic = ?, vorrueckdatum = ?, einstelldatum = ? WHERE id = ?";
     private static String sqlUpdateSponsor          = "UPDATE person SET anrede = ?, titel = ?, vorname = ?, nachname = ?, strasse_hausnummer = ?, plz = ?, ort = ?, telefonnummer = ?, email = ?, geburtsdatum = ?, firmenname = ?, firmentelefonnummer = ?, firmenemail = ? WHERE id = ?";
-    private static String sqlUpdateEvent            = "UPDATE aktivitaet SET datum = ?, aktivitaetsbezeichnung = ? WHERE id = ?";
-    private static String sqlUpdateEventprotocol    = "UPDATE aktivitaetsprotokoll SET mitarbeiter = ?, klient = ?, rechnung = ?, startzeit = ?, endzeit = ?, jahr_Monat = ?, stundensatz = ?, fahrtkosten = ? WHERE id = ?";
+    private static String sqlUpdateEvent            = "UPDATE aktivitaet SET datum = ?, aktivitaetsbezeichnung = ?, notiz = ? WHERE id = ?";
+    private static String sqlUpdateEventprotocol    = "UPDATE aktivitaetsprotokoll SET mitarbeiter = ?, klient = ?, rechnung = ?, startzeit = ?, endzeit = ?, jahr_Monat = ?, stundensatz = ?, fahrtkosten = ?, notiz = ? WHERE id = ?";
     private static String sqlUpdateBill             = "UPDATE rechnung SET ausstellungsdatum = ?, verwendungszweck = ? WHERE rechnungsnummer = ?";
     private static String sqlUpdateDocument         = "UPDATE dokument SET besitzerIdPerson = ?, besitzerIdAktivitaet = ?, pfad = ?, dokumentenart = ?, besitzer = ? WHERE id = ?";
     private static String sqlDeletePerson           = "UPDATE person SET geloescht = ? WHERE id = ?"; // for person, client, employee and sponsor
@@ -283,6 +283,7 @@ public class DBManager {
         stmtInsertEvent.setDate(1, Date.valueOf(e.getDate()));
         stmtInsertEvent.setString(2, e.getName());
         stmtInsertEvent.setInt(3, (e.getIsGroup() ? 1 : 0));
+        stmtInsertEvent.setString(4, e.getNote());
         boolean added = (stmtInsertEvent.executeUpdate() == 1);
         ResultSet rs = stmtInsertEvent.getGeneratedKeys();
         if(rs != null && rs.next()) {
@@ -328,6 +329,7 @@ public class DBManager {
         stmtInsertEventprotocol.setString(7, ep.getYear_month());
         stmtInsertEventprotocol.setDouble(8, ep.getHourlyRate()); // must be changed to decimal
         stmtInsertEventprotocol.setDouble(9, ep.getRideCosts()); // must be changed to decimal
+        stmtInsertEventprotocol.setString(10, ep.getNote());
         boolean added = (stmtInsertEventprotocol.executeUpdate() == 1);
         ResultSet rs = stmtInsertEventprotocol.getGeneratedKeys();
         if(rs != null && rs.next()) {
@@ -576,7 +578,8 @@ public class DBManager {
     public static void updateEvent(Event e) throws SQLException {
         stmtUpdateEvent.setDate(1, Date.valueOf(e.getDate()));
         stmtUpdateEvent.setString(2, e.getName());
-        stmtUpdateEvent.setInt(3, e.getId());
+        stmtUpdateEvent.setString(3, e.getNote());
+        stmtUpdateEvent.setInt(4, e.getId());
         stmtUpdateEvent.executeUpdate();
         stmtUpdateEvent.clearParameters();
     } //TODO check non mandatory fields
@@ -607,7 +610,8 @@ public class DBManager {
         stmtUpdateEventprotocol.setString(6, ep.getYear_month());
         stmtUpdateEventprotocol.setDouble(7, ep.getHourlyRate()); // must be changed to decimal
         stmtUpdateEventprotocol.setDouble(8, ep.getRideCosts()); // must be changed to decimal
-        stmtUpdateEventprotocol.setInt(9, ep.getId());
+        stmtUpdateEventprotocol.setString(9, ep.getNote());
+        stmtUpdateEventprotocol.setInt(10, ep.getId());
         stmtUpdateEventprotocol.executeUpdate();
         stmtUpdateEventprotocol.clearParameters();
     } //TODO check non mandatory fields

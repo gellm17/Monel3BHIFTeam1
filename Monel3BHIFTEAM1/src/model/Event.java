@@ -11,12 +11,22 @@ public class Event {
     private ObjectProperty<LocalDate> date;
     private StringProperty name;                //activity
     private BooleanProperty isGroup;            //if the event is a group event
+    private StringProperty note;
 
     public Event(Integer id, LocalDate date, String name, boolean isGroup) {
         this.id = new SimpleIntegerProperty(this, "id", id);
         this.date = new SimpleObjectProperty<LocalDate>(this, "date", date);
         this.name = new SimpleStringProperty(this, "name", name);
         this.isGroup = new SimpleBooleanProperty(this, "isGroup", isGroup);
+        this.note = new SimpleStringProperty(this, "note");
+    }
+
+    public Event(Integer id, LocalDate date, String name, boolean isGroup, String note) {
+        this.id = new SimpleIntegerProperty(this, "id", id);
+        this.date = new SimpleObjectProperty<LocalDate>(this, "date", date);
+        this.name = new SimpleStringProperty(this, "name", name);
+        this.isGroup = new SimpleBooleanProperty(this, "isGroup", isGroup);
+        this.note = new SimpleStringProperty(this, "note", note);
     }
 
     public Event(Integer id) {
@@ -28,10 +38,11 @@ public class Event {
         this.date = new SimpleObjectProperty<LocalDate>(this, "date");
         this.name = new SimpleStringProperty(this, "name");
         this.isGroup = new SimpleBooleanProperty(this, "isGroup");
+        this.note = new SimpleStringProperty(this, "note");
     }
 
     public static Event fromResults(ResultSet rs) throws SQLException {
-        return new Event(rs.getInt("id"), LocalDate.parse(rs.getString("datum")), rs.getString("aktivitaetsbezeichnung"), (rs.getInt("kategorie") == 1 ? true : false));
+        return new Event(rs.getInt("id"), LocalDate.parse(rs.getString("datum")), rs.getString("aktivitaetsbezeichnung"), (rs.getInt("kategorie") == 1 ? true : false), rs.getString("notiz"));
     }
 
     public int getId() {
@@ -81,6 +92,12 @@ public class Event {
     public void setIsGroup(boolean isGroup) {
         this.isGroup.set(isGroup);
     }
+
+    public String getNote() { return note.get(); }
+
+    public StringProperty noteProperty() { return note; }
+
+    public void setNote(String note) { this.note.set(note); }
 
     @Override
     public String toString() {
