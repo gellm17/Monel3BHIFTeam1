@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import model.Settings;
 
 import java.sql.SQLException;
 
@@ -30,6 +31,7 @@ public class Main extends Application {
     @Override
     public void stop() {
         DBManager.close();
+        Settings.saveData();
     }
     public static void main(String[] args) {
         launch(args);

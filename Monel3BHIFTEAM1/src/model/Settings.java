@@ -8,11 +8,14 @@ import javafx.collections.*;
 import javafx.fxml.Initializable;
 
 import java.awt.*;
+import java.io.*;
 import java.net.URL;
 import java.util.*;
 
-public class Settings implements Initializable {
-    private static ObservableList<String> klientColumns = FXCollections.observableList(new ArrayList<String>());
+public class Settings implements Initializable, Serializable {
+    private final static String FILENAME = "Settings.lmaa";
+
+    private transient static ObservableList<String> klientColumns = FXCollections.observableList(new ArrayList<String>());
     private static ObservableList<String> klientColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
 
     private static ObservableList<String> employeeColumns = FXCollections.observableList(new ArrayList<String>());
@@ -536,5 +539,43 @@ public class Settings implements Initializable {
             ret = true;
         }
         return ret;
+    }
+
+    public static void getData() {
+        try {
+            FileInputStream is = new FileInputStream(FILENAME);
+            ObjectInputStream ois = new ObjectInputStream(is);
+            Object o = ois.readObject();
+            if (o instanceof Settings) {
+                // Setting sollte in onject geladen werden
+            }
+            is.close();
+        } catch (Exception e) {
+            //sollten default werte eingefügt werden
+        }
+    }
+
+    public static void saveData() {
+        try {
+            FileOutputStream os = new FileOutputStream(FILENAME);
+            ObjectOutputStream oos = new ObjectOutputStream(os);
+            oos.writeObject(this); // funktioniert nicht weil Settings kein Object ist
+            oos.flush();
+            oos.close();
+            os.close();
+        } catch (Exception e) {
+            System.out.println(e);
+            e.printStackTrace();
+        }
+    }
+
+    private void writeObject(ObjectOutputStream s) throws IOException {
+        s.defaultWriteObject();
+        s.writeObject(getKlientColumns()); // wurde nur zum test implementiert der rest fehlt noch
+    }
+
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+        s.defaultReadObject();
+        // sollte geladenes object gespeichert werden
     }
 }
