@@ -293,7 +293,7 @@ public class ViewBill_Controller extends SceneLoader {
                 "                </tr>\n" +
                 "                <tr>\n" +
                 "                    <td>UID-Nummer:</td>\n" +
-                "                    <td id=\"uidNr\" class=\"right\">" + Settings.getUid_Number() + "</td>\n" +
+                "                    <td id=\"uidNr\" class=\"right\">" + Settings.getInstance().getUid_Number() + "</td>\n" +
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +
@@ -336,13 +336,13 @@ public class ViewBill_Controller extends SceneLoader {
                 "        <div id=\"rechnung\">\n" +
                 "            <table style=\"letter-spacing: 7.5px\">\n" +
                 "                <tr>\n" +
-                "                  <td style=\"padding-bottom:25px\" id=\"firma\">" + Settings.getCompanyName() + "</td>\n" +
+                "                  <td style=\"padding-bottom:25px\" id=\"firma\">" + Settings.getInstance().getCompanyName() + "</td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
-                "                    <td style=\"padding-bottom:25px; min-width:500px\" id=\"iban\">" + Settings.getIban() + "</td>\n" +
+                "                    <td style=\"padding-bottom:25px; min-width:500px\" id=\"iban\">" + Settings.getInstance().getIban() + "</td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
-                "                    <td id=\"bic\">" + Settings.getBic() + "</td><td style=\"padding-left:228px; #\">" + numberFormat.format(Math.round(((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*1.2) * 100.0) / 100.0).replace(" €", "").replace(",", "") +"</td>\n" +
+                "                    <td id=\"bic\">" + Settings.getInstance().getBic() + "</td><td style=\"padding-left:228px; #\">" + numberFormat.format(Math.round(((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*1.2) * 100.0) / 100.0).replace(" €", "").replace(",", "") +"</td>\n" +
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +

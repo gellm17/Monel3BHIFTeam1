@@ -193,29 +193,19 @@ public class Settings_Controller implements Initializable {
     private int posOfSelectedItem;
 
     @FXML
-    void btnAddColumnClients_Clicked(ActionEvent event) {
-        Settings.klientColumnLoadIn((String) selectedItem);
-    }
+    void btnAddColumnClients_Clicked(ActionEvent event) { Settings.getInstance().klientColumnLoadIn((String) selectedItem); }
 
     @FXML
-    void btnAddColumnEmployees_Clicked(ActionEvent event) {
-        Settings.employeeColumnLoadIn((String) selectedItem);
-    }
+    void btnAddColumnEmployees_Clicked(ActionEvent event) { Settings.getInstance().employeeColumnLoadIn((String) selectedItem); }
 
     @FXML
-    void btnAddColumnEvents_Clicked(ActionEvent event) {
-        Settings.activityColumnLoadIn((String) selectedItem);
-    }
+    void btnAddColumnEvents_Clicked(ActionEvent event) { Settings.getInstance().activityColumnLoadIn((String) selectedItem); }
 
     @FXML
-    void btnAddColumnSponsors_Clicked(ActionEvent event) {
-        Settings.sponsorColumnLoadIn((String) selectedItem);
-    }
+    void btnAddColumnSponsors_Clicked(ActionEvent event) { Settings.getInstance().sponsorColumnLoadIn((String) selectedItem); }
 
     @FXML
-    void btnAddColumnProtocols_Clicked(ActionEvent event){
-        Settings.protocolColumnLoadIn((String) selectedItem);
-    }
+    void btnAddColumnProtocols_Clicked(ActionEvent event) { Settings.getInstance().protocolColumnLoadIn((String) selectedItem); }
 
     @FXML
     void btnAddHourlyRate_Clicked(ActionEvent event) {
@@ -235,88 +225,78 @@ public class Settings_Controller implements Initializable {
     @FXML
     void btnMoveColumnClientsDown_Clicked(ActionEvent event) {
 
-        Settings.klientColumnMoveDown((String) selectedItem);
+        Settings.getInstance().klientColumnMoveDown((String) selectedItem);
         lvSelectedColumnsClients.getSelectionModel().select(posOfSelectedItem + 1);
     }
 
     @FXML
     void btnMoveColumnClientsUp_Clicked(ActionEvent event) {
-        Settings.klientColumnMoveUp((String) selectedItem);
+        Settings.getInstance().klientColumnMoveUp((String) selectedItem);
         lvSelectedColumnsClients.getSelectionModel().select(posOfSelectedItem - 1);
     }
 
     @FXML
     void btnMoveColumnEmployeesDown_Clicked(ActionEvent event) {
-        Settings.employeeColumnMoveDown((String) selectedItem);
+        Settings.getInstance().employeeColumnMoveDown((String) selectedItem);
         lvSelectedColumnsEmployees.getSelectionModel().select(posOfSelectedItem + 1);
     }
 
     @FXML
     void btnMoveColumnEmployeesUp_Clicked(ActionEvent event) {
-        Settings.employeeColumnMoveUp((String) selectedItem);
+        Settings.getInstance().employeeColumnMoveUp((String) selectedItem);
         lvSelectedColumnsEmployees.getSelectionModel().select(posOfSelectedItem - 1);
     }
 
     @FXML
     void btnMoveColumnEventsUp_Clicked(ActionEvent event) {
-        Settings.activityColumnMoveUp((String) selectedItem);
+        Settings.getInstance().activityColumnMoveUp((String) selectedItem);
         lvSelectedColumnsEvents.getSelectionModel().select(posOfSelectedItem + 1);
     }
 
     @FXML
     void btnMoveColumnEventsDown_Clicked(ActionEvent event) {
-        Settings.activityColumnMoveDown((String) selectedItem);
+        Settings.getInstance().activityColumnMoveDown((String) selectedItem);
         lvSelectedColumnsEvents.getSelectionModel().select(posOfSelectedItem - 1);
     }
 
     @FXML
     void btnMoveColumnProtocolsDown_Clicked(ActionEvent event) {
-        Settings.protocolColumnMoveDown((String) selectedItem);
+        Settings.getInstance().protocolColumnMoveDown((String) selectedItem);
         lvSelectedColumnsProtocols.getSelectionModel().select(posOfSelectedItem + 1);
     }
 
     @FXML
     void btnMoveColumnProtocolsUp_Clicked(ActionEvent event) {
-        Settings.protocolColumnMoveUp((String) selectedItem);
+        Settings.getInstance().protocolColumnMoveUp((String) selectedItem);
         lvSelectedColumnsProtocols.getSelectionModel().select(posOfSelectedItem - 1);
     }
 
     @FXML
     void btnMoveColumnSponsorsDown_Clicked(ActionEvent event) {
-        Settings.sponsorColumnMoveDown((String) selectedItem);
+        Settings.getInstance().sponsorColumnMoveDown((String) selectedItem);
         lvSelectedColumnsSponsors.getSelectionModel().select(posOfSelectedItem + 1);
     }
 
     @FXML
     void btnMoveColumnSponsorsUp_Clicked(ActionEvent event) {
-        Settings.sponsorColumnMoveUp((String) selectedItem);
+        Settings.getInstance().sponsorColumnMoveUp((String) selectedItem);
         lvSelectedColumnsSponsors.getSelectionModel().select(posOfSelectedItem - 1);
     }
 
     @FXML
-    void btnRemoveColumnClients_Clicked(ActionEvent event) {
-        Settings.klientColumnLoadOut((String) selectedItem);
-    }
+    void btnRemoveColumnClients_Clicked(ActionEvent event) { Settings.getInstance().klientColumnLoadOut((String) selectedItem); }
 
     @FXML
-    void btnRemoveColumnEmployees_Clicked(ActionEvent event) {
-        Settings.employeeColumnLoadOut((String) selectedItem);
-    }
+    void btnRemoveColumnEmployees_Clicked(ActionEvent event) { Settings.getInstance().employeeColumnLoadOut((String) selectedItem); }
 
     @FXML
-    void btnRemoveColumnEvents_Clicked(ActionEvent event) {
-        Settings.activityColumnLoadOut((String) selectedItem);
-    }
+    void btnRemoveColumnEvents_Clicked(ActionEvent event) { Settings.getInstance().activityColumnLoadOut((String) selectedItem); }
 
     @FXML
-    void btnRemoveColumnSponsors_Clicked(ActionEvent event) {
-        Settings.sponsorColumnLoadOut((String) selectedItem);
-    }
+    void btnRemoveColumnSponsors_Clicked(ActionEvent event) { Settings.getInstance().sponsorColumnLoadOut((String) selectedItem); }
 
     @FXML
-    void btnRemoveColumnProtocols_Clicked(ActionEvent event) {
-        Settings.protocolColumnLoadOut((String) selectedItem);
-    }
+    void btnRemoveColumnProtocols_Clicked(ActionEvent event) { Settings.getInstance().protocolColumnLoadOut((String) selectedItem); }
 
     @FXML
     void btnSaveSettings_Clicked(ActionEvent event) {
@@ -331,14 +311,14 @@ public class Settings_Controller implements Initializable {
         tfCheck(tfPlaceCompany, "^\\D+$", tabCompanyData, null, companyCounter);
 
         if (companyCounter == 0 && commonCounter == 0){
-            Settings.setCompanyName(tfNameCompany.getText());
-            Settings.setIban(tfIbanCompany.getText());
-            Settings.setBic(tfBicCompany.getText());
-            Settings.setUid_Number(tfUidCompany.getText());
-            Settings.setStreet(tfStreetCompany.getText());
-            Settings.setNr(Integer.parseInt(tfHousenumberCompany.getText()));
-            Settings.setPlz(Integer.parseInt(tfZipCompany.getText()));
-            Settings.setLocation(tfPlaceCompany.getText());
+            Settings.getInstance().setCompanyName(tfNameCompany.getText());
+            Settings.getInstance().setIban(tfIbanCompany.getText());
+            Settings.getInstance().setBic(tfBicCompany.getText());
+            Settings.getInstance().setUid_Number(tfUidCompany.getText());
+            Settings.getInstance().setStreet(tfStreetCompany.getText());
+            Settings.getInstance().setNr(Integer.parseInt(tfHousenumberCompany.getText()));
+            Settings.getInstance().setPlz(Integer.parseInt(tfZipCompany.getText()));
+            Settings.getInstance().setLocation(tfPlaceCompany.getText());
             Stage stage = (Stage) btnSaveSettings.getScene().getWindow();
             stage.close();
         }
@@ -378,14 +358,14 @@ public class Settings_Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //COMPANY DATA
-        tfNameCompany.setText(Settings.getCompanyName());
-        tfUidCompany.setText(Settings.getUid_Number());
-        tfIbanCompany.setText(Settings.getIban());
-        tfBicCompany.setText(Settings.getBic());
-        tfStreetCompany.setText(Settings.getStreet());
-        tfHousenumberCompany.setText(""+Settings.getNr());
-        tfZipCompany.setText(""+Settings.getPlz());
-        tfPlaceCompany.setText(Settings.getLocation());
+        tfNameCompany.setText(Settings.getInstance().getCompanyName());
+        tfUidCompany.setText(Settings.getInstance().getUid_Number());
+        tfIbanCompany.setText(Settings.getInstance().getIban());
+        tfBicCompany.setText(Settings.getInstance().getBic());
+        tfStreetCompany.setText(Settings.getInstance().getStreet());
+        tfHousenumberCompany.setText(""+Settings.getInstance().getNr());
+        tfZipCompany.setText(""+Settings.getInstance().getPlz());
+        tfPlaceCompany.setText(Settings.getInstance().getLocation());
 
         tabCompanyData.setText("");
         tabCompanyData.setGraphic(new Label("Firmendaten"));
@@ -397,17 +377,17 @@ public class Settings_Controller implements Initializable {
         colorAccent.setValue(Color.RED);
 
         //TABLES
-        lvAvailableColumnsClients.setItems(Settings.getKlientColumns());
-        lvAvailableColumnsEmployees.setItems(Settings.getEmployeeColumns());
-        lvAvailableColumnsEvents.setItems(Settings.getActivityColumns());
-        lvAvailableColumnsProtocols.setItems(Settings.getProtocolColumns());
-        lvAvailableColumnsSponsors.setItems(Settings.getSponsorColumns());
+        lvAvailableColumnsClients.setItems(Settings.getInstance().getKlientColumns());
+        lvAvailableColumnsEmployees.setItems(Settings.getInstance().getEmployeeColumns());
+        lvAvailableColumnsEvents.setItems(Settings.getInstance().getActivityColumns());
+        lvAvailableColumnsProtocols.setItems(Settings.getInstance().getProtocolColumns());
+        lvAvailableColumnsSponsors.setItems(Settings.getInstance().getSponsorColumns());
 
-        lvSelectedColumnsClients.setItems(Settings.getKlientColumnsLoaded());
-        lvSelectedColumnsEmployees.setItems(Settings.getEmployeeColumnsLoaded());
-        lvSelectedColumnsEvents.setItems(Settings.getActivityColumnsLoaded());
-        lvSelectedColumnsProtocols.setItems(Settings.getProtocolColumnsLoaded());
-        lvSelectedColumnsSponsors.setItems(Settings.getSponsorColumnsLoaded());
+        lvSelectedColumnsClients.setItems(Settings.getInstance().getKlientColumnsLoaded());
+        lvSelectedColumnsEmployees.setItems(Settings.getInstance().getEmployeeColumnsLoaded());
+        lvSelectedColumnsEvents.setItems(Settings.getInstance().getActivityColumnsLoaded());
+        lvSelectedColumnsProtocols.setItems(Settings.getInstance().getProtocolColumnsLoaded());
+        lvSelectedColumnsSponsors.setItems(Settings.getInstance().getSponsorColumnsLoaded());
 
         setSelectionEvent(lvAvailableColumnsClients, lvSelectedColumnsClients, btnAddColumnClients, btnRemoveColumnClients, btnMoveColumnClientsUp, btnMoveColumnClientsDown);
         setSelectionEvent(lvAvailableColumnsEmployees, lvSelectedColumnsEmployees, btnAddColumnEmployees, btnRemoveColumnEmployees, btnMoveColumnEmployeesUp, btnMoveColumnEmployeesDown);

@@ -31,7 +31,7 @@ public class Main extends Application {
     @Override
     public void stop() {
         DBManager.close();
-        Settings.saveData();
+        Settings.getInstance().saveData();
     }
     public static void main(String[] args) {
         launch(args);

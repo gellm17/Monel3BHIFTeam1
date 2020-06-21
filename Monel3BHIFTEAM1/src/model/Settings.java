@@ -19,45 +19,39 @@ public class Settings implements Initializable, Serializable {
     private static Settings instance = null;
 
     private transient ObservableList<String> klientColumns = FXCollections.observableList(new ArrayList<String>());
-    private ObservableList<String> klientColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
+    private transient ObservableList<String> klientColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
 
-    private ObservableList<String> employeeColumns = FXCollections.observableList(new ArrayList<String>());
-    private ObservableList<String> employeeColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
+    private transient ObservableList<String> employeeColumns = FXCollections.observableList(new ArrayList<String>());
+    private transient ObservableList<String> employeeColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
 
-    private ObservableList<String> sponsorColumns = FXCollections.observableList(new ArrayList<String>());
-    private ObservableList<String> sponsorColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
+    private transient ObservableList<String> sponsorColumns = FXCollections.observableList(new ArrayList<String>());
+    private transient ObservableList<String> sponsorColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
 
-    private ObservableList<String> activityColumns = FXCollections.observableList(new ArrayList<String>());
-    private ObservableList<String> activityColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
+    private transient ObservableList<String> activityColumns = FXCollections.observableList(new ArrayList<String>());
+    private transient ObservableList<String> activityColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
 
-    private ObservableList<String> protocolColumns = FXCollections.observableList(new ArrayList<String>());
-    private ObservableList<String> protocolColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
+    private transient ObservableList<String> protocolColumns = FXCollections.observableList(new ArrayList<String>());
+    private transient ObservableList<String> protocolColumnsLoaded = FXCollections.observableList(new ArrayList<String>());
 
-    private ObservableList<Integer> size = FXCollections.observableList(new ArrayList<Integer>());
+    private transient ObservableList<Integer> size = FXCollections.observableList(new ArrayList<Integer>());
 
-    private ObservableList<Double> hourlyRates = FXCollections.observableList(new ArrayList<Double>());
+    private transient ObservableList<Double> hourlyRates = FXCollections.observableList(new ArrayList<Double>());
 
-    private Color color = Color.orange;
-    private FontStyle font = FontStyle.Arial;
-    private int selectedSize = 18;
-    private double selectedHourlyRate = 3.20;
-    private StringProperty companyName = new SimpleStringProperty(this, "companyName", "Monel GmbH");
-    private StringProperty uid_Number = new SimpleStringProperty(this, "uid_Number", "ATU 75050926");
-    private StringProperty iban = new SimpleStringProperty(this, "iban", "AT09 3946 4000 0015 0490");
-    private StringProperty bic = new SimpleStringProperty(this, "bic", "BKAUATWW");
-    private StringProperty street = new SimpleStringProperty(this, "street", "Villacher Straße");
-    private IntegerProperty nr = new SimpleIntegerProperty(this, "nr", 95);
-    private IntegerProperty plz = new SimpleIntegerProperty(this, "plz", 9800);
-    private StringProperty location = new SimpleStringProperty(this, "location", "Spittal/Drau");
+    private transient Color color = Color.orange;
+    private transient FontStyle font = FontStyle.Arial;
+    private transient int selectedSize = 18;
+    private transient double selectedHourlyRate = 3.20;
+    private transient StringProperty companyName = new SimpleStringProperty(this, "companyName", "Monel GmbH");
+    private transient StringProperty uid_Number = new SimpleStringProperty(this, "uid_Number", "ATU 75050926");
+    private transient StringProperty iban = new SimpleStringProperty(this, "iban", "AT09 3946 4000 0015 0490");
+    private transient StringProperty bic = new SimpleStringProperty(this, "bic", "BKAUATWW");
+    private transient StringProperty street = new SimpleStringProperty(this, "street", "Villacher Straße");
+    private transient IntegerProperty nr = new SimpleIntegerProperty(this, "nr", 95);
+    private transient IntegerProperty plz = new SimpleIntegerProperty(this, "plz", 9800);
+    private transient StringProperty location = new SimpleStringProperty(this, "location", "Spittal/Drau");
 
     private Settings() {
-        if (klientColumns.isEmpty()) {
-            klientColumns.addAll("Kundennummer", "Anrede", "Titel", "Vorname", "Nachname", "Straße/Nr", "PLZ", "Ort", "Telefonnummer", "E-Mail", "Geburtsdatum", "SVNR", "Diagnose", "Allergien", "Sonstiges", "Beschäftigung");
-            employeeColumns.addAll("Mitarbeiter", "Anrede", "Titel", "Vorname", "Nachname", "Straße/Nr", "PLZ", "Ort", "Telefonnummer", "E-Mail", "Geburtsdatum", "SVNR", "Ehrenamt", "Verwengungsgruppe", "Gehaltsstuffe", "Stunden pro Wochen", "Vorrückdatum", "IBAN", "BIC", "Einstellungsdatum");
-            sponsorColumns.addAll("Anrede", "Titel", "Vorname", "Nachname", "Straße/Nr", "PLZ", "Ort", "Telefonnummer", "E-Mail", "Geburtsdatum", "Firmenname", "Firmentelefonnummer");
-            activityColumns.addAll("Datum", "Name", "Kategorie");
-            protocolColumns.addAll("Protokoll", "Startzeit", "Endzeit", "Monat_Jahr", "Stundensatz", "Mitarbeiter", "Kunde", "Aktivität", "Fahrtkposten");
-        }
+        getData();
     }
 
     public static Settings getInstance() {
@@ -549,11 +543,17 @@ public class Settings implements Initializable, Serializable {
             ObjectInputStream ois = new ObjectInputStream(is);
             Object o = ois.readObject();
             if (o instanceof Settings) {
-                // Setting sollte in onject geladen werden
+                instance = (Settings)o;
             }
             is.close();
         } catch (Exception e) {
-            //sollten default werte eingefügt werden
+            e.printStackTrace();
+            System.out.println(e +", create default dummies...");
+            klientColumns.addAll("Kundennummer", "Anrede", "Titel", "Vorname", "Nachname", "Straße/Nr", "PLZ", "Ort", "Telefonnummer", "E-Mail", "Geburtsdatum", "SVNR", "Diagnose", "Allergien", "Sonstiges", "Beschäftigung");
+            employeeColumns.addAll("Mitarbeiter", "Anrede", "Titel", "Vorname", "Nachname", "Straße/Nr", "PLZ", "Ort", "Telefonnummer", "E-Mail", "Geburtsdatum", "SVNR", "Ehrenamt", "Verwengungsgruppe", "Gehaltsstuffe", "Stunden pro Wochen", "Vorrückdatum", "IBAN", "BIC", "Einstellungsdatum");
+            sponsorColumns.addAll("Anrede", "Titel", "Vorname", "Nachname", "Straße/Nr", "PLZ", "Ort", "Telefonnummer", "E-Mail", "Geburtsdatum", "Firmenname", "Firmentelefonnummer");
+            activityColumns.addAll("Datum", "Name", "Kategorie");
+            protocolColumns.addAll("Protokoll", "Startzeit", "Endzeit", "Monat_Jahr", "Stundensatz", "Mitarbeiter", "Kunde", "Aktivität", "Fahrtkposten");
         }
     }
 
@@ -561,7 +561,7 @@ public class Settings implements Initializable, Serializable {
         try {
             FileOutputStream os = new FileOutputStream(FILENAME);
             ObjectOutputStream oos = new ObjectOutputStream(os);
-            oos.writeObject(this); // funktioniert nicht weil Settings kein Object ist
+            oos.writeObject(this);
             oos.flush();
             oos.close();
             os.close();
@@ -573,11 +573,67 @@ public class Settings implements Initializable, Serializable {
 
     private void writeObject(ObjectOutputStream s) throws IOException {
         s.defaultWriteObject();
-        s.writeObject(getKlientColumns()); // wurde nur zum test implementiert der rest fehlt noch
+        ArrayList<String> help = new ArrayList<String>(getKlientColumns());
+        s.writeObject(help);
+        help = new ArrayList<String>(getKlientColumnsLoaded());
+        s.writeObject(help);
+        help = new ArrayList<String>(getEmployeeColumns());
+        s.writeObject(help);
+        help = new ArrayList<String>(getEmployeeColumnsLoaded());
+        s.writeObject(help);
+        help = new ArrayList<String>(getSponsorColumns());
+        s.writeObject(help);
+        help = new ArrayList<String>(getSponsorColumnsLoaded());
+        s.writeObject(help);
+        help = new ArrayList<String>(getActivityColumns());
+        s.writeObject(help);
+        help = new ArrayList<String>(getActivityColumnsLoaded());
+        s.writeObject(help);
+        help = new ArrayList<String>(getProtocolColumns());
+        s.writeObject(help);
+        help = new ArrayList<String>(getProtocolColumns());
+        s.writeObject(help);
+        s.writeObject(new ArrayList<Integer>(getSize()));
+        s.writeObject(new ArrayList<Double>(getHourlyRates()));
+        s.writeObject(getColor());
+        s.writeObject(getFont());
+        s.writeObject(getSelectedSize());
+        s.writeObject(getSelectedHourlyRate());
+        s.writeObject(getCompanyName());
+        s.writeObject(getUid_Number());
+        s.writeObject(getIban());
+        s.writeObject(getBic());
+        s.writeObject(getStreet());
+        s.writeObject(getNr());
+        s.writeObject(getPlz());
+        s.writeObject(getLocation());
     }
 
     private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
         s.defaultReadObject();
-        // sollte geladenes object gespeichert werden
+        klientColumns = FXCollections.observableList((ArrayList<String>)s.readObject());
+        klientColumnsLoaded = FXCollections.observableList((ArrayList<String>)s.readObject());
+        employeeColumns = FXCollections.observableList((ArrayList<String>)s.readObject());
+        employeeColumnsLoaded = FXCollections.observableList((ArrayList<String>)s.readObject());
+        sponsorColumns = FXCollections.observableList((ArrayList<String>)s.readObject());
+        sponsorColumnsLoaded = FXCollections.observableList((ArrayList<String>)s.readObject());
+        activityColumns = FXCollections.observableList((ArrayList<String>)s.readObject());
+        activityColumnsLoaded = FXCollections.observableList((ArrayList<String>)s.readObject());
+        protocolColumns = FXCollections.observableList((ArrayList<String>)s.readObject());
+        protocolColumnsLoaded = FXCollections.observableList((ArrayList<String>)s.readObject());
+        size = FXCollections.observableList((ArrayList<Integer>)s.readObject());
+        hourlyRates = FXCollections.observableList((ArrayList<Double>)s.readObject());
+        color = (Color) s.readObject();
+        font = (FontStyle) s.readObject();
+        selectedSize = (int) s.readObject();
+        selectedHourlyRate = (double) s.readObject();
+        companyName = new SimpleStringProperty(this, "companyName", (String)s.readObject());
+        uid_Number = new SimpleStringProperty(this, "uid_Number", (String) s.readObject());
+        iban = new SimpleStringProperty(this, "iban", (String) s.readObject());
+        bic = new SimpleStringProperty(this, "bic", (String) s.readObject());
+        street = new SimpleStringProperty(this, "street", (String) s.readObject());
+        nr = new SimpleIntegerProperty(this, "nr", (int) s.readObject());
+        plz = new SimpleIntegerProperty(this, "plz", (int) s.readObject());
+        location = new SimpleStringProperty(this, "location", (String) s.readObject());
     }
 }
