@@ -96,7 +96,7 @@ public class SponsorList_Controller extends SceneLoader implements Initializable
 
     @FXML
     void btnInfo_Clicked(ActionEvent event) {
-
+        openInfo();
     }
 
     @FXML
@@ -141,7 +141,7 @@ public class SponsorList_Controller extends SceneLoader implements Initializable
 
     @FXML
     void btnSettings_Clicked(ActionEvent event) {
-
+        openSettings();
     }
 
     @Override

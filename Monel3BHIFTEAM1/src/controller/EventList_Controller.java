@@ -452,7 +452,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
 
     @FXML
     void btnInfo_Clicked(ActionEvent event) {
-
+        openInfo();
     }
 
     @FXML
@@ -497,7 +497,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
 
     @FXML
     void btnSettings_Clicked(ActionEvent event) {
-
+        openSettings();
     }
 
     private void goToEdit() {

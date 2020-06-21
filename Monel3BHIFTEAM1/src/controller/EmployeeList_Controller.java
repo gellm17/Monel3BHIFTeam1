@@ -259,7 +259,7 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
 
     @FXML
     void btnInfo_Clicked(ActionEvent event) {
-
+        openInfo();
     }
 
     @FXML
@@ -304,7 +304,7 @@ public class EmployeeList_Controller extends SceneLoader implements Initializabl
 
     @FXML
     void btnSettings_Clicked(ActionEvent event) {
-
+        openSettings();
     }
 
 
