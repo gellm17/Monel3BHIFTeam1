@@ -636,4 +636,8 @@ public class Settings implements Initializable, Serializable {
         plz = new SimpleIntegerProperty(this, "plz", (int) s.readObject());
         location = new SimpleStringProperty(this, "location", (String) s.readObject());
     }
+
+    public boolean addHourlyRate(double rate){
+        return hourlyRates.add(rate);
+    }
 }

@@ -25,7 +25,7 @@ public class Settings_Controller implements Initializable {
     private Tab tabCommon;
 
     @FXML
-    private ListView<?> lvHourlyRates;
+    private ListView<Double> lvHourlyRates;
 
     @FXML
     private Button btnAddHourlyRate;
@@ -65,6 +65,9 @@ public class Settings_Controller implements Initializable {
 
     @FXML
     private TextField tfZipCompany;
+
+    @FXML
+    private TextField tfHourlyRate;
 
     @FXML
     private TextField tfPlaceCompany;
@@ -209,6 +212,9 @@ public class Settings_Controller implements Initializable {
 
     @FXML
     void btnAddHourlyRate_Clicked(ActionEvent event) {
+        if (tfCheck(tfHourlyRate,"^\\d{1,8}([\\.,]\\d{2})?$", tabCommon, null, commonCounter)){
+            Settings.getInstance().addHourlyRate(Double.parseDouble(tfHourlyRate.getText()));
+        }
     }
 
     @FXML
@@ -369,6 +375,8 @@ public class Settings_Controller implements Initializable {
 
         tabCompanyData.setText("");
         tabCompanyData.setGraphic(new Label("Firmendaten"));
+        tabCommon.setText("");
+        tabCommon.setGraphic(new Label("Allgemein"));
 
         //COMMON DATA
         comboFont.setItems(FXCollections.observableArrayList(Arrays.asList(FontStyle.values())));
@@ -377,6 +385,8 @@ public class Settings_Controller implements Initializable {
         colorAccent.setValue(Color.RED);
 
         //TABLES
+        lvHourlyRates.setItems(Settings.getInstance().getHourlyRates());
+
         lvAvailableColumnsClients.setItems(Settings.getInstance().getKlientColumns());
         lvAvailableColumnsEmployees.setItems(Settings.getInstance().getEmployeeColumns());
         lvAvailableColumnsEvents.setItems(Settings.getInstance().getActivityColumns());

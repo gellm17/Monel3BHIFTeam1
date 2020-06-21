@@ -48,7 +48,7 @@
                                  <left>
                                     <HBox BorderPane.alignment="CENTER">
                                        <children>
-                                          <TextField prefWidth="100.0" promptText="neu">
+                                          <TextField fx:id="tfHourlyRate" prefWidth="100.0" promptText="neu">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
