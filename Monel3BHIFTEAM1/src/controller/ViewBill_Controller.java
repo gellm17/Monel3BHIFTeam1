@@ -353,6 +353,19 @@ public class ViewBill_Controller extends SceneLoader {
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +
+                "        <div id=\"rechnung\" style=\"margin-left:-60px\" >\n" +
+                "            <table style=\"letter-spacing: 7.5px\">\n" +
+                "                <tr>\n" +
+                "                  <td style=\"padding-bottom:25px\" id=\"firma\">" + Settings.getInstance().getCompanyName() + "</td>\n" +
+                "                </tr>\n" +
+                "                <tr>\n" +
+                "                    <td style=\"padding-bottom:25px; min-width:500px; letter-spacing:2.5px\" >" + Settings.getInstance().getIban() + "</td>\n" +
+                "                </tr>\n" +
+                "                <tr>\n" +
+                "                   <td id=\"bic\">" + Settings.getInstance().getBic() + "</td>" +
+                "                </tr>\n" +
+                "            </table>\n" +
+                "        </div>\n" +
                 "    </div>\n" +
                 "</body>\n" +
                 "</html>";
