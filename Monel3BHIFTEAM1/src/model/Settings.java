@@ -37,10 +37,14 @@ public class Settings implements Initializable, Serializable {
 
     private transient ObservableList<Double> hourlyRates = FXCollections.observableList(new ArrayList<Double>());
 
-    private transient Color color = Color.orange;
-    private transient FontStyle font = FontStyle.Arial;
-    private transient int selectedSize = 18;
-    private transient double selectedHourlyRate = 3.20;
+    private transient ObservableList<String> userGroup = FXCollections.observableList(new ArrayList<String>());
+
+    private transient ObservableList<String> salaryLevel  = FXCollections.observableList(new ArrayList<String>());
+
+    private Color color = Color.orange;
+    private FontStyle font = FontStyle.Arial;
+    private int selectedSize = 18;
+    private double selectedHourlyRate = 3.20;
     private transient StringProperty companyName = new SimpleStringProperty(this, "companyName", "Monel GmbH");
     private transient StringProperty uid_Number = new SimpleStringProperty(this, "uid_Number", "ATU 75050926");
     private transient StringProperty iban = new SimpleStringProperty(this, "iban", "AT09 3946 4000 0015 0490");
@@ -51,8 +55,30 @@ public class Settings implements Initializable, Serializable {
     private transient StringProperty location = new SimpleStringProperty(this, "location", "Spittal/Drau");
 
     private Settings() {
+        if (klientColumns.isEmpty()) {
+            klientColumns.addAll("Kundennummer", "Anrede", "Titel", "Vorname", "Nachname", "Straße/Nr", "PLZ", "Ort", "Telefonnummer", "E-Mail", "Geburtsdatum", "SVNR", "Diagnose", "Allergien", "Sonstiges", "Beschäftigung");
+            employeeColumns.addAll("Mitarbeiter", "Anrede", "Titel", "Vorname", "Nachname", "Straße/Nr", "PLZ", "Ort", "Telefonnummer", "E-Mail", "Geburtsdatum", "SVNR", "Ehrenamt", "Verwengungsgruppe", "Gehaltsstuffe", "Stunden pro Wochen", "Vorrückdatum", "IBAN", "BIC", "Einstellungsdatum");
+            sponsorColumns.addAll("Anrede", "Titel", "Vorname", "Nachname", "Straße/Nr", "PLZ", "Ort", "Telefonnummer", "E-Mail", "Geburtsdatum", "Firmenname", "Firmentelefonnummer");
+            activityColumns.addAll("Datum", "Name", "Kategorie");
+            protocolColumns.addAll("Protokoll", "Startzeit", "Endzeit", "Monat_Jahr", "Stundensatz", "Mitarbeiter", "Kunde", "Aktivität", "Fahrtkposten");
+        }
+        if (salaryLevel.isEmpty()) {
+            salaryLevel.addAll("GS1", "GS2", "GS3", "GS4", "GS5", "GS6", "GS7", "GS8", "GS9", "GS10", "GS11", "GS12", "GS13", "GS14", "GS15", "GS16", "GS17", "GS18");
+        }
+        if (userGroup.isEmpty()) {
+            userGroup.addAll("VG1", "VG2", "VG3", "VG4", "VG4A", "VG4B", "VG5", "VG6", "VG7", "VG8", "VG9");
+        }
+        if (hourlyRates.isEmpty()) {
+            hourlyRates.addAll(1.50, 2.00, 3.20, 4.10);
+        }
+    }
+    
+    /*
+    private Settings() {
         getData();
     }
+    */
+
 
     public static Settings getInstance() {
         if (instance == null) {
@@ -65,6 +91,38 @@ public class Settings implements Initializable, Serializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    }
+
+    public boolean addUserGroup(String group) {
+        return this.userGroup.addAll(group);
+    }
+
+    public boolean addSalaryLevel(String level) {
+        return this.salaryLevel.addAll(level);
+    }
+
+    public boolean removeUserGroup(String group) {
+        return  this.userGroup.remove(group);
+    }
+
+    public boolean removeSalaryLevel(String level) {
+        return  this.salaryLevel.remove(level);
+    }
+
+    public ObservableList<String> getUserGroup() {
+        return userGroup;
+    }
+
+    public void setUserGroup(ObservableList<String> userGroup) {
+        this.userGroup = userGroup;
+    }
+
+    public ObservableList<String> getSalaryLevel() {
+        return salaryLevel;
+    }
+
+    public void setSalaryLevel(ObservableList<String> salaryLevel) {
+        this.salaryLevel = salaryLevel;
     }
 
     public ObservableList<String> getKlientColumns() {
