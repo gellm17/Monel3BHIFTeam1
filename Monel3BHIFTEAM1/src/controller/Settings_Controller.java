@@ -25,6 +25,18 @@ public class Settings_Controller implements Initializable {
     private Tab tabCommon;
 
     @FXML
+    private ComboBox<FontStyle> comboFont;
+
+    @FXML
+    private ComboBox<?> comboFontSize;
+
+    @FXML
+    private ColorPicker colorAccent;
+
+    @FXML
+    private Tab tabAdministration;
+
+    @FXML
     private ListView<Double> lvHourlyRates;
 
     @FXML
@@ -34,13 +46,28 @@ public class Settings_Controller implements Initializable {
     private Button btnDeleteHourlyRate;
 
     @FXML
-    private ComboBox<FontStyle> comboFont;
+    private ListView<?> lvOccupationGroup;
 
     @FXML
-    private ComboBox<?> comboFontSize;
+    private TextField tfOccupationGroup;
 
     @FXML
-    private ColorPicker colorAccent;
+    private Button btnAddOccupationGroup;
+
+    @FXML
+    private Button btnDeleteOccupationGroup;
+
+    @FXML
+    private ListView<?> lvSalaryLevel;
+
+    @FXML
+    private TextField tfSalaryLevel;
+
+    @FXML
+    private Button btnAddSalaryLevel;
+
+    @FXML
+    private Button btnDeleteSalaryLevel;
 
     @FXML
     private Tab tabCompanyData;
@@ -218,14 +245,34 @@ public class Settings_Controller implements Initializable {
     }
 
     @FXML
-    void btnCancel_Clicked(ActionEvent event) {
-        Stage stage = (Stage) btnSaveSettings.getScene().getWindow();
-        stage.close();
+    void btnDeleteHourlyRate_Clicked(ActionEvent event) {
+
     }
 
     @FXML
-    void btnDeleteHourlyRate_Clicked(ActionEvent event) {
+    void btnAddOccupationGroup_Clicked(ActionEvent event) {
 
+    }
+
+    @FXML
+    void btnDeleteOccupationGroup_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnAddSalaryLevel_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnDeleteSalaryLevel_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnCancel_Clicked(ActionEvent event) {
+        Stage stage = (Stage) btnSaveSettings.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
