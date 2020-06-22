@@ -221,7 +221,7 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
 
         @FXML
         void btnSettings_Clicked(ActionEvent event) {
-
+            openSettings();
         }
 
         private boolean tfCheck(TextField tf, String regex) {

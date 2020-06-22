@@ -305,7 +305,7 @@ public class ClientSummary_Controller extends SceneLoader implements Initializab
 
     @FXML
     void btnSettings_Clicked(ActionEvent event) {
-
+        openSettings();
     }
 
     @Override

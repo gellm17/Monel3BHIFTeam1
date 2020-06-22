@@ -156,11 +156,6 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
 
         eventProtocolToAdd.setHourlyRate(comboHourlyRate.getSelectionModel().getSelectedItem());
 
-        //TODO
-        /*if (!tfCheck(tfHourlyRateEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){  // TODO
-            eventProtocolToAdd.setHourlyRate(Double.parseDouble(tfHourlyRateEvent.getText()));
-        }*/
-
         if (!tfCheck(tfRideCostsEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){
             eventProtocolToAdd.setRideCosts(Double.parseDouble(tfRideCostsEvent.getText()));
         }
@@ -226,7 +221,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
 
     @FXML
     void btnSettings_Clicked(ActionEvent event) {
-
+        openSettings();
     }
 
     private void tglBtnChange(ToggleButton currentTglBtn, ToggleButton pendantTglBtn){

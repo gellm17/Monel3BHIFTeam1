@@ -109,7 +109,7 @@ public class ViewBill_Controller extends SceneLoader {
 
     @FXML
     void btnSettings_Clicked(ActionEvent event) {
-
+        openSettings();
     }
 
     @FXML
