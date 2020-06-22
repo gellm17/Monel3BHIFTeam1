@@ -62,7 +62,7 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
     private TextField tfEndEvent;
 
     @FXML
-    private ComboBox<?> comboHourlyRate;
+    private ComboBox<Double> comboHourlyRate;
 
     @FXML
     private ToggleButton tglBtnHourlyRateBrutto;
@@ -190,6 +190,7 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
                 }
             }
 
+            eventProtocolToAdd.setHourlyRate(comboHourlyRate.getSelectionModel().getSelectedItem());
             //TODO
             /*if (!tfCheck(tfHourlyRateEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){  // TODO
                 eventProtocolToAdd.setHourlyRate(Double.parseDouble(tfHourlyRateEvent.getText()));
@@ -220,7 +221,7 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
 
         @FXML
         void btnSettings_Clicked(ActionEvent event) {
-
+            openSettings();
         }
 
         private boolean tfCheck(TextField tf, String regex) {
@@ -295,5 +296,6 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
     public void initialize(URL url, ResourceBundle resourceBundle) {
         comboClientEvent.getItems().setAll(PersonDAO.getInstance().getClients());
         comboEmployeeEvent.getItems().setAll(PersonDAO.getInstance().getEmployees());
+        comboHourlyRate.getItems().setAll(Settings.getInstance().getHourlyRates());
     }
 }

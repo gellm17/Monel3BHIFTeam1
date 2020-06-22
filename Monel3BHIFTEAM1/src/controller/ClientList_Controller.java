@@ -230,7 +230,7 @@ public class ClientList_Controller extends SceneLoader implements Initializable 
 
     @FXML
     void btnInfo_Clicked(ActionEvent event) {
-
+        openInfo();
     }
 
     @FXML

@@ -16,6 +16,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         DBManager.open();
+        Settings.getInstance().getData();
         FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/ClientList.fxml"));
         primaryStage.setMaximized(true);
         primaryStage.setTitle("Monel Pro");
@@ -31,7 +32,7 @@ public class Main extends Application {
     @Override
     public void stop() {
         DBManager.close();
-        Settings.saveData();
+        Settings.getInstance().saveData();
     }
     public static void main(String[] args) {
         launch(args);

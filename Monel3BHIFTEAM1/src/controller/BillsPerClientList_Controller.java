@@ -199,7 +199,7 @@ import java.util.ResourceBundle;
 
         @FXML
         void btnInfo_Clicked(ActionEvent event) {
-
+             openInfo();
         }
 
         @FXML
@@ -242,7 +242,7 @@ import java.util.ResourceBundle;
 
         @FXML
         void btnSettings_Clicked(ActionEvent event) {
-
+             openSettings();
         }
 
         @Override

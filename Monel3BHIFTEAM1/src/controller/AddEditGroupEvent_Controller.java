@@ -299,7 +299,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
 
     @FXML
     void btnSettings_Clicked(ActionEvent event) {
-
+        openSettings();
     }
 
     private boolean tfCheck(TextField tf, String regex) {

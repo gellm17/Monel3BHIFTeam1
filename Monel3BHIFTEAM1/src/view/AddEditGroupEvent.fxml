@@ -95,7 +95,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Label>
-                        <DatePicker fx:id="dpDateEvent" prefWidth="130.0" />
+                        <DatePicker fx:id="dpDateEvent" prefWidth="130.0" promptText="01/01/2020" />
                      </children>
                      <HBox.margin>
                         <Insets right="10.0" />
@@ -111,7 +111,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="tfNameEvent" prefWidth="700.0">
+                        <TextField fx:id="tfNameEvent" prefWidth="700.0" promptText="z.B. Wandertag">
                            <font>
                               <Font size="14.0" />
                            </font>

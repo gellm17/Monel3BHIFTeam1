@@ -13,10 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
-import model.Client;
-import model.Employee;
-import model.Event;
-import model.EventProtocol;
+import model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -55,7 +52,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
     private TextField tfEndEvent;
 
     @FXML
-    private ComboBox<?> comboHourlyRate;
+    private ComboBox<Double> comboHourlyRate;
 
     @FXML
     private ToggleButton tglBtnHourlyRateBrutto;
@@ -157,10 +154,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
             }
         }
 
-        //TODO
-        /*if (!tfCheck(tfHourlyRateEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){  // TODO
-            eventProtocolToAdd.setHourlyRate(Double.parseDouble(tfHourlyRateEvent.getText()));
-        }*/
+        eventProtocolToAdd.setHourlyRate(comboHourlyRate.getSelectionModel().getSelectedItem());
 
         if (!tfCheck(tfRideCostsEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){
             eventProtocolToAdd.setRideCosts(Double.parseDouble(tfRideCostsEvent.getText()));
@@ -227,7 +221,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
 
     @FXML
     void btnSettings_Clicked(ActionEvent event) {
-
+        openSettings();
     }
 
     private void tglBtnChange(ToggleButton currentTglBtn, ToggleButton pendantTglBtn){
@@ -274,6 +268,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
     public void initialize(URL url, ResourceBundle resourceBundle) {
         comboClientEvent.getItems().setAll(PersonDAO.getInstance().getClients());
         comboEmployeeEvent.getItems().setAll(PersonDAO.getInstance().getEmployees());
+        comboHourlyRate.getItems().setAll(Settings.getInstance().getHourlyRates());
     }
 
 }

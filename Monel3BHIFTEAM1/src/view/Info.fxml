@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="600.0" prefWidth="900.0" styleClass="background" stylesheets="@../resources/betterThanLinux.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Info_Controller">
+   <center>
+      <TabPane nodeOrientation="LEFT_TO_RIGHT" styleClass="settingsTabPane" tabMinHeight="30.0" tabMinWidth="100.0">
+         <tabs>
+            <Tab fx:id="tabSecurity" closable="false" text="Datenschutz">
+               <content>
+                  <BorderPane />
+               </content>
+            </Tab>
+            <Tab fx:id="tabImpressum" closable="false" text="Impressum">
+               <content>
+                  <BorderPane />
+               </content>
+            </Tab>
+            <Tab fx:id="tabAbout" closable="false" text="About">
+               <content>
+                  <BorderPane>
+                     <center>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </center>
+</BorderPane>

@@ -97,7 +97,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Label>
-                        <DatePicker fx:id="dpDateEvent" prefWidth="130.0" promptText="12/05/2020" />
+                        <DatePicker fx:id="dpDateEvent" prefWidth="130.0" promptText="01/01/2020" />
                      </children>
                      <HBox.margin>
                         <Insets right="10.0" />
@@ -113,7 +113,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Label>
-                        <TextField fx:id="tfNameEvent" prefWidth="700.0" promptText="z.B. Wandertag">
+                        <TextField fx:id="tfNameEvent" prefWidth="700.0" promptText="z.B. Ausflug">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -187,7 +187,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfStartEvent" prefWidth="60.0" promptText="08:00">
+                                    <TextField fx:id="tfStartEvent" prefWidth="60.0" promptText="00:00">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -207,7 +207,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfEndEvent" prefWidth="60.0" promptText="10:00">
+                                    <TextField fx:id="tfEndEvent" prefWidth="60.0" promptText="23:59">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -286,7 +286,7 @@
                            <children>
                               <HBox alignment="CENTER_LEFT">
                                  <children>
-                                    <TextField fx:id="tfRideCosts" maxWidth="-Infinity" prefWidth="60.0" promptText="20.50">
+                                    <TextField fx:id="tfRideCosts" maxWidth="-Infinity" prefWidth="60.0" promptText="00.00">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -336,7 +336,7 @@
                            <children>
                               <HBox alignment="CENTER_LEFT">
                                  <children>
-                                    <TextField fx:id="tfOtherCosts" maxWidth="-Infinity" prefWidth="60.0" promptText="12.00">
+                                    <TextField fx:id="tfOtherCosts" maxWidth="-Infinity" prefWidth="60.0" promptText="00.00">
                                        <font>
                                           <Font size="14.0" />
                                        </font>

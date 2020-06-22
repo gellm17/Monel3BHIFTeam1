@@ -115,7 +115,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfTitleClient" maxWidth="-Infinity" prefWidth="400.0">
+                                    <TextField fx:id="tfTitleClient" maxWidth="-Infinity" prefWidth="400.0" promptText="z.B. Dr.">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -131,7 +131,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfFirstnameClient" maxWidth="700.0">
+                                    <TextField fx:id="tfFirstnameClient" maxWidth="700.0" promptText="z.B. Max">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -147,7 +147,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfLastnameClient" maxWidth="700.0">
+                                    <TextField fx:id="tfLastnameClient" maxWidth="700.0" promptText="z.B. Mustermann">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -163,7 +163,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfSsnrClient" maxWidth="-Infinity" prefWidth="100.0">
+                                    <TextField fx:id="tfSsnrClient" maxWidth="-Infinity" prefWidth="100.0" promptText="1234010180">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -179,7 +179,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <DatePicker fx:id="dpBirthdateClient">
+                                    <DatePicker fx:id="dpBirthdateClient" prefWidth="130.0" promptText="01/01/1980">
                                        <VBox.margin>
                                           <Insets />
                                        </VBox.margin>
@@ -202,11 +202,19 @@
                            <content>
                               <VBox>
                                  <children>
+                                    <Label text="(alles Pflichtfelder)">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </Label>
                                     <HBox prefHeight="0.0">
                                        <children>
                                           <VBox prefHeight="200.0">
                                              <children>
-                                                <Label text="Straße (Pflichtfeld)">
+                                                <Label text="Straße">
                                                    <font>
                                                       <Font name="Gill Sans MT" size="16.0" />
                                                    </font>
@@ -214,7 +222,7 @@
                                                       <Insets bottom="5.0" />
                                                    </VBox.margin>
                                                 </Label>
-                                                <TextField fx:id="tfStreetClient" prefWidth="400.0">
+                                                <TextField fx:id="tfStreetClient" prefWidth="400.0" promptText="z.B. Tschinowitscherweg">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -234,7 +242,7 @@
                                                       <Insets bottom="5.0" />
                                                    </VBox.margin>
                                                 </Label>
-                                                <TextField fx:id="tfHousenumberClient" maxWidth="-Infinity" prefWidth="50.0">
+                                                <TextField fx:id="tfHousenumberClient" maxWidth="-Infinity" prefWidth="50.0" promptText="5">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -250,7 +258,7 @@
                                        <children>
                                           <VBox prefHeight="200.0">
                                              <children>
-                                                <Label text="PLZ (Pflichtfeld)">
+                                                <Label text="PLZ">
                                                    <font>
                                                       <Font name="Gill Sans MT" size="16.0" />
                                                    </font>
@@ -258,7 +266,7 @@
                                                       <Insets bottom="5.0" />
                                                    </VBox.margin>
                                                 </Label>
-                                                <TextField fx:id="tfZipClient" maxWidth="-Infinity" prefWidth="100.0">
+                                                <TextField fx:id="tfZipClient" maxWidth="-Infinity" prefWidth="60.0" promptText="9300">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -270,7 +278,7 @@
                                           </VBox>
                                           <VBox prefHeight="200.0">
                                              <children>
-                                                <Label text="Ort (Pflichtfeld)">
+                                                <Label text="Ort">
                                                    <font>
                                                       <Font name="Gill Sans MT" size="16.0" />
                                                    </font>
@@ -278,7 +286,7 @@
                                                       <Insets bottom="5.0" />
                                                    </VBox.margin>
                                                 </Label>
-                                                <TextField fx:id="tfPlaceClient" prefWidth="400.0">
+                                                <TextField fx:id="tfPlaceClient" prefWidth="400.0" promptText="z.B. Villach">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -466,6 +474,14 @@
                                                                         <Insets bottom="10.0" />
                                                                      </VBox.margin>
                                                                   </Label>
+                                                                  <Label text="(alles Pflichtfelder)">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                     <VBox.margin>
+                                                                        <Insets bottom="5.0" />
+                                                                     </VBox.margin>
+                                                                  </Label>
                                                                   <HBox prefHeight="0.0">
                                                                      <children>
                                                                         <VBox prefHeight="0.0">
@@ -528,7 +544,7 @@
                                                                                     <Insets bottom="5.0" />
                                                                                  </VBox.margin>
                                                                               </Label>
-                                                                              <TextField fx:id="tfZipEsv" maxWidth="-Infinity" prefWidth="100.0">
+                                                                              <TextField fx:id="tfZipEsv" maxWidth="-Infinity" prefWidth="60.0">
                                                                                  <font>
                                                                                     <Font size="14.0" />
                                                                                  </font>
@@ -571,7 +587,7 @@
                                                                         <Insets bottom="15.0" />
                                                                      </VBox.margin>
                                                                   </Label>
-                                                                  <Label text="Telefonnummer">
+                                                                  <Label text="Telefonnummer (Pflichtfeld)">
                                                                      <font>
                                                                         <Font name="Gill Sans MT" size="16.0" />
                                                                      </font>
@@ -724,6 +740,14 @@
                                                                         <Insets bottom="10.0" />
                                                                      </VBox.margin>
                                                                   </Label>
+                                                                  <Label text="(alles Pflichtfelder)">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                     <VBox.margin>
+                                                                        <Insets bottom="5.0" />
+                                                                     </VBox.margin>
+                                                                  </Label>
                                                                   <HBox prefHeight="0.0">
                                                                      <children>
                                                                         <VBox prefHeight="0.0">
@@ -786,7 +810,7 @@
                                                                                     <Insets bottom="5.0" />
                                                                                  </VBox.margin>
                                                                               </Label>
-                                                                              <TextField fx:id="tfZipContact1" maxWidth="-Infinity" prefWidth="100.0">
+                                                                              <TextField fx:id="tfZipContact1" maxWidth="-Infinity" prefWidth="60.0">
                                                                                  <font>
                                                                                     <Font size="14.0" />
                                                                                  </font>
@@ -829,7 +853,7 @@
                                                                         <Insets bottom="15.0" />
                                                                      </VBox.margin>
                                                                   </Label>
-                                                                  <Label text="Telefonnummer">
+                                                                  <Label text="Telefonnummer (Pflichtfeld)">
                                                                      <font>
                                                                         <Font name="Gill Sans MT" size="16.0" />
                                                                      </font>
@@ -982,6 +1006,14 @@
                                                                         <Insets bottom="10.0" />
                                                                      </VBox.margin>
                                                                   </Label>
+                                                                  <Label text="(alles Pflichtfelder)">
+                                                                     <font>
+                                                                        <Font size="16.0" />
+                                                                     </font>
+                                                                     <VBox.margin>
+                                                                        <Insets bottom="5.0" />
+                                                                     </VBox.margin>
+                                                                  </Label>
                                                                   <HBox prefHeight="0.0">
                                                                      <children>
                                                                         <VBox prefHeight="0.0">
@@ -1044,7 +1076,7 @@
                                                                                     <Insets bottom="5.0" />
                                                                                  </VBox.margin>
                                                                               </Label>
-                                                                              <TextField fx:id="tfZipContact2" maxWidth="-Infinity" prefWidth="100.0">
+                                                                              <TextField fx:id="tfZipContact2" maxWidth="-Infinity" prefWidth="60.0">
                                                                                  <font>
                                                                                     <Font size="14.0" />
                                                                                  </font>
@@ -1087,7 +1119,7 @@
                                                                         <Insets bottom="15.0" />
                                                                      </VBox.margin>
                                                                   </Label>
-                                                                  <Label text="Telefonnummer">
+                                                                  <Label text="Telefonnummer (Pflichtfeld)">
                                                                      <font>
                                                                         <Font name="Gill Sans MT" size="16.0" />
                                                                      </font>
@@ -1165,7 +1197,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfTelNrClient" maxWidth="300.0">
+                                    <TextField fx:id="tfTelNrClient" maxWidth="300.0" promptText="z.B. +43 600 1234567">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -1181,7 +1213,7 @@
                                           <Insets bottom="5.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <TextField fx:id="tfEmailClient" maxWidth="600.0">
+                                    <TextField fx:id="tfEmailClient" maxWidth="600.0" promptText="z.B. max.mustermann@email.com">
                                        <font>
                                           <Font size="14.0" />
                                        </font>

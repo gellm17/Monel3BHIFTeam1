@@ -144,7 +144,7 @@
                                     <Insets bottom="5.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField fx:id="tfStartEvent" prefWidth="60.0" promptText="08:00">
+                              <TextField fx:id="tfStartEvent" prefWidth="60.0" promptText="00:00">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -164,7 +164,7 @@
                                     <Insets bottom="5.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField fx:id="tfEndEvent" prefWidth="60.0" promptText="10:00">
+                              <TextField fx:id="tfEndEvent" prefWidth="60.0" promptText="23:59">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -240,7 +240,7 @@
                      <children>
                         <HBox alignment="CENTER_LEFT">
                            <children>
-                              <TextField fx:id="tfRideCostsEvent" maxWidth="-Infinity" prefWidth="60.0" promptText="20.50">
+                              <TextField fx:id="tfRideCostsEvent" maxWidth="-Infinity" prefWidth="60.0" promptText="00.00">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
@@ -293,7 +293,7 @@
                      <children>
                         <HBox alignment="CENTER_LEFT">
                            <children>
-                              <TextField fx:id="tfOtherCosts" maxWidth="-Infinity" prefWidth="60.0" promptText="12.00">
+                              <TextField fx:id="tfOtherCosts" maxWidth="-Infinity" prefWidth="60.0" promptText="00.00">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

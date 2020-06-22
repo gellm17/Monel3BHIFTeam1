@@ -57,6 +57,26 @@ public abstract class SceneLoader {
         }
     }
 
+    public void openInfo(){
+        try {
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/Info.fxml"));
+            BorderPane root = fxml.load();
+            Stage stage = new Stage();
+            stage.setTitle("Info");
+            stage.setScene(new Scene(root));
+            Screen screen = Screen.getPrimary();
+            Rectangle2D bounds = screen.getVisualBounds();
+            /*stage.setX(bounds.getMinX());
+            stage.setY(bounds.getMinY());
+            stage.setWidth(bounds.getWidth());
+            stage.setHeight(bounds.getHeight());*/
+            stage.show();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public Stage getPrimStage() {
         return primStage;
     }

@@ -1,5 +1,6 @@
 package controller;
 
+import app.SceneLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
@@ -11,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.ImageView;
 
-public class AddEditSponsor_Controller {
+public class AddEditSponsor_Controller extends SceneLoader {
 
     @FXML
     private Button btnInfo;
@@ -127,7 +128,7 @@ public class AddEditSponsor_Controller {
 
     @FXML
     void btnSettings_Clicked(ActionEvent event) {
-
+        openSettings();
     }
 
 }

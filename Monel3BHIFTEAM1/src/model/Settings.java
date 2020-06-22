@@ -37,7 +37,6 @@ public class Settings implements Initializable, Serializable {
 
     private transient ObservableList<Double> hourlyRates = FXCollections.observableList(new ArrayList<Double>());
 
-<<<<<<< HEAD
     private ObservableList<String> userGroup = FXCollections.observableList(new ArrayList<String>());
 
     private ObservableList<String> salaryLevel  = FXCollections.observableList(new ArrayList<String>());
@@ -72,24 +71,14 @@ public class Settings implements Initializable, Serializable {
         if (hourlyRates.isEmpty()) {
             hourlyRates.addAll(1.50, 2.00, 3.20, 4.10);
         }
-=======
-    private transient Color color = Color.orange;
-    private transient FontStyle font = FontStyle.Arial;
-    private transient int selectedSize = 18;
-    private transient double selectedHourlyRate = 3.20;
-    private transient StringProperty companyName = new SimpleStringProperty(this, "companyName", "Monel GmbH");
-    private transient StringProperty uid_Number = new SimpleStringProperty(this, "uid_Number", "ATU 75050926");
-    private transient StringProperty iban = new SimpleStringProperty(this, "iban", "AT09 3946 4000 0015 0490");
-    private transient StringProperty bic = new SimpleStringProperty(this, "bic", "BKAUATWW");
-    private transient StringProperty street = new SimpleStringProperty(this, "street", "Villacher Straße");
-    private transient IntegerProperty nr = new SimpleIntegerProperty(this, "nr", 95);
-    private transient IntegerProperty plz = new SimpleIntegerProperty(this, "plz", 9800);
-    private transient StringProperty location = new SimpleStringProperty(this, "location", "Spittal/Drau");
-
+    }
+    
+    /*
     private Settings() {
         getData();
->>>>>>> 18bc11cb389e2498d13f51075e329eac9890f16e
     }
+    */
+
 
     public static Settings getInstance() {
         if (instance == null) {
