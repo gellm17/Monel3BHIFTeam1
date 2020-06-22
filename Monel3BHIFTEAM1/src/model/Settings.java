@@ -37,22 +37,22 @@ public class Settings implements Initializable, Serializable {
 
     private transient ObservableList<Double> hourlyRates = FXCollections.observableList(new ArrayList<Double>());
 
-    private ObservableList<String> userGroup = FXCollections.observableList(new ArrayList<String>());
+    private transient ObservableList<String> userGroup = FXCollections.observableList(new ArrayList<String>());
 
-    private ObservableList<String> salaryLevel  = FXCollections.observableList(new ArrayList<String>());
+    private transient ObservableList<String> salaryLevel  = FXCollections.observableList(new ArrayList<String>());
 
     private Color color = Color.orange;
     private FontStyle font = FontStyle.Arial;
     private int selectedSize = 18;
     private double selectedHourlyRate = 3.20;
-    private StringProperty companyName = new SimpleStringProperty(this, "companyName", "Monel GmbH");
-    private StringProperty uid_Number = new SimpleStringProperty(this, "uid_Number", "ATU 75050926");
-    private StringProperty iban = new SimpleStringProperty(this, "iban", "AT09 3946 4000 0015 0490");
-    private StringProperty bic = new SimpleStringProperty(this, "bic", "BKAUATWW");
-    private StringProperty street = new SimpleStringProperty(this, "street", "Villacher Straße");
-    private IntegerProperty nr = new SimpleIntegerProperty(this, "nr", 95);
-    private IntegerProperty plz = new SimpleIntegerProperty(this, "plz", 9800);
-    private StringProperty location = new SimpleStringProperty(this, "location", "Spittal/Drau");
+    private transient StringProperty companyName = new SimpleStringProperty(this, "companyName", "Monel GmbH");
+    private transient StringProperty uid_Number = new SimpleStringProperty(this, "uid_Number", "ATU 75050926");
+    private transient StringProperty iban = new SimpleStringProperty(this, "iban", "AT09 3946 4000 0015 0490");
+    private transient StringProperty bic = new SimpleStringProperty(this, "bic", "BKAUATWW");
+    private transient StringProperty street = new SimpleStringProperty(this, "street", "Villacher Straße");
+    private transient IntegerProperty nr = new SimpleIntegerProperty(this, "nr", 95);
+    private transient IntegerProperty plz = new SimpleIntegerProperty(this, "plz", 9800);
+    private transient StringProperty location = new SimpleStringProperty(this, "location", "Spittal/Drau");
 
     private Settings() {
         if (klientColumns.isEmpty()) {
