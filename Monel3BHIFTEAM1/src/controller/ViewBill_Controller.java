@@ -131,6 +131,13 @@ public class ViewBill_Controller extends SceneLoader {
         DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/MM/uuuu");
         Locale locale = Locale.GERMANY;
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
+        String padding = "";
+        if (numberFormat.format(Math.round(((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*1.2) * 100.0) / 100.0).replace("€", "").replace(",", "").replace(" ", "").length() == 5) {
+            padding = "style=\"padding-left:228px; \"";
+        } else {
+            padding = "style=\"padding-left:210px; \"";
+        }
+
 
         String html = "<!DOCTYPE html>\n" +
                 "<html lang=\"en\">\n" +
@@ -342,7 +349,7 @@ public class ViewBill_Controller extends SceneLoader {
                 "                    <td style=\"padding-bottom:25px; min-width:500px\" id=\"iban\">" + Settings.getInstance().getIban() + "</td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
-                "                    <td id=\"bic\">" + Settings.getInstance().getBic() + "</td><td style=\"padding-left:228px; #\">" + numberFormat.format(Math.round(((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*1.2) * 100.0) / 100.0).replace(" €", "").replace(",", "") +"</td>\n" +
+                "                    <td id=\"bic\">" + Settings.getInstance().getBic() + "</td><td " + padding + ">" +numberFormat.format(Math.round(((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*1.2) * 100.0) / 100.0).replace("€", "").replace(",", "").replace(" ", "") +"</td>\n" +
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +
