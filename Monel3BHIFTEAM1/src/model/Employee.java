@@ -9,8 +9,8 @@ import java.time.LocalDate;
 public class Employee extends Person {
     private LongProperty ssnr;
     private BooleanProperty volunteering;
-    private ObjectProperty<OccupationGroup> occupationGroup;
-    private ObjectProperty<SalaryLevel> salaryLevel;
+    private StringProperty occupationGroup;
+    private StringProperty salaryLevel;
     private IntegerProperty hoursPerWeek;
     private ObjectProperty<LocalDate> dateSalaryLevel;
     private StringProperty iban;
@@ -18,12 +18,12 @@ public class Employee extends Person {
     private ObjectProperty<LocalDate> dateOfEmployment;
     private ObjectProperty<Privacy> privacy;
 
-    public Employee(int id, Salutation salutation, String title, String firstName, String lastName, String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate, long ssnr, boolean volunteering, OccupationGroup occupationGroup, SalaryLevel salaryLevel, int hoursPerWeek, LocalDate dateSalaryLevel, String iban, String bic, LocalDate dateOfEmployment, Privacy privacy) {
+    public Employee(int id, Salutation salutation, String title, String firstName, String lastName, String adress, int zipCode, String place, String telNr, String email, LocalDate birthDate, long ssnr, boolean volunteering, String occupationGroup, String salaryLevel, int hoursPerWeek, LocalDate dateSalaryLevel, String iban, String bic, LocalDate dateOfEmployment, Privacy privacy) {
         super(id, salutation, title, firstName, lastName, adress, zipCode, place, telNr, email, birthDate);
         this.ssnr = new SimpleLongProperty(this, "ssnr", ssnr);
         this.volunteering = new SimpleBooleanProperty(this, "volunteering", volunteering);
-        this.occupationGroup = new SimpleObjectProperty<OccupationGroup>(this, "occupationGroup", occupationGroup);
-        this.salaryLevel = new SimpleObjectProperty<SalaryLevel>(this, "salaryLevel", salaryLevel);
+        this.occupationGroup = new SimpleStringProperty(this, "occupationGroup", occupationGroup);
+        this.salaryLevel = new SimpleStringProperty(this, "salaryLevel", salaryLevel);
         this.hoursPerWeek = new SimpleIntegerProperty(this, "hoursPerWeek", hoursPerWeek);
         this.dateSalaryLevel = new SimpleObjectProperty<LocalDate>(this, "dateSalaryLevel", dateSalaryLevel);
         this.iban = new SimpleStringProperty(this, "iban", iban);
@@ -37,8 +37,8 @@ public class Employee extends Person {
 
         ssnr = new SimpleLongProperty(this, "ssnr");
         volunteering = new SimpleBooleanProperty(this, "volunteering");
-        occupationGroup = new SimpleObjectProperty<OccupationGroup>(this, "occupationGroup", OccupationGroup.VG1);
-        salaryLevel = new SimpleObjectProperty<SalaryLevel>(this, "salaryLevel", SalaryLevel.GS1);
+        occupationGroup = new SimpleStringProperty(this, "occupationGroup", "");
+        salaryLevel = new SimpleStringProperty(this, "salaryLevel", "");
         hoursPerWeek = new SimpleIntegerProperty(this, "hoursPerWeek", 0);
         dateSalaryLevel = new SimpleObjectProperty<LocalDate>(this, "dateSalaryLevel");
         iban = new SimpleStringProperty(this, "iban", "");
@@ -52,8 +52,8 @@ public class Employee extends Person {
 
         ssnr = new SimpleLongProperty(this, "ssnr");
         volunteering = new SimpleBooleanProperty(this, "volunteering");
-        occupationGroup = new SimpleObjectProperty<OccupationGroup>(this, "occupationGroup", OccupationGroup.VG1);
-        salaryLevel = new SimpleObjectProperty<SalaryLevel>(this, "salaryLevel", SalaryLevel.GS1);
+        occupationGroup = new SimpleStringProperty(this, "occupationGroup", "");
+        salaryLevel = new SimpleStringProperty(this, "salaryLevel", "");
         hoursPerWeek = new SimpleIntegerProperty(this, "hoursPerWeek");
         dateSalaryLevel = new SimpleObjectProperty<LocalDate>(this, "dateSalaryLevel");
         iban = new SimpleStringProperty(this, "iban", "");
@@ -71,7 +71,7 @@ public class Employee extends Person {
                 if (rs.getString("vorrueckdatum") != null) {
             vorrueckdatum = LocalDate.parse(rs.getString("vorrueckdatum"));
         }
-        return new Employee(rs.getInt("id"), Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")), rs.getInt("svnr"), (rs.getInt("amt") == 1 ? true : false), OccupationGroup.valueOf(rs.getString("verwendungsgruppe")), SalaryLevel.valueOf(rs.getString("gehaltsstufe")), rs.getInt("wochenstunden"), vorrueckdatum, rs.getString("iban"), rs.getString("bic"), LocalDate.parse(rs.getString("einstelldatum")), new Privacy());
+        return new Employee(rs.getInt("id"), Salutation.valueOf(rs.getString("anrede")), rs.getString("titel"), rs.getString("vorname"), rs.getString("nachname"), rs.getString("strasse_hausnummer"), rs.getInt("plz"), rs.getString("ort"), rs.getString("telefonnummer"), rs.getString("email"), LocalDate.parse(rs.getString("geburtsdatum")), rs.getInt("svnr"), (rs.getInt("amt") == 1 ? true : false), rs.getString("verwendungsgruppe"), rs.getString("gehaltsstufe"), rs.getInt("wochenstunden"), vorrueckdatum, rs.getString("iban"), rs.getString("bic"), LocalDate.parse(rs.getString("einstelldatum")), new Privacy());
     }
 
     public long getSsnr() {
@@ -98,27 +98,27 @@ public class Employee extends Person {
         this.volunteering.set(volunteering);
     }
 
-    public OccupationGroup getOccupationGroup() {
+    public String getOccupationGroup() {
         return occupationGroup.get();
     }
 
-    public ObjectProperty<OccupationGroup> occupationGroupProperty() {
+    public StringProperty occupationGroupProperty() {
         return occupationGroup;
     }
 
-    public void setOccupationGroup(OccupationGroup occupationGroup) {
+    public void setOccupationGroup(String occupationGroup) {
         this.occupationGroup.set(occupationGroup);
     }
 
-    public SalaryLevel getSalaryLevel() {
+    public String getSalaryLevel() {
         return salaryLevel.get();
     }
 
-    public ObjectProperty<SalaryLevel> salaryLevelProperty() {
+    public StringProperty salaryLevelProperty() {
         return salaryLevel;
     }
 
-    public void setSalaryLevel(SalaryLevel salaryLevel) {
+    public void setSalaryLevel(String salaryLevel) {
         this.salaryLevel.set(salaryLevel);
     }
 

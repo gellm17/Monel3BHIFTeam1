@@ -108,10 +108,10 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
     private ToggleButton tglBtnVolunteeringEmployee;
 
     @FXML
-    private ComboBox<OccupationGroup> comboOccupationGroupEmployee;
+    private ComboBox<String> comboOccupationGroupEmployee;
 
     @FXML
-    private ComboBox<SalaryLevel> comboSalaryLevelEmployee;
+    private ComboBox<String> comboSalaryLevelEmployee;
 
     @FXML
     private TextField tfHoursPerWeekEmployee;
@@ -161,8 +161,8 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
     public void setEditableEmployee(Employee editableEmployee) {
         this.editableEmployee = editableEmployee;
         comboSalutationEmployee.getItems().setAll(Salutation.values());
-        comboOccupationGroupEmployee.getItems().setAll(OccupationGroup.values());
-        comboSalaryLevelEmployee.getItems().setAll(SalaryLevel.values());
+        comboOccupationGroupEmployee.getItems().setAll(Settings.getInstance().getUserGroup());
+        comboSalaryLevelEmployee.getItems().setAll(Settings.getInstance().getSalaryLevel());
         if (editableEmployee != null){
             comboSalutationEmployee.getSelectionModel().select(editableEmployee.getSalutation());
             tfTitleEmployee.setText(editableEmployee.getTitle());
@@ -428,10 +428,10 @@ public class AddEditEmployee_Controller extends SceneLoader implements Initializ
         comboSalutationEmployee.getItems().setAll(Salutation.values());
         comboSalutationEmployee.getSelectionModel().select(0);
 
-        comboOccupationGroupEmployee.getItems().setAll(OccupationGroup.values());
+        comboOccupationGroupEmployee.getItems().setAll(Settings.getInstance().getUserGroup());
         comboOccupationGroupEmployee.getSelectionModel().select(0);
 
-        comboSalaryLevelEmployee.getItems().setAll(SalaryLevel.values());
+        comboSalaryLevelEmployee.getItems().setAll(Settings.getInstance().getSalaryLevel());
         comboSalaryLevelEmployee.getSelectionModel().select(0);
 
         this.accordionEmployees.setExpandedPane(tPaneBasicData);
