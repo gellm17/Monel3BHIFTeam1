@@ -40,6 +40,9 @@ public class Settings_Controller implements Initializable {
     private ListView<Double> lvHourlyRates;
 
     @FXML
+    private TextField tfHourlyRate;
+
+    @FXML
     private Button btnAddHourlyRate;
 
     @FXML
@@ -70,6 +73,19 @@ public class Settings_Controller implements Initializable {
     private Button btnDeleteSalaryLevel;
 
     @FXML
+    private ListView<?> lvTaxRate;
+
+    @FXML
+    private TextField tfTaxRate;
+
+    @FXML
+    private Button btnAddTaxRate;
+
+    @FXML
+    private Button btnDeleteTaxRate;
+
+
+    @FXML
     private Tab tabCompanyData;
 
     @FXML
@@ -92,9 +108,6 @@ public class Settings_Controller implements Initializable {
 
     @FXML
     private TextField tfZipCompany;
-
-    @FXML
-    private TextField tfHourlyRate;
 
     @FXML
     private TextField tfPlaceCompany;
@@ -268,6 +281,16 @@ public class Settings_Controller implements Initializable {
     @FXML
     void btnDeleteSalaryLevel_Clicked(ActionEvent event) {
         Settings.getInstance().removeSalaryLevel((String) selectedItem);
+    }
+
+    @FXML
+    void btnAddTaxRate_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnDeleteTaxRate_Clicked(ActionEvent event) {
+
     }
 
     @FXML
