@@ -46,7 +46,7 @@ public class Settings_Controller implements Initializable {
     private Button btnDeleteHourlyRate;
 
     @FXML
-    private ListView<?> lvOccupationGroup;
+    private ListView<String> lvOccupationGroup;
 
     @FXML
     private TextField tfOccupationGroup;
@@ -58,7 +58,7 @@ public class Settings_Controller implements Initializable {
     private Button btnDeleteOccupationGroup;
 
     @FXML
-    private ListView<?> lvSalaryLevel;
+    private ListView<String> lvSalaryLevel;
 
     @FXML
     private TextField tfSalaryLevel;
@@ -218,6 +218,7 @@ public class Settings_Controller implements Initializable {
 
     private int companyCounter = 0;
     private int commonCounter = 0;
+    private int verwaltungCounter = 0;
 
     private Object selectedItem;
     private int posOfSelectedItem;
@@ -239,34 +240,34 @@ public class Settings_Controller implements Initializable {
 
     @FXML
     void btnAddHourlyRate_Clicked(ActionEvent event) {
-        if (tfCheck(tfHourlyRate,"^\\d{1,8}([\\.,]\\d{2})?$", tabCommon, null, commonCounter)){
+        if (tfCheck(tfHourlyRate,"^\\d{1,8}([\\.,]\\d{2})?$", tabAdministration, null, verwaltungCounter)){
             Settings.getInstance().addHourlyRate(Double.parseDouble(tfHourlyRate.getText()));
         }
     }
 
     @FXML
     void btnDeleteHourlyRate_Clicked(ActionEvent event) {
-
+        Settings.getInstance().removeHourlyRate((Double) selectedItem);
     }
 
     @FXML
     void btnAddOccupationGroup_Clicked(ActionEvent event) {
-
+        Settings.getInstance().addUserGroup(tfOccupationGroup.getText());
     }
 
     @FXML
     void btnDeleteOccupationGroup_Clicked(ActionEvent event) {
-
+        Settings.getInstance().removeUserGroup((String) selectedItem);
     }
 
     @FXML
     void btnAddSalaryLevel_Clicked(ActionEvent event) {
-
+        Settings.getInstance().addSalaryLevel(tfSalaryLevel.getText());
     }
 
     @FXML
     void btnDeleteSalaryLevel_Clicked(ActionEvent event) {
-
+        Settings.getInstance().removeSalaryLevel((String) selectedItem);
     }
 
     @FXML
@@ -353,6 +354,7 @@ public class Settings_Controller implements Initializable {
 
     @FXML
     void btnSaveSettings_Clicked(ActionEvent event) {
+        verwaltungCounter = 0;
         companyCounter = 0;
         commonCounter = 0;
         tfCheck(tfIbanCompany, "^[A-Z]{2}[0-9]{2}(?:[ ]?[0-9]{4}){4}(?:[ ]?[0-9]{1,2})?$", tabCompanyData, null, companyCounter);
@@ -387,6 +389,9 @@ public class Settings_Controller implements Initializable {
                     break;
                 case "tabCommon":
                     commonCounter++;
+                    break;
+                case "tabAdministration":
+                    verwaltungCounter++;
                     break;
             }
             tf.setStyle("-FX-Border-Color: red");
@@ -424,6 +429,8 @@ public class Settings_Controller implements Initializable {
         tabCompanyData.setGraphic(new Label("Firmendaten"));
         tabCommon.setText("");
         tabCommon.setGraphic(new Label("Allgemein"));
+        tabAdministration.setText("");
+        tabAdministration.setGraphic(new Label("Verwaltung"));
 
         //COMMON DATA
         comboFont.setItems(FXCollections.observableArrayList(Arrays.asList(FontStyle.values())));
@@ -433,6 +440,8 @@ public class Settings_Controller implements Initializable {
 
         //TABLES
         lvHourlyRates.setItems(Settings.getInstance().getHourlyRates());
+        lvSalaryLevel.setItems(Settings.getInstance().getSalaryLevel());
+        lvOccupationGroup.setItems(Settings.getInstance().getUserGroup());
 
         lvAvailableColumnsClients.setItems(Settings.getInstance().getKlientColumns());
         lvAvailableColumnsEmployees.setItems(Settings.getInstance().getEmployeeColumns());
@@ -451,7 +460,33 @@ public class Settings_Controller implements Initializable {
         setSelectionEvent(lvAvailableColumnsSponsors, lvSelectedColumnsSponsors, btnAddColumnSponsors, btnRemoveColumnSponsors, btnMoveColumnSponsorsUp, btnMoveColumnSponsorsDown);
         setSelectionEvent(lvAvailableColumnsProtocols, lvSelectedColumnsProtocols, btnAddColumnProtocols, btnRemoveColumnProtocols, btnMoveColumnProtocolsUp, btnMoveColumnProtocolsDown);
         setSelectionEvent(lvAvailableColumnsEvents, lvSelectedColumnsEvents, btnAddColumnEvents, btnRemoveColumnEvents, btnMoveColumnEventsUp, btnMoveColumnEventsDown);
-    }
+
+        lvHourlyRates.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null){
+                selectedItem = newSelection;
+                btnDeleteHourlyRate.setDisable(false);
+                btnDeleteSalaryLevel.setDisable(true);
+                btnDeleteOccupationGroup.setDisable(true);
+            }
+        });
+        lvOccupationGroup.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null){
+                selectedItem = newSelection;
+                btnDeleteOccupationGroup.setDisable(false);
+                btnDeleteHourlyRate.setDisable(true);
+                btnDeleteSalaryLevel.setDisable(true);
+
+            }
+        });
+        lvSalaryLevel.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null){
+                selectedItem = newSelection;
+                btnDeleteSalaryLevel.setDisable(false);
+                btnDeleteOccupationGroup.setDisable(true);
+                btnDeleteHourlyRate.setDisable(true);
+            }
+        });
+        }
 
     private void setSelectionEvent(ListView lvAvailable, ListView lvSelected, Button btnAdd, Button btnRemove, Button btnUp, Button btnDown){
         lvAvailable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {

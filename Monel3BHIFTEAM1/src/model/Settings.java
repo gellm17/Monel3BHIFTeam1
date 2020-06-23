@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.*;
 
 public class Settings implements Initializable, Serializable {
-    private final static String FILENAME = "Settings.lmaa";
+    private final static String FILENAME = "Settings.monel";
 
     private static Settings instance = null;
 
@@ -93,13 +93,6 @@ public class Settings implements Initializable, Serializable {
 
     }
 
-    public boolean addUserGroup(String group) {
-        return this.userGroup.addAll(group);
-    }
-
-    public boolean addSalaryLevel(String level) {
-        return this.salaryLevel.addAll(level);
-    }
 
     public boolean removeUserGroup(String group) {
         return  this.userGroup.remove(group);
@@ -649,10 +642,12 @@ public class Settings implements Initializable, Serializable {
         s.writeObject(help);
         help = new ArrayList<String>(getProtocolColumns());
         s.writeObject(help);
-        help = new ArrayList<String>(getProtocolColumns());
+        help = new ArrayList<String>(getProtocolColumnsLoaded());
         s.writeObject(help);
         s.writeObject(new ArrayList<Integer>(getSize()));
         s.writeObject(new ArrayList<Double>(getHourlyRates()));
+        s.writeObject(new ArrayList<String>(getSalaryLevel()));
+        s.writeObject(new ArrayList<String>(getUserGroup()));
         s.writeObject(getColor());
         s.writeObject(getFont());
         s.writeObject(getSelectedSize());
@@ -681,6 +676,8 @@ public class Settings implements Initializable, Serializable {
         protocolColumnsLoaded = FXCollections.observableList((ArrayList<String>)s.readObject());
         size = FXCollections.observableList((ArrayList<Integer>)s.readObject());
         hourlyRates = FXCollections.observableList((ArrayList<Double>)s.readObject());
+        salaryLevel = FXCollections.observableList((ArrayList<String>)s.readObject());
+        userGroup = FXCollections.observableList((ArrayList<String>)s.readObject());
         color = (Color) s.readObject();
         font = (FontStyle) s.readObject();
         selectedSize = (int) s.readObject();
@@ -697,5 +694,11 @@ public class Settings implements Initializable, Serializable {
 
     public boolean addHourlyRate(double rate){
         return hourlyRates.add(rate);
+    }
+    public boolean addSalaryLevel(String level) { return salaryLevel.add(level); }
+    public boolean addUserGroup(String group) { return userGroup.add(group); }
+
+    public boolean removeHourlyRate(double rate) {
+        return  this.hourlyRates.remove(rate);
     }
 }
