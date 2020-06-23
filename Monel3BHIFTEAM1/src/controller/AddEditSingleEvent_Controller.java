@@ -71,9 +71,6 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
     private ToggleButton tglBtnHourlyRateNetto;
 
     @FXML
-    private ComboBox<?> comboTaxesHourlyRate;
-
-    @FXML
     private TextField tfRideCosts;
 
     @FXML
@@ -83,19 +80,22 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
     private ToggleButton tglBtnRideCostNetto;
 
     @FXML
-    private ComboBox<?> comboTaxesRideCost;
+    private TextField tfNameOtherCost;
 
     @FXML
-    private TextField tfOtherCosts;
+    private TextField tfValueOtherCost;
 
     @FXML
-    private ToggleButton tglBtnOtherCostsBrutto;
+    private ComboBox<?> comboTaxesOtherCost;
 
     @FXML
-    private ToggleButton tglBtnOtherCostsNetto;
+    private Button btnAddOtherCost;
 
     @FXML
-    private ComboBox<?> comboTaxesOtherCosts;
+    private Button btnDeleteOtherCost;
+
+    @FXML
+    private ListView<?> lvOtherCosts;
 
     @FXML
     private Label lbMessage;
@@ -273,16 +273,6 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
     }
 
     @FXML
-    void tglBtnOtherCostsBrutto_onAction(ActionEvent event) {
-        tglBtnChange(tglBtnOtherCostsBrutto, tglBtnOtherCostsNetto);
-    }
-
-    @FXML
-    void tglBtnOtherCostsNetto_onAction(ActionEvent event) {
-        tglBtnChange(tglBtnOtherCostsNetto, tglBtnOtherCostsBrutto);
-    }
-
-    @FXML
     void tglBtnRideCostBrutto_onAction(ActionEvent event) {
         tglBtnChange(tglBtnRideCostBrutto, tglBtnRideCostNetto);
     }
@@ -290,6 +280,16 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
     @FXML
     void tglBtnRideCostNetto_onAction(ActionEvent event) {
         tglBtnChange(tglBtnRideCostNetto, tglBtnRideCostBrutto);
+    }
+
+    @FXML
+    void btnAddOtherCost_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnDeleteOtherCost_Clicked(ActionEvent event) {
+
     }
 
     @Override
