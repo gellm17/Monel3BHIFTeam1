@@ -17,7 +17,8 @@ public class DBManager {
     private static String sqlInsertEmployee         = "INSERT INTO person (personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,svnr,amt,verwendungsgruppe,gehaltsstufe,wochenstunden,iban,bic,vorrueckdatum,einstelldatum) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private static String sqlInsertSponsor          = "INSERT INTO person (personentyp,anrede,titel,vorname,nachname,strasse_hausnummer,plz,ort,telefonnummer,email,geburtsdatum,firmenname,firmentelefonnummer,firmenemail) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     private static String sqlInsertEvent            = "INSERT INTO aktivitaet (datum,aktivitaetsbezeichnung,kategorie,notiz) VALUES (?,?,?,?)";
-    private static String sqlInsertEventprotocol    = "INSERT INTO aktivitaetsprotokoll (aktivitaet,mitarbeiter,klient,rechnung,startzeit,endzeit,jahr_Monat,stundensatz,fahrtkosten,notiz) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    private static String sqlInsertEventprotocol    = "INSERT INTO aktivitaetsprotokoll (aktivitaet,mitarbeiter,klient,rechnung,startzeit,endzeit,jahr_Monat,stundensatz,kilometersatz,notiz,km) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    private static String sqlInsertCosts            = "INSERT INTO kosten (aktivitaetsprotokoll,bezeichnung,betrag,steuersatz) VALUES (?,?,?,?)";
     private static String sqlInsertBill             = "INSERT INTO rechnung (klient,ausstellungsdatum,verwendungszweck) VALUES (?,?,?)";
     private static String sqlInsertDocument         = "INSERT INTO dokument (besitzerIdPerson,besitzerIdAktivitaet,pfad,dokumentenart,besitzer) VALUES (?,?,?,?,?)";
     private static String sqlUpdatePerson           = "UPDATE person SET anrede = ?, titel = ?, vorname = ?, nachname = ?, strasse_hausnummer = ?, plz = ?, ort = ?, telefonnummer = ?, email = ?, geburtsdatum = ? WHERE id = ?";
@@ -25,12 +26,14 @@ public class DBManager {
     private static String sqlUpdateEmployee         = "UPDATE person SET anrede = ?, titel = ?, vorname = ?, nachname = ?, strasse_hausnummer = ?, plz = ?, ort = ?, telefonnummer = ?, email = ?, geburtsdatum = ?, svnr = ? , amt = ?, verwendungsgruppe = ?, gehaltsstufe = ?, wochenstunden = ?, iban = ?, bic = ?, vorrueckdatum = ?, einstelldatum = ? WHERE id = ?";
     private static String sqlUpdateSponsor          = "UPDATE person SET anrede = ?, titel = ?, vorname = ?, nachname = ?, strasse_hausnummer = ?, plz = ?, ort = ?, telefonnummer = ?, email = ?, geburtsdatum = ?, firmenname = ?, firmentelefonnummer = ?, firmenemail = ? WHERE id = ?";
     private static String sqlUpdateEvent            = "UPDATE aktivitaet SET datum = ?, aktivitaetsbezeichnung = ?, notiz = ? WHERE id = ?";
-    private static String sqlUpdateEventprotocol    = "UPDATE aktivitaetsprotokoll SET mitarbeiter = ?, klient = ?, rechnung = ?, startzeit = ?, endzeit = ?, jahr_Monat = ?, stundensatz = ?, fahrtkosten = ?, notiz = ? WHERE id = ?";
+    private static String sqlUpdateEventprotocol    = "UPDATE aktivitaetsprotokoll SET mitarbeiter = ?, klient = ?, rechnung = ?, startzeit = ?, endzeit = ?, jahr_Monat = ?, stundensatz = ?, kilometersatz = ?, notiz = ?, km = ? WHERE id = ?";
+    private static String sqlUpdateCosts            = "UPDATE kosten SET aktivitaetsprotokoll = ?, bezeichnung = ?, betrag = ?, steuersatz = ? WHERE id = ?";
     private static String sqlUpdateBill             = "UPDATE rechnung SET ausstellungsdatum = ?, verwendungszweck = ? WHERE rechnungsnummer = ?";
     private static String sqlUpdateDocument         = "UPDATE dokument SET besitzerIdPerson = ?, besitzerIdAktivitaet = ?, pfad = ?, dokumentenart = ?, besitzer = ? WHERE id = ?";
     private static String sqlDeletePerson           = "UPDATE person SET geloescht = ? WHERE id = ?"; // for person, client, employee and sponsor
     private static String sqlDeleteEvent            = "DELETE FROM aktivitaet WHERE id = ?";
     private static String sqlDeleteEventprotocol    = "DELETE FROM aktivitaetsprotokoll WHERE id = ?";
+    private static String sqlDeleteCosts            = "DELETE FROM kosten WHERE id = ?";
     private static String sqlDeleteBill             = "DELETE FROM rechnung WHERE id = ?";
     private static String sqlDeleteDocument         = "DELETE FROM dokument WHERE id = ?";
     private static String sqlSelectEventprotocol    = "SELECT * FROM aktivitaetsprotokoll WHERE klient = ? AND jahr_Monat like ?";
@@ -41,6 +44,7 @@ public class DBManager {
     private static PreparedStatement stmtInsertSponsor          = null;
     private static PreparedStatement stmtInsertEvent            = null;
     private static PreparedStatement stmtInsertEventprotocol    = null;
+    private static PreparedStatement stmtInsertCosts            = null;
     private static PreparedStatement stmtInsertBill             = null;
     private static PreparedStatement stmtInsertDocument         = null;
     private static PreparedStatement stmtUpdatePerson           = null;
@@ -49,11 +53,13 @@ public class DBManager {
     private static PreparedStatement stmtUpdateSponsor          = null;
     private static PreparedStatement stmtUpdateEvent            = null;
     private static PreparedStatement stmtUpdateEventprotocol    = null;
+    private static PreparedStatement stmtUpdateCosts            = null;
     private static PreparedStatement stmtUpdateBill             = null;
     private static PreparedStatement stmtUpdateDocument         = null;
     private static PreparedStatement stmtDeletePerson           = null;
     private static PreparedStatement stmtDeleteEvent            = null;
     private static PreparedStatement stmtDeleteEventprotocol    = null;
+    private static PreparedStatement stmtDeleteCosts            = null;
     private static PreparedStatement stmtDeleteBill             = null;
     private static PreparedStatement stmtDeleteDocument         = null;
     private static PreparedStatement stmtSelectEventprotocol    = null;
@@ -328,14 +334,39 @@ public class DBManager {
         stmtInsertEventprotocol.setTime(6, Time.valueOf(ep.getEndTime()));
         stmtInsertEventprotocol.setString(7, ep.getYear_month());
         stmtInsertEventprotocol.setDouble(8, ep.getHourlyRate()); // must be changed to decimal
-        stmtInsertEventprotocol.setDouble(9, ep.getRideCosts()); // must be changed to decimal
+        stmtInsertEventprotocol.setDouble(9, ep.getMileage()); // must be changed to decimal
         stmtInsertEventprotocol.setString(10, ep.getNote());
+        stmtInsertEventprotocol.setInt(11, ep.getKm());
         boolean added = (stmtInsertEventprotocol.executeUpdate() == 1);
         ResultSet rs = stmtInsertEventprotocol.getGeneratedKeys();
         if(rs != null && rs.next()) {
             newId = rs.getInt(1);
         }
         stmtInsertEventprotocol.clearParameters();
+        if (!added) {
+            newId = -1;
+        }
+        return newId;
+    } //TODO check non mandatory fields
+
+    /** insert a Costs into the DB
+     *
+     * @param c
+     * @return
+     * @throws SQLException
+     */
+    public static int insertCosts(Costs c) throws SQLException {
+        int newId = -1;
+        stmtInsertCosts.setInt(1, c.getEventprotocol().getId());
+        stmtInsertCosts.setString(2, c.getDescription());
+        stmtInsertCosts.setDouble(3, c.getAmount());
+        stmtInsertCosts.setInt(4, c.getTaxrate());
+        boolean added = (stmtInsertCosts.executeUpdate() == 1);
+        ResultSet rs = stmtInsertCosts.getGeneratedKeys();
+        if(rs != null && rs.next()) {
+            newId = rs.getInt(1);
+        }
+        stmtInsertCosts.clearParameters();
         if (!added) {
             newId = -1;
         }
@@ -609,11 +640,26 @@ public class DBManager {
         stmtUpdateEventprotocol.setTime(5, Time.valueOf(ep.getEndTime()));
         stmtUpdateEventprotocol.setString(6, ep.getYear_month());
         stmtUpdateEventprotocol.setDouble(7, ep.getHourlyRate()); // must be changed to decimal
-        stmtUpdateEventprotocol.setDouble(8, ep.getRideCosts()); // must be changed to decimal
+        stmtUpdateEventprotocol.setDouble(8, ep.getMileage()); // must be changed to decimal
         stmtUpdateEventprotocol.setString(9, ep.getNote());
-        stmtUpdateEventprotocol.setInt(10, ep.getId());
+        stmtUpdateEventprotocol.setInt(10, ep.getKm());
+        stmtUpdateEventprotocol.setInt(11, ep.getId());
         stmtUpdateEventprotocol.executeUpdate();
         stmtUpdateEventprotocol.clearParameters();
+    } //TODO check non mandatory fields
+
+    /** update the Data of the Costs with the sam id in the DB with the Data of this Costs
+     *
+     * @param c
+     * @throws SQLException
+     */
+    public static void updateCosts(Costs c) throws SQLException {
+        stmtUpdateCosts.setInt(1, c.getEventprotocol().getId());
+        stmtUpdateCosts.setString( 2, c.getDescription());
+        stmtUpdateCosts.setDouble(3, c.getAmount());
+        stmtUpdateCosts.setInt(4, c.getTaxrate());
+        stmtUpdateCosts.executeUpdate();
+        stmtUpdateCosts.clearParameters();
     } //TODO check non mandatory fields
 
     /** updates the Data of the Bill with the same id in the DB with the Data of this Bill
@@ -682,6 +728,17 @@ public class DBManager {
         stmtDeleteEventprotocol.setInt(1, ep.getId());
         stmtDeleteEventprotocol.executeUpdate();
         stmtDeleteEventprotocol.clearParameters();
+    }
+
+    /** deletes the Costs with the same id in the id
+     *
+     * @param c
+     * @throws SQLException
+     */
+    public static void deleteCosts(Costs c) throws SQLException {
+        stmtDeleteCosts.setInt(1, c.getId());
+        stmtDeleteCosts.executeUpdate();
+        stmtDeleteCosts.clearParameters();
     }
 
     /** deletes the Bill with the same id in the DB
@@ -925,6 +982,30 @@ public class DBManager {
         return evps;
     }
 
+    /** returns a HashMap of all Costs from the DB with Objects (eventprotocol)
+     *
+     * @return
+     * @throws SQLException
+     */
+    public static ArrayList<Costs> getAllCosts() throws SQLException {
+        ArrayList<Costs> cost = new ArrayList<Costs>();
+        ArrayList<EventProtocol> evps = getAllEventProtocols();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM kosten");
+        Costs c;
+        while (rs.next()) {
+            c = Costs.fromResults(rs);
+            if (rs.getInt("aktivitaetsprotokoll") != 0) {
+                for (EventProtocol ep: evps) {
+                    if (ep.getId() == rs.getInt("aktivitaetsprotokoll")) {
+                        c.setEventprotocol(ep);
+                    }
+                }
+            }
+        }
+        return cost;
+    }
+
     /** returns a HashMap of all Bills from the DB without Objects (client)
      *
      * @return
@@ -1010,6 +1091,7 @@ public class DBManager {
         stmtInsertSponsor       = conn.prepareStatement(sqlInsertSponsor, Statement.RETURN_GENERATED_KEYS);
         stmtInsertEvent         = conn.prepareStatement(sqlInsertEvent, Statement.RETURN_GENERATED_KEYS);
         stmtInsertEventprotocol = conn.prepareStatement(sqlInsertEventprotocol, Statement.RETURN_GENERATED_KEYS);
+        stmtInsertCosts         = conn.prepareStatement(sqlInsertCosts , Statement.RETURN_GENERATED_KEYS);
         stmtInsertBill          = conn.prepareStatement(sqlInsertBill, Statement.RETURN_GENERATED_KEYS);
         stmtInsertDocument      = conn.prepareStatement(sqlInsertDocument, Statement.RETURN_GENERATED_KEYS);
         stmtUpdatePerson        = conn.prepareStatement(sqlUpdatePerson);
@@ -1018,11 +1100,13 @@ public class DBManager {
         stmtUpdateSponsor       = conn.prepareStatement(sqlUpdateSponsor);
         stmtUpdateEvent         = conn.prepareStatement(sqlUpdateEvent);
         stmtUpdateEventprotocol = conn.prepareStatement(sqlUpdateEventprotocol);
+        stmtUpdateCosts         = conn.prepareStatement(sqlUpdateCosts);
         stmtUpdateBill          = conn.prepareStatement(sqlUpdateBill);
         stmtUpdateDocument      = conn.prepareStatement(sqlUpdateDocument);
         stmtDeletePerson        = conn.prepareStatement(sqlDeletePerson);
         stmtDeleteEvent         = conn.prepareStatement(sqlDeleteEvent);
         stmtDeleteEventprotocol = conn.prepareStatement(sqlDeleteEventprotocol);
+        stmtDeleteCosts         = conn.prepareStatement(sqlDeleteCosts);
         stmtDeleteBill          = conn.prepareStatement(sqlDeleteBill);
         stmtDeleteDocument      = conn.prepareStatement(sqlDeleteDocument);
         stmtSelectEventprotocol = conn.prepareStatement(sqlSelectEventprotocol);
@@ -1058,6 +1142,10 @@ public class DBManager {
                 stmtInsertEventprotocol.close();
                 stmtInsertEventprotocol = null;
             }
+            if (stmtInsertCosts != null) {
+                stmtInsertCosts.close();
+                stmtInsertCosts = null;
+            }
             if (stmtInsertBill != null) {
                 stmtInsertBill.close();
                 stmtInsertBill = null;
@@ -1090,6 +1178,10 @@ public class DBManager {
                 stmtUpdateEventprotocol.close();
                 stmtUpdateEventprotocol = null;
             }
+            if (stmtUpdateCosts != null) {
+                stmtUpdateCosts.close();
+                stmtUpdateCosts = null;
+            }
             if (stmtUpdateBill != null) {
                 stmtUpdateBill.close();
                 stmtUpdateBill = null;
@@ -1109,6 +1201,10 @@ public class DBManager {
             if (stmtDeleteEventprotocol != null) {
                 stmtDeleteEventprotocol.close();
                 stmtDeleteEventprotocol = null;
+            }
+            if (stmtDeleteCosts != null) {
+                stmtDeleteCosts.close();
+                stmtDeleteCosts = null;
             }
             if (stmtDeleteBill != null) {
                 stmtDeleteBill.close();

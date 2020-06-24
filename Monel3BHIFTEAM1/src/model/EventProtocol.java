@@ -18,10 +18,11 @@ public class EventProtocol {
     private ObjectProperty<Client> client;
     private ObjectProperty<Event> event;
     private ObjectProperty<Bill> bill;
-    private DoubleProperty rideCosts;
+    private DoubleProperty mileage;
+    private IntegerProperty km;
     private StringProperty note;
 
-    public EventProtocol(Integer id, LocalTime startTime, LocalTime endTime, String year_month, Double hourlyRate, Employee employee, Client client, Event event, Bill bill, Double rideCosts, String note) {
+    public EventProtocol(Integer id, LocalTime startTime, LocalTime endTime, String year_month, Double hourlyRate, Employee employee, Client client, Event event, Bill bill, Double mileage, Integer km, String note) {
         this.id = new SimpleIntegerProperty(this, "id", id);
         this.startTime = new SimpleObjectProperty<LocalTime>(this, "startTime", startTime);
         this.endTime = new SimpleObjectProperty<LocalTime>(this, "endTIme", endTime);
@@ -31,11 +32,12 @@ public class EventProtocol {
         this.client = new SimpleObjectProperty<Client>(this, "client", client);
         this.event = new SimpleObjectProperty<Event>(this, "event", event);
         this.bill = new SimpleObjectProperty<Bill>(this, "bill", bill);
-        this.rideCosts = new SimpleDoubleProperty(this, "rideCosts", rideCosts);
+        this.mileage = new SimpleDoubleProperty(this, "mileage", mileage);
+        this.km = new SimpleIntegerProperty(this, "km", km);
         this.note = new SimpleStringProperty(this, "note", note);
     }
 
-    public EventProtocol(Integer id, LocalTime startTime, LocalTime endTime, String year_month, Double hourlyRate, Employee employee, Client client, Event event, Bill bill, Double rideCosts) {
+    public EventProtocol(Integer id, LocalTime startTime, LocalTime endTime, String year_month, Double hourlyRate, Employee employee, Client client, Event event, Bill bill, Double mileage, String note) {
         this.id = new SimpleIntegerProperty(this, "id", id);
         this.startTime = new SimpleObjectProperty<LocalTime>(this, "startTime", startTime);
         this.endTime = new SimpleObjectProperty<LocalTime>(this, "endTIme", endTime);
@@ -45,10 +47,11 @@ public class EventProtocol {
         this.client = new SimpleObjectProperty<Client>(this, "client", client);
         this.event = new SimpleObjectProperty<Event>(this, "event", event);
         this.bill = new SimpleObjectProperty<Bill>(this, "bill", bill);
-        this.rideCosts = new SimpleDoubleProperty(this, "rideCosts", rideCosts);
+        this.mileage = new SimpleDoubleProperty(this, "mileage", mileage);
+        this.note = new SimpleStringProperty(this, "note", note);
     }
 
-    public EventProtocol(Integer id, LocalTime startTime, LocalTime endTime, String year_month, Double hourlyRate, Employee employee, Client client, Event event, Double rideCosts) {
+    public EventProtocol(Integer id, LocalTime startTime, LocalTime endTime, String year_month, Double hourlyRate, Employee employee, Client client, Event event, Bill bill, Double mileage) {
         this.id = new SimpleIntegerProperty(this, "id", id);
         this.startTime = new SimpleObjectProperty<LocalTime>(this, "startTime", startTime);
         this.endTime = new SimpleObjectProperty<LocalTime>(this, "endTIme", endTime);
@@ -57,7 +60,20 @@ public class EventProtocol {
         this.employee = new SimpleObjectProperty<Employee>(this, "employee", employee);
         this.client = new SimpleObjectProperty<Client>(this, "client", client);
         this.event = new SimpleObjectProperty<Event>(this, "event", event);
-        this.rideCosts = new SimpleDoubleProperty(this, "rideCosts", rideCosts);
+        this.bill = new SimpleObjectProperty<Bill>(this, "bill", bill);
+        this.mileage = new SimpleDoubleProperty(this, "mileage", mileage);
+    }
+
+    public EventProtocol(Integer id, LocalTime startTime, LocalTime endTime, String year_month, Double hourlyRate, Employee employee, Client client, Event event, Double mileage) {
+        this.id = new SimpleIntegerProperty(this, "id", id);
+        this.startTime = new SimpleObjectProperty<LocalTime>(this, "startTime", startTime);
+        this.endTime = new SimpleObjectProperty<LocalTime>(this, "endTIme", endTime);
+        this.year_month = new SimpleStringProperty(this, "year_month", year_month);
+        this.hourlyRate = new SimpleDoubleProperty(this, "hourlyRate", hourlyRate);
+        this.employee = new SimpleObjectProperty<Employee>(this, "employee", employee);
+        this.client = new SimpleObjectProperty<Client>(this, "client", client);
+        this.event = new SimpleObjectProperty<Event>(this, "event", event);
+        this.mileage = new SimpleDoubleProperty(this, "mileage", mileage);
     }
 
     public EventProtocol() {
@@ -70,12 +86,12 @@ public class EventProtocol {
         this.client = new SimpleObjectProperty<Client>(this, "client");
         this.event = new SimpleObjectProperty<Event>(this, "event");
         this.bill = new SimpleObjectProperty<Bill>(this, "bill", null);
-        this.rideCosts = new SimpleDoubleProperty(this, "rideCosts");
+        this.mileage = new SimpleDoubleProperty(this, "mileage");
         this.note = new SimpleStringProperty(this, "note");
     }
 
     public static EventProtocol fromResults(ResultSet rs) throws SQLException { //mandatory startTime, endTime and year_month
-        return new EventProtocol(rs.getInt("id"), LocalTime.parse(rs.getString("startzeit")), LocalTime.parse(rs.getString("endzeit")), rs.getString("jahr_Monat"), rs.getDouble("stundensatz"), null, null, null, null, rs.getDouble("fahrtkosten"), rs.getString("notiz"));
+        return new EventProtocol(rs.getInt("id"), LocalTime.parse(rs.getString("startzeit")), LocalTime.parse(rs.getString("endzeit")), rs.getString("jahr_Monat"), rs.getDouble("stundensatz"), null, null, null, null, rs.getDouble("kilometersatz"), rs.getInt("km"), rs.getString("notiz"));
     }
 
     public int getId() {
@@ -172,11 +188,11 @@ public class EventProtocol {
         this.event.set(event);
     }
 
-    public double getRideCosts() { return rideCosts.get(); }
+    public double getMileage() { return mileage.get(); }
 
-    public DoubleProperty rideCostsProperty() { return rideCosts; }
+    public DoubleProperty mileageProperty() { return mileage; }
 
-    public void setRideCosts(double rideCosts) { this.rideCosts.set(rideCosts); }
+    public void setMileage(double mileage) { this.mileage.set(mileage); }
 
     public Bill getBill() { return bill.get(); }
 
@@ -189,4 +205,10 @@ public class EventProtocol {
     public StringProperty noteProperty() { return note; }
 
     public void setNote(String note) { this.note.set(note); }
+
+    public Integer getKm() { return km.get(); }
+
+    public IntegerProperty kmProperty() { return km; }
+
+    public void setKm(Integer km) { this.km.set(km); }
 }
