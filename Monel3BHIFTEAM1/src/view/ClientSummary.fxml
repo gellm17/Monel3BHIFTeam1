@@ -73,7 +73,7 @@
          <center>
             <BorderPane BorderPane.alignment="CENTER">
                <center>
-                  <TabPane styleClass="lightBorder" tabMinWidth="60.0">
+                  <TabPane styleClass="lightBorder" tabMinHeight="30.0" tabMinWidth="90.0">
                      <tabs>
                         <Tab fx:id="tabBasicData" closable="false" styleClass="summaryTab" text="Basisdaten">
                            <content>

@@ -142,7 +142,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <TextArea fx:id="taDescription" maxHeight="1.7976931348623157E308" maxWidth="300.0" prefHeight="99999.0" wrapText="true">
+                        <TextArea fx:id="taDescription" maxHeight="1.7976931348623157E308" maxWidth="300.0" minWidth="300.0" prefHeight="99999.0" wrapText="true">
                            <VBox.margin>
                               <Insets right="30.0" />
                            </VBox.margin>
@@ -151,7 +151,7 @@
                   </VBox>
                   <ScrollPane fitToWidth="true" styleClass="lightBorder">
                      <content>
-                        <VBox maxWidth="1.7976931348623157E308" prefWidth="900.0">
+                        <VBox maxWidth="1.7976931348623157E308" prefWidth="99999.0">
                            <children>
                               <Label text="Klient">
                                  <font>
@@ -236,7 +236,7 @@
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="250.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" prefWidth="300.0" />
                                  </columnConstraints>
                                  <rowConstraints>
@@ -245,7 +245,7 @@
                                  <children>
                                     <HBox>
                                        <children>
-                                          <ComboBox fx:id="comboHourlyRate" prefWidth="150.0">
+                                          <ComboBox fx:id="comboHourlyRate" prefWidth="100.0">
                                              <HBox.margin>
                                                 <Insets />
                                              </HBox.margin>
@@ -281,7 +281,7 @@
                                     <Insets bottom="15.0" />
                                  </VBox.margin>
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="250.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                  </columnConstraints>
                                  <rowConstraints>
@@ -302,11 +302,27 @@
                                           </ToggleButton>
                                        </children>
                                     </HBox>
-                                    <TextField fx:id="tfRideCosts" maxWidth="-Infinity" prefWidth="60.0" promptText="00.00">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </TextField>
+                                    <HBox>
+                                       <children>
+                                          <ComboBox fx:id="comboRideCostRate" prefWidth="100.0" />
+                                          <TextField fx:id="tfRideCostsKm" maxWidth="-Infinity" prefWidth="60.0" promptText="0">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <Label text="km">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                    </HBox>
                                  </children>
                               </GridPane>
                               <Label layoutX="10.0" layoutY="300.0" text="sonstige Kosten">

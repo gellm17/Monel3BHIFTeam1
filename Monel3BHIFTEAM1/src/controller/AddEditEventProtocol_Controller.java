@@ -61,7 +61,10 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
     private ToggleButton tglBtnHourlyRateNetto;
 
     @FXML
-    private TextField tfRideCostsEvent;
+    private ComboBox comboRideCostRate;
+
+    @FXML
+    private TextField tfRideCostKm;
 
     @FXML
     private ToggleButton tglBtnRideCostBrutto;

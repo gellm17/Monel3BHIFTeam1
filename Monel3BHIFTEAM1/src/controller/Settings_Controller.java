@@ -37,6 +37,12 @@ public class Settings_Controller implements Initializable {
     private Tab tabAdministration;
 
     @FXML
+    private Tab tabAdminRates;
+
+    @FXML
+    private Tab tabAdminEmployees;
+
+    @FXML
     private ListView<Double> lvHourlyRates;
 
     @FXML
@@ -83,6 +89,18 @@ public class Settings_Controller implements Initializable {
 
     @FXML
     private Button btnDeleteTaxRate;
+
+    @FXML
+    private ListView<?> lvRideCostRates;
+
+    @FXML
+    private TextField tfRideCostRate;
+
+    @FXML
+    private Button btnAddRideCostRate;
+
+    @FXML
+    private Button btnDeleteRideCostRate;
 
 
     @FXML
@@ -290,6 +308,16 @@ public class Settings_Controller implements Initializable {
 
     @FXML
     void btnDeleteTaxRate_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnAddRideCostRate_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnDeleteRideCostRate_Clicked(ActionEvent event) {
 
     }
 

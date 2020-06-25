@@ -752,7 +752,7 @@
                                                                      <children>
                                                                         <VBox prefHeight="0.0">
                                                                            <children>
-                                                                              <Label text="Straße (Pflichtfeld)">
+                                                                              <Label text="Straße">
                                                                                  <font>
                                                                                     <Font name="Gill Sans MT" size="16.0" />
                                                                                  </font>
@@ -802,7 +802,7 @@
                                                                      <children>
                                                                         <VBox prefHeight="200.0">
                                                                            <children>
-                                                                              <Label text="PLZ (Pflichtfeld)">
+                                                                              <Label text="PLZ">
                                                                                  <font>
                                                                                     <Font name="Gill Sans MT" size="16.0" />
                                                                                  </font>
@@ -822,7 +822,7 @@
                                                                         </VBox>
                                                                         <VBox prefHeight="200.0">
                                                                            <children>
-                                                                              <Label text="Ort (Pflichtfeld)">
+                                                                              <Label text="Ort">
                                                                                  <font>
                                                                                     <Font name="Gill Sans MT" size="16.0" />
                                                                                  </font>

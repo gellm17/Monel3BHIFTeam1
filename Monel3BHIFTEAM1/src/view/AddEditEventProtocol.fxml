@@ -190,7 +190,7 @@
                         </Label>
                         <GridPane>
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="250.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" prefWidth="300.0" />
                            </columnConstraints>
                            <rowConstraints>
@@ -235,21 +235,39 @@
                         </Label>
                         <GridPane>
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="250.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <HBox alignment="CENTER_LEFT">
+                              <HBox GridPane.columnIndex="1">
                                  <children>
-                                    <TextField fx:id="tfRideCostsEvent" maxWidth="-Infinity" prefWidth="60.0" promptText="00.00">
+                                    <ToggleButton fx:id="tglBtnRideCostBrutto1" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#tglBtnRideCostBrutto_onAction" prefWidth="60.0" selected="true" text="Brutto">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="groupBruttoNetto2" />
+                                       </toggleGroup>
+                                    </ToggleButton>
+                                    <ToggleButton fx:id="tglBtnRideCostNetto1" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#tglBtnRideCostNetto_onAction" prefWidth="60.0" text="Netto" toggleGroup="$groupBruttoNetto2">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </ToggleButton>
+                                 </children>
+                              </HBox>
+                              <HBox>
+                                 <children>
+                                    <ComboBox fx:id="comboRideCostRate" prefWidth="100.0" />
+                                    <TextField fx:id="tfRideCostsKm" maxWidth="-Infinity" prefWidth="60.0" promptText="0">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
                                     </TextField>
-                                    <Label text="€">
+                                    <Label text="km">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -257,20 +275,6 @@
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                     </Label>
-                                 </children>
-                              </HBox>
-                              <HBox GridPane.columnIndex="1">
-                                 <children>
-                                    <ToggleButton fx:id="tglBtnRideCostBrutto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#tglBtnRideCostBrutto_onAction" prefWidth="60.0" selected="true" text="Brutto">
-                                       <toggleGroup>
-                                          <ToggleGroup fx:id="groupToggleButton2" />
-                                       </toggleGroup>
-                                    </ToggleButton>
-                                    <ToggleButton fx:id="tglBtnRideCostNetto" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#tglBtnRideCostNetto_onAction" prefWidth="60.0" text="Netto" toggleGroup="$groupToggleButton2">
-                                       <HBox.margin>
-                                          <Insets right="10.0" />
-                                       </HBox.margin>
-                                    </ToggleButton>
                                  </children>
                               </HBox>
                            </children>

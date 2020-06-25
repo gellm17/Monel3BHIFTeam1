@@ -117,247 +117,344 @@
             <Tab fx:id="tabAdministration" closable="false" text="Verwaltung">
                <content>
                   <BorderPane>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
                      <center>
-                        <GridPane BorderPane.alignment="CENTER">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <VBox alignment="TOP_CENTER">
-                                 <children>
-                                    <Label text="Stundensätze">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <ListView fx:id="lvHourlyRates">
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" />
-                                       </VBox.margin>
-                                    </ListView>
-                                    <BorderPane>
-                                       <left>
-                                          <HBox BorderPane.alignment="CENTER">
+                        <TabPane nodeOrientation="LEFT_TO_RIGHT" tabMinWidth="100.0">
+                           <tabs>
+                              <Tab fx:id="tabAdminRates" closable="false" styleClass="backgroundTab" text="Sätze">
+                                 <content>
+                                    <GridPane>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <VBox alignment="TOP_CENTER">
                                              <children>
-                                                <TextField fx:id="tfHourlyRate" prefWidth="100.0" promptText="neu">
+                                                <Label text="Stundensätze">
                                                    <font>
-                                                      <Font size="18.0" />
+                                                      <Font name="System Bold" size="16.0" />
                                                    </font>
-                                                </TextField>
-                                                <Button fx:id="btnAddHourlyRate" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnAddHourlyRate_Clicked" styleClass="toolButton">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                   <graphic>
-                                                      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../resources/icon_Add.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                </Button>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <ListView fx:id="lvHourlyRates">
+                                                   <VBox.margin>
+                                                      <Insets bottom="20.0" />
+                                                   </VBox.margin>
+                                                </ListView>
+                                                <BorderPane>
+                                                   <left>
+                                                      <HBox BorderPane.alignment="CENTER">
+                                                         <children>
+                                                            <TextField fx:id="tfHourlyRate" prefWidth="100.0" promptText="neu">
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                            </TextField>
+                                                            <Button fx:id="btnAddHourlyRate" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnAddHourlyRate_Clicked" styleClass="toolButton">
+                                                               <font>
+                                                                  <Font size="14.0" />
+                                                               </font>
+                                                               <graphic>
+                                                                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="@../resources/icon_Add.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                         </children>
+                                                      </HBox>
+                                                   </left>
+                                                   <right>
+                                                      <Button fx:id="btnDeleteHourlyRate" disable="true" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnDeleteHourlyRate_Clicked" styleClass="toolButton" BorderPane.alignment="CENTER">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                         <graphic>
+                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../resources/icon_Del.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                   </right>
+                                                </BorderPane>
                                              </children>
-                                          </HBox>
-                                       </left>
-                                       <right>
-                                          <Button fx:id="btnDeleteHourlyRate" disable="true" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnDeleteHourlyRate_Clicked" styleClass="toolButton" BorderPane.alignment="CENTER">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                             <graphic>
-                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../resources/icon_Del.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </Button>
-                                       </right>
-                                    </BorderPane>
-                                 </children>
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </VBox>
-                              <VBox alignment="TOP_CENTER" layoutX="20.0" layoutY="20.0" GridPane.columnIndex="1">
-                                 <children>
-                                    <Label text="Verwendungsgruppen">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <ListView fx:id="lvOccupationGroup">
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" />
-                                       </VBox.margin>
-                                    </ListView>
-                                    <BorderPane>
-                                       <left>
-                                          <HBox BorderPane.alignment="CENTER">
+                                             <GridPane.margin>
+                                                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                             </GridPane.margin>
+                                          </VBox>
+                                          <VBox alignment="TOP_CENTER" GridPane.columnIndex="1">
                                              <children>
-                                                <TextField fx:id="tfOccupationGroup" prefWidth="100.0" promptText="neu">
+                                                <Label text="Kilometersätze">
                                                    <font>
-                                                      <Font size="18.0" />
+                                                      <Font name="System Bold" size="16.0" />
                                                    </font>
-                                                </TextField>
-                                                <Button fx:id="btnAddOccupationGroup" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnAddOccupationGroup_Clicked" styleClass="toolButton">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                   <graphic>
-                                                      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../resources/icon_Add.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                </Button>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <ListView fx:id="lvRideCostRates">
+                                                   <VBox.margin>
+                                                      <Insets bottom="20.0" />
+                                                   </VBox.margin>
+                                                </ListView>
+                                                <BorderPane>
+                                                   <left>
+                                                      <HBox BorderPane.alignment="CENTER">
+                                                         <children>
+                                                            <TextField fx:id="tfRideCostRate" prefWidth="100.0" promptText="neu">
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                            </TextField>
+                                                            <Button fx:id="btnAddRideCostRate" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnAddRideCostRate_Clicked" styleClass="toolButton">
+                                                               <font>
+                                                                  <Font size="14.0" />
+                                                               </font>
+                                                               <graphic>
+                                                                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="@../resources/icon_Add.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                         </children>
+                                                      </HBox>
+                                                   </left>
+                                                   <right>
+                                                      <Button fx:id="btnDeleteRideCostRate" disable="true" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnDeleteRideCostRate_Clicked" styleClass="toolButton" BorderPane.alignment="CENTER">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                         <graphic>
+                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../resources/icon_Del.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                   </right>
+                                                </BorderPane>
                                              </children>
-                                          </HBox>
-                                       </left>
-                                       <right>
-                                          <Button fx:id="btnDeleteOccupationGroup" disable="true" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnDeleteOccupationGroup_Clicked" styleClass="toolButton" BorderPane.alignment="CENTER">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                             <graphic>
-                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../resources/icon_Del.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </Button>
-                                       </right>
-                                    </BorderPane>
-                                 </children>
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </VBox>
-                              <VBox alignment="TOP_CENTER" layoutX="307.0" layoutY="20.0" GridPane.columnIndex="2">
-                                 <children>
-                                    <Label text="Gehaltsstufen">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <ListView fx:id="lvSalaryLevel">
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" />
-                                       </VBox.margin>
-                                    </ListView>
-                                    <BorderPane>
-                                       <left>
-                                          <HBox BorderPane.alignment="CENTER">
+                                             <GridPane.margin>
+                                                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                             </GridPane.margin>
+                                          </VBox>
+                                          <VBox alignment="TOP_CENTER" layoutX="320.0" layoutY="20.0" GridPane.columnIndex="2">
                                              <children>
-                                                <TextField fx:id="tfSalaryLevel" prefWidth="100.0" promptText="neu">
+                                                <Label text="Steuersätze">
                                                    <font>
-                                                      <Font size="18.0" />
+                                                      <Font name="System Bold" size="16.0" />
                                                    </font>
-                                                </TextField>
-                                                <Button fx:id="btnAddSalaryLevel" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnAddSalaryLevel_Clicked" styleClass="toolButton">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                   <graphic>
-                                                      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../resources/icon_Add.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                </Button>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <ListView fx:id="lvTaxRate">
+                                                   <VBox.margin>
+                                                      <Insets bottom="20.0" />
+                                                   </VBox.margin>
+                                                </ListView>
+                                                <BorderPane>
+                                                   <left>
+                                                      <HBox BorderPane.alignment="CENTER">
+                                                         <children>
+                                                            <TextField fx:id="tfTaxRate" prefWidth="100.0" promptText="neu">
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                            </TextField>
+                                                            <Button fx:id="btnAddTaxRate" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnAddTaxRate_Clicked" styleClass="toolButton">
+                                                               <font>
+                                                                  <Font size="14.0" />
+                                                               </font>
+                                                               <graphic>
+                                                                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="@../resources/icon_Add.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                         </children>
+                                                      </HBox>
+                                                   </left>
+                                                   <right>
+                                                      <Button fx:id="btnDeleteTaxRate" disable="true" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnDeleteTaxRate_Clicked" styleClass="toolButton" BorderPane.alignment="CENTER">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                         <graphic>
+                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../resources/icon_Del.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                   </right>
+                                                </BorderPane>
                                              </children>
-                                          </HBox>
-                                       </left>
-                                       <right>
-                                          <Button fx:id="btnDeleteSalaryLevel" disable="true" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnDeleteSalaryLevel_Clicked" styleClass="toolButton" BorderPane.alignment="CENTER">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                             <graphic>
-                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../resources/icon_Del.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </Button>
-                                       </right>
-                                    </BorderPane>
-                                 </children>
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </VBox>
-                              <VBox alignment="TOP_CENTER" GridPane.columnIndex="3">
-                                 <children>
-                                    <Label text="Steuersätze">
-                                       <font>
-                                          <Font name="System Bold" size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <ListView fx:id="lvTaxRate">
-                                       <VBox.margin>
-                                          <Insets bottom="20.0" />
-                                       </VBox.margin>
-                                    </ListView>
-                                    <BorderPane>
-                                       <left>
-                                          <HBox BorderPane.alignment="CENTER">
+                                             <GridPane.margin>
+                                                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                             </GridPane.margin>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </GridPane>
+                                 </content>
+                              </Tab>
+                              <Tab fx:id="tabAdminEmployees" closable="false" styleClass="backgroundTab" text="Mitarbeiter">
+                                 <content>
+                                    <GridPane>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <VBox alignment="TOP_CENTER" layoutX="20.0" layoutY="20.0">
                                              <children>
-                                                <TextField fx:id="tfTaxRate" prefWidth="100.0" promptText="neu">
+                                                <Label text="Verwendungsgruppen">
                                                    <font>
-                                                      <Font size="18.0" />
+                                                      <Font name="System Bold" size="16.0" />
                                                    </font>
-                                                </TextField>
-                                                <Button fx:id="btnAddTaxRate" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnAddTaxRate_Clicked" styleClass="toolButton">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                   <graphic>
-                                                      <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@../resources/icon_Add.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </graphic>
-                                                </Button>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <ListView fx:id="lvOccupationGroup">
+                                                   <VBox.margin>
+                                                      <Insets bottom="20.0" />
+                                                   </VBox.margin>
+                                                </ListView>
+                                                <BorderPane>
+                                                   <left>
+                                                      <HBox BorderPane.alignment="CENTER">
+                                                         <children>
+                                                            <TextField fx:id="tfOccupationGroup" prefWidth="100.0" promptText="neu">
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                            </TextField>
+                                                            <Button fx:id="btnAddOccupationGroup" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnAddOccupationGroup_Clicked" styleClass="toolButton">
+                                                               <font>
+                                                                  <Font size="14.0" />
+                                                               </font>
+                                                               <graphic>
+                                                                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="@../resources/icon_Add.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                         </children>
+                                                      </HBox>
+                                                   </left>
+                                                   <right>
+                                                      <Button fx:id="btnDeleteOccupationGroup" disable="true" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnDeleteOccupationGroup_Clicked" styleClass="toolButton" BorderPane.alignment="CENTER">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                         <graphic>
+                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../resources/icon_Del.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                   </right>
+                                                </BorderPane>
                                              </children>
-                                          </HBox>
-                                       </left>
-                                       <right>
-                                          <Button fx:id="btnDeleteTaxRate" disable="true" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnDeleteTaxRate_Clicked" styleClass="toolButton" BorderPane.alignment="CENTER">
-                                             <font>
-                                                <Font size="14.0" />
-                                             </font>
-                                             <graphic>
-                                                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../resources/icon_Del.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </graphic>
-                                          </Button>
-                                       </right>
-                                    </BorderPane>
-                                 </children>
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </VBox>
-                           </children>
-                        </GridPane>
+                                             <GridPane.margin>
+                                                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                             </GridPane.margin>
+                                          </VBox>
+                                          <VBox alignment="TOP_CENTER" layoutX="307.0" layoutY="20.0" GridPane.columnIndex="1">
+                                             <children>
+                                                <Label text="Gehaltsstufen">
+                                                   <font>
+                                                      <Font name="System Bold" size="16.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="5.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <ListView fx:id="lvSalaryLevel">
+                                                   <VBox.margin>
+                                                      <Insets bottom="20.0" />
+                                                   </VBox.margin>
+                                                </ListView>
+                                                <BorderPane>
+                                                   <left>
+                                                      <HBox BorderPane.alignment="CENTER">
+                                                         <children>
+                                                            <TextField fx:id="tfSalaryLevel" prefWidth="100.0" promptText="neu">
+                                                               <font>
+                                                                  <Font size="18.0" />
+                                                               </font>
+                                                            </TextField>
+                                                            <Button fx:id="btnAddSalaryLevel" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnAddSalaryLevel_Clicked" styleClass="toolButton">
+                                                               <font>
+                                                                  <Font size="14.0" />
+                                                               </font>
+                                                               <graphic>
+                                                                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="@../resources/icon_Add.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </graphic>
+                                                            </Button>
+                                                         </children>
+                                                      </HBox>
+                                                   </left>
+                                                   <right>
+                                                      <Button fx:id="btnDeleteSalaryLevel" disable="true" minHeight="39.0" minWidth="39.0" mnemonicParsing="false" onAction="#btnDeleteSalaryLevel_Clicked" styleClass="toolButton" BorderPane.alignment="CENTER">
+                                                         <font>
+                                                            <Font size="14.0" />
+                                                         </font>
+                                                         <graphic>
+                                                            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@../resources/icon_Del.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </graphic>
+                                                      </Button>
+                                                   </right>
+                                                </BorderPane>
+                                             </children>
+                                             <GridPane.margin>
+                                                <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                             </GridPane.margin>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </GridPane>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
                      </center>
                   </BorderPane>
                </content>
