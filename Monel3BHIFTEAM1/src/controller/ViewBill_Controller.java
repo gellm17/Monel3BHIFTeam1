@@ -89,7 +89,7 @@ public class ViewBill_Controller extends SceneLoader {
             } else {
                 assistanceCostsSingle += Duration.between(current.getStartTime(), current.getEndTime()).toHours() * current.getHourlyRate();
             }
-            wholeRideCosts += current.getRideCosts();
+            wholeRideCosts += current.getMileage()*current.getKm();
         }
         lbSingleEvents.setText(assistanceCostsSingle + " €\n");
         lbGroupEvents.setText(assistanceCostsGroup +  " €\n");
@@ -125,7 +125,7 @@ public class ViewBill_Controller extends SceneLoader {
             } else {
                 assistanceCostsSingle += Duration.between(current.getStartTime(), current.getEndTime()).toHours() * current.getHourlyRate();
             }
-            wholeRideCosts += current.getRideCosts();
+            wholeRideCosts += current.getMileage() * current.getKm();
         }
 
         DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/MM/uuuu");
@@ -265,12 +265,20 @@ public class ViewBill_Controller extends SceneLoader {
                 "            <h4>Rechnung Monel</h4>\n" +
                 "            <table style=\" float: right;\">\n" +
                 "                <tr>\n" +
-                "                    <td>Rechnungsdatum:</td>\n" +
-                "                    <td id=\"rechnungsdatum\">" + bill.getDateOfIssue().format(formatters) + "</td>\n" +
+                "                       <td> " + Settings.getInstance().getCompanyName() + " </td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
-                "                    <td>Ausstellungsdatum:</td>\n" +
-                "                    <td id=\"ausstellungsdatum\">" + LocalDate.now().format(formatters) + "</td>\n" +
+                "                       <td> " + Settings.getInstance().getStreet() + ", " + Settings.getInstance().getPlz() + ", "  + Settings.getInstance().getLocation() + " </td>\n" +
+                "                </tr>\n" +
+                "                <tr>\n" +
+                "                       <td> UID: " + Settings.getInstance().getUid_Number()+ " </td>\n" +
+
+                "                </tr>\n" +
+                "                <tr>\n" +
+                "                    <td id=\"rechnungsdatum\">Rechnungsdatum: " + bill.getDateOfIssue().format(formatters) + "</td>\n" +
+                "                </tr>\n" +
+                "                <tr>\n" +
+                "                    <td id=\"ausstellungsdatum\">Ausstellungsdatum: " + LocalDate.now().format(formatters) + "</td>\n" +
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +
@@ -297,10 +305,6 @@ public class ViewBill_Controller extends SceneLoader {
                 "                <tr>\n" +
                 "                    <td>Rechnungsnummer:</td>\n" +
                 "                    <td id=\"rechnungsNr\" class=\"right\">" + bill.getNr() + "</td>\n" +
-                "                </tr>\n" +
-                "                <tr>\n" +
-                "                    <td>UID-Nummer:</td>\n" +
-                "                    <td id=\"uidNr\" class=\"right\">" + Settings.getInstance().getUid_Number() + "</td>\n" +
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +
