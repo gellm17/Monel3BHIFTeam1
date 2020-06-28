@@ -78,9 +78,9 @@
       </BorderPane>
    </top>
    <center>
-      <TabPane nodeOrientation="RIGHT_TO_LEFT" tabMinWidth="60.0" BorderPane.alignment="CENTER">
+      <TabPane fx:id="tabPaneEvents" nodeOrientation="RIGHT_TO_LEFT" tabMinWidth="60.0" BorderPane.alignment="CENTER">
          <tabs>
-            <Tab closable="false" text="Protokolle">
+            <Tab fx:id="tabProtocols" closable="false" text="Protokolle">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
@@ -154,7 +154,7 @@
                   <String fx:value="borderBackgroundTab" />
                </styleClass>
             </Tab>
-            <Tab closable="false" styleClass="backgroundTab" text="Aktivitäten">
+            <Tab fx:id="tabEvents" closable="false" styleClass="backgroundTab" text="Aktivitäten">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>

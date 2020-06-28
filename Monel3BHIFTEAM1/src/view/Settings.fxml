@@ -120,7 +120,7 @@
                      <center>
                         <TabPane nodeOrientation="LEFT_TO_RIGHT" tabMinWidth="100.0">
                            <tabs>
-                              <Tab fx:id="tabAdminRates" closable="false" styleClass="backgroundTab" text="Sätze">
+                              <Tab fx:id="tabAdminRates" closable="false" text="Sätze">
                                  <content>
                                     <GridPane>
                                        <columnConstraints>
@@ -315,6 +315,10 @@
                                        </padding>
                                     </GridPane>
                                  </content>
+                                 <styleClass>
+                                    <String fx:value="backgroundTab" />
+                                    <String fx:value="borderBackgroundTab" />
+                                 </styleClass>
                               </Tab>
                               <Tab fx:id="tabAdminEmployees" closable="false" styleClass="backgroundTab" text="Mitarbeiter">
                                  <content>

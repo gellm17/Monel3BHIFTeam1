@@ -137,6 +137,15 @@ public class EventList_Controller extends SceneLoader implements Initializable {
     @FXML
     private TextField tfSearchEmployee;
 
+    @FXML
+    private TabPane tabPaneEvents;
+
+    @FXML
+    private Tab tabEvents;
+
+    @FXML
+    private Tab tabProtocols;
+
 
     private Event selectedItem;
 
@@ -207,6 +216,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
 
         //this.comboClient.getItems().setAll(PersonDAO.getInstance().getClients());
         //this.comboEmployee.getItems().setAll(PersonDAO.getInstance().getEmployees());
+        this.tabPaneEvents.getSelectionModel().select(this.tabEvents);
     }
 
     private SortedList<Event> iniSearchEvents() {
