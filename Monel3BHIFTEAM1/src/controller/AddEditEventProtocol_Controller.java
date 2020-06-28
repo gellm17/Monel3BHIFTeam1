@@ -79,7 +79,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
     private TextField tfValueOtherCost;
 
     @FXML
-    private ComboBox<?> comboTaxesOtherCost;
+    private ComboBox<Integer> comboTaxesOtherCost;
 
     @FXML
     private Button btnAddOtherCost;
@@ -116,13 +116,14 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
         this.editableEventProtocol = editableEventProtocol;
         comboClientEvent.getItems().setAll(PersonDAO.getInstance().getClients());
         comboEmployeeEvent.getItems().setAll(PersonDAO.getInstance().getEmployees());
+        comboHourlyRate.getItems().setAll(Settings.getInstance().getHourlyRates());
         comboClientEvent.getSelectionModel().select(editableEventProtocol.getClient());
         comboEmployeeEvent.getSelectionModel().select(editableEventProtocol.getEmployee());
         if (editableEventProtocol != null) {
             tfStartEvent.setText(""+editableEventProtocol.getStartTime());
             tfEndEvent.setText(""+editableEventProtocol.getEndTime());
-            //TODO tfHourlyRateEvent.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getHourlyRate())); // TODO
-            tfRideCostsEvent.setText(""+String.format(Locale.ROOT, "%.2f", editableEventProtocol.getRideCosts()));
+            comboHourlyRate.getSelectionModel().select(editableEventProtocol.getHourlyRate());
+            tfRideCostKm.setText(""+editableEventProtocol.getKm());
         }
     }
 
@@ -159,8 +160,14 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
 
         eventProtocolToAdd.setHourlyRate(comboHourlyRate.getSelectionModel().getSelectedItem());
 
-        if (!tfCheck(tfRideCostsEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){
+        /*if (!tfCheck(tfRideCostsEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){
             eventProtocolToAdd.setRideCosts(Double.parseDouble(tfRideCostsEvent.getText()));
+        }*/
+
+        eventProtocolToAdd.setMileage(comboRideCostRate.getSelectionModel().getSelectedIndex());
+
+        if (!tfCheck(tfRideCostKm, "^[1-9][0-9]*$")){
+            eventProtocolToAdd.setKm(Integer.parseInt(tfRideCostKm.getText()));
         }
 
         if (assignedEvent.getDate().getMonthValue() < 10) {
@@ -272,6 +279,8 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
         comboClientEvent.getItems().setAll(PersonDAO.getInstance().getClients());
         comboEmployeeEvent.getItems().setAll(PersonDAO.getInstance().getEmployees());
         comboHourlyRate.getItems().setAll(Settings.getInstance().getHourlyRates());
+        comboRideCostRate.getItems().setAll(Settings.getInstance().getRideCostRate());
+        comboTaxesOtherCost.getItems().setAll(Settings.getInstance().getTaxRates());
     }
 
 }

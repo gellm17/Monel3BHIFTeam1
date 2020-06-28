@@ -4,6 +4,7 @@ import app.SceneLoader;
 import data.EventDAO;
 import data.PersonDAO;
 import db.DBManager;
+import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -136,6 +137,15 @@ public class EventList_Controller extends SceneLoader implements Initializable {
     @FXML
     private TextField tfSearchEmployee;
 
+    @FXML
+    private TabPane tabPaneEvents;
+
+    @FXML
+    private Tab tabEvents;
+
+    @FXML
+    private Tab tabProtocols;
+
 
     private Event selectedItem;
 
@@ -206,6 +216,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
 
         //this.comboClient.getItems().setAll(PersonDAO.getInstance().getClients());
         //this.comboEmployee.getItems().setAll(PersonDAO.getInstance().getEmployees());
+        this.tabPaneEvents.getSelectionModel().select(this.tabEvents);
     }
 
     private SortedList<Event> iniSearchEvents() {
@@ -318,7 +329,7 @@ public class EventList_Controller extends SceneLoader implements Initializable {
         tcClient.setCellValueFactory(new PropertyValueFactory<EventProtocol, Client>("client"));
         tcEmployee.setCellValueFactory(new PropertyValueFactory<EventProtocol, Employee>("employee"));
         tcHourlyRate.setCellValueFactory(new PropertyValueFactory<EventProtocol, Double>("hourlyRate"));
-        tcRideCosts.setCellValueFactory(new PropertyValueFactory<EventProtocol, Double>("rideCosts"));
+        //TODO tcRideCosts.setCellValueFactory();
         tcStart.setCellValueFactory(new PropertyValueFactory<EventProtocol, LocalTime>("startTime"));
         tcEnd.setCellValueFactory(new PropertyValueFactory<EventProtocol, LocalTime>("endTime"));
 
