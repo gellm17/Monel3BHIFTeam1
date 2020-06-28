@@ -89,7 +89,7 @@ public class ViewBill_Controller extends SceneLoader {
             } else {
                 assistanceCostsSingle += Duration.between(current.getStartTime(), current.getEndTime()).toHours() * current.getHourlyRate();
             }
-            wholeRideCosts += current.getRideCosts();
+            wholeRideCosts += current.getMileage() * current.getKm();
         }
         lbSingleEvents.setText(assistanceCostsSingle + " €\n");
         lbGroupEvents.setText(assistanceCostsGroup +  " €\n");
@@ -125,7 +125,7 @@ public class ViewBill_Controller extends SceneLoader {
             } else {
                 assistanceCostsSingle += Duration.between(current.getStartTime(), current.getEndTime()).toHours() * current.getHourlyRate();
             }
-            wholeRideCosts += current.getRideCosts();
+            wholeRideCosts += current.getMileage() * current.getKm();
         }
 
         DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/MM/uuuu");

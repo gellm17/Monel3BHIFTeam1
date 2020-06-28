@@ -79,7 +79,7 @@ public class Settings_Controller implements Initializable {
     private Button btnDeleteSalaryLevel;
 
     @FXML
-    private ListView<?> lvTaxRate;
+    private ListView<Integer> lvTaxRate;
 
     @FXML
     private TextField tfTaxRate;
@@ -91,7 +91,7 @@ public class Settings_Controller implements Initializable {
     private Button btnDeleteTaxRate;
 
     @FXML
-    private ListView<?> lvRideCostRates;
+    private ListView<Double> lvRideCostRates;
 
     @FXML
     private TextField tfRideCostRate;
@@ -303,7 +303,9 @@ public class Settings_Controller implements Initializable {
 
     @FXML
     void btnAddTaxRate_Clicked(ActionEvent event) {
-
+        if (tfCheck(tfTaxRate,"^[1-9]([0-9])?$", tabAdministration, tabAdminRates, verwaltungCounter)){
+            Settings.getInstance().addRideCostRate(Double.parseDouble(tfHourlyRate.getText()));
+        }
     }
 
     @FXML
@@ -313,7 +315,9 @@ public class Settings_Controller implements Initializable {
 
     @FXML
     void btnAddRideCostRate_Clicked(ActionEvent event) {
-
+        if (tfCheck(tfRideCostRate,"^\\d{1,8}([\\.,]\\d{2})?$", tabAdministration, tabAdminRates, verwaltungCounter)){
+            Settings.getInstance().addRideCostRate(Double.parseDouble(tfHourlyRate.getText()));
+        }
     }
 
     @FXML
@@ -482,6 +486,10 @@ public class Settings_Controller implements Initializable {
         tabCommon.setGraphic(new Label("Allgemein"));
         tabAdministration.setText("");
         tabAdministration.setGraphic(new Label("Verwaltung"));
+        tabAdminRates.setText("");
+        tabAdminRates.setGraphic(new Label("Sätze"));
+        tabAdminEmployees.setText("");
+        tabAdminEmployees.setGraphic(new Label("Mitarbeiter"));
 
         //COMMON DATA
         comboFont.setItems(FXCollections.observableArrayList(Arrays.asList(FontStyle.values())));
@@ -493,6 +501,8 @@ public class Settings_Controller implements Initializable {
         lvHourlyRates.setItems(Settings.getInstance().getHourlyRates());
         lvSalaryLevel.setItems(Settings.getInstance().getSalaryLevel());
         lvOccupationGroup.setItems(Settings.getInstance().getUserGroup());
+        lvTaxRate.setItems(Settings.getInstance().getTaxRates());
+        lvRideCostRates.setItems(Settings.getInstance().getRideCostRate());
 
         lvAvailableColumnsClients.setItems(Settings.getInstance().getKlientColumns());
         lvAvailableColumnsEmployees.setItems(Settings.getInstance().getEmployeeColumns());
@@ -516,8 +526,28 @@ public class Settings_Controller implements Initializable {
             if (newSelection != null){
                 selectedItem = newSelection;
                 btnDeleteHourlyRate.setDisable(false);
-                btnDeleteSalaryLevel.setDisable(true);
+                btnDeleteTaxRate.setDisable(true);
+                btnDeleteRideCostRate.setDisable(true);
                 btnDeleteOccupationGroup.setDisable(true);
+                btnDeleteSalaryLevel.setDisable(true);
+                lvTaxRate.getSelectionModel().clearSelection();
+                lvOccupationGroup.getSelectionModel().clearSelection();
+                lvSalaryLevel.getSelectionModel().clearSelection();
+                lvRideCostRates.getSelectionModel().clearSelection();
+            }
+        });
+        lvTaxRate.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null){
+                selectedItem = newSelection;
+                btnDeleteHourlyRate.setDisable(true);
+                btnDeleteTaxRate.setDisable(false);
+                btnDeleteRideCostRate.setDisable(true);
+                btnDeleteOccupationGroup.setDisable(true);
+                btnDeleteSalaryLevel.setDisable(true);
+                lvHourlyRates.getSelectionModel().clearSelection();
+                lvOccupationGroup.getSelectionModel().clearSelection();
+                lvSalaryLevel.getSelectionModel().clearSelection();
+                lvRideCostRates.getSelectionModel().clearSelection();
             }
         });
         lvOccupationGroup.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -526,6 +556,12 @@ public class Settings_Controller implements Initializable {
                 btnDeleteOccupationGroup.setDisable(false);
                 btnDeleteHourlyRate.setDisable(true);
                 btnDeleteSalaryLevel.setDisable(true);
+                btnDeleteTaxRate.setDisable(true);
+                btnDeleteRideCostRate.setDisable(true);
+                lvHourlyRates.getSelectionModel().clearSelection();
+                lvTaxRate.getSelectionModel().clearSelection();
+                lvSalaryLevel.getSelectionModel().clearSelection();
+                lvRideCostRates.getSelectionModel().clearSelection();
 
             }
         });
@@ -535,6 +571,26 @@ public class Settings_Controller implements Initializable {
                 btnDeleteSalaryLevel.setDisable(false);
                 btnDeleteOccupationGroup.setDisable(true);
                 btnDeleteHourlyRate.setDisable(true);
+                btnDeleteTaxRate.setDisable(true);
+                btnDeleteRideCostRate.setDisable(true);
+                lvHourlyRates.getSelectionModel().clearSelection();
+                lvTaxRate.getSelectionModel().clearSelection();
+                lvOccupationGroup.getSelectionModel().clearSelection();
+                lvRideCostRates.getSelectionModel().clearSelection();
+            }
+        });
+        lvRideCostRates.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null){
+                selectedItem = newSelection;
+                btnDeleteSalaryLevel.setDisable(true);
+                btnDeleteOccupationGroup.setDisable(true);
+                btnDeleteHourlyRate.setDisable(true);
+                btnDeleteTaxRate.setDisable(true);
+                btnDeleteRideCostRate.setDisable(false);
+                lvHourlyRates.getSelectionModel().clearSelection();
+                lvTaxRate.getSelectionModel().clearSelection();
+                lvOccupationGroup.getSelectionModel().clearSelection();
+                lvSalaryLevel.getSelectionModel().clearSelection();
             }
         });
         }

@@ -37,6 +37,11 @@ public class Settings implements Initializable, Serializable {
 
     private transient ObservableList<Double> hourlyRates = FXCollections.observableList(new ArrayList<Double>());
 
+    private transient ObservableList<Double> rideCostRate = FXCollections.observableList(new ArrayList<Double>());
+
+    private transient ObservableList<Integer> taxRates = FXCollections.observableList(new ArrayList<Integer>());
+
+
     private transient ObservableList<String> userGroup = FXCollections.observableList(new ArrayList<String>());
 
     private transient ObservableList<String> salaryLevel  = FXCollections.observableList(new ArrayList<String>());
@@ -70,6 +75,13 @@ public class Settings implements Initializable, Serializable {
         }
         if (hourlyRates.isEmpty()) {
             hourlyRates.addAll(1.50, 2.00, 3.20, 4.10);
+        }
+        if (rideCostRate.isEmpty()){
+            rideCostRate.addAll(1.40, 2.00, 3.10);
+        }
+
+        if (taxRates.isEmpty()){
+            taxRates.addAll(10, 13, 20);
         }
     }
     
@@ -341,6 +353,22 @@ public class Settings implements Initializable, Serializable {
 
     public void setLocation(String location) {
         this.location.set(location);
+    }
+
+    public ObservableList<Double> getRideCostRate() {
+        return rideCostRate;
+    }
+
+    public void setRideCostRate(ObservableList<Double> rideCostRate) {
+        this.rideCostRate = rideCostRate;
+    }
+
+    public ObservableList<Integer> getTaxRates() {
+        return taxRates;
+    }
+
+    public void setTaxRates(ObservableList<Integer> taxRates) {
+        this.taxRates = taxRates;
     }
 
     //adds the column in the loaded on and removes form the other Array
@@ -648,6 +676,8 @@ public class Settings implements Initializable, Serializable {
         s.writeObject(new ArrayList<Double>(getHourlyRates()));
         s.writeObject(new ArrayList<String>(getSalaryLevel()));
         s.writeObject(new ArrayList<String>(getUserGroup()));
+        s.writeObject(new ArrayList<Integer>(getTaxRates()));
+        s.writeObject(new ArrayList<Double>(getRideCostRate()));
         s.writeObject(getColor());
         s.writeObject(getFont());
         s.writeObject(getSelectedSize());
@@ -678,6 +708,8 @@ public class Settings implements Initializable, Serializable {
         hourlyRates = FXCollections.observableList((ArrayList<Double>)s.readObject());
         salaryLevel = FXCollections.observableList((ArrayList<String>)s.readObject());
         userGroup = FXCollections.observableList((ArrayList<String>)s.readObject());
+        taxRates = FXCollections.observableList((ArrayList<Integer>)s.readObject());
+        rideCostRate = FXCollections.observableList((ArrayList<Double>)s.readObject());
         color = (Color) s.readObject();
         font = (FontStyle) s.readObject();
         selectedSize = (int) s.readObject();
@@ -697,7 +729,8 @@ public class Settings implements Initializable, Serializable {
     }
     public boolean addSalaryLevel(String level) { return salaryLevel.add(level); }
     public boolean addUserGroup(String group) { return userGroup.add(group); }
-
+    public boolean addRideCostRate(Double rate) { return rideCostRate.add(rate); }
+    public boolean addTaxRate(Integer tax) { return taxRates.add(tax); }
     public boolean removeHourlyRate(double rate) {
         return  this.hourlyRates.remove(rate);
     }
