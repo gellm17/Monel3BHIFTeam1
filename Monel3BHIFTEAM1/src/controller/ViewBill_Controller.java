@@ -2,8 +2,10 @@ package controller;
 
 import app.SceneLoader;
 import data.BillDAO;
+import data.CostDAO;
 import data.EventDAO;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -118,24 +120,74 @@ public class ViewBill_Controller extends SceneLoader {
         double wholeRideCosts = 0;
         double assistanceCostsGroup = 0;
         double assistanceCostsSingle = 0;
-        while (it.hasNext()){
+        double additionalCosts = 0;
+        double additionalCostswithTax = 0;
+        DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/MM/uuuu");
+        Locale locale = Locale.GERMANY;
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
+        ObservableList<Costs> allcosts = FXCollections.observableArrayList();
+
+        String ust = "";
+        while (it.hasNext()) {
             EventProtocol current = it.next();
+            allcosts.addAll(CostDAO.getInstance().getCostsByEventProtocol(current));
+            for (Costs cost : CostDAO.getInstance().getCostsByEventProtocol(current)) {
+                additionalCosts += cost.getAmount();
+            }
             if (current.getEvent().getIsGroup()){
                 assistanceCostsGroup += Duration.between(current.getStartTime(), current.getEndTime()).toHours() * current.getHourlyRate();
             } else {
                 assistanceCostsSingle += Duration.between(current.getStartTime(), current.getEndTime()).toHours() * current.getHourlyRate();
             }
+
+
             wholeRideCosts += current.getMileage() * current.getKm();
         }
 
-        DateTimeFormatter formatters = DateTimeFormatter.ofPattern("d/MM/uuuu");
-        Locale locale = Locale.GERMANY;
-        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
+        additionalCostswithTax = additionalCosts;
+
+
+
+        for( int rate: Settings.getInstance().getTaxRates() )
+        {
+            double amount = 0;
+            for (Costs cost : allcosts) {
+                if (cost.getTaxrate() == rate) {
+                    amount += cost.getAmount()*rate/100;
+                }
+            }
+
+
+
+
+                if (rate == 20) {
+                    ust +=
+                            "       <tr>\n" +
+                                    "            <td class=\"final\">Umsatzsteuer " + rate + "%:</td>\n" +
+                                    "                    <td id=\"gesamtpreis\" class=\"right final\">" + numberFormat.format(Math.round((amount + (assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts) * 0.2) * 100.0) / 100.0) + "</td>\n" +
+                                    "                </tr>\n";
+                } else {
+                    ust +=
+                            "       <tr>\n" +
+                                    "            <td class=\"final\">Umsatzsteuer " + rate + "%:</td>\n" +
+                                    "                    <td id=\"gesamtpreis\" class=\"right final\">" + numberFormat.format(amount) + "</td>\n" +
+                                    "                </tr>\n";
+                }
+
+            additionalCostswithTax += amount;
+
+        }
+
+
+
         String padding = "";
+        String padding2 = "";
         if (numberFormat.format(Math.round(((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*1.2) * 100.0) / 100.0).replace("€", "").replace(",", "").replace(" ", "").length() == 5) {
             padding = "style=\"padding-left:228px; \"";
+            padding2 =  "style=\"padding-left:228px; \"";
         } else {
             padding = "style=\"padding-left:210px; \"";
+            padding2 =  "style=\"padding-left:215px; \"";
         }
 
 
@@ -159,7 +211,8 @@ public class ViewBill_Controller extends SceneLoader {
                 "            position: relative;\n" +
                 "            width: 1000px;\n" +
                 "            height: auto;\n" +
-                "              margin-left: -95px" +
+                "              margin-left: -95px;" +
+                "               top: 85px;" +
 
                 "        }\n" +
                 "\n" +
@@ -237,7 +290,7 @@ public class ViewBill_Controller extends SceneLoader {
                 "\n" +
                 "        #rechnung {\n" +
                 "            position: absolute;\n" +
-                "            bottom: -280px;\n" +
+                "            top: 1100px;\n" +
                 "            margin-left: 280px;\n" +
                 "        }\n" +
                 "\n"+
@@ -246,7 +299,6 @@ public class ViewBill_Controller extends SceneLoader {
                 "            border: 1px solid gray;\n" +
                 "        }*/\n" +
                 "       #billimg {" +
-                "           margin-top:150px;" +
                 "           width:1205px;" +
                 "}" +
                 "@page {" +
@@ -328,16 +380,18 @@ public class ViewBill_Controller extends SceneLoader {
                 "                    <td id=\"fahrtkosten\" class=\"right\">" + numberFormat.format(Math.round((wholeRideCosts)*100.0)/100.0) + "</td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
+                "                    <td>Zusatzkosten:</td>\n" +
+                "                    <td id=\"fahrtkosten\" class=\"right\">" + numberFormat.format(Math.round(additionalCosts)) + "</td>\n" +
+                "                </tr>\n" +
+                "                <tr>\n" +
                 "                    <td class=\"final\">Nettobetrag:</td>\n" +
-                "                    <td id=\"gesamtpreis\" class=\"right final\">" + numberFormat.format(Math.round((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*100.0)/100.0) + "</td>\n" +
+                "                    <td id=\"gesamtpreis\" class=\"right final\">" + numberFormat.format(Math.round((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts+ additionalCosts)*100.0)/100.0) + "</td>\n" +
                 "                </tr>\n" +
-                "       <tr>\n" +
-                "            <td class=\"final\">Umsatzsteuer 20%:</td>\n" +
-                "                    <td id=\"gesamtpreis\" class=\"right final\">" +  numberFormat.format(Math.round(((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*0.2) * 100.0) / 100.0) +  "</td>\n" +
-                "                </tr>\n" +
-                "<tr>\n" +
+                //Umsatzsteuersätze
+                ust
+                +
         "                    <td class=\"final\">Rechnungsbetrag:</td>\n" +
-                "                    <td id=\"gesamtpreis\" class=\"right final\">" + numberFormat.format(Math.round(((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*1.2) * 100.0) / 100.0) + "</td>\n" +
+                "                    <td id=\"gesamtpreis\" class=\"right final\">" + numberFormat.format(Math.round(((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*1.2 + additionalCostswithTax) * 100.0) / 100.0) + "</td>\n" +
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +
@@ -357,7 +411,7 @@ public class ViewBill_Controller extends SceneLoader {
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +
-                "        <div id=\"rechnung\" style=\"margin-left:-60px\" >\n" +
+                "        <div  style=\"margin-left:-60px;  position: absolute;  top: 1100px; \" >\n" +
                 "            <table style=\"letter-spacing: 7.5px\">\n" +
                 "                <tr>\n" +
                 "                  <td style=\"padding-bottom:25px\" id=\"firma\">" + Settings.getInstance().getCompanyName() + "</td>\n" +
@@ -366,7 +420,10 @@ public class ViewBill_Controller extends SceneLoader {
                 "                    <td style=\"padding-bottom:25px; min-width:500px; letter-spacing:2.5px\" >" + Settings.getInstance().getIban() + "</td>\n" +
                 "                </tr>\n" +
                 "                <tr>\n" +
-                "                   <td id=\"bic\">" + Settings.getInstance().getBic() + "</td>" +
+                "                   <td id=\"bic\" style=\"padding-bottom: 25px\">" + Settings.getInstance().getBic() + "</td>" +
+                "                </tr>\n" +
+                "                <tr>\n" +
+                "                   <td id=\"betrag\"" + padding2 + " +>" + numberFormat.format(Math.round(((assistanceCostsGroup + assistanceCostsSingle + wholeRideCosts)*1.2) * 100.0) / 100.0).replace("€", "").replace(",", "").replace(" ", "") + "</td>" +
                 "                </tr>\n" +
                 "            </table>\n" +
                 "        </div>\n" +
