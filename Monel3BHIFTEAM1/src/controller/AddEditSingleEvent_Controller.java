@@ -98,7 +98,7 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
     private Button btnDeleteOtherCost;
 
     @FXML
-    private ListView<?> lvOtherCosts;
+    private ListView<Costs> lvOtherCosts;
 
     @FXML
     private Label lbMessage;
@@ -211,6 +211,9 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
                 eventToAdd.setId(editableEvent.getId());
             }
 
+            for (Costs c: lvOtherCosts.getItems()) {
+                c.setEventprotocol(eventProtocolToAdd);
+            }
 
             if (errorCounter == 0 && EventDAO.getInstance().addEvent(eventToAdd) && EventDAO.getInstance().addEventProtcol(eventProtocolToAdd)) {
                 if (editableEvent != null && editableEventProtocol != null) {
@@ -286,7 +289,16 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
 
     @FXML
     void btnAddOtherCost_Clicked(ActionEvent event) {
+        Costs cToAdd = new Costs();
 
+        cToAdd.setamount(Double.parseDouble(tfValueOtherCost.getText()));
+        cToAdd.setDescription(tfNameOtherCost.getText());
+
+
+
+        if (errorCounter == 0) {
+            lvOtherCosts.getItems().add(cToAdd);
+        }
     }
 
     @FXML

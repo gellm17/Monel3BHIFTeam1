@@ -2,6 +2,7 @@ package model;
 
 
 import javafx.beans.property.*;
+import javafx.collections.ObservableList;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -206,9 +207,11 @@ public class EventProtocol {
 
     public void setNote(String note) { this.note.set(note); }
 
-    public Integer getKm() { return km.get(); }
+    public int getKm() { return km.get(); }
 
     public IntegerProperty kmProperty() { return km; }
 
-    public void setKm(Integer km) { this.km.set(km); }
+    public void setKm(int km) {
+        this.km.set(km);
+    }
 }

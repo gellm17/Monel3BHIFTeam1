@@ -61,4 +61,9 @@ public class Costs {
     public IntegerProperty taxrateProperty() { return taxrate; }
 
     public void setTaxrate(Integer taxrate) { this.taxrate.set(taxrate); }
+
+    @Override
+    public String toString() {
+        return description + " " + amount;
+    }
 }
