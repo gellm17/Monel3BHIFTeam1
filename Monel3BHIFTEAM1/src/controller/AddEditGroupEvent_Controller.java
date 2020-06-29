@@ -108,6 +108,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
         this.editableEvent = editableEvent;
         if (editableEvent != null) {
             dpDateEvent.setValue(editableEvent.getDate());
+            taDescription.setText(editableEvent.getNote());
             tfNameEvent.setText(editableEvent.getName());
             tableProtocols.setItems(EventDAO.getInstance().getEventProtocolsByEvent(editableEvent));
         }
@@ -176,7 +177,7 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
         tcClient.setCellValueFactory(new PropertyValueFactory<EventProtocol, Client>("client"));
         tcEmployee.setCellValueFactory(new PropertyValueFactory<EventProtocol, Employee>("employee"));
         tcHourlyRate.setCellValueFactory(new PropertyValueFactory<EventProtocol, Double>("hourlyRate"));
-        tcRideCosts.setCellValueFactory(new PropertyValueFactory<EventProtocol, Double>("rideCosts"));
+        //TODO tcRideCosts.setCellValueFactory(new PropertyValueFactory<EventProtocol, Double>("rideCosts"));
         tcStart.setCellValueFactory(new PropertyValueFactory<EventProtocol, LocalTime>("startTime"));
         tcEnd.setCellValueFactory(new PropertyValueFactory<EventProtocol, LocalTime>("endTime"));
 
@@ -240,7 +241,12 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
     @FXML
     void btnOkEvent_Clicked(ActionEvent event) throws SQLException {
         errorCounter = 0;
-        Event thisEvent = new Event();
+        Event thisEvent;
+        if (editableEvent != null){
+            thisEvent = editableEvent;
+        } else {
+            thisEvent = new Event();
+        }
         try {
             LocalDateStringConverter ldsc = new LocalDateStringConverter();
             thisEvent.setDate(ldsc.fromString(dpDateEvent.getEditor().getText()));
@@ -255,6 +261,10 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
             thisEvent.setName(tfNameEvent.getText());
         }
 
+        if (!taCheck(taDescription, "^.+$")) {
+            thisEvent.setNote(taDescription.getText());
+        }
+
         thisEvent.setIsGroup(true);
 
         if (editableEvent != null){
@@ -262,9 +272,12 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
         }
 
         if (errorCounter == 0 && EventDAO.getInstance().addEvent(thisEvent)) {
-            if (editableEvent != null) {
-                EventDAO.getInstance().deleteEvent(editableEvent);
-            }
+            /*if (editableEvent != null) {
+                for(EventProtocol ep:  EventDAO.getInstance().getEventProtocolsByEvent(editableEvent)){
+                    ep.setEvent(thisEvent);
+                }
+                //EventDAO.getInstance().deleteEvent(editableEvent);
+            }*/
             if (wantToAddAPerson) {
                 try {
                     FXMLLoader fxml = new FXMLLoader(getClass().getResource("../view/AddEditEventProtocol.fxml"));
@@ -312,6 +325,20 @@ public class AddEditGroupEvent_Controller extends SceneLoader implements Initial
         } else {
             error = false;
             tf.setStyle(null);
+        }
+        return error;
+    }
+
+    private boolean taCheck(TextArea ta, String regex) {
+        boolean error = true;
+        if (!ta.getText().matches(regex)) {
+            error = true;
+            errorCounter++;
+            ta.setStyle("-FX-Border-Color: red");
+            lbMessage.setText("Es sind " + errorCounter + " Fehler aufgetreten!");
+        } else {
+            error = false;
+            ta.setStyle(null);
         }
         return error;
     }

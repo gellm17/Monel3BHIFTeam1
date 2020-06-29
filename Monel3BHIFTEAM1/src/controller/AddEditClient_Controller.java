@@ -455,7 +455,7 @@ public class AddEditClient_Controller extends SceneLoader implements Initializab
             infoErrorCounter++;
         }
 
-        if (!taCheck(taDiagnoseClient,"^\\D+$", tPaneInformation, infoErrorCounter)) {
+        if (!taCheck(taDiagnoseClient,"^(\\D+)?$", tPaneInformation, infoErrorCounter)) {
             clientToAdd.setDiagnose(taDiagnoseClient.getText());
         } else {
             errors.add(true);
