@@ -65,7 +65,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
     private ComboBox comboRideCostRate;
 
     @FXML
-    private TextField tfRideCostKm;
+    private TextField tfRideCostsKm;
 
     @FXML
     private ToggleButton tglBtnRideCostBrutto;
@@ -124,7 +124,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
             tfStartEvent.setText(""+editableEventProtocol.getStartTime());
             tfEndEvent.setText(""+editableEventProtocol.getEndTime());
             comboHourlyRate.getSelectionModel().select(editableEventProtocol.getHourlyRate());
-            tfRideCostKm.setText(""+editableEventProtocol.getKm());
+            tfRideCostsKm.setText(""+editableEventProtocol.getKm());
             lvOtherCosts.setItems(CostDAO.getInstance().getCostsByEventProtocol(editableEventProtocol));
         }
     }
@@ -164,8 +164,8 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
 
         eventProtocolToAdd.setMileage(comboRideCostRate.getSelectionModel().getSelectedIndex());
 
-        if (!tfCheck(tfRideCostKm, "^[1-9][0-9]*$")){
-            eventProtocolToAdd.setKm(Integer.parseInt(tfRideCostKm.getText()));
+        if (!tfCheck(tfRideCostsKm, "^[1-9][0-9]*$")){
+            eventProtocolToAdd.setKm(Integer.parseInt(tfRideCostsKm.getText()));
         }
 
         if (assignedEvent.getDate().getMonthValue() < 10) {

@@ -75,7 +75,7 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
     private ComboBox comboRideCostRate;
 
     @FXML
-    private TextField tfRideCostKm;
+    private TextField tfRideCostsKm;
 
     @FXML
     private ToggleButton tglBtnRideCostBrutto;
@@ -131,6 +131,7 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
             if (editableEvent != null) {
                 dpDateEvent.setValue(editableEvent.getDate());
                 tfNameEvent.setText(editableEvent.getName());
+                taDescription.setText(editableEvent.getNote());
             }
             if (editableEventProtocol != null){
                 comboClientEvent.getSelectionModel().select(editableEventProtocol.getClient());
@@ -138,7 +139,7 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
                 tfStartEvent.setText(""+editableEventProtocol.getStartTime());
                 tfEndEvent.setText(""+editableEventProtocol.getEndTime());
                 comboHourlyRate.getSelectionModel().select(editableEventProtocol.getHourlyRate());
-                tfRideCostKm.setText(""+editableEventProtocol.getKm());
+                tfRideCostsKm.setText(""+editableEventProtocol.getKm());
                 lvOtherCosts.setItems(CostDAO.getInstance().getCostsByEventProtocol(editableEventProtocol));
             }
         }
@@ -180,6 +181,10 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
                 eventToAdd.setName(tfNameEvent.getText());
             }
 
+            if (!taCheck(taDescription, "^.+$")) {
+                eventToAdd.setNote(taDescription.getText());
+            }
+
             eventToAdd.setIsGroup(false);
             eventProtocolToAdd.setClient(comboClientEvent.getSelectionModel().getSelectedItem());
             eventProtocolToAdd.setEmployee(comboEmployeeEvent.getSelectionModel().getSelectedItem());
@@ -201,8 +206,8 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
 
             eventProtocolToAdd.setMileage(comboRideCostRate.getSelectionModel().getSelectedIndex());
 
-            if (!tfCheck(tfRideCostKm, "^[1-9][0-9]*$")){
-                eventProtocolToAdd.setKm(Integer.parseInt(tfRideCostKm.getText()));
+            if (!tfCheck(tfRideCostsKm, "^[1-9][0-9]*$")){
+                eventProtocolToAdd.setKm(Integer.parseInt(tfRideCostsKm.getText()));
             }
 
             eventProtocolToAdd.setEvent(eventToAdd);

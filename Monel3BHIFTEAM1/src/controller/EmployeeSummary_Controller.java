@@ -126,4 +126,18 @@ public class EmployeeSummary_Controller extends SceneLoader {
 
     }
 
+    public void btnSettings_Clicked(ActionEvent event) {
+        openSettings();
+    }
+
+    @FXML
+    void btnInfo_Clicked(ActionEvent event) {
+        openInfo();
+    }
+
+    @FXML
+    void btnBack_Clicked(ActionEvent event) {
+        showScene("EmployeeList");
+    }
+
 }
