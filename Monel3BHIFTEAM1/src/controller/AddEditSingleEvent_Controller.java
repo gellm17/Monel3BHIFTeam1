@@ -1,6 +1,7 @@
 package controller;
 
 import app.SceneLoader;
+import data.CostDAO;
 import data.EventDAO;
 import data.PersonDAO;
 import javafx.event.ActionEvent;
@@ -109,6 +110,7 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
     @FXML
     private Button btnOkEvent;
 
+        private Object selectedItem;
         private Event editableEvent = null;
         private EventProtocol editableEventProtocol = null;
         private int errorCounter = 0;
@@ -137,6 +139,7 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
                 tfEndEvent.setText(""+editableEventProtocol.getEndTime());
                 comboHourlyRate.getSelectionModel().select(editableEventProtocol.getHourlyRate());
                 tfRideCostKm.setText(""+editableEventProtocol.getKm());
+                lvOtherCosts.setItems(CostDAO.getInstance().getCostsByEventProtocol(editableEventProtocol));
             }
         }
 
@@ -290,20 +293,31 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
     @FXML
     void btnAddOtherCost_Clicked(ActionEvent event) {
         Costs cToAdd = new Costs();
+        int counter = 0;
 
-        cToAdd.setamount(Double.parseDouble(tfValueOtherCost.getText()));
+        if (!tfCheck(tfValueOtherCost, "^\\d{1,8}([\\.,]\\d{2})?$")){
+            cToAdd.setamount(Double.parseDouble(tfValueOtherCost.getText()));
+        } else {
+            counter++;
+        }
+
         cToAdd.setDescription(tfNameOtherCost.getText());
 
+        cToAdd.setTaxrate(comboTaxesOtherCost.getSelectionModel().getSelectedItem());
 
 
-        if (errorCounter == 0) {
+        if (counter == 0) {
             lvOtherCosts.getItems().add(cToAdd);
         }
     }
 
     @FXML
     void btnDeleteOtherCost_Clicked(ActionEvent event) {
-
+            try {
+                CostDAO.getInstance().deleteCost((Costs) selectedItem);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
     }
 
     @Override
@@ -313,5 +327,12 @@ public class AddEditSingleEvent_Controller extends SceneLoader implements Initia
         comboHourlyRate.getItems().setAll(Settings.getInstance().getHourlyRates());
         comboRideCostRate.getItems().setAll(Settings.getInstance().getRideCostRate());
         comboTaxesOtherCost.getItems().setAll(Settings.getInstance().getTaxRates());
+
+        lvOtherCosts.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null){
+                selectedItem = newSelection;
+                btnDeleteOtherCost.setDisable(false);
+            }
+        });
     }
 }

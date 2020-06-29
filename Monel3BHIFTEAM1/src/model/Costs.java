@@ -64,6 +64,6 @@ public class Costs {
 
     @Override
     public String toString() {
-        return description + " " + amount;
+        return getDescription() + " " + getAmount();
     }
 }

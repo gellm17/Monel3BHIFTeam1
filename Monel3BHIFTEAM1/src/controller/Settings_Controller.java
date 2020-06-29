@@ -304,13 +304,13 @@ public class Settings_Controller implements Initializable {
     @FXML
     void btnAddTaxRate_Clicked(ActionEvent event) {
         if (tfCheck(tfTaxRate,"^[1-9]([0-9])?$", tabAdministration, tabAdminRates, verwaltungCounter)){
-            Settings.getInstance().addRideCostRate(Double.parseDouble(tfHourlyRate.getText()));
+            Settings.getInstance().addTaxRate(Integer.parseInt(tfTaxRate.getText()));
         }
     }
 
     @FXML
     void btnDeleteTaxRate_Clicked(ActionEvent event) {
-
+        Settings.getInstance().removeTaxRate((int) selectedItem);
     }
 
     @FXML
@@ -322,7 +322,7 @@ public class Settings_Controller implements Initializable {
 
     @FXML
     void btnDeleteRideCostRate_Clicked(ActionEvent event) {
-
+        Settings.getInstance().removeRideCostRate((Double) selectedItem);
     }
 
     @FXML

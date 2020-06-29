@@ -1,6 +1,7 @@
 package controller;
 
 import app.SceneLoader;
+import data.CostDAO;
 import data.EventDAO;
 import data.PersonDAO;
 import javafx.event.ActionEvent;
@@ -88,7 +89,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
     private Button btnDeleteOtherCost;
 
     @FXML
-    private ListView<?> lvOtherCosts;
+    private ListView<Costs> lvOtherCosts;
 
     @FXML
     private Label lbMessage;
@@ -99,7 +100,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
     @FXML
     private Button btnOkEvent;
 
-
+    private Object selectedItem;
     private EventProtocol editableEventProtocol = null;
     private Event assignedEvent = null;
     private int errorCounter = 0;
@@ -124,6 +125,7 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
             tfEndEvent.setText(""+editableEventProtocol.getEndTime());
             comboHourlyRate.getSelectionModel().select(editableEventProtocol.getHourlyRate());
             tfRideCostKm.setText(""+editableEventProtocol.getKm());
+            lvOtherCosts.setItems(CostDAO.getInstance().getCostsByEventProtocol(editableEventProtocol));
         }
     }
 
@@ -160,10 +162,6 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
 
         eventProtocolToAdd.setHourlyRate(comboHourlyRate.getSelectionModel().getSelectedItem());
 
-        /*if (!tfCheck(tfRideCostsEvent, "^\\d{1,8}([\\.,]\\d{2})?$")){
-            eventProtocolToAdd.setRideCosts(Double.parseDouble(tfRideCostsEvent.getText()));
-        }*/
-
         eventProtocolToAdd.setMileage(comboRideCostRate.getSelectionModel().getSelectedIndex());
 
         if (!tfCheck(tfRideCostKm, "^[1-9][0-9]*$")){
@@ -180,6 +178,10 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
 
         if (editableEventProtocol != null){
             eventProtocolToAdd.setId(editableEventProtocol.getId());
+        }
+
+        for (Costs c: lvOtherCosts.getItems()) {
+            c.setEventprotocol(eventProtocolToAdd);
         }
 
         if (errorCounter == 0 && EventDAO.getInstance().addEventProtcol(eventProtocolToAdd)) {
@@ -266,12 +268,32 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
 
     @FXML
     void btnAddOtherCost_Clicked(ActionEvent event) {
+        Costs cToAdd = new Costs();
+        int counter = 0;
 
+        if (!tfCheck(tfValueOtherCost, "^\\d{1,8}([\\.,]\\d{2})?$")){
+            cToAdd.setamount(Double.parseDouble(tfValueOtherCost.getText()));
+        } else {
+            counter++;
+        }
+
+        cToAdd.setDescription(tfNameOtherCost.getText());
+
+        cToAdd.setTaxrate(comboTaxesOtherCost.getSelectionModel().getSelectedItem());
+
+
+        if (counter == 0) {
+            lvOtherCosts.getItems().add(cToAdd);
+        }
     }
 
     @FXML
     void btnDeleteOtherCost_Clicked(ActionEvent event) {
-
+        try {
+            CostDAO.getInstance().deleteCost((Costs) selectedItem);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -281,6 +303,13 @@ public class AddEditEventProtocol_Controller extends SceneLoader implements Init
         comboHourlyRate.getItems().setAll(Settings.getInstance().getHourlyRates());
         comboRideCostRate.getItems().setAll(Settings.getInstance().getRideCostRate());
         comboTaxesOtherCost.getItems().setAll(Settings.getInstance().getTaxRates());
+
+        lvOtherCosts.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null){
+                selectedItem = newSelection;
+                btnDeleteOtherCost.setDisable(false);
+            }
+        });
     }
 
 }

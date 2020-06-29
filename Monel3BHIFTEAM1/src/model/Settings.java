@@ -1,9 +1,5 @@
 package model;
 
-import data.BillDAO;
-import data.EventDAO;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.property.*;
 import javafx.collections.*;
 import javafx.fxml.Initializable;
@@ -733,5 +729,11 @@ public class Settings implements Initializable, Serializable {
     public boolean addTaxRate(Integer tax) { return taxRates.add(tax); }
     public boolean removeHourlyRate(double rate) {
         return  this.hourlyRates.remove(rate);
+    }
+    public boolean removeRideCostRate(double rate) {
+        return  this.rideCostRate.remove(rate);
+    }
+    public boolean removeTaxRate(Integer tax) {
+        return  this.taxRates.remove(tax);
     }
 }
